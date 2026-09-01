@@ -83,6 +83,13 @@ export default function DashboardPage() {
 
       {data && (
         <>
+          {data.demo && (
+            <div className="bg-panel border border-accent2/50 text-accent2 rounded-xl p-3 text-sm">
+              Modo demonstracao — exibindo dados de exemplo porque as credenciais do YouTube ainda nao
+              foram configuradas. Preencha <code>.env.local</code> (veja o README) para ver os dados reais
+              do canal.
+            </div>
+          )}
           <p className="text-xs text-muted -mt-2">
             Periodo: {data.range.label} ({data.range.start} a {data.range.end})
           </p>

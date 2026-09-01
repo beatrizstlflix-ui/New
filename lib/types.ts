@@ -36,6 +36,7 @@ export interface Totals {
 }
 
 export interface DashboardResponse {
+  demo?: boolean
   channel: {
     title: string
     thumbnail: string

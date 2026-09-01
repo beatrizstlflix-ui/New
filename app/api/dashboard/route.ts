@@ -1,7 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { fetchAnalytics, fetchChannelSnapshot, fetchVideoDetails, AnalyticsReport } from '@/lib/youtube'
 import { isOrganicSource, labelForSource } from '@/lib/organic'
+import { buildDemoPayload } from '@/lib/demoData'
 import type { DashboardResponse, DailyPoint, TrafficSourcePoint, TopVideo, Totals } from '@/lib/types'
+
+function hasCredentials(): boolean {
+  return Boolean(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET && process.env.YOUTUBE_REFRESH_TOKEN)
+}
 
 export const dynamic = 'force-dynamic'
 
@@ -49,6 +54,10 @@ export async function GET(req: NextRequest) {
   try {
     const rangeParam = Number(req.nextUrl.searchParams.get('range') ?? '28')
     const days = [7, 28, 90].includes(rangeParam) ? rangeParam : 28
+
+    if (!hasCredentials()) {
+      return NextResponse.json(buildDemoPayload(days))
+    }
 
     // Dados do YouTube Analytics normalmente ficam completos ate ~2 dias atras.
     const end = shiftDays(new Date(), -2)
