@@ -1,70 +1,96 @@
-# STLFLIX BR — Dashboard Organico do YouTube Studio
+# STLFLIX BR — Dashboard Organico + Pago
 
-Dashboard proprio (Next.js) com a visao dos dados **organicos** do canal
-STLFLIX BR: visualizacoes, tempo assistido, inscritos ganhos, origem do
-trafego (organico x pago) e os videos mais assistidos no periodo.
+Dashboard proprio (Next.js) com a visao dos dados do canal STLFLIX BR:
+visualizacoes, tempo assistido, inscritos ganhos, origem do trafego
+(organico x pago), os videos mais assistidos e, opcionalmente, o
+desempenho de campanhas pagas no Google Ads.
 
-Os dados vem diretamente da **YouTube Data API v3** e da
-**YouTube Analytics API v2** do Google, chamadas apenas no servidor
-(rotas `app/api/*`). Nenhuma credencial e exposta ao navegador.
+Os dados vem diretamente da **YouTube Data API v3**, da
+**YouTube Analytics API v2** e da **Google Ads API**, chamadas apenas no
+servidor (rotas `app/api/*`). Nenhuma credencial e exposta ao navegador.
 
 ## Aviso de seguranca
 
-Um `refresh_token` foi colado em texto puro em uma conversa de chat durante
-o desenvolvimento deste projeto. **Trate esse token como comprometido:**
+Credenciais (refresh tokens, client secret, developer token e uma API key)
+foram coladas em texto puro em conversas de chat durante o desenvolvimento
+deste projeto. **Trate todas elas como comprometidas:**
 
-1. Revogue o acesso em <https://myaccount.google.com/permissions> (procure
-   pelo app/projeto OAuth correspondente).
-2. Gere um novo `refresh_token` (passo a passo abaixo) e use apenas esse
-   novo valor.
-3. Nunca cole client secrets ou tokens em mensagens de chat, commits ou
-   arquivos versionados. Este repositorio ja ignora `.env*` no `.gitignore`.
+1. Revogue o acesso OAuth em <https://myaccount.google.com/permissions>
+   (procure pelos apps/projetos correspondentes ao YouTube e ao Google Ads).
+2. Redefina (reset) o `client_secret` de cada credencial OAuth no
+   [Google Cloud Console](https://console.cloud.google.com/apis/credentials).
+3. Regenere a `YOUTUBE_API_KEY` no Cloud Console e restrinja-a por API
+   (YouTube Data API v3) e, se possivel, por referenciador/IP.
+4. Gere um novo `refresh_token` para cada integracao (passo a passo abaixo)
+   e use apenas os novos valores.
+5. Nunca cole client secrets, developer tokens ou refresh tokens em
+   mensagens de chat, commits ou arquivos versionados. Este repositorio ja
+   ignora `.env*` no `.gitignore`.
+
+## Modos de operacao (YouTube)
+
+O dashboard escolhe automaticamente o modo com base no que estiver
+configurado em `.env.local`:
+
+1. **OAuth completo** (`GOOGLE_CLIENT_ID` + `GOOGLE_CLIENT_SECRET` +
+   `YOUTUBE_REFRESH_TOKEN`): todos os dados, incluindo tendencia diaria,
+   origem do trafego e metricas por periodo (via YouTube Analytics API).
+   Tem prioridade se estiver configurado.
+2. **API key** (`YOUTUBE_API_KEY` + `YOUTUBE_CHANNEL_ID`): apenas
+   estatisticas publicas e **vitalicias** (nao filtradas por periodo) do
+   canal e dos videos, via YouTube Data API v3. Mais simples de configurar,
+   mas sem tendencia diaria nem origem do trafego (isso exige OAuth).
+3. **Demonstracao**: se nenhum dos dois acima estiver configurado, o
+   dashboard mostra dados de exemplo (claramente identificados) so para
+   visualizar a interface.
 
 ## Configuracao
 
-### 1. Credenciais OAuth (Google Cloud Console)
+### YouTube — modo simples (API key)
 
-1. Crie/abra um projeto em <https://console.cloud.google.com/>.
-2. Ative as APIs **YouTube Data API v3** e **YouTube Analytics API**.
-3. Em "Tela de consentimento OAuth", adicione os escopos:
+1. No [Google Cloud Console](https://console.cloud.google.com/apis/credentials),
+   ative a **YouTube Data API v3** e crie uma credencial do tipo "Chave de
+   API". Restrinja-a a essa API.
+2. Pegue o ID do canal STLFLIX BR (comeca com `UC...`) em YouTube Studio >
+   Configuracoes > Canal > Info basicas.
+3. Preencha `YOUTUBE_API_KEY` e `YOUTUBE_CHANNEL_ID` no `.env.local`.
+
+### YouTube — modo completo (OAuth)
+
+1. No mesmo projeto, ative tambem a **YouTube Analytics API**.
+2. Em "Tela de consentimento OAuth", adicione os escopos:
    - `https://www.googleapis.com/auth/youtube.readonly`
    - `https://www.googleapis.com/auth/yt-analytics.readonly`
-4. Crie uma credencial "ID do cliente OAuth" do tipo **App da Web**, com
-   `https://developers.google.com/oauthplayground` como URI de redirecionamento
-   autorizado (para gerar o refresh token). Anote o `client_id` e o
-   `client_secret`.
+3. Crie uma credencial "ID do cliente OAuth" do tipo **App da Web**, com
+   `https://developers.google.com/oauthplayground` como URI de
+   redirecionamento autorizado. Anote `client_id` e `client_secret`.
+4. No [OAuth Playground](https://developers.google.com/oauthplayground):
+   marque "Use your own OAuth credentials" (engrenagem), informe as
+   credenciais, autorize os dois escopos acima **fazendo login com a conta
+   que administra o canal STLFLIX BR** (confirme que o consentimento e dado
+   para esse canal, nao um canal pessoal vazio) e troque o codigo pelo
+   `refresh_token`.
+5. Preencha `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` e
+   `YOUTUBE_REFRESH_TOKEN` no `.env.local`.
 
-### 2. Gerar o refresh_token do canal correto
+### Google Ads (opcional — trafego pago)
 
-Use o [OAuth Playground](https://developers.google.com/oauthplayground):
+1. Solicite/obtenha um **developer token** no
+   [Google Ads API Center](https://ads.google.com/aw/apicenter) da conta
+   gerenciadora.
+2. Crie uma credencial OAuth "App da Web" com o escopo
+   `https://www.googleapis.com/auth/adwords` e gere um `refresh_token` do
+   mesmo jeito descrito acima (OAuth Playground), autenticando com uma
+   conta que tenha acesso a conta STLFLIX Brasil.
+3. Preencha no `.env.local`:
+   - `GOOGLE_ADS_CLIENT_ID`, `GOOGLE_ADS_CLIENT_SECRET`
+   - `GOOGLE_ADS_DEVELOPER_TOKEN`
+   - `GOOGLE_ADS_REFRESH_TOKEN`
+   - `GOOGLE_ADS_CUSTOMER_ID` (ID da conta STLFLIX Brasil, so digitos)
+   - `GOOGLE_ADS_LOGIN_CUSTOMER_ID` (ID da conta gerenciadora/MCC, so
+     digitos) — necessario quando a conta e acessada via MCC.
 
-1. No icone de engrenagem (canto superior direito), marque "Use your own
-   OAuth credentials" e informe seu `client_id`/`client_secret`.
-2. Em "Step 1", selecione os escopos do YouTube listados acima e clique em
-   "Authorize APIs".
-3. **Importante:** faca login com a conta Google que administra o canal
-   **STLFLIX BR**. Se essa conta gerencia varios canais/Brand Accounts,
-   confirme que o consentimento e dado para o canal STLFLIX BR (nao um
-   canal pessoal vazio).
-4. Em "Step 2", clique em "Exchange authorization code for tokens" e copie
-   o `refresh_token` gerado.
-
-### 3. Variaveis de ambiente
-
-Copie `.env.example` para `.env.local` e preencha:
-
-```
-GOOGLE_CLIENT_ID=...
-GOOGLE_CLIENT_SECRET=...
-YOUTUBE_REFRESH_TOKEN=...
-YOUTUBE_CHANNEL_ID=   # opcional, se a conta tiver mais de um canal
-```
-
-Se a conta autenticada gerenciar mais de um canal, descubra o ID do canal
-STLFLIX BR (comeca com `UC...`) em YouTube Studio > Configuracoes > Canal >
-Info basicas, e preencha `YOUTUBE_CHANNEL_ID`.
-
-### 4. Rodar localmente
+### Rodar localmente
 
 ```bash
 npm install
@@ -89,10 +115,17 @@ atras de autenticacao/rede privada.
 
 ## Estrutura
 
-- `app/api/dashboard/route.ts` — orquestra as chamadas ao Google e devolve
-  um payload agregado (totais, serie diaria, origem do trafego, top videos).
-- `lib/googleAuth.ts` — troca o refresh_token por um access_token de curta
-  duracao (cacheado em memoria).
-- `lib/youtube.ts` — chamadas a YouTube Analytics API e YouTube Data API.
-- `lib/organic.ts` — classifica cada fonte de trafego como organica ou paga.
+- `app/api/dashboard/route.ts` — escolhe o modo do YouTube (oauth/api_key/
+  demo), orquestra as chamadas ao Google e devolve um payload agregado.
+- `lib/googleOAuth.ts` — troca generica de refresh_token por access_token
+  (cacheada em memoria por token).
+- `lib/googleAuth.ts` / `lib/youtube.ts` — modo OAuth do YouTube (Analytics
+  API + Data API).
+- `lib/youtubePublic.ts` — modo API key do YouTube (somente Data API,
+  estatisticas publicas/vitalicias).
+- `lib/googleAdsAuth.ts` / `lib/googleAds.ts` — integracao com a Google Ads
+  API (trafego pago).
+- `lib/organic.ts` — classifica cada fonte de trafego do YouTube como
+  organica ou paga.
+- `lib/demoData.ts` — dados de exemplo usados quando nada esta configurado.
 - `app/page.tsx` + `components/*` — interface do dashboard.

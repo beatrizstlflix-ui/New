@@ -103,6 +103,7 @@ export function buildDemoPayload(days: number): DashboardResponse {
   const organicViews = trafficSources.filter((t) => t.organic).reduce((s, t) => s + t.views, 0)
 
   return {
+    mode: 'demo',
     demo: true,
     channel: {
       title: 'STLFLIX BR (exemplo)',

@@ -35,7 +35,32 @@ export interface Totals {
   shares: number
 }
 
+export interface AdsTotals {
+  impressions: number
+  clicks: number
+  costMicros: number
+  conversions: number
+}
+
+export interface AdsDailyPoint {
+  date: string
+  impressions: number
+  clicks: number
+  costMicros: number
+  conversions: number
+}
+
+export interface AdsSection {
+  accountLabel: string
+  totals: AdsTotals
+  previousTotals: AdsTotals
+  daily: AdsDailyPoint[]
+}
+
+export type YoutubeMode = 'oauth' | 'api_key' | 'demo'
+
 export interface DashboardResponse {
+  mode: YoutubeMode
   demo?: boolean
   channel: {
     title: string
@@ -45,10 +70,17 @@ export interface DashboardResponse {
     videoCount: number
   }
   range: { start: string; end: string; label: string }
-  totals: Totals
-  previousTotals: Totals
-  organicSharePct: number
-  daily: DailyPoint[]
-  trafficSources: TrafficSourcePoint[]
+  // Presentes apenas nos modos 'oauth' e 'demo' (exigem YouTube Analytics API).
+  totals?: Totals
+  previousTotals?: Totals
+  organicSharePct?: number
+  daily?: DailyPoint[]
+  trafficSources?: TrafficSourcePoint[]
+  // Sempre presente: no modo 'api_key' sao estatisticas vitalicias (nao
+  // filtradas pelo periodo selecionado), pois isso exige OAuth.
   topVideos: TopVideo[]
+  topVideosNote?: string
+  // Trafego pago (Google Ads), presente apenas quando configurado.
+  ads?: AdsSection
+  adsError?: string
 }

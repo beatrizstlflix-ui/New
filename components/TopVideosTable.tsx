@@ -6,18 +6,32 @@ function formatDuration(seconds: number): string {
   return `${m}:${s.toString().padStart(2, '0')}`
 }
 
-export default function TopVideosTable({ videos }: { videos: TopVideo[] }) {
+export default function TopVideosTable({
+  videos,
+  showWatchTime = true,
+  title = 'Videos mais assistidos no periodo',
+}: {
+  videos: TopVideo[]
+  showWatchTime?: boolean
+  title?: string
+}) {
+  const columnCount = showWatchTime ? 5 : 3
+
   return (
     <div className="bg-panel border border-border rounded-xl p-4">
-      <h3 className="text-sm text-muted mb-3">Videos mais assistidos no periodo</h3>
+      <h3 className="text-sm text-muted mb-3">{title}</h3>
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
             <tr className="text-left text-muted border-b border-border">
               <th className="py-2 pr-3 font-normal">Video</th>
               <th className="py-2 px-3 font-normal text-right">Views</th>
-              <th className="py-2 px-3 font-normal text-right">Tempo assistido</th>
-              <th className="py-2 px-3 font-normal text-right">Duracao media</th>
+              {showWatchTime && (
+                <>
+                  <th className="py-2 px-3 font-normal text-right">Tempo assistido</th>
+                  <th className="py-2 px-3 font-normal text-right">Duracao media</th>
+                </>
+              )}
               <th className="py-2 pl-3 font-normal text-right">Curtidas</th>
             </tr>
           </thead>
@@ -43,15 +57,19 @@ export default function TopVideosTable({ videos }: { videos: TopVideo[] }) {
                   </div>
                 </td>
                 <td className="py-2 px-3 text-right">{v.views.toLocaleString('pt-BR')}</td>
-                <td className="py-2 px-3 text-right">{Math.round(v.minutesWatched).toLocaleString('pt-BR')} min</td>
-                <td className="py-2 px-3 text-right">{formatDuration(v.averageViewDuration)}</td>
+                {showWatchTime && (
+                  <>
+                    <td className="py-2 px-3 text-right">{Math.round(v.minutesWatched).toLocaleString('pt-BR')} min</td>
+                    <td className="py-2 px-3 text-right">{formatDuration(v.averageViewDuration)}</td>
+                  </>
+                )}
                 <td className="py-2 pl-3 text-right">{v.likes.toLocaleString('pt-BR')}</td>
               </tr>
             ))}
             {videos.length === 0 && (
               <tr>
-                <td colSpan={5} className="py-6 text-center text-muted">
-                  Nenhum dado de video no periodo selecionado.
+                <td colSpan={columnCount} className="py-6 text-center text-muted">
+                  Nenhum dado de video encontrado.
                 </td>
               </tr>
             )}

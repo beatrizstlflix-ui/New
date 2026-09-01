@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { fetchAnalytics, fetchChannelSnapshot, fetchVideoDetails, AnalyticsReport } from '@/lib/youtube'
+import { hasYoutubeOAuthCredentials } from '@/lib/googleAuth'
+import { hasYoutubeApiKeyCredentials, fetchChannelSnapshotByKey, fetchTopVideosLifetimeByKey } from '@/lib/youtubePublic'
 import { isOrganicSource, labelForSource } from '@/lib/organic'
 import { buildDemoPayload } from '@/lib/demoData'
-import type { DashboardResponse, DailyPoint, TrafficSourcePoint, TopVideo, Totals } from '@/lib/types'
-
-function hasCredentials(): boolean {
-  return Boolean(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET && process.env.YOUTUBE_REFRESH_TOKEN)
-}
+import { hasGoogleAdsCredentials } from '@/lib/googleAdsAuth'
+import { fetchAdsDaily, sumAdsDaily } from '@/lib/googleAds'
+import type { DashboardResponse, DailyPoint, TrafficSourcePoint, TopVideo, Totals, AdsSection } from '@/lib/types'
 
 export const dynamic = 'force-dynamic'
 
@@ -50,14 +50,104 @@ function toTotals(rows: Record<string, string | number>[]): Totals {
   }
 }
 
+async function buildOAuthYoutubeSection(
+  startDate: string,
+  endDate: string,
+  prevStartDate: string,
+  prevEndDate: string
+): Promise<Pick<DashboardResponse, 'channel' | 'totals' | 'previousTotals' | 'organicSharePct' | 'daily' | 'trafficSources' | 'topVideos'>> {
+  const [channel, totalsReport, prevTotalsReport, dailyReport, trafficReport, topVideosReport] = await Promise.all([
+    fetchChannelSnapshot(),
+    fetchAnalytics({ startDate, endDate, metrics: TOTAL_METRICS }),
+    fetchAnalytics({ startDate: prevStartDate, endDate: prevEndDate, metrics: TOTAL_METRICS }),
+    fetchAnalytics({ startDate, endDate, metrics: ['views', 'estimatedMinutesWatched', 'subscribersGained'], dimensions: ['day'], sort: 'day' }),
+    fetchAnalytics({ startDate, endDate, metrics: ['views', 'estimatedMinutesWatched'], dimensions: ['insightTrafficSourceType'], sort: '-views' }),
+    fetchAnalytics({
+      startDate,
+      endDate,
+      metrics: ['views', 'estimatedMinutesWatched', 'averageViewDuration', 'likes', 'comments'],
+      dimensions: ['video'],
+      sort: '-views',
+      maxResults: 10,
+    }),
+  ])
+
+  const totals = toTotals(toObjects(totalsReport))
+  const previousTotals = toTotals(toObjects(prevTotalsReport))
+
+  const daily: DailyPoint[] = toObjects(dailyReport).map((r) => ({
+    date: String(r.day),
+    views: Number(r.views ?? 0),
+    minutesWatched: Number(r.estimatedMinutesWatched ?? 0),
+    subscribersGained: Number(r.subscribersGained ?? 0),
+  }))
+
+  const trafficRows = toObjects(trafficReport)
+  const trafficSources: TrafficSourcePoint[] = trafficRows.map((r) => {
+    const source = String(r.insightTrafficSourceType)
+    return {
+      source,
+      label: labelForSource(source),
+      organic: isOrganicSource(source),
+      views: Number(r.views ?? 0),
+      minutesWatched: Number(r.estimatedMinutesWatched ?? 0),
+    }
+  })
+
+  const totalTrafficViews = trafficSources.reduce((sum, t) => sum + t.views, 0)
+  const organicViews = trafficSources.filter((t) => t.organic).reduce((sum, t) => sum + t.views, 0)
+  const organicSharePct = totalTrafficViews > 0 ? (organicViews / totalTrafficViews) * 100 : 0
+
+  const topVideoRows = toObjects(topVideosReport)
+  const videoIds = topVideoRows.map((r) => String(r.video)).filter(Boolean)
+  const videoDetails = await fetchVideoDetails(videoIds)
+
+  const topVideos: TopVideo[] = topVideoRows.map((r) => {
+    const id = String(r.video)
+    const details = videoDetails[id]
+    return {
+      id,
+      title: details?.title ?? id,
+      thumbnail: details?.thumbnail ?? '',
+      publishedAt: details?.publishedAt ?? '',
+      views: Number(r.views ?? 0),
+      minutesWatched: Number(r.estimatedMinutesWatched ?? 0),
+      averageViewDuration: Number(r.averageViewDuration ?? 0),
+      likes: Number(r.likes ?? 0),
+      comments: Number(r.comments ?? 0),
+    }
+  })
+
+  return { channel, totals, previousTotals, organicSharePct, daily, trafficSources, topVideos }
+}
+
+async function buildApiKeyYoutubeSection(): Promise<
+  Pick<DashboardResponse, 'channel' | 'topVideos' | 'topVideosNote'>
+> {
+  const channel = await fetchChannelSnapshotByKey()
+  const topVideos = await fetchTopVideosLifetimeByKey(channel.uploadsPlaylistId)
+  return {
+    channel,
+    topVideos,
+    topVideosNote:
+      'Estatisticas vitalicias (nao filtradas pelo periodo selecionado). Configure GOOGLE_CLIENT_ID/SECRET e YOUTUBE_REFRESH_TOKEN para tendencia diaria, origem do trafego e dados por periodo.',
+  }
+}
+
+async function buildAdsSection(startDate: string, endDate: string, prevStartDate: string, prevEndDate: string): Promise<AdsSection> {
+  const [daily, prevDaily] = await Promise.all([fetchAdsDaily(startDate, endDate), fetchAdsDaily(prevStartDate, prevEndDate)])
+  return {
+    accountLabel: process.env.GOOGLE_ADS_CUSTOMER_ID ?? '',
+    totals: sumAdsDaily(daily),
+    previousTotals: sumAdsDaily(prevDaily),
+    daily,
+  }
+}
+
 export async function GET(req: NextRequest) {
   try {
     const rangeParam = Number(req.nextUrl.searchParams.get('range') ?? '28')
     const days = [7, 28, 90].includes(rangeParam) ? rangeParam : 28
-
-    if (!hasCredentials()) {
-      return NextResponse.json(buildDemoPayload(days))
-    }
 
     // Dados do YouTube Analytics normalmente ficam completos ate ~2 dias atras.
     const end = shiftDays(new Date(), -2)
@@ -69,79 +159,28 @@ export async function GET(req: NextRequest) {
     const endDate = fmtDate(end)
     const prevStartDate = fmtDate(prevStart)
     const prevEndDate = fmtDate(prevEnd)
+    const range = { start: startDate, end: endDate, label: RANGE_LABELS[days] }
 
-    const [channel, totalsReport, prevTotalsReport, dailyReport, trafficReport, topVideosReport] = await Promise.all([
-      fetchChannelSnapshot(),
-      fetchAnalytics({ startDate, endDate, metrics: TOTAL_METRICS }),
-      fetchAnalytics({ startDate: prevStartDate, endDate: prevEndDate, metrics: TOTAL_METRICS }),
-      fetchAnalytics({ startDate, endDate, metrics: ['views', 'estimatedMinutesWatched', 'subscribersGained'], dimensions: ['day'], sort: 'day' }),
-      fetchAnalytics({ startDate, endDate, metrics: ['views', 'estimatedMinutesWatched'], dimensions: ['insightTrafficSourceType'], sort: '-views' }),
-      fetchAnalytics({
-        startDate,
-        endDate,
-        metrics: ['views', 'estimatedMinutesWatched', 'averageViewDuration', 'likes', 'comments'],
-        dimensions: ['video'],
-        sort: '-views',
-        maxResults: 10,
-      }),
-    ])
+    // A secao de Ads e opcional: uma falha nela (credenciais, API, etc.)
+    // nao deve derrubar o resto do dashboard.
+    const adsPromise = hasGoogleAdsCredentials()
+      ? buildAdsSection(startDate, endDate, prevStartDate, prevEndDate)
+          .then((ads) => ({ ads }))
+          .catch((err: any) => ({ adsError: err?.message ?? 'Erro desconhecido ao consultar o Google Ads.' }))
+      : Promise.resolve({})
 
-    const totals = toTotals(toObjects(totalsReport))
-    const previousTotals = toTotals(toObjects(prevTotalsReport))
-
-    const daily: DailyPoint[] = toObjects(dailyReport).map((r) => ({
-      date: String(r.day),
-      views: Number(r.views ?? 0),
-      minutesWatched: Number(r.estimatedMinutesWatched ?? 0),
-      subscribersGained: Number(r.subscribersGained ?? 0),
-    }))
-
-    const trafficRows = toObjects(trafficReport)
-    const trafficSources: TrafficSourcePoint[] = trafficRows.map((r) => {
-      const source = String(r.insightTrafficSourceType)
-      return {
-        source,
-        label: labelForSource(source),
-        organic: isOrganicSource(source),
-        views: Number(r.views ?? 0),
-        minutesWatched: Number(r.estimatedMinutesWatched ?? 0),
-      }
-    })
-
-    const totalTrafficViews = trafficSources.reduce((sum, t) => sum + t.views, 0)
-    const organicViews = trafficSources.filter((t) => t.organic).reduce((sum, t) => sum + t.views, 0)
-    const organicSharePct = totalTrafficViews > 0 ? (organicViews / totalTrafficViews) * 100 : 0
-
-    const topVideoRows = toObjects(topVideosReport)
-    const videoIds = topVideoRows.map((r) => String(r.video)).filter(Boolean)
-    const videoDetails = await fetchVideoDetails(videoIds)
-
-    const topVideos: TopVideo[] = topVideoRows.map((r) => {
-      const id = String(r.video)
-      const details = videoDetails[id]
-      return {
-        id,
-        title: details?.title ?? id,
-        thumbnail: details?.thumbnail ?? '',
-        publishedAt: details?.publishedAt ?? '',
-        views: Number(r.views ?? 0),
-        minutesWatched: Number(r.estimatedMinutesWatched ?? 0),
-        averageViewDuration: Number(r.averageViewDuration ?? 0),
-        likes: Number(r.likes ?? 0),
-        comments: Number(r.comments ?? 0),
-      }
-    })
-
-    const payload: DashboardResponse = {
-      channel,
-      range: { start: startDate, end: endDate, label: RANGE_LABELS[days] },
-      totals,
-      previousTotals,
-      organicSharePct,
-      daily,
-      trafficSources,
-      topVideos,
+    let payload: DashboardResponse
+    if (hasYoutubeOAuthCredentials()) {
+      const section = await buildOAuthYoutubeSection(startDate, endDate, prevStartDate, prevEndDate)
+      payload = { mode: 'oauth', range, ...section }
+    } else if (hasYoutubeApiKeyCredentials()) {
+      const section = await buildApiKeyYoutubeSection()
+      payload = { mode: 'api_key', range, ...section }
+    } else {
+      payload = buildDemoPayload(days)
     }
+
+    Object.assign(payload, await adsPromise)
 
     return NextResponse.json(payload)
   } catch (err: any) {
