@@ -171,6 +171,42 @@ export function getYoutubeStudioAnalytics(): YoutubeStudioAnalytics {
   return readJSON('data/processed/youtube_studio_analytics.json')
 }
 
+export interface SeriesVideo {
+  video_id: string
+  series: string
+  title: string
+  url: string
+  published_at: string
+  duration_seconds: number
+  view_count_lifetime: number
+  like_count: number
+  comment_count: number
+  used_in_paid_media_last90d: boolean
+  ad_cost_brl_90d?: number
+  ad_follow_on_views_90d?: number
+  ad_subscriptions_90d?: number
+  ad_checkout_starts_90d?: number
+}
+
+export interface SeriesData {
+  series_name: string
+  totals: {
+    video_count: number
+    views_lifetime_total: number
+    likes_total: number
+    comments_total: number
+    videos_in_paid_media: number
+    ad_cost_brl_90d_total: number
+    ad_follow_on_views_90d_total: number
+    ad_subscriptions_90d_total: number
+  }
+  videos: SeriesVideo[]
+}
+
+export function getSeriesViews(): { series: Record<string, SeriesData>; borderline_not_included: Array<{ video_id: string; title: string; reason: string }> } {
+  return readJSON('data/processed/series_views.json')
+}
+
 export function brl(v: number): string {
   return v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 })
 }

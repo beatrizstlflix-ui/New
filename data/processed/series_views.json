@@ -1,0 +1,547 @@
+{
+  "generated_at": "2026-09-10",
+  "note": "Classificacao manual por titulo/formato - ver docs/taxonomia_series.md para criterios e casos de fronteira excluidos.",
+  "borderline_not_included": [
+    {
+      "video_id": "jYZ6RQay4QY",
+      "title": "O nicho que fez esse casal lucrar com impressão 3D!",
+      "reason": "menciona um casal real mas formato mais curto (6:53) e tom de dica, nao entrevista completa - fora da serie ate confirmacao"
+    },
+    {
+      "video_id": "5nsR9qi9ndA",
+      "title": "Como Faturei R$5 Milhões com Impressão 3D (e o que deu errado)",
+      "reason": "narrativa em 1a pessoa ('faturEI'), provavel fundador falando de si mesmo, nao entrevista de convidado"
+    }
+  ],
+  "series": {
+    "Arena 3D": {
+      "series_name": "Arena 3D",
+      "totals": {
+        "video_count": 3,
+        "views_lifetime_total": 82311,
+        "likes_total": 2162,
+        "comments_total": 122,
+        "videos_in_paid_media": 2,
+        "ad_cost_brl_90d_total": 2397.8,
+        "ad_follow_on_views_90d_total": 687,
+        "ad_subscriptions_90d_total": 42
+      },
+      "videos": [
+        {
+          "video_id": "X7ngtI2GV3g",
+          "series": "Arena 3D",
+          "title": "Impressão 3D do Zero ao Lucro: 3 Caminhos diferentes, R$6.000 Cada | Arena 3D EP01",
+          "url": "https://www.youtube.com/watch?v=X7ngtI2GV3g",
+          "published_at": "2026-08-19T22:00:08Z",
+          "duration_seconds": 2254,
+          "view_count_lifetime": 21613,
+          "like_count": 879,
+          "comment_count": 34,
+          "used_in_paid_media_last90d": true,
+          "ad_trueview_views_90d": 4028,
+          "ad_engagements_90d": 4268,
+          "ad_campaigns": [
+            "[STLFLIX] Impressão 3D do Zero ao Lucro: 3 Caminhos diferentes, R$6.000 Cada | Arena 3D EP01"
+          ],
+          "ad_cost_brl_90d": 2387.28,
+          "ad_follow_on_views_90d": 687,
+          "ad_subscriptions_90d": 42,
+          "ad_checkout_starts_90d": 0.0
+        },
+        {
+          "video_id": "YueS6DDvdpk",
+          "series": "Arena 3D",
+          "title": "Em 1 Semana a Primeira Venda de Impressão 3D em Lojas físicas e no TiktokShop! Arena 3D EP02",
+          "url": "https://www.youtube.com/watch?v=YueS6DDvdpk",
+          "published_at": "2026-08-29T15:25:25Z",
+          "duration_seconds": 2383,
+          "view_count_lifetime": 38592,
+          "like_count": 731,
+          "comment_count": 43,
+          "used_in_paid_media_last90d": true,
+          "ad_trueview_views_90d": 68,
+          "ad_engagements_90d": 69,
+          "ad_campaigns": [
+            "Será que vendeu? 1 Semana tentando Lucrar com Impressão 3D! Arena 3D EP02"
+          ],
+          "ad_cost_brl_90d": 10.52,
+          "ad_follow_on_views_90d": 0,
+          "ad_subscriptions_90d": 0,
+          "ad_checkout_starts_90d": 0.0
+        },
+        {
+          "video_id": "W4K2JKlIllw",
+          "series": "Arena 3D",
+          "title": "Em 2 semanas Todos Venderam Impressões 3D No TiktokShop, Lojas físicas e na Shopee| Arena 3D EP 03",
+          "url": "https://www.youtube.com/watch?v=W4K2JKlIllw",
+          "published_at": "2026-09-05T15:00:15Z",
+          "duration_seconds": 2449,
+          "view_count_lifetime": 22106,
+          "like_count": 552,
+          "comment_count": 45,
+          "used_in_paid_media_last90d": false
+        }
+      ]
+    },
+    "Série Vivendo de Impressão 3D": {
+      "series_name": "Série Vivendo de Impressão 3D",
+      "totals": {
+        "video_count": 22,
+        "views_lifetime_total": 2880082,
+        "likes_total": 23774,
+        "comments_total": 827,
+        "videos_in_paid_media": 20,
+        "ad_cost_brl_90d_total": 47639.95,
+        "ad_follow_on_views_90d_total": 5783,
+        "ad_subscriptions_90d_total": 635
+      },
+      "videos": [
+        {
+          "video_id": "mavt78HpSoY",
+          "series": "Série Vivendo de Impressão 3D",
+          "title": "Como ele pagou o plano vitalício em 4 meses e hoje fatura R$ 20 mil com 3D",
+          "url": "https://www.youtube.com/watch?v=mavt78HpSoY",
+          "published_at": "2026-02-11T21:00:50Z",
+          "duration_seconds": 467,
+          "view_count_lifetime": 130087,
+          "like_count": 388,
+          "comment_count": 14,
+          "used_in_paid_media_last90d": true,
+          "ad_trueview_views_90d": 4146,
+          "ad_engagements_90d": 6931,
+          "ad_campaigns": [
+            "[STLFLIX] vídeo-reconhecimento-Como ele pagou o plano vitalício em 4 meses"
+          ],
+          "ad_cost_brl_90d": 237.39,
+          "ad_follow_on_views_90d": 15,
+          "ad_subscriptions_90d": 0,
+          "ad_checkout_starts_90d": 6.0
+        },
+        {
+          "video_id": "pRFKfBxGRtI",
+          "series": "Série Vivendo de Impressão 3D",
+          "title": "R$20 Mil/Mês vendendo impressão 3d e travou | Como Vender Impressão 3D EP1",
+          "url": "https://www.youtube.com/watch?v=pRFKfBxGRtI",
+          "published_at": "2026-05-23T15:00:59Z",
+          "duration_seconds": 2164,
+          "view_count_lifetime": 566595,
+          "like_count": 1508,
+          "comment_count": 32,
+          "used_in_paid_media_last90d": true,
+          "ad_trueview_views_90d": 61299,
+          "ad_engagements_90d": 84805,
+          "ad_campaigns": [
+            "Vídeo_Reconhecimento_Topo_STLFLIX"
+          ],
+          "ad_cost_brl_90d": 4888.24,
+          "ad_follow_on_views_90d": 247,
+          "ad_subscriptions_90d": 78,
+          "ad_checkout_starts_90d": 0.48
+        },
+        {
+          "video_id": "Zo5txKEoK0o",
+          "series": "Série Vivendo de Impressão 3D",
+          "title": "Ele Fatura R$50 MIL/mês com Impressão 3D em Casa",
+          "url": "https://www.youtube.com/watch?v=Zo5txKEoK0o",
+          "published_at": "2026-05-27T21:00:09Z",
+          "duration_seconds": 2324,
+          "view_count_lifetime": 284973,
+          "like_count": 1857,
+          "comment_count": 105,
+          "used_in_paid_media_last90d": true,
+          "ad_trueview_views_90d": 13922,
+          "ad_engagements_90d": 26321,
+          "ad_campaigns": [
+            "[STLFLIX] vídeo-reconhecimento-Ele Fatura R$50 MIL"
+          ],
+          "ad_cost_brl_90d": 925.39,
+          "ad_follow_on_views_90d": 33,
+          "ad_subscriptions_90d": 1,
+          "ad_checkout_starts_90d": 0.0
+        },
+        {
+          "video_id": "mST92AkiZyQ",
+          "series": "Série Vivendo de Impressão 3D",
+          "title": "Do Zero a R$67 Mil/Mês em 8 Meses com Impressão 3D! | Como Vender Impressão 3D EP02",
+          "url": "https://www.youtube.com/watch?v=mST92AkiZyQ",
+          "published_at": "2026-05-31T15:00:11Z",
+          "duration_seconds": 1730,
+          "view_count_lifetime": 235825,
+          "like_count": 1400,
+          "comment_count": 80,
+          "used_in_paid_media_last90d": true,
+          "ad_trueview_views_90d": 13100,
+          "ad_engagements_90d": 24391,
+          "ad_campaigns": [
+            "[STLFLIX] vídeo-reconhecimento-Como Vender Impressão 3D EP02"
+          ],
+          "ad_cost_brl_90d": 968.32,
+          "ad_follow_on_views_90d": 7,
+          "ad_subscriptions_90d": 0,
+          "ad_checkout_starts_90d": 0.0
+        },
+        {
+          "video_id": "_1OJve8Itn4",
+          "series": "Série Vivendo de Impressão 3D",
+          "title": "Mãe lucra com impressão 3D em casa, mas estava vendendo ERRADO! | Como Vender Impressão 3D EP03",
+          "url": "https://www.youtube.com/watch?v=_1OJve8Itn4",
+          "published_at": "2026-06-06T15:00:06Z",
+          "duration_seconds": 1912,
+          "view_count_lifetime": 377344,
+          "like_count": 4066,
+          "comment_count": 146,
+          "used_in_paid_media_last90d": true,
+          "ad_trueview_views_90d": 61564,
+          "ad_engagements_90d": 89197,
+          "ad_campaigns": [
+            "[STLFLIX] vídeo-reconhecimento-Mãe lucra com impressão 3D em casa"
+          ],
+          "ad_cost_brl_90d": 4953.84,
+          "ad_follow_on_views_90d": 1358,
+          "ad_subscriptions_90d": 112,
+          "ad_checkout_starts_90d": 0.0
+        },
+        {
+          "video_id": "3oqYDF4GprM",
+          "series": "Série Vivendo de Impressão 3D",
+          "title": "R$20 MIL com Personalizados Impressssos 3D - Como ele chegou la!",
+          "url": "https://www.youtube.com/watch?v=3oqYDF4GprM",
+          "published_at": "2026-06-10T21:00:28Z",
+          "duration_seconds": 1112,
+          "view_count_lifetime": 94790,
+          "like_count": 646,
+          "comment_count": 35,
+          "used_in_paid_media_last90d": true,
+          "ad_trueview_views_90d": 11634,
+          "ad_engagements_90d": 23075,
+          "ad_campaigns": [
+            "[STLFLIX] vídeo-reconhecimento-R$20 MIL com Personalizados Impressssos 3D"
+          ],
+          "ad_cost_brl_90d": 901.82,
+          "ad_follow_on_views_90d": 69,
+          "ad_subscriptions_90d": 2,
+          "ad_checkout_starts_90d": 0.0
+        },
+        {
+          "video_id": "YQOOHZbNdJI",
+          "series": "Série Vivendo de Impressão 3D",
+          "title": "Uber ou Impressão 3D: Com Qual Ele Ganhou Mais? | Como Vender Impressão 3D EP04",
+          "url": "https://www.youtube.com/watch?v=YQOOHZbNdJI",
+          "published_at": "2026-06-13T15:00:32Z",
+          "duration_seconds": 2397,
+          "view_count_lifetime": 229117,
+          "like_count": 1583,
+          "comment_count": 49,
+          "used_in_paid_media_last90d": true,
+          "ad_trueview_views_90d": 54303,
+          "ad_engagements_90d": 76128,
+          "ad_campaigns": [
+            "[STLFLIX] vídeo-reconhecimento- Uber ou Impressão 3D: Com Qual Ele Ganhou Mais"
+          ],
+          "ad_cost_brl_90d": 4319.16,
+          "ad_follow_on_views_90d": 1012,
+          "ad_subscriptions_90d": 72,
+          "ad_checkout_starts_90d": 2.0
+        },
+        {
+          "video_id": "ZUmpgv0efHs",
+          "series": "Série Vivendo de Impressão 3D",
+          "title": "Ele Começou Há 5 Meses e Já Está Vendendo Impressão 3D Todos os Dias na Shopee!",
+          "url": "https://www.youtube.com/watch?v=ZUmpgv0efHs",
+          "published_at": "2026-06-17T21:40:43Z",
+          "duration_seconds": 441,
+          "view_count_lifetime": 5322,
+          "like_count": 251,
+          "comment_count": 4,
+          "used_in_paid_media_last90d": false
+        },
+        {
+          "video_id": "8TWZBPmDcq0",
+          "series": "Série Vivendo de Impressão 3D",
+          "title": "Motoboy Vira Empreendedor 3D Vendendo Chaveiros | Como Vender Impressão 3D EP05",
+          "url": "https://www.youtube.com/watch?v=8TWZBPmDcq0",
+          "published_at": "2026-06-20T15:00:12Z",
+          "duration_seconds": 2106,
+          "view_count_lifetime": 39373,
+          "like_count": 952,
+          "comment_count": 32,
+          "used_in_paid_media_last90d": true,
+          "ad_trueview_views_90d": 6042,
+          "ad_engagements_90d": 10076,
+          "ad_campaigns": [
+            "[STLFLIX] vídeo-reconhecimento- Saíram-do-CLT"
+          ],
+          "ad_cost_brl_90d": 2931.81,
+          "ad_follow_on_views_90d": 630,
+          "ad_subscriptions_90d": 76,
+          "ad_checkout_starts_90d": 0.0
+        },
+        {
+          "video_id": "C0nVtKpRLuk",
+          "series": "Série Vivendo de Impressão 3D",
+          "title": "Pediu Demissão do Emprego na STLFLIX e Faz R$20 MIL/Mês com Impressão 3D",
+          "url": "https://www.youtube.com/watch?v=C0nVtKpRLuk",
+          "published_at": "2026-06-25T15:00:21Z",
+          "duration_seconds": 1953,
+          "view_count_lifetime": 260225,
+          "like_count": 1378,
+          "comment_count": 31,
+          "used_in_paid_media_last90d": true,
+          "ad_trueview_views_90d": 70876,
+          "ad_engagements_90d": 114449,
+          "ad_campaigns": [
+            "[STLFLIX] vídeo-reconhecimento-  Pediu Demissão do Emprego na STLFLIX e Faz R$20 MIL/Mês com Impressão 3D"
+          ],
+          "ad_cost_brl_90d": 4817.14,
+          "ad_follow_on_views_90d": 274,
+          "ad_subscriptions_90d": 43,
+          "ad_checkout_starts_90d": 0.0
+        },
+        {
+          "video_id": "AqfFf9vmhP0",
+          "series": "Série Vivendo de Impressão 3D",
+          "title": "R$30 Mil/Mês na Shopee em 6 Meses com Impressão 3D | Como Vender Impressão 3D EP06",
+          "url": "https://www.youtube.com/watch?v=AqfFf9vmhP0",
+          "published_at": "2026-06-27T21:00:26Z",
+          "duration_seconds": 2991,
+          "view_count_lifetime": 95454,
+          "like_count": 1175,
+          "comment_count": 54,
+          "used_in_paid_media_last90d": true,
+          "ad_trueview_views_90d": 56439,
+          "ad_engagements_90d": 83927,
+          "ad_campaigns": [
+            "[STLFLIX] vídeo-reconhecimento- R$30 Mil/Mês na Shopee em 6 Meses com Impressão 3D"
+          ],
+          "ad_cost_brl_90d": 4870.13,
+          "ad_follow_on_views_90d": 873,
+          "ad_subscriptions_90d": 47,
+          "ad_checkout_starts_90d": 7.0
+        },
+        {
+          "video_id": "TmosUaw4AZU",
+          "series": "Série Vivendo de Impressão 3D",
+          "title": "Impressão 3d Vende em Feiras? Eles fizeram R$52 MIL em um mês!",
+          "url": "https://www.youtube.com/watch?v=TmosUaw4AZU",
+          "published_at": "2026-07-01T21:00:04Z",
+          "duration_seconds": 1977,
+          "view_count_lifetime": 141386,
+          "like_count": 1637,
+          "comment_count": 36,
+          "used_in_paid_media_last90d": true,
+          "ad_trueview_views_90d": 31320,
+          "ad_engagements_90d": 52047,
+          "ad_campaigns": [
+            "[STLFLIX] Impressão 3d vende em feiras?"
+          ],
+          "ad_cost_brl_90d": 2145.09,
+          "ad_follow_on_views_90d": 299,
+          "ad_subscriptions_90d": 26,
+          "ad_checkout_starts_90d": 0.0
+        },
+        {
+          "video_id": "17Gi12-k3_c",
+          "series": "Série Vivendo de Impressão 3D",
+          "title": "R$20 Mil/Mês com Impressão 3D em 10 Meses | Como Vender Impressão 3D EP07",
+          "url": "https://www.youtube.com/watch?v=17Gi12-k3_c",
+          "published_at": "2026-07-04T15:22:16Z",
+          "duration_seconds": 3436,
+          "view_count_lifetime": 58438,
+          "like_count": 978,
+          "comment_count": 18,
+          "used_in_paid_media_last90d": true,
+          "ad_trueview_views_90d": 33789,
+          "ad_engagements_90d": 35855,
+          "ad_campaigns": [
+            "R$20 Mil/Mês com Impressão 3D em 10 Meses | Como Vender Impressão 3D EP07"
+          ],
+          "ad_cost_brl_90d": 3257.05,
+          "ad_follow_on_views_90d": 457,
+          "ad_subscriptions_90d": 83,
+          "ad_checkout_starts_90d": 2.0
+        },
+        {
+          "video_id": "d4gWJcVKkw8",
+          "series": "Série Vivendo de Impressão 3D",
+          "title": "Como Ele Escalou para 9 Impressoras 3D e Fez R$35 MIL",
+          "url": "https://www.youtube.com/watch?v=d4gWJcVKkw8",
+          "published_at": "2026-07-08T16:54:08Z",
+          "duration_seconds": 748,
+          "view_count_lifetime": 57277,
+          "like_count": 270,
+          "comment_count": 4,
+          "used_in_paid_media_last90d": true,
+          "ad_trueview_views_90d": 37001,
+          "ad_engagements_90d": 42815,
+          "ad_campaigns": [
+            "[STLFLIX] vídeo-reconhecimento-como-ele-escalou-9-impressoras"
+          ],
+          "ad_cost_brl_90d": 2264.46,
+          "ad_follow_on_views_90d": 0,
+          "ad_subscriptions_90d": 0,
+          "ad_checkout_starts_90d": 0.0
+        },
+        {
+          "video_id": "yVK-hTfwyT0",
+          "series": "Série Vivendo de Impressão 3D",
+          "title": "O Plano para Vender Impressão 3d Funcionou De R$13k a R$21 MIL/Mês —Como Vender Impressão 3d Update",
+          "url": "https://www.youtube.com/watch?v=yVK-hTfwyT0",
+          "published_at": "2026-07-11T20:45:26Z",
+          "duration_seconds": 1410,
+          "view_count_lifetime": 24673,
+          "like_count": 323,
+          "comment_count": 6,
+          "used_in_paid_media_last90d": true,
+          "ad_trueview_views_90d": 9226,
+          "ad_engagements_90d": 10044,
+          "ad_campaigns": [
+            "[STLFLIX] vídeo-reconhecimento-o-plano-funcionou"
+          ],
+          "ad_cost_brl_90d": 2194.64,
+          "ad_follow_on_views_90d": 100,
+          "ad_subscriptions_90d": 21,
+          "ad_checkout_starts_90d": 0.0
+        },
+        {
+          "video_id": "3Lxrr1YejZI",
+          "series": "Série Vivendo de Impressão 3D",
+          "title": "Ele Fatura R$100 MIL/MÊS com Impressão 3D, O Plano Para Crescer Mais | Como Vender Impressão 3D EP08",
+          "url": "https://www.youtube.com/watch?v=3Lxrr1YejZI",
+          "published_at": "2026-07-19T15:00:15Z",
+          "duration_seconds": 3849,
+          "view_count_lifetime": 51607,
+          "like_count": 390,
+          "comment_count": 11,
+          "used_in_paid_media_last90d": true,
+          "ad_trueview_views_90d": 27907,
+          "ad_engagements_90d": 30199,
+          "ad_campaigns": [
+            "[STLFLIX] vídeo-reconhecimento-ele-fatura-R$100-com-impressão-3d",
+            "[STLFLIX] vídeo-reconhecimento-o-plano-funcionou"
+          ],
+          "ad_cost_brl_90d": 4391.35,
+          "ad_follow_on_views_90d": 176,
+          "ad_subscriptions_90d": 44,
+          "ad_checkout_starts_90d": 0.0
+        },
+        {
+          "video_id": "FXUhs98cSHQ",
+          "series": "Série Vivendo de Impressão 3D",
+          "title": "Saiu do Emprego e Hoje Fatura Mais de R$100 MIL/Mês com Impressão 3D",
+          "url": "https://www.youtube.com/watch?v=FXUhs98cSHQ",
+          "published_at": "2026-07-22T20:30:17Z",
+          "duration_seconds": 2227,
+          "view_count_lifetime": 115593,
+          "like_count": 2995,
+          "comment_count": 103,
+          "used_in_paid_media_last90d": true,
+          "ad_trueview_views_90d": 1,
+          "ad_engagements_90d": 1,
+          "ad_campaigns": [
+            "Saiu do Emprego e Hoje Fatura Mais de R$100 MIL/Mês com Impressão 3D"
+          ],
+          "ad_cost_brl_90d": 0.21,
+          "ad_follow_on_views_90d": 0,
+          "ad_subscriptions_90d": 0,
+          "ad_checkout_starts_90d": 0.0
+        },
+        {
+          "video_id": "XXg0NWacP60",
+          "series": "Série Vivendo de Impressão 3D",
+          "title": "Pai e Filho Empreendendo com Impressão 3D  | Como Vender Impressão 3d EP09",
+          "url": "https://www.youtube.com/watch?v=XXg0NWacP60",
+          "published_at": "2026-07-25T21:00:35Z",
+          "duration_seconds": 2601,
+          "view_count_lifetime": 19221,
+          "like_count": 524,
+          "comment_count": 11,
+          "used_in_paid_media_last90d": true,
+          "ad_trueview_views_90d": 914,
+          "ad_engagements_90d": 1069,
+          "ad_campaigns": [
+            "Pai e Filho Empreendendo com Impressão 3D | Como Vender Impressão 3d EP09"
+          ],
+          "ad_cost_brl_90d": 933.63,
+          "ad_follow_on_views_90d": 119,
+          "ad_subscriptions_90d": 12,
+          "ad_checkout_starts_90d": 0.0
+        },
+        {
+          "video_id": "cqx3aYC9QAw",
+          "series": "Série Vivendo de Impressão 3D",
+          "title": "Impressão 3d + Pintura vendendo acessórios de board games e RPG | Como Vender impressão 3d EP10",
+          "url": "https://www.youtube.com/watch?v=cqx3aYC9QAw",
+          "published_at": "2026-08-01T15:00:22Z",
+          "duration_seconds": 1824,
+          "view_count_lifetime": 14458,
+          "like_count": 268,
+          "comment_count": 8,
+          "used_in_paid_media_last90d": true,
+          "ad_trueview_views_90d": 1173,
+          "ad_engagements_90d": 1272,
+          "ad_campaigns": [
+            "Impressão 3d + Pintura vendendo acessórios de board games e RPG | Como Vender impressão 3d EP10"
+          ],
+          "ad_cost_brl_90d": 927.88,
+          "ad_follow_on_views_90d": 73,
+          "ad_subscriptions_90d": 11,
+          "ad_checkout_starts_90d": 0.0
+        },
+        {
+          "video_id": "dCq-wQ3PopA",
+          "series": "Série Vivendo de Impressão 3D",
+          "title": "Vai sair do Aplicativo? Motoboy empreendendo com impressão 3d! ",
+          "url": "https://www.youtube.com/watch?v=dCq-wQ3PopA",
+          "published_at": "2026-08-08T15:00:39Z",
+          "duration_seconds": 1305,
+          "view_count_lifetime": 40069,
+          "like_count": 426,
+          "comment_count": 14,
+          "used_in_paid_media_last90d": true,
+          "ad_trueview_views_90d": 6908,
+          "ad_engagements_90d": 10287,
+          "ad_campaigns": [
+            "[STLFLIX] vídeo-reconhecimento - Vai sair do Aplicativo? Motoboy empreendendo com impressão 3d!"
+          ],
+          "ad_cost_brl_90d": 797.48,
+          "ad_follow_on_views_90d": 22,
+          "ad_subscriptions_90d": 3,
+          "ad_checkout_starts_90d": 0.0
+        },
+        {
+          "video_id": "bTt4wme-79E",
+          "series": "Série Vivendo de Impressão 3D",
+          "title": "Ele Largou o Emprego para Vender Impressão 3D… Hoje Fatura R$50 MIL",
+          "url": "https://www.youtube.com/watch?v=bTt4wme-79E",
+          "published_at": "2026-08-13T15:00:36Z",
+          "duration_seconds": 2738,
+          "view_count_lifetime": 20130,
+          "like_count": 392,
+          "comment_count": 14,
+          "used_in_paid_media_last90d": true,
+          "ad_trueview_views_90d": 465,
+          "ad_engagements_90d": 506,
+          "ad_campaigns": [
+            "Ele Largou o Emprego para Vender Impressão 3D… Hoje Fatura R$50 MIL"
+          ],
+          "ad_cost_brl_90d": 914.92,
+          "ad_follow_on_views_90d": 19,
+          "ad_subscriptions_90d": 4,
+          "ad_checkout_starts_90d": 0.0
+        },
+        {
+          "video_id": "KvSsBToBnH0",
+          "series": "Série Vivendo de Impressão 3D",
+          "title": "Como Ele Fatura Mais de R$50 MIL/MÊS Vendendo Impressão 3D Para 66 Lojas | Higor 123dbrindes",
+          "url": "https://www.youtube.com/watch?v=KvSsBToBnH0",
+          "published_at": "2026-09-08T22:00:29Z",
+          "duration_seconds": 1221,
+          "view_count_lifetime": 18125,
+          "like_count": 367,
+          "comment_count": 20,
+          "used_in_paid_media_last90d": false
+        }
+      ]
+    }
+  }
+}

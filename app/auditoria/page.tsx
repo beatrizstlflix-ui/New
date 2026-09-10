@@ -13,6 +13,7 @@ import {
   getOrganicSummary,
   getCaptionsCoverage,
   getYoutubeStudioAnalytics,
+  getSeriesViews,
   brl,
   num,
 } from '@/lib/auditData'
@@ -53,6 +54,7 @@ export default function AuditoriaPage() {
   const organic = getOrganicSummary()
   const captions = getCaptionsCoverage()
   const studio = getYoutubeStudioAnalytics()
+  const seriesData = getSeriesViews()
 
   const cadenceData = Object.entries(organic.publish_cadence_by_month).map(([month, videos]) => ({ month, videos }))
   const periodLabels: Record<string, string> = { P1: 'YTD 2026', P2: '90 dias', P3: '28 dias', P4: '28d anteriores', P5: 'BF 2025' }
@@ -483,14 +485,77 @@ export default function AuditoriaPage() {
         </div>
       </section>
 
-      {/* CONTEÚDO E NARRATIVAS */}
+      {/* CONTEÚDO E NARRATIVAS — SÉRIES */}
       <section className="flex flex-col gap-4">
-        <h2 className="text-lg font-semibold border-b border-border pb-2">Conteúdo e narrativas</h2>
-        <BlockedBanner title="Taxonomia de narrativas x desempenho">
-          Depende do inventário completo de vídeos (bloqueado) e de transcrições (ainda não iniciadas — ver
-          <code> docs/status_videos_transcricoes.md</code>). O que já se observa nos nomes de campanha: a grande
-          maioria dos vídeos promovidos são estudos de caso/depoimentos de alunos monetizando com impressão 3D
-          (&quot;vídeo-reconhecimento&quot;), estrategicamente de topo de funil.
+        <h2 className="text-lg font-semibold border-b border-border pb-2">Conteúdo e narrativas — séries</h2>
+        <p className="text-xs text-muted">
+          Classificação manual por título/formato (não por palavra-chave genérica) — ver{' '}
+          <code>docs/taxonomia_series.md</code> para os critérios e casos de fronteira excluídos.
+        </p>
+
+        {Object.values(seriesData.series).map((s) => (
+          <div key={s.series_name} className="flex flex-col gap-3">
+            <h3 className="text-base font-semibold text-white">{s.series_name}</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <StatCard label="Vídeos na série" value={num(s.totals.video_count)} />
+              <StatCard label="Views vitalícias (soma)" value={num(s.totals.views_lifetime_total)} />
+              <StatCard label="Vídeos já promovidos em ads" value={`${s.totals.videos_in_paid_media} / ${s.totals.video_count}`} />
+              <StatCard label="Investimento em mídia (90d)" value={brl(s.totals.ad_cost_brl_90d_total)} />
+            </div>
+            <div className="bg-panel border border-border rounded-xl p-4 overflow-x-auto">
+              <table className="w-full text-xs">
+                <thead className="text-muted text-left">
+                  <tr>
+                    <th className="pb-2 pr-2">Vídeo</th>
+                    <th className="pb-2 pr-2">Publicado</th>
+                    <th className="pb-2 pr-2 text-right">Views (vitalício)</th>
+                    <th className="pb-2 pr-2 text-right">Likes</th>
+                    <th className="pb-2 pr-2">Mídia paga (90d)</th>
+                    <th className="pb-2 pr-2 text-right">Custo (90d)</th>
+                    <th className="pb-2 pr-2 text-right">Follow-on views</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {s.videos.map((v) => (
+                    <tr key={v.video_id} className="border-t border-border/60">
+                      <td className="py-1.5 pr-2 max-w-sm truncate" title={v.title}>
+                        <a href={v.url} target="_blank" rel="noreferrer" className="hover:underline text-white">
+                          {v.title}
+                        </a>
+                      </td>
+                      <td className="py-1.5 pr-2 text-muted">{v.published_at?.slice(0, 10)}</td>
+                      <td className="py-1.5 pr-2 text-right">{num(v.view_count_lifetime)}</td>
+                      <td className="py-1.5 pr-2 text-right">{num(v.like_count)}</td>
+                      <td className="py-1.5 pr-2">
+                        {v.used_in_paid_media_last90d ? (
+                          <span className="text-good">sim</span>
+                        ) : (
+                          <span className="text-muted">só orgânico</span>
+                        )}
+                      </td>
+                      <td className="py-1.5 pr-2 text-right">{v.ad_cost_brl_90d ? brl(v.ad_cost_brl_90d) : '—'}</td>
+                      <td className="py-1.5 pr-2 text-right">{v.ad_follow_on_views_90d ? num(v.ad_follow_on_views_90d) : '—'}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ))}
+
+        <div className="bg-panel border border-accent2/50 rounded-xl p-4 text-sm">
+          <p className="font-semibold text-accent2 mb-1">Achado: concentração de mídia na Série Vivendo de Impressão 3D</p>
+          <p className="text-muted">
+            Essa série sozinha concentra {brl(seriesData.series['Série Vivendo de Impressão 3D']?.totals.ad_cost_brl_90d_total ?? 0)}{' '}
+            dos R$ 129.617 investidos em mídia nos últimos 90 dias (~37%). O investimento por episódio caiu de
+            R$4.000-5.000 (maio-junho) para R$800-2.200 (julho-agosto) — investigar se é desaceleração deliberada
+            ou fadiga de criativo antes de decidir se a série segue como carro-chefe rumo à Black Friday.
+          </p>
+        </div>
+
+        <BlockedBanner title="Taxonomia completa de narrativas x desempenho (todas as demais séries/temas)">
+          Esta visão cobre as 2 séries pedidas. Uma taxonomia completa do restante do catálogo (1.014 vídeos) ainda
+          depende de transcrição em escala — ver <code>docs/status_videos_transcricoes.md</code>.
         </BlockedBanner>
       </section>
 
