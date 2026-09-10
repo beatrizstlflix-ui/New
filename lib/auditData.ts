@@ -107,6 +107,46 @@ export function getVideoAdSummary(): { videos_used_in_ads_count: number; videos:
   return readJSON('data/processed/google_ads_video_summary_last90d.json')
 }
 
+export interface OrganicSummary {
+  channel: {
+    channel_id: string
+    title: string
+    custom_url: string
+    country: string
+    published_at: string
+    subscriber_count: number
+    view_count: number
+    video_count_reported: number
+  }
+  video_count_inventoried: number
+  by_format: Record<string, number>
+  publish_cadence_by_month: Record<string, number>
+  top_videos_by_views: Array<{
+    video_id: string
+    title: string
+    view_count: number
+    like_count: number
+    comment_count: number
+    duration_seconds: number
+    format_guess: string
+    published_at: string
+  }>
+}
+
+export function getOrganicSummary(): OrganicSummary {
+  return readJSON('data/processed/youtube_organic_summary.json')
+}
+
+export function getCaptionsCoverage(): { checked: number; withCaptions: number; withAsrPt: number; quotaExhausted: boolean } {
+  const raw: Record<string, any> = readJSON('data/raw/youtube/captions_list_by_video.json')
+  const entries = Object.values(raw)
+  const valid = entries.filter((v) => Array.isArray(v))
+  const withCaptions = valid.filter((v: any) => v.length > 0).length
+  const withAsrPt = valid.filter((v: any) => v.some((t: any) => t.trackKind === 'asr' && (t.language || '').startsWith('pt'))).length
+  const quotaExhausted = entries.some((v) => !Array.isArray(v) && v?.error === 403)
+  return { checked: valid.length, withCaptions, withAsrPt, quotaExhausted }
+}
+
 export function brl(v: number): string {
   return v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 })
 }

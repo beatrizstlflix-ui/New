@@ -1,6 +1,7 @@
 import StatCard from '@/components/StatCard'
 import MonthlyChannelChart, { MonthlyChannelPoint } from '@/components/MonthlyChannelChart'
 import MediaPagaBarChart from '@/components/MediaPagaBarChart'
+import CadenceChart from '@/components/CadenceChart'
 import {
   getMediaPagaResumo,
   getGA4Last28,
@@ -8,6 +9,8 @@ import {
   getGA4Monthly,
   getUserLists,
   getVideoAdSummary,
+  getOrganicSummary,
+  getCaptionsCoverage,
   brl,
   num,
 } from '@/lib/auditData'
@@ -45,6 +48,10 @@ export default function AuditoriaPage() {
   const monthly = getGA4Monthly()
   const userLists = getUserLists()
   const videoAds = getVideoAdSummary()
+  const organic = getOrganicSummary()
+  const captions = getCaptionsCoverage()
+
+  const cadenceData = Object.entries(organic.publish_cadence_by_month).map(([month, videos]) => ({ month, videos }))
 
   const paidVideoLast28 = ga4_28.last28d.rows.find((r) => r.session_default_channel_group === 'Paid Video')
   const paidVideoPrev28 = ga4_28.previous28d.rows.find((r) => r.session_default_channel_group === 'Paid Video')
@@ -142,6 +149,7 @@ export default function AuditoriaPage() {
       <section className="flex flex-col gap-4">
         <h2 className="text-lg font-semibold border-b border-border pb-2">Audiência</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <StatCard label="Inscritos no canal (total)" value={num(organic.channel.subscriber_count)} />
           <StatCard
             label="Sessões 'Paid Video' (28d)"
             value={num(paidVideoLast28?.sessions ?? 0)}
@@ -150,29 +158,76 @@ export default function AuditoriaPage() {
           />
           <StatCard label="Sessões 'Organic Video' (28d)" value={num(organicVideoLast28?.sessions ?? 0)} />
           <StatCard label="Sessões 'Paid Social' (28d)" value={num(paidSocialLast28?.sessions ?? 0)} />
-          <StatCard
-            label="Usuários novos via Paid Video (28d)"
-            value={num(paidVideoLast28?.newusers ?? 0)}
-          />
         </div>
         <p className="text-xs text-muted -mt-2">
-          Fonte: GA4 (LP - AMBIENTE BR), sessões no site por canal de aquisição — não é o mesmo que espectadores no
-          YouTube (isso está bloqueado). "Recorrência" e "audiência ativa" no sentido do YouTube Studio não podem
-          ser respondidas aqui.
+          Inscritos: contagem vitalícia do YouTube Data API (ponto no tempo, não bounded pelo período). Sessões:
+          GA4 (LP - AMBIENTE BR), tráfego no site por canal de aquisição — não é o mesmo que espectadores no
+          YouTube.
         </p>
-        <BlockedBanner title="Espectadores, inscritos, audiência ativa/recorrente (definição YouTube)">
-          Requer YouTube Analytics do canal correto. Ver <code>docs/bloqueios_e_pedidos.md</code> item 1.
+        <BlockedBanner title="Espectadores/audiência ativa/recorrente (definição YouTube Studio), inscritos ganhos por período, demografia">
+          Requer YouTube Analytics (OAuth) do canal correto. Ver <code>docs/bloqueios_e_pedidos.md</code> item 1.
         </BlockedBanner>
       </section>
 
       {/* ORGÂNICO */}
       <section className="flex flex-col gap-4">
         <h2 className="text-lg font-semibold border-b border-border pb-2">Orgânico</h2>
-        <BlockedBanner title="Descoberta, retenção, inscrições, origens de tráfego no YouTube, vídeos em destaque">
-          O conector do YouTube está autenticado no canal pessoal vazio da conta, não no canal STLFLIX BR. Nenhum
-          dado orgânico de vídeo pode ser mostrado aqui sem inventar números. Corrigir em
+        <p className="text-xs text-muted">
+          Canal <strong>{organic.channel.title}</strong> ({organic.channel.custom_url}) — estatísticas vitalícias via
+          YouTube Data API v3 (chave de API), extraídas em 2026-09-10. Sem filtro de período: estes números são
+          desde a criação do canal ({organic.channel.published_at?.slice(0, 10)}).
+        </p>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <StatCard label="Inscritos (total)" value={num(organic.channel.subscriber_count)} />
+          <StatCard label="Visualizações (total do canal)" value={num(organic.channel.view_count)} />
+          <StatCard label="Vídeos inventariados" value={num(organic.video_count_inventoried)} />
+          <StatCard label="Shorts / Longos" value={`${num(organic.by_format.short ?? 0)} / ${num(organic.by_format.long ?? 0)}`} />
+        </div>
+        <CadenceChart data={cadenceData} />
+        <div className="bg-panel border border-border rounded-xl p-4 overflow-x-auto">
+          <h3 className="text-sm text-muted mb-3">Top 10 vídeos por visualizações (vitalício)</h3>
+          <table className="w-full text-xs">
+            <thead className="text-muted text-left">
+              <tr>
+                <th className="pb-2 pr-2">Vídeo</th>
+                <th className="pb-2 pr-2">Formato</th>
+                <th className="pb-2 pr-2 text-right">Views</th>
+                <th className="pb-2 pr-2 text-right">Likes</th>
+                <th className="pb-2 pr-2 text-right">Comentários</th>
+                <th className="pb-2 pr-2">Publicado em</th>
+              </tr>
+            </thead>
+            <tbody>
+              {organic.top_videos_by_views.slice(0, 10).map((v) => (
+                <tr key={v.video_id} className="border-t border-border/60">
+                  <td className="py-1.5 pr-2 max-w-sm truncate" title={v.title}>
+                    <a href={`https://www.youtube.com/watch?v=${v.video_id}`} target="_blank" rel="noreferrer" className="hover:underline">
+                      {v.title}
+                    </a>
+                  </td>
+                  <td className="py-1.5 pr-2 text-muted">{v.format_guess === 'short' ? 'Short' : 'Longo'} ({v.duration_seconds}s)</td>
+                  <td className="py-1.5 pr-2 text-right">{num(v.view_count)}</td>
+                  <td className="py-1.5 pr-2 text-right">{num(v.like_count)}</td>
+                  <td className="py-1.5 pr-2 text-right">{num(v.comment_count)}</td>
+                  <td className="py-1.5 pr-2 text-muted">{v.published_at?.slice(0, 10)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="bg-panel border border-good/50 rounded-xl p-4 text-sm">
+          <p className="font-semibold text-good mb-1">Transcrição: viável, cobertura parcial confirmada</p>
+          <p className="text-muted">
+            {num(captions.withAsrPt)} de {num(captions.checked)} vídeos testados ({((captions.withAsrPt / (captions.checked || 1)) * 100).toFixed(0)}%)
+            têm legenda automática em português disponível. {captions.quotaExhausted && 'A checagem completa parou por limite diário de cota da API do YouTube (captions.list custa 50 unidades/chamada) — ver '}
+            {captions.quotaExhausted && <code>docs/status_videos_transcricoes.md</code>}
+            {captions.quotaExhausted && ' para o plano de continuidade.'} Baixar o texto em si ainda exige OAuth (bloqueio #1).
+          </p>
+        </div>
+        <BlockedBanner title="Retenção, origem de tráfego (orgânico x pago), inscritos por período, demografia, recorrência de audiência">
+          Isso exige o YouTube Analytics (OAuth), não coberto pela chave de API pública usada acima. Corrigir em
           <code> https://onboard.windsor.ai/connect?connector=youtube&next=/youtube/authorize</code> selecionando o
-          canal correto na tela de consentimento.
+          canal correto na tela de consentimento, ou configurando OAuth completo no próprio app (ver README).
         </BlockedBanner>
       </section>
 

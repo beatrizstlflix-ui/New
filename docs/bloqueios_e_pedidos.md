@@ -3,33 +3,38 @@
 Status em 2026-09-10. Ver protocolo completo na conversa (o que tentei, impedimento,
 o que depende disso, o que preciso, como resolver, o que continuo fazendo).
 
-## 1. [CRÍTICO] YouTube conectado ao canal errado no Windsor.ai
+## 1. [CRÍTICO — parcialmente resolvido] YouTube conectado ao canal errado no Windsor.ai
 - **Tentando**: extrair views, tempo assistido, origem de tráfego, retenção,
   inscritos, demografia do canal STLFLIX BR.
 - **Impedimento**: a conta `beatrizstlflix@gmail.com` no conector `youtube` do
   Windsor.ai está autenticada no canal pessoal dela (vazio), não no STLFLIX BR.
-- **Depende disso**: toda a seção "Orgânico", "Retenção", parte de "Audiência" e
-  "Relação mídia x orgânico" do dashboard e das 20 perguntas obrigatórias.
-- **Preciso que você**: reconecte o YouTube no Windsor.ai selecionando o canal
-  correto.
-- **Como fazer**: abra
+- **Resolvido parcialmente em 2026-09-10** via chave de API própria (item 2): já
+  temos inventário completo de vídeos e estatísticas vitalícias (ver
+  `docs/status_videos_transcricoes.md`). **Ainda falta** tudo que só o YouTube
+  Analytics dá: tendência diária, origem de tráfego (orgânico x pago), retenção,
+  inscritos ganhos por período, demografia, recorrência de audiência.
+- **Depende disso agora**: seção "Retenção", parte de "Audiência" (recorrência,
+  ativa) e "Relação mídia x orgânico" com granularidade diária real do YouTube.
+- **Preciso que você**: ainda reconecte o YouTube no Windsor.ai selecionando o
+  canal correto, **ou** gere um `refresh_token` OAuth para o modo completo do
+  próprio dashboard (README original tem o passo a passo via OAuth Playground).
+- **Como fazer (Windsor.ai)**: abra
   `https://onboard.windsor.ai/connect?connector=youtube&next=/youtube/authorize`,
   entre com a conta que administra o Windsor.ai, e **na tela de consentimento do
   Google escolha explicitamente o canal/marca STLFLIX BR** (não "Beatriz stlflix")
   quando for perguntado qual canal autorizar.
-- **Enquanto isso**: sigo com Google Ads, GA4, estrutura do projeto e o dashboard com
-  as seções que não dependem do YouTube.
+- **Enquanto isso**: sigo com o que a API key libera (inventário, legendas,
+  estatísticas vitalícias) e o restante do escopo.
 
-## 2. [ALTO] Chave de API do YouTube inválida
-- **Tentando**: usar o modo "API key" (sem OAuth) como alternativa parcial ao item 1.
-- **Impedimento**: `YOUTUBE_API_KEY` fornecida retornou `API_KEY_INVALID` — provável
-  erro de transcrição ao ler de um screenshot (caracteres ambíguos como 0/O, l/1/I).
-- **Depende disso**: inventário básico de vídeos (mesmo sem métricas por período).
-- **Preciso que você**: cole a chave como texto simples (não screenshot) em uma
-  mensagem, ou confirme se ela foi regenerada desde a captura de tela.
-- **Observação de segurança**: mesmo corrigida, essa chave só dá estatísticas
-  públicas vitalícias — não substitui o item 1 para as métricas por período,
-  retenção e tráfego.
+## 2. [RESOLVIDO] Chave de API do YouTube
+- A chave enviada como texto (não screenshot) funcionou: canal confirmado
+  **STLFLIX BR - Impressão 3D** (@stlflix_br), 83.400 inscritos, 24.856.451 views
+  vitalícias, 1.062 vídeos reportados (1.039 inventariados via playlist pública —
+  a diferença provavelmente são vídeos não listados/privados, não visíveis sem
+  OAuth). Erro anterior era mesmo transcrição do screenshot (`O` maiúsculo lido no
+  lugar de `0`).
+- **Limite que continua valendo**: este modo só dá estatísticas vitalícias
+  (sem filtro de período) — ver item 1.
 
 ## 3. [MÉDIO] Eventos de lead no GA4 nunca disparam
 - **Achado**: `qualify_lead` e `close_convert_lead` existem como conversões
@@ -91,3 +96,30 @@ o que depende disso, o que preciso, como resolver, o que continuo fazendo).
   o suficiente para merecer investigação antes de usar qualquer um dos dois
   números como "a" verdade em decisões de investimento. Vou tratar isso como
   achado de auditoria de mensuração (não vou reconciliar arbitrariamente).
+
+## 9. [NOVO — achado de escopo] Vídeos de anúncio vêm de pelo menos 3 canais do YouTube diferentes do STLFLIX BR
+- **Achado**: cruzando o inventário orgânico (1.039 vídeos do canal
+  `UCb3H1VIsLk9l6xAz6eyyLwQ`) com os 66 vídeos usados em anúncios nos últimos 90
+  dias, 23 não aparecem no canal público — a maioria pertence a
+  `UCke6o2ZrbJ7ZGrzgDI4xM4Q` (nomes de arquivo tipo "1936_V_A_SO_FREESTYLE_6.mp4",
+  parece um canal só de upload de criativos de anúncio), outros a
+  `UCBXu5NZtZoUA4pIeU2GGPdg` e `UCTKWuk5VvxQd7_R4KP5OeHw`. Mais 3 vídeos pertencem
+  ao próprio canal STLFLIX BR mas não aparecem no inventário público porque são
+  não listados/privados (ex.: "Arena 3D EP 03 - Intro 0X.mp4", enviados
+  recentemente em 2026-09-04).
+- **Pergunta**: esses canais de criativo (`UCke6o2ZrbJ7ZGrzgDI4xM4Q` e os outros
+  dois) são geridos pela agência/STLFLIX? Fazem sentido no escopo desta auditoria
+  (são só veículo técnico para servir anúncio) ou devo tratá-los como fora de
+  escopo? Isso não bloqueia o restante do trabalho — só registro para não
+  presumir silenciosamente.
+
+## 10. [BAIXO — limitação técnica confirmada] Endpoints públicos de legenda do YouTube bloqueados neste ambiente
+- **Achado**: a política de rede deste ambiente bloqueia `www.youtube.com` e
+  `video.google.com` (usados por ferramentas de transcrição de terceiros) — só
+  `www.googleapis.com` (API oficial) é permitido. Isso não impede a transcrição:
+  confirmei via `captions.list` (que funciona com a chave de API) que legendas
+  automáticas (ASR) em português **existem e estão "serving"** para os vídeos
+  testados. O **download** do texto da legenda (`captions.download`) exige OAuth
+  (erro 401 confirmado com a chave de API) — ou seja, depende da mesma correção
+  do item 1. Não é um impedimento novo, é o mesmo de sempre, agora com uma rota
+  de solução mais clara (usar a API oficial via OAuth, não scraping).

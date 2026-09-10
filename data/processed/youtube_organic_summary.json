@@ -1,0 +1,423 @@
+{
+  "source": "YouTube Data API v3 (API key), estatisticas vitalicias, canal UCb3H1VIsLk9l6xAz6eyyLwQ",
+  "extracted_at": "2026-09-10",
+  "channel": {
+    "channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+    "title": "STLFLIX BR - Impressão 3D",
+    "custom_url": "@stlflix_br",
+    "country": "BR",
+    "published_at": "2023-04-28T14:07:24.457586Z",
+    "subscriber_count": 83400,
+    "view_count": 24856451,
+    "video_count_reported": 1062
+  },
+  "video_count_inventoried": 1039,
+  "by_format": {
+    "long": 363,
+    "short": 676
+  },
+  "publish_cadence_by_month": {
+    "2023-05": 34,
+    "2023-06": 53,
+    "2023-07": 67,
+    "2023-08": 11,
+    "2023-12": 6,
+    "2024-01": 1,
+    "2024-02": 5,
+    "2024-03": 8,
+    "2024-04": 10,
+    "2024-05": 11,
+    "2024-06": 30,
+    "2024-07": 36,
+    "2024-08": 35,
+    "2024-09": 29,
+    "2024-10": 38,
+    "2024-11": 32,
+    "2024-12": 26,
+    "2025-01": 42,
+    "2025-02": 14,
+    "2025-03": 17,
+    "2025-04": 21,
+    "2025-05": 22,
+    "2025-06": 18,
+    "2025-07": 26,
+    "2025-08": 14,
+    "2025-09": 28,
+    "2025-10": 39,
+    "2025-11": 52,
+    "2025-12": 29,
+    "2026-01": 30,
+    "2026-02": 29,
+    "2026-03": 35,
+    "2026-04": 23,
+    "2026-05": 28,
+    "2026-06": 34,
+    "2026-07": 61,
+    "2026-08": 36,
+    "2026-09": 9
+  },
+  "top_videos_by_views": [
+    {
+      "video_id": "f5f3TEhFpGo",
+      "title": "TIPS - Dica para impressões a prova d'água!",
+      "view_count": 4085534,
+      "like_count": 13829,
+      "comment_count": 23,
+      "duration_seconds": 45,
+      "format_guess": "short",
+      "published_at": "2024-05-04T12:00:37Z"
+    },
+    {
+      "video_id": "ejnpr-RidMw",
+      "title": "Eleve o nível do seu Nintendo Switch com nossos assessórios! 🎮  #impressao3d #3d #impressora #stlfl",
+      "view_count": 2091641,
+      "like_count": 41110,
+      "comment_count": 248,
+      "duration_seconds": 18,
+      "format_guess": "short",
+      "published_at": "2025-04-07T19:15:40Z"
+    },
+    {
+      "video_id": "zODvGo7W43o",
+      "title": "TIPS - Como imprimir com menos suportes do que o necessário!",
+      "view_count": 1843677,
+      "like_count": 14635,
+      "comment_count": 122,
+      "duration_seconds": 51,
+      "format_guess": "short",
+      "published_at": "2024-05-11T12:00:55Z"
+    },
+    {
+      "video_id": "rmlIous-6E8",
+      "title": "Isso ficou muito bom! 😍  #impressao3d #3d #impressora #stlflixbr",
+      "view_count": 1617528,
+      "like_count": 13652,
+      "comment_count": 159,
+      "duration_seconds": 15,
+      "format_guess": "short",
+      "published_at": "2024-10-22T18:00:57Z"
+    },
+    {
+      "video_id": "AygBiH9CPxs",
+      "title": "Dicas para imprimir objetos cônicos🎄 Endless Swirling Tree - Confira nossa plataforma para este arq",
+      "view_count": 1193857,
+      "like_count": 10241,
+      "comment_count": 26,
+      "duration_seconds": 24,
+      "format_guess": "short",
+      "published_at": "2024-12-12T21:01:21Z"
+    },
+    {
+      "video_id": "ueGTX_xhvZY",
+      "title": "Imprima seu Time: 3D Prints de Futebol para a Copa!",
+      "view_count": 1163402,
+      "like_count": 17636,
+      "comment_count": 48,
+      "duration_seconds": 23,
+      "format_guess": "short",
+      "published_at": "2026-05-04T13:46:52Z"
+    },
+    {
+      "video_id": "D_kBytQkxT4",
+      "title": "👟 Eu já tinha testado todos os infills em PLA, mas agora resolvi ir além: Imprimi todos eles em TPU",
+      "view_count": 1103996,
+      "like_count": 10396,
+      "comment_count": 105,
+      "duration_seconds": 86,
+      "format_guess": "long",
+      "published_at": "2025-07-05T15:01:16Z"
+    },
+    {
+      "video_id": "LE5-1QUiOa4",
+      "title": "TIPS - Mola impressa 3D?",
+      "view_count": 740335,
+      "like_count": 5703,
+      "comment_count": 25,
+      "duration_seconds": 25,
+      "format_guess": "short",
+      "published_at": "2024-05-14T12:00:28Z"
+    },
+    {
+      "video_id": "pRFKfBxGRtI",
+      "title": "R$20 Mil/Mês vendendo impressão 3d e travou | Como Vender Impressão 3D EP1",
+      "view_count": 566595,
+      "like_count": 1508,
+      "comment_count": 32,
+      "duration_seconds": 2164,
+      "format_guess": "long",
+      "published_at": "2026-05-23T15:00:59Z"
+    },
+    {
+      "video_id": "HFO9SSpRzeU",
+      "title": "Seis dinossauros diferentes, todos articulados e cheios de atitude. Cada um vem com seu próprio ovo",
+      "view_count": 493556,
+      "like_count": 8297,
+      "comment_count": 1053,
+      "duration_seconds": 20,
+      "format_guess": "short",
+      "published_at": "2026-04-27T13:04:01Z"
+    },
+    {
+      "video_id": "pIoh9gBo1o4",
+      "title": "Vocês pediram, e nós atendemos! 😍  #impressao3d #3d #impressora #stlflixbr",
+      "view_count": 490506,
+      "like_count": 15791,
+      "comment_count": 10,
+      "duration_seconds": 23,
+      "format_guess": "short",
+      "published_at": "2024-08-03T12:01:02Z"
+    },
+    {
+      "video_id": "_XU3nRSMhec",
+      "title": "O PRODUTO de Impressão 3D CAMPEÃO em Vendas que Está Fazendo R$ MILHÕES no Etsy!",
+      "view_count": 415278,
+      "like_count": 1283,
+      "comment_count": 27,
+      "duration_seconds": 1375,
+      "format_guess": "long",
+      "published_at": "2024-09-28T14:45:02Z"
+    },
+    {
+      "video_id": "N9HptH76kA8",
+      "title": "TIPS - Dica de preenchimento para sua peça articulada!",
+      "view_count": 409492,
+      "like_count": 3523,
+      "comment_count": 13,
+      "duration_seconds": 36,
+      "format_guess": "short",
+      "published_at": "2024-04-20T12:00:30Z"
+    },
+    {
+      "video_id": "BH_xYBlVwaE",
+      "title": "Como Precificar Produtos Feitos com Impressão 3D: Por quanto vender? Quanto lucrar?",
+      "view_count": 384834,
+      "like_count": 1760,
+      "comment_count": 46,
+      "duration_seconds": 830,
+      "format_guess": "long",
+      "published_at": "2024-08-21T21:00:05Z"
+    },
+    {
+      "video_id": "_1OJve8Itn4",
+      "title": "Mãe lucra com impressão 3D em casa, mas estava vendendo ERRADO! | Como Vender Impressão 3D EP03",
+      "view_count": 377344,
+      "like_count": 4066,
+      "comment_count": 146,
+      "duration_seconds": 1912,
+      "format_guess": "long",
+      "published_at": "2026-06-06T15:00:06Z"
+    },
+    {
+      "video_id": "aD-uyompWoU",
+      "title": "Top 5 Nichos LUCRATIVOS para Vender Impressão 3D!",
+      "view_count": 348158,
+      "like_count": 2684,
+      "comment_count": 37,
+      "duration_seconds": 660,
+      "format_guess": "long",
+      "published_at": "2025-03-01T15:00:00Z"
+    },
+    {
+      "video_id": "ILcZLbKvthk",
+      "title": "Se usar a impressora 3D com determinação, é possível ganhar dinheiro!",
+      "view_count": 321194,
+      "like_count": 2049,
+      "comment_count": 9,
+      "duration_seconds": 47,
+      "format_guess": "short",
+      "published_at": "2023-06-08T21:15:56Z"
+    },
+    {
+      "video_id": "2FFe99rRswc",
+      "title": "Filamento vs. Resina: Qual impressora 3d dá mais dinheiro?",
+      "view_count": 288894,
+      "like_count": 9155,
+      "comment_count": 294,
+      "duration_seconds": 1000,
+      "format_guess": "long",
+      "published_at": "2024-12-21T15:00:03Z"
+    },
+    {
+      "video_id": "Zo5txKEoK0o",
+      "title": "Ele Fatura R$50 MIL/mês com Impressão 3D em Casa",
+      "view_count": 284973,
+      "like_count": 1857,
+      "comment_count": 105,
+      "duration_seconds": 2324,
+      "format_guess": "long",
+      "published_at": "2026-05-27T21:00:09Z"
+    },
+    {
+      "video_id": "jkepnB5W23I",
+      "title": "5 passos para Começar a Vender impressões 3D",
+      "view_count": 281783,
+      "like_count": 2177,
+      "comment_count": 56,
+      "duration_seconds": 900,
+      "format_guess": "long",
+      "published_at": "2025-03-15T15:00:57Z"
+    }
+  ],
+  "top_videos_by_like_ratio_min1000views": [
+    {
+      "video_id": "v1otj8vcECk",
+      "title": "5 ERROS que Atrasam Iniciantes na Impressão 3D (e como EVITÁ-LOS!)",
+      "view_count": 1548,
+      "like_count": 167,
+      "like_ratio": 0.1079,
+      "format_guess": "long"
+    },
+    {
+      "video_id": "cscLiJ8jrc0",
+      "title": "Murilo Laffranchi do 3D Geek Show | STLCAST #04",
+      "view_count": 1281,
+      "like_count": 129,
+      "like_ratio": 0.1007,
+      "format_guess": "long"
+    },
+    {
+      "video_id": "VDtbpbXMs9g",
+      "title": "Eu fiz uma surpresa de páscoas para meus colegas utilizando a minha impressora 3D! 😱  #impressao3d",
+      "view_count": 13868,
+      "like_count": 1396,
+      "like_ratio": 0.1007,
+      "format_guess": "short"
+    },
+    {
+      "video_id": "sZDa9k2s2Ds",
+      "title": "Anderson Costa da 3D Prime | STLCAST #02",
+      "view_count": 1056,
+      "like_count": 104,
+      "like_ratio": 0.0985,
+      "format_guess": "long"
+    },
+    {
+      "video_id": "29_4FM2Nvx0",
+      "title": "Emanuel Campos pioneiro em Impressão 3D no Brasil | STLCAST #03",
+      "view_count": 1014,
+      "like_count": 99,
+      "like_ratio": 0.0976,
+      "format_guess": "long"
+    },
+    {
+      "video_id": "LSCk4VyI6R4",
+      "title": "Impressora de Filamento  Versatilidade de Cores",
+      "view_count": 4515,
+      "like_count": 422,
+      "like_ratio": 0.0935,
+      "format_guess": "short"
+    },
+    {
+      "video_id": "cJcSbVO4UZQ",
+      "title": "Circuito modular de Bolinhas Impresso em 3D! - Marble Run",
+      "view_count": 1084,
+      "like_count": 94,
+      "like_ratio": 0.0867,
+      "format_guess": "long"
+    },
+    {
+      "video_id": "maw4vKqj8v4",
+      "title": "🧩 Imprimi TODOS os infills da impressão 3D e hoje te conto qual é o nosso queridinho — e por que vo",
+      "view_count": 12164,
+      "like_count": 1046,
+      "like_ratio": 0.086,
+      "format_guess": "long"
+    },
+    {
+      "video_id": "9BLV6xSsDP0",
+      "title": "Esse modelo com certeza vai paralisar a sua mente! 🐍🤯  #impressao3d #3d #impressora #stlflixbr",
+      "view_count": 12354,
+      "like_count": 1058,
+      "like_ratio": 0.0856,
+      "format_guess": "short"
+    },
+    {
+      "video_id": "2kNeGT5asGY",
+      "title": "Como Lucrar com produtos impressos 3D que já vendem muito!",
+      "view_count": 1957,
+      "like_count": 162,
+      "like_ratio": 0.0828,
+      "format_guess": "long"
+    },
+    {
+      "video_id": "M8FFj99FSqU",
+      "title": "Qual seria o objeto que você usaria se fosse um espião? 😱  #impressao3d #3d #impressora #stlflixbr",
+      "view_count": 19913,
+      "like_count": 1600,
+      "like_ratio": 0.0803,
+      "format_guess": "short"
+    },
+    {
+      "video_id": "9Iosyl4w4V4",
+      "title": "Nosso incrível T-Rex com 250% de seu tamanho normal! 😍  #impressao3d #3d #impressora #stlflixbr",
+      "view_count": 1343,
+      "like_count": 106,
+      "like_ratio": 0.0789,
+      "format_guess": "short"
+    },
+    {
+      "video_id": "qLxnu8g8JEA",
+      "title": "Um Abacaxi diferente! 🍍  #impressao3d #3d #impressora #stlflixbr",
+      "view_count": 12208,
+      "like_count": 935,
+      "like_ratio": 0.0766,
+      "format_guess": "short"
+    },
+    {
+      "video_id": "cZ9LdQgRfak",
+      "title": "Como Fizemos Esse Carrossel de Unicórnios FUNCIONAR | Impressão 3D",
+      "view_count": 1293,
+      "like_count": 98,
+      "like_ratio": 0.0758,
+      "format_guess": "long"
+    },
+    {
+      "video_id": "X2JE8qj1MSM",
+      "title": "Viver de Impressão 3D - Curso Gratis de Vendas de impressões 3D",
+      "view_count": 2793,
+      "like_count": 209,
+      "like_ratio": 0.0748,
+      "format_guess": "long"
+    },
+    {
+      "video_id": "6m2vF_VSKpY",
+      "title": "Guilherme Damiani | @Damiani | STLCAST #22",
+      "view_count": 2077,
+      "like_count": 151,
+      "like_ratio": 0.0727,
+      "format_guess": "long"
+    },
+    {
+      "video_id": "8Zio0wO6abw",
+      "title": "Como fracassar seu négocio de impressão 3D, não cometa esse erro básico.",
+      "view_count": 2705,
+      "like_count": 194,
+      "like_ratio": 0.0717,
+      "format_guess": "long"
+    },
+    {
+      "video_id": "u7VVLC1hhpc",
+      "title": "Acabou o Mercado de impressão 3d? Mercado esta saturado?",
+      "view_count": 6254,
+      "like_count": 445,
+      "like_ratio": 0.0712,
+      "format_guess": "long"
+    },
+    {
+      "video_id": "Okt-HZBRc1g",
+      "title": "Bambu Studio 2.4.0: novo infill, organização da mesa e melhorias práticas!",
+      "view_count": 6332,
+      "like_count": 447,
+      "like_ratio": 0.0706,
+      "format_guess": "long"
+    },
+    {
+      "video_id": "gkePU54VwEE",
+      "title": "A VERDADE sobre imprimir a 500 mm/s (ninguém te conta isso!)",
+      "view_count": 6276,
+      "like_count": 438,
+      "like_ratio": 0.0698,
+      "format_guess": "long"
+    }
+  ]
+}
