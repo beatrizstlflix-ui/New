@@ -1,0 +1,1570 @@
+{
+  "source": "Windsor.ai google_ads (445-144-0907), agregado de linhas ad+device+network por video_id",
+  "period": {
+    "date_from": "2026-06-12",
+    "date_to": "2026-09-09"
+  },
+  "note": "video_channel_id confirma que os vídeos usados nos anúncios pertencem ao canal UCb3H1VIsLk9l6xAz6eyyLwQ (STLFLIX BR), consistente com o YOUTUBE_CHANNEL_ID informado pelo usuário. Quartis sao media ponderada por trueview_views das combinacoes device/network (nao e a curva de retencao do YouTube Studio).",
+  "videos_used_in_ads_count": 67,
+  "videos": [
+    {
+      "video_id": "(sem video_id)",
+      "video_title": null,
+      "video_channel_id": null,
+      "campaigns": [
+        "Pmax_Fundo-de-Funil_Vendas_Oferta-Anual",
+        "Remarketing_Alcance-Lembrete_Aniversário[30d]",
+        "Sales-Performance Max-4stlflix-venda-pmax-aniversario-4anos"
+      ],
+      "trueview_views": 149633,
+      "engagements": 249283,
+      "views_by_device": {
+        "DESKTOP": 23148,
+        "MOBILE": 75340,
+        "TABLET": 11689,
+        "CONNECTED_TV": 39456
+      },
+      "views_by_network": {
+        "YOUTUBE": 147100,
+        "DISCOVER": 2533,
+        "CONTENT": 0
+      },
+      "quartile_p25_view_weighted_avg": 0.0,
+      "quartile_p50_view_weighted_avg": 0.0,
+      "quartile_p75_view_weighted_avg": 0.0,
+      "quartile_p100_view_weighted_avg": 0.0
+    },
+    {
+      "video_id": "2tqvuHWPGGY",
+      "video_title": "Lucrando com impressão 3D: Comece seu negócio",
+      "video_channel_id": "UCke6o2ZrbJ7ZGrzgDI4xM4Q",
+      "campaigns": [
+        "Vendas-Vídeos-4stlflix-aniversario-4anos"
+      ],
+      "trueview_views": 126450,
+      "engagements": 151878,
+      "views_by_device": {
+        "DESKTOP": 128,
+        "MOBILE": 125890,
+        "TABLET": 59,
+        "CONNECTED_TV": 373
+      },
+      "views_by_network": {
+        "YOUTUBE": 126447,
+        "DISCOVER": 3
+      },
+      "quartile_p25_view_weighted_avg": 0.9694,
+      "quartile_p50_view_weighted_avg": 0.6798,
+      "quartile_p75_view_weighted_avg": 0.5925,
+      "quartile_p100_view_weighted_avg": 0.548
+    },
+    {
+      "video_id": "C0nVtKpRLuk",
+      "video_title": "Pediu Demissão do Emprego na STLFLIX e Faz R$20 MIL/Mês com Impressão 3D",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "[STLFLIX] vídeo-reconhecimento-  Pediu Demissão do Emprego na STLFLIX e Faz R$20 MIL/Mês com Impressão 3D"
+      ],
+      "trueview_views": 70876,
+      "engagements": 114449,
+      "views_by_device": {
+        "DESKTOP": 20113,
+        "MOBILE": 28870,
+        "TABLET": 2875,
+        "CONNECTED_TV": 19018
+      },
+      "views_by_network": {
+        "CONTENT": 23893,
+        "YOUTUBE": 46983
+      },
+      "quartile_p25_view_weighted_avg": 0.1952,
+      "quartile_p50_view_weighted_avg": 0.1554,
+      "quartile_p75_view_weighted_avg": 0.1321,
+      "quartile_p100_view_weighted_avg": 0.1174
+    },
+    {
+      "video_id": "jkepnB5W23I",
+      "video_title": "5 passos para Começar a Vender impressões 3D",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "[STLFLIX] vídeo-reconhecimento-5 passos para Começar a Vender impressões 3D"
+      ],
+      "trueview_views": 62570,
+      "engagements": 77882,
+      "views_by_device": {
+        "DESKTOP": 2516,
+        "MOBILE": 46438,
+        "TABLET": 1493,
+        "CONNECTED_TV": 12123
+      },
+      "views_by_network": {
+        "CONTENT": 29561,
+        "YOUTUBE": 33009
+      },
+      "quartile_p25_view_weighted_avg": 0.0303,
+      "quartile_p50_view_weighted_avg": 0.0209,
+      "quartile_p75_view_weighted_avg": 0.016,
+      "quartile_p100_view_weighted_avg": 0.0122
+    },
+    {
+      "video_id": "_1OJve8Itn4",
+      "video_title": "Mãe lucra com impressão 3D em casa, mas estava vendendo ERRADO! | Como Vender Impressão 3D EP03",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "[STLFLIX] vídeo-reconhecimento-Mãe lucra com impressão 3D em casa"
+      ],
+      "trueview_views": 61564,
+      "engagements": 89197,
+      "views_by_device": {
+        "DESKTOP": 4831,
+        "MOBILE": 40575,
+        "TABLET": 4001,
+        "CONNECTED_TV": 12157
+      },
+      "views_by_network": {
+        "CONTENT": 38800,
+        "YOUTUBE": 22764
+      },
+      "quartile_p25_view_weighted_avg": 0.0232,
+      "quartile_p50_view_weighted_avg": 0.0158,
+      "quartile_p75_view_weighted_avg": 0.0117,
+      "quartile_p100_view_weighted_avg": 0.0078
+    },
+    {
+      "video_id": "pRFKfBxGRtI",
+      "video_title": "R$20 Mil/Mês vendendo impressão 3d e travou | Como Vender Impressão 3D EP1",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "Vídeo_Reconhecimento_Topo_STLFLIX"
+      ],
+      "trueview_views": 61299,
+      "engagements": 84805,
+      "views_by_device": {
+        "DESKTOP": 2600,
+        "MOBILE": 42117,
+        "TABLET": 7341,
+        "CONNECTED_TV": 9241
+      },
+      "views_by_network": {
+        "CONTENT": 38353,
+        "YOUTUBE": 22946
+      },
+      "quartile_p25_view_weighted_avg": 0.0108,
+      "quartile_p50_view_weighted_avg": 0.0071,
+      "quartile_p75_view_weighted_avg": 0.0056,
+      "quartile_p100_view_weighted_avg": 0.0042
+    },
+    {
+      "video_id": "AqfFf9vmhP0",
+      "video_title": "R$30 Mil/Mês na Shopee em 6 Meses com Impressão 3D | Como Vender Impressão 3D EP06",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "[STLFLIX] vídeo-reconhecimento- R$30 Mil/Mês na Shopee em 6 Meses com Impressão 3D"
+      ],
+      "trueview_views": 56439,
+      "engagements": 83927,
+      "views_by_device": {
+        "DESKTOP": 11449,
+        "MOBILE": 36648,
+        "TABLET": 2698,
+        "CONNECTED_TV": 5644
+      },
+      "views_by_network": {
+        "CONTENT": 36867,
+        "YOUTUBE": 19572
+      },
+      "quartile_p25_view_weighted_avg": 0.0493,
+      "quartile_p50_view_weighted_avg": 0.0337,
+      "quartile_p75_view_weighted_avg": 0.0266,
+      "quartile_p100_view_weighted_avg": 0.0211
+    },
+    {
+      "video_id": "aD-uyompWoU",
+      "video_title": "Top 5 Nichos LUCRATIVOS para Vender Impressão 3D!",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "[STLFLIX] vídeo-reconhecimento-Top 5 Nichos LUCRATIVOS para Vender Impressão 3D"
+      ],
+      "trueview_views": 56222,
+      "engagements": 76308,
+      "views_by_device": {
+        "DESKTOP": 2081,
+        "MOBILE": 34601,
+        "TABLET": 4070,
+        "CONNECTED_TV": 15470
+      },
+      "views_by_network": {
+        "CONTENT": 25042,
+        "YOUTUBE": 31180
+      },
+      "quartile_p25_view_weighted_avg": 0.0413,
+      "quartile_p50_view_weighted_avg": 0.0256,
+      "quartile_p75_view_weighted_avg": 0.0183,
+      "quartile_p100_view_weighted_avg": 0.0089
+    },
+    {
+      "video_id": "ZFJgFQcWxe0",
+      "video_title": "Ele Comprou 3 Impressoras Vendendo Só Esse Modelo da STLFLIX!",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "[STLFLIX] vídeo-reconhecimento-Ele Comprou 3 Impressoras Vendendo Só Esse Modelo da STLFLIX"
+      ],
+      "trueview_views": 56088,
+      "engagements": 67953,
+      "views_by_device": {
+        "DESKTOP": 2600,
+        "MOBILE": 43328,
+        "TABLET": 2704,
+        "CONNECTED_TV": 7456
+      },
+      "views_by_network": {
+        "CONTENT": 31653,
+        "YOUTUBE": 24435
+      },
+      "quartile_p25_view_weighted_avg": 0.0551,
+      "quartile_p50_view_weighted_avg": 0.0364,
+      "quartile_p75_view_weighted_avg": 0.0289,
+      "quartile_p100_view_weighted_avg": 0.0242
+    },
+    {
+      "video_id": "BH_xYBlVwaE",
+      "video_title": "Como Precificar Produtos Feitos com Impressão 3D: Por quanto vender? Quanto lucrar?",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "[STLFLIX] vídeo-reconhecimento-Como Precificar Produtos Feitos com Impressão 3D"
+      ],
+      "trueview_views": 55553,
+      "engagements": 78490,
+      "views_by_device": {
+        "DESKTOP": 1213,
+        "MOBILE": 36774,
+        "TABLET": 1311,
+        "CONNECTED_TV": 16255
+      },
+      "views_by_network": {
+        "CONTENT": 21409,
+        "YOUTUBE": 34144
+      },
+      "quartile_p25_view_weighted_avg": 0.0131,
+      "quartile_p50_view_weighted_avg": 0.0078,
+      "quartile_p75_view_weighted_avg": 0.006,
+      "quartile_p100_view_weighted_avg": 0.0047
+    },
+    {
+      "video_id": "_XU3nRSMhec",
+      "video_title": "O PRODUTO de Impressão 3D CAMPEÃO em Vendas que Está Fazendo R$ MILHÕES no Etsy!",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "[STLFLIX] vídeo-reconhecimento-O PRODUTO de Impressão 3D CAMPEÃO em Vendas"
+      ],
+      "trueview_views": 54697,
+      "engagements": 75878,
+      "views_by_device": {
+        "DESKTOP": 1701,
+        "MOBILE": 37959,
+        "TABLET": 2942,
+        "CONNECTED_TV": 12095
+      },
+      "views_by_network": {
+        "CONTENT": 21387,
+        "YOUTUBE": 33310
+      },
+      "quartile_p25_view_weighted_avg": 0.0131,
+      "quartile_p50_view_weighted_avg": 0.0084,
+      "quartile_p75_view_weighted_avg": 0.0066,
+      "quartile_p100_view_weighted_avg": 0.005
+    },
+    {
+      "video_id": "YQOOHZbNdJI",
+      "video_title": "Uber ou Impressão 3D: Com Qual Ele Ganhou Mais? | Como Vender Impressão 3D EP04",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "[STLFLIX] vídeo-reconhecimento- Uber ou Impressão 3D: Com Qual Ele Ganhou Mais"
+      ],
+      "trueview_views": 54303,
+      "engagements": 76128,
+      "views_by_device": {
+        "DESKTOP": 3350,
+        "MOBILE": 38190,
+        "TABLET": 2844,
+        "CONNECTED_TV": 9919
+      },
+      "views_by_network": {
+        "CONTENT": 34105,
+        "YOUTUBE": 20198
+      },
+      "quartile_p25_view_weighted_avg": 0.0201,
+      "quartile_p50_view_weighted_avg": 0.0152,
+      "quartile_p75_view_weighted_avg": 0.0124,
+      "quartile_p100_view_weighted_avg": 0.0098
+    },
+    {
+      "video_id": "B_W05Xj_tic",
+      "video_title": "História da STLFLIX - Como tudo começou!",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "História da STLFLIX - Como tudo começou!"
+      ],
+      "trueview_views": 48177,
+      "engagements": 71038,
+      "views_by_device": {
+        "DESKTOP": 15087,
+        "MOBILE": 20884,
+        "TABLET": 1740,
+        "CONNECTED_TV": 10466
+      },
+      "views_by_network": {
+        "CONTENT": 16260,
+        "YOUTUBE": 31917
+      },
+      "quartile_p25_view_weighted_avg": 0.1718,
+      "quartile_p50_view_weighted_avg": 0.1373,
+      "quartile_p75_view_weighted_avg": 0.1173,
+      "quartile_p100_view_weighted_avg": 0.1041
+    },
+    {
+      "video_id": "FGkgOos6vys",
+      "video_title": "Lucrando com Impressão 3D Novo Negócio",
+      "video_channel_id": "UCke6o2ZrbJ7ZGrzgDI4xM4Q",
+      "campaigns": [
+        "Vendas-Vídeos-4stlflix-aniversario-4anos"
+      ],
+      "trueview_views": 42519,
+      "engagements": 68615,
+      "views_by_device": {
+        "DESKTOP": 1473,
+        "MOBILE": 39764,
+        "TABLET": 113,
+        "CONNECTED_TV": 1169
+      },
+      "views_by_network": {
+        "YOUTUBE": 42471,
+        "DISCOVER": 48
+      },
+      "quartile_p25_view_weighted_avg": 0.5011,
+      "quartile_p50_view_weighted_avg": 0.3681,
+      "quartile_p75_view_weighted_avg": 0.3052,
+      "quartile_p100_view_weighted_avg": 0.2706
+    },
+    {
+      "video_id": "d4gWJcVKkw8",
+      "video_title": "Como Ele Escalou para 9 Impressoras 3D e Fez R$35 MIL",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "[STLFLIX] vídeo-reconhecimento-como-ele-escalou-9-impressoras"
+      ],
+      "trueview_views": 37001,
+      "engagements": 42815,
+      "views_by_device": {
+        "MOBILE": 35852,
+        "TABLET": 1149
+      },
+      "views_by_network": {
+        "CONTENT": 37001
+      },
+      "quartile_p25_view_weighted_avg": 0.0046,
+      "quartile_p50_view_weighted_avg": 0.0019,
+      "quartile_p75_view_weighted_avg": 0.0011,
+      "quartile_p100_view_weighted_avg": 0.0008
+    },
+    {
+      "video_id": "lHwWANf0KOM",
+      "video_title": "PRODUTOS IMPRESSOS EM 3D QUE VENDEM MILHÕES (e ninguém faz no Brasil!)",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "[STLFLIX] vídeo-reconhecimento-PRODUTOS IMPRESSOS EM 3D QUE VENDEM MILHÕES"
+      ],
+      "trueview_views": 34084,
+      "engagements": 35234,
+      "views_by_device": {
+        "MOBILE": 31192,
+        "TABLET": 2168,
+        "DESKTOP": 66,
+        "CONNECTED_TV": 658
+      },
+      "views_by_network": {
+        "CONTENT": 23554,
+        "YOUTUBE": 10530
+      },
+      "quartile_p25_view_weighted_avg": 0.0434,
+      "quartile_p50_view_weighted_avg": 0.0285,
+      "quartile_p75_view_weighted_avg": 0.0201,
+      "quartile_p100_view_weighted_avg": 0.0106
+    },
+    {
+      "video_id": "17Gi12-k3_c",
+      "video_title": "R$20 Mil/Mês com Impressão 3D em 10 Meses | Como Vender Impressão 3D EP07",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "R$20 Mil/Mês com Impressão 3D em 10 Meses | Como Vender Impressão 3D EP07"
+      ],
+      "trueview_views": 33789,
+      "engagements": 35855,
+      "views_by_device": {
+        "MOBILE": 30919,
+        "TABLET": 2520,
+        "DESKTOP": 20,
+        "CONNECTED_TV": 330
+      },
+      "views_by_network": {
+        "CONTENT": 15378,
+        "YOUTUBE": 18411
+      },
+      "quartile_p25_view_weighted_avg": 0.0138,
+      "quartile_p50_view_weighted_avg": 0.0084,
+      "quartile_p75_view_weighted_avg": 0.006,
+      "quartile_p100_view_weighted_avg": 0.0026
+    },
+    {
+      "video_id": "TmosUaw4AZU",
+      "video_title": "Impressão 3d Vende em Feiras? Eles fizeram R$52 MIL em um mês!",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "[STLFLIX] Impressão 3d vende em feiras?"
+      ],
+      "trueview_views": 31320,
+      "engagements": 52047,
+      "views_by_device": {
+        "DESKTOP": 8373,
+        "MOBILE": 14685,
+        "TABLET": 1623,
+        "CONNECTED_TV": 6639
+      },
+      "views_by_network": {
+        "CONTENT": 12949,
+        "YOUTUBE": 18371
+      },
+      "quartile_p25_view_weighted_avg": 0.1551,
+      "quartile_p50_view_weighted_avg": 0.1193,
+      "quartile_p75_view_weighted_avg": 0.101,
+      "quartile_p100_view_weighted_avg": 0.0877
+    },
+    {
+      "video_id": "7MCU5kcM5gw",
+      "video_title": "Lucrando com Impressão 3D: Seu Novo Negócio",
+      "video_channel_id": "UCke6o2ZrbJ7ZGrzgDI4xM4Q",
+      "campaigns": [
+        "Vendas-Vídeos-4stlflix-aniversario-4anos"
+      ],
+      "trueview_views": 30945,
+      "engagements": 46733,
+      "views_by_device": {
+        "DESKTOP": 1067,
+        "MOBILE": 28602,
+        "TABLET": 245,
+        "CONNECTED_TV": 1031
+      },
+      "views_by_network": {
+        "YOUTUBE": 30937,
+        "DISCOVER": 8
+      },
+      "quartile_p25_view_weighted_avg": 0.6683,
+      "quartile_p50_view_weighted_avg": 0.3882,
+      "quartile_p75_view_weighted_avg": 0.3298,
+      "quartile_p100_view_weighted_avg": 0.2879
+    },
+    {
+      "video_id": "3Lxrr1YejZI",
+      "video_title": "Ele Fatura R$100 MIL/MÊS com Impressão 3D, O Plano Para Crescer Mais | Como Vender Impressão 3D EP08",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "[STLFLIX] vídeo-reconhecimento-ele-fatura-R$100-com-impressão-3d",
+        "[STLFLIX] vídeo-reconhecimento-o-plano-funcionou"
+      ],
+      "trueview_views": 27907,
+      "engagements": 30199,
+      "views_by_device": {
+        "MOBILE": 25416,
+        "TABLET": 2368,
+        "DESKTOP": 56,
+        "CONNECTED_TV": 67
+      },
+      "views_by_network": {
+        "CONTENT": 19994,
+        "YOUTUBE": 7913
+      },
+      "quartile_p25_view_weighted_avg": 0.0048,
+      "quartile_p50_view_weighted_avg": 0.0026,
+      "quartile_p75_view_weighted_avg": 0.002,
+      "quartile_p100_view_weighted_avg": 0.001
+    },
+    {
+      "video_id": "ZebifBeyCQw",
+      "video_title": "Saíram da CLT e Hoje Vivem de Impressão 3D (A História Dessas Empreendedoras)",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "[STLFLIX] vídeo-reconhecimento- Saíram-do-CLT"
+      ],
+      "trueview_views": 22419,
+      "engagements": 23420,
+      "views_by_device": {
+        "MOBILE": 20521,
+        "TABLET": 1694,
+        "DESKTOP": 85,
+        "CONNECTED_TV": 119
+      },
+      "views_by_network": {
+        "CONTENT": 9852,
+        "YOUTUBE": 12567
+      },
+      "quartile_p25_view_weighted_avg": 0.0322,
+      "quartile_p50_view_weighted_avg": 0.0209,
+      "quartile_p75_view_weighted_avg": 0.0145,
+      "quartile_p100_view_weighted_avg": 0.0046
+    },
+    {
+      "video_id": "r3z16kWcMwA",
+      "video_title": "Arena 3D EP 03 - Intro 03.mp4",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "Teste_Intros-EP03"
+      ],
+      "trueview_views": 22132,
+      "engagements": 26528,
+      "views_by_device": {
+        "DESKTOP": 1474,
+        "MOBILE": 3074,
+        "TABLET": 494,
+        "CONNECTED_TV": 17090
+      },
+      "views_by_network": {
+        "YOUTUBE": 22132
+      },
+      "quartile_p25_view_weighted_avg": 0.8246,
+      "quartile_p50_view_weighted_avg": 0.7137,
+      "quartile_p75_view_weighted_avg": 0.6749,
+      "quartile_p100_view_weighted_avg": 0.6458
+    },
+    {
+      "video_id": "rXopPoZwdrE",
+      "video_title": "Lucrar com Impressão 3D Novo Negócio",
+      "video_channel_id": "UCke6o2ZrbJ7ZGrzgDI4xM4Q",
+      "campaigns": [
+        "Vendas-Vídeos-4stlflix-aniversario-4anos"
+      ],
+      "trueview_views": 19815,
+      "engagements": 30115,
+      "views_by_device": {
+        "DESKTOP": 454,
+        "MOBILE": 18230,
+        "TABLET": 83,
+        "CONNECTED_TV": 1048
+      },
+      "views_by_network": {
+        "YOUTUBE": 19814,
+        "DISCOVER": 1
+      },
+      "quartile_p25_view_weighted_avg": 0.4833,
+      "quartile_p50_view_weighted_avg": 0.3046,
+      "quartile_p75_view_weighted_avg": 0.2519,
+      "quartile_p100_view_weighted_avg": 0.2227
+    },
+    {
+      "video_id": "GP2Ck1ZsNaY",
+      "video_title": "Lucrar com Impressão 3D: Seu Novo Negócio",
+      "video_channel_id": "UCke6o2ZrbJ7ZGrzgDI4xM4Q",
+      "campaigns": [
+        "Vendas-Vídeos-4stlflix-aniversario-4anos"
+      ],
+      "trueview_views": 15273,
+      "engagements": 23387,
+      "views_by_device": {
+        "DESKTOP": 282,
+        "MOBILE": 14539,
+        "TABLET": 56,
+        "CONNECTED_TV": 396
+      },
+      "views_by_network": {
+        "YOUTUBE": 15244,
+        "DISCOVER": 29
+      },
+      "quartile_p25_view_weighted_avg": 0.4787,
+      "quartile_p50_view_weighted_avg": 0.3529,
+      "quartile_p75_view_weighted_avg": 0.3021,
+      "quartile_p100_view_weighted_avg": 0.2731
+    },
+    {
+      "video_id": "Zo5txKEoK0o",
+      "video_title": "Ele Fatura R$50 MIL/mês com Impressão 3D em Casa",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "[STLFLIX] vídeo-reconhecimento-Ele Fatura R$50 MIL"
+      ],
+      "trueview_views": 13922,
+      "engagements": 26321,
+      "views_by_device": {
+        "DESKTOP": 1888,
+        "MOBILE": 3693,
+        "TABLET": 209,
+        "CONNECTED_TV": 8132
+      },
+      "views_by_network": {
+        "CONTENT": 4479,
+        "YOUTUBE": 9443
+      },
+      "quartile_p25_view_weighted_avg": 0.0305,
+      "quartile_p50_view_weighted_avg": 0.0248,
+      "quartile_p75_view_weighted_avg": 0.0212,
+      "quartile_p100_view_weighted_avg": 0.0192
+    },
+    {
+      "video_id": "mST92AkiZyQ",
+      "video_title": "Do Zero a R$67 Mil/Mês em 8 Meses com Impressão 3D! | Como Vender Impressão 3D EP02",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "[STLFLIX] vídeo-reconhecimento-Como Vender Impressão 3D EP02"
+      ],
+      "trueview_views": 13100,
+      "engagements": 24391,
+      "views_by_device": {
+        "DESKTOP": 2763,
+        "MOBILE": 4622,
+        "TABLET": 305,
+        "CONNECTED_TV": 5410
+      },
+      "views_by_network": {
+        "CONTENT": 5372,
+        "YOUTUBE": 7728
+      },
+      "quartile_p25_view_weighted_avg": 0.0564,
+      "quartile_p50_view_weighted_avg": 0.0465,
+      "quartile_p75_view_weighted_avg": 0.0408,
+      "quartile_p100_view_weighted_avg": 0.0361
+    },
+    {
+      "video_id": "3oqYDF4GprM",
+      "video_title": "R$20 MIL com Personalizados Impressssos 3D - Como ele chegou la!",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "[STLFLIX] vídeo-reconhecimento-R$20 MIL com Personalizados Impressssos 3D"
+      ],
+      "trueview_views": 11634,
+      "engagements": 23075,
+      "views_by_device": {
+        "DESKTOP": 2599,
+        "MOBILE": 4541,
+        "TABLET": 308,
+        "CONNECTED_TV": 4186
+      },
+      "views_by_network": {
+        "CONTENT": 4922,
+        "YOUTUBE": 6712
+      },
+      "quartile_p25_view_weighted_avg": 0.0777,
+      "quartile_p50_view_weighted_avg": 0.0645,
+      "quartile_p75_view_weighted_avg": 0.0579,
+      "quartile_p100_view_weighted_avg": 0.0535
+    },
+    {
+      "video_id": "L35qhRpaed4",
+      "video_title": "O MAIOR ECOSSISTEMA DE IMPRESSÃO 3D DO MUNDO | STLFLIX",
+      "video_channel_id": "UCBXu5NZtZoUA4pIeU2GGPdg",
+      "campaigns": [
+        "[STLFLIX] Impressão 3D do Zero ao Lucro: 3 Caminhos diferentes, R$6.000 Cada | Arena 3D EP01"
+      ],
+      "trueview_views": 9871,
+      "engagements": 10400,
+      "views_by_device": {
+        "DESKTOP": 53,
+        "MOBILE": 8419,
+        "TABLET": 1235,
+        "CONNECTED_TV": 164
+      },
+      "views_by_network": {
+        "YOUTUBE": 9871
+      },
+      "quartile_p25_view_weighted_avg": 0.0519,
+      "quartile_p50_view_weighted_avg": 0.0356,
+      "quartile_p75_view_weighted_avg": 0.0267,
+      "quartile_p100_view_weighted_avg": 0.0189
+    },
+    {
+      "video_id": "yVK-hTfwyT0",
+      "video_title": "O Plano para Vender Impressão 3d Funcionou De R$13k a R$21 MIL/Mês —Como Vender Impressão 3d Update",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "[STLFLIX] vídeo-reconhecimento-o-plano-funcionou"
+      ],
+      "trueview_views": 9226,
+      "engagements": 10044,
+      "views_by_device": {
+        "MOBILE": 8299,
+        "TABLET": 830,
+        "DESKTOP": 12,
+        "CONNECTED_TV": 85
+      },
+      "views_by_network": {
+        "CONTENT": 6663,
+        "YOUTUBE": 2563
+      },
+      "quartile_p25_view_weighted_avg": 0.0146,
+      "quartile_p50_view_weighted_avg": 0.0097,
+      "quartile_p75_view_weighted_avg": 0.0074,
+      "quartile_p100_view_weighted_avg": 0.0038
+    },
+    {
+      "video_id": "KIWK8t9f7xc",
+      "video_title": "1881_V_A_CAIP_1 (1).mp4",
+      "video_channel_id": "UCke6o2ZrbJ7ZGrzgDI4xM4Q",
+      "campaigns": [
+        "stlflix-video-captação-aniversário"
+      ],
+      "trueview_views": 8707,
+      "engagements": 9810,
+      "views_by_device": {
+        "DESKTOP": 15,
+        "MOBILE": 8666,
+        "TABLET": 7,
+        "CONNECTED_TV": 19
+      },
+      "views_by_network": {
+        "YOUTUBE": 8707
+      },
+      "quartile_p25_view_weighted_avg": 0.9012,
+      "quartile_p50_view_weighted_avg": 0.7877,
+      "quartile_p75_view_weighted_avg": 0.6168,
+      "quartile_p100_view_weighted_avg": 0.5478
+    },
+    {
+      "video_id": "wkNgcyc3yxU",
+      "video_title": "Arena 3D EP 03 - Intro 01_2026-09-04_17-30-44.mp4",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "Teste_Intros-EP03"
+      ],
+      "trueview_views": 7500,
+      "engagements": 10687,
+      "views_by_device": {
+        "DESKTOP": 592,
+        "MOBILE": 1293,
+        "TABLET": 259,
+        "CONNECTED_TV": 5356
+      },
+      "views_by_network": {
+        "YOUTUBE": 7500
+      },
+      "quartile_p25_view_weighted_avg": 0.52,
+      "quartile_p50_view_weighted_avg": 0.416,
+      "quartile_p75_view_weighted_avg": 0.3691,
+      "quartile_p100_view_weighted_avg": 0.3387
+    },
+    {
+      "video_id": "D_kBytQkxT4",
+      "video_title": "👟 Eu já tinha testado todos os infills em PLA, mas agora resolvi ir além: Imprimi todos eles em TPU",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "Vídeo_Inscrição_Topo_STLFLIX"
+      ],
+      "trueview_views": 7394,
+      "engagements": 9836,
+      "views_by_device": {
+        "DESKTOP": 659,
+        "MOBILE": 6735
+      },
+      "views_by_network": {
+        "YOUTUBE": 7394
+      },
+      "quartile_p25_view_weighted_avg": 0.1774,
+      "quartile_p50_view_weighted_avg": 0.1404,
+      "quartile_p75_view_weighted_avg": 0.1117,
+      "quartile_p100_view_weighted_avg": 0.0172
+    },
+    {
+      "video_id": "KL2sHVBzfzs",
+      "video_title": "1936_V_A_SO_FREESTYLE_6.mp4",
+      "video_channel_id": "UCke6o2ZrbJ7ZGrzgDI4xM4Q",
+      "campaigns": [
+        "stlflix-video-captação-aniversário"
+      ],
+      "trueview_views": 7363,
+      "engagements": 11420,
+      "views_by_device": {
+        "DESKTOP": 66,
+        "MOBILE": 7203,
+        "TABLET": 26,
+        "CONNECTED_TV": 68
+      },
+      "views_by_network": {
+        "YOUTUBE": 7363
+      },
+      "quartile_p25_view_weighted_avg": 0.5592,
+      "quartile_p50_view_weighted_avg": 0.4279,
+      "quartile_p75_view_weighted_avg": 0.3506,
+      "quartile_p100_view_weighted_avg": 0.3114
+    },
+    {
+      "video_id": "dCq-wQ3PopA",
+      "video_title": "Vai sair do Aplicativo? Motoboy empreendendo com impressão 3d! ",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "[STLFLIX] vídeo-reconhecimento - Vai sair do Aplicativo? Motoboy empreendendo com impressão 3d!"
+      ],
+      "trueview_views": 6908,
+      "engagements": 10287,
+      "views_by_device": {
+        "DESKTOP": 645,
+        "MOBILE": 875,
+        "TABLET": 299,
+        "CONNECTED_TV": 5089
+      },
+      "views_by_network": {
+        "CONTENT": 12,
+        "YOUTUBE": 6896
+      },
+      "quartile_p25_view_weighted_avg": 0.0767,
+      "quartile_p50_view_weighted_avg": 0.0566,
+      "quartile_p75_view_weighted_avg": 0.0476,
+      "quartile_p100_view_weighted_avg": 0.0409
+    },
+    {
+      "video_id": "oTSLvTs3u-8",
+      "video_title": "1933_V_A_SO_FREESTYLE_3.mp4",
+      "video_channel_id": "UCke6o2ZrbJ7ZGrzgDI4xM4Q",
+      "campaigns": [
+        "stlflix-video-captação-aniversário"
+      ],
+      "trueview_views": 6380,
+      "engagements": 8063,
+      "views_by_device": {
+        "DESKTOP": 11,
+        "MOBILE": 6351,
+        "TABLET": 1,
+        "CONNECTED_TV": 17
+      },
+      "views_by_network": {
+        "YOUTUBE": 6380
+      },
+      "quartile_p25_view_weighted_avg": 0.8919,
+      "quartile_p50_view_weighted_avg": 0.5924,
+      "quartile_p75_view_weighted_avg": 0.5157,
+      "quartile_p100_view_weighted_avg": 0.4731
+    },
+    {
+      "video_id": "8TWZBPmDcq0",
+      "video_title": "Motoboy Vira Empreendedor 3D Vendendo Chaveiros | Como Vender Impressão 3D EP05",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "[STLFLIX] vídeo-reconhecimento- Saíram-do-CLT"
+      ],
+      "trueview_views": 6042,
+      "engagements": 10076,
+      "views_by_device": {
+        "DESKTOP": 1165,
+        "MOBILE": 3907,
+        "TABLET": 345,
+        "CONNECTED_TV": 625
+      },
+      "views_by_network": {
+        "CONTENT": 4032,
+        "YOUTUBE": 2010
+      },
+      "quartile_p25_view_weighted_avg": 0.0597,
+      "quartile_p50_view_weighted_avg": 0.0483,
+      "quartile_p75_view_weighted_avg": 0.0407,
+      "quartile_p100_view_weighted_avg": 0.0373
+    },
+    {
+      "video_id": "5Yv5HKxXI8Y",
+      "video_title": "WhatsApp Video 2026-07-02 at 19.26.39_2026-07-10_17-39-02.mp4",
+      "video_channel_id": "UCke6o2ZrbJ7ZGrzgDI4xM4Q",
+      "campaigns": [
+        "Tráfego_Live-Aniversário"
+      ],
+      "trueview_views": 5595,
+      "engagements": 17518,
+      "views_by_device": {
+        "MOBILE": 5155,
+        "TABLET": 371,
+        "DESKTOP": 33,
+        "CONNECTED_TV": 36
+      },
+      "views_by_network": {
+        "CONTENT": 4243,
+        "YOUTUBE": 1352
+      },
+      "quartile_p25_view_weighted_avg": 0.5795,
+      "quartile_p50_view_weighted_avg": 0.4186,
+      "quartile_p75_view_weighted_avg": 0.3121,
+      "quartile_p100_view_weighted_avg": 0.2142
+    },
+    {
+      "video_id": "AN6kkDFxcLw",
+      "video_title": "2019_V_A_UD_v3_6.mp4",
+      "video_channel_id": "UCTKWuk5VvxQd7_R4KP5OeHw",
+      "campaigns": [
+        "Remarketing_Videoview-Lembrete_Aniversário[30d]"
+      ],
+      "trueview_views": 5175,
+      "engagements": 8060,
+      "views_by_device": {
+        "MOBILE": 4860,
+        "TABLET": 128,
+        "DESKTOP": 0,
+        "CONNECTED_TV": 187
+      },
+      "views_by_network": {
+        "CONTENT": 4547,
+        "YOUTUBE": 628
+      },
+      "quartile_p25_view_weighted_avg": 0.8833,
+      "quartile_p50_view_weighted_avg": 0.4224,
+      "quartile_p75_view_weighted_avg": 0.2861,
+      "quartile_p100_view_weighted_avg": 0.1992
+    },
+    {
+      "video_id": "mavt78HpSoY",
+      "video_title": "Como ele pagou o plano vitalício em 4 meses e hoje fatura R$ 20 mil com 3D",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "[STLFLIX] vídeo-reconhecimento-Como ele pagou o plano vitalício em 4 meses"
+      ],
+      "trueview_views": 4146,
+      "engagements": 6931,
+      "views_by_device": {
+        "DESKTOP": 911,
+        "MOBILE": 1114,
+        "TABLET": 133,
+        "CONNECTED_TV": 1988
+      },
+      "views_by_network": {
+        "CONTENT": 1191,
+        "YOUTUBE": 2955
+      },
+      "quartile_p25_view_weighted_avg": 0.3437,
+      "quartile_p50_view_weighted_avg": 0.2831,
+      "quartile_p75_view_weighted_avg": 0.2515,
+      "quartile_p100_view_weighted_avg": 0.2279
+    },
+    {
+      "video_id": "X7ngtI2GV3g",
+      "video_title": "Impressão 3D do Zero ao Lucro: 3 Caminhos diferentes, R$6.000 Cada | Arena 3D EP01",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "[STLFLIX] Impressão 3D do Zero ao Lucro: 3 Caminhos diferentes, R$6.000 Cada | Arena 3D EP01"
+      ],
+      "trueview_views": 4028,
+      "engagements": 4268,
+      "views_by_device": {
+        "DESKTOP": 27,
+        "MOBILE": 2521,
+        "TABLET": 1290,
+        "CONNECTED_TV": 190
+      },
+      "views_by_network": {
+        "YOUTUBE": 4028
+      },
+      "quartile_p25_view_weighted_avg": 0.0517,
+      "quartile_p50_view_weighted_avg": 0.0397,
+      "quartile_p75_view_weighted_avg": 0.0294,
+      "quartile_p100_view_weighted_avg": 0.0187
+    },
+    {
+      "video_id": "zODvGo7W43o",
+      "video_title": "TIPS - Como imprimir com menos suportes do que o necessário!",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "Vídeo_Inscrição_Topo_STLFLIX"
+      ],
+      "trueview_views": 3961,
+      "engagements": 6242,
+      "views_by_device": {
+        "DESKTOP": 239,
+        "MOBILE": 3722
+      },
+      "views_by_network": {
+        "YOUTUBE": 3961,
+        "DISCOVER": 0
+      },
+      "quartile_p25_view_weighted_avg": 0.2172,
+      "quartile_p50_view_weighted_avg": 0.1604,
+      "quartile_p75_view_weighted_avg": 0.1262,
+      "quartile_p100_view_weighted_avg": 0.03
+    },
+    {
+      "video_id": "f5f3TEhFpGo",
+      "video_title": "TIPS - Dica para impressões a prova d'água!",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "Vídeo_Inscrição_Topo_STLFLIX"
+      ],
+      "trueview_views": 3676,
+      "engagements": 10204,
+      "views_by_device": {
+        "DESKTOP": 50,
+        "MOBILE": 3626
+      },
+      "views_by_network": {
+        "YOUTUBE": 3674,
+        "DISCOVER": 2
+      },
+      "quartile_p25_view_weighted_avg": 0.0973,
+      "quartile_p50_view_weighted_avg": 0.0426,
+      "quartile_p75_view_weighted_avg": 0.0282,
+      "quartile_p100_view_weighted_avg": 0.016
+    },
+    {
+      "video_id": "ErZL3S2fBZA",
+      "video_title": "1931_V_A_SO_FREESTYLE_1.mp4",
+      "video_channel_id": "UCke6o2ZrbJ7ZGrzgDI4xM4Q",
+      "campaigns": [
+        "stlflix-video-captação-aniversário"
+      ],
+      "trueview_views": 3429,
+      "engagements": 4560,
+      "views_by_device": {
+        "DESKTOP": 12,
+        "MOBILE": 3378,
+        "TABLET": 13,
+        "CONNECTED_TV": 26
+      },
+      "views_by_network": {
+        "YOUTUBE": 3429
+      },
+      "quartile_p25_view_weighted_avg": 0.9041,
+      "quartile_p50_view_weighted_avg": 0.5809,
+      "quartile_p75_view_weighted_avg": 0.5009,
+      "quartile_p100_view_weighted_avg": 0.4542
+    },
+    {
+      "video_id": "uqBNBuYTMBg",
+      "video_title": "1934_V_A_SO_FREESTYLE_4.mp4",
+      "video_channel_id": "UCke6o2ZrbJ7ZGrzgDI4xM4Q",
+      "campaigns": [
+        "stlflix-video-captação-aniversário"
+      ],
+      "trueview_views": 3349,
+      "engagements": 4438,
+      "views_by_device": {
+        "DESKTOP": 11,
+        "MOBILE": 3266,
+        "TABLET": 28,
+        "CONNECTED_TV": 44
+      },
+      "views_by_network": {
+        "YOUTUBE": 3349
+      },
+      "quartile_p25_view_weighted_avg": 0.8375,
+      "quartile_p50_view_weighted_avg": 0.5704,
+      "quartile_p75_view_weighted_avg": 0.4999,
+      "quartile_p100_view_weighted_avg": 0.4582
+    },
+    {
+      "video_id": "uT36juYIk6s",
+      "video_title": "VIDEO COMPLETO NO CANAL DO YOUTUBE. . História incrível de transformação através do empreendedorismo",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "stlflix-vídeo-shorts-chamadas"
+      ],
+      "trueview_views": 3165,
+      "engagements": 7708,
+      "views_by_device": {
+        "DESKTOP": 33,
+        "MOBILE": 126,
+        "TABLET": 6,
+        "CONNECTED_TV": 3000
+      },
+      "views_by_network": {
+        "YOUTUBE": 3165
+      },
+      "quartile_p25_view_weighted_avg": 0.0304,
+      "quartile_p50_view_weighted_avg": 0.0147,
+      "quartile_p75_view_weighted_avg": 0.0102,
+      "quartile_p100_view_weighted_avg": 0.008
+    },
+    {
+      "video_id": "kA3pLoHJxcY",
+      "video_title": "1932_V_A_SO_FREESTYLE_2_2026-07-03_14-29-51.mp4",
+      "video_channel_id": "UCke6o2ZrbJ7ZGrzgDI4xM4Q",
+      "campaigns": [
+        "stlflix-video-captação-aniversário"
+      ],
+      "trueview_views": 2980,
+      "engagements": 4230,
+      "views_by_device": {
+        "DESKTOP": 2,
+        "MOBILE": 2969,
+        "TABLET": 2,
+        "CONNECTED_TV": 7
+      },
+      "views_by_network": {
+        "YOUTUBE": 2980
+      },
+      "quartile_p25_view_weighted_avg": 0.6379,
+      "quartile_p50_view_weighted_avg": 0.5007,
+      "quartile_p75_view_weighted_avg": 0.4431,
+      "quartile_p100_view_weighted_avg": 0.4072
+    },
+    {
+      "video_id": "EJmLfHhq6zo",
+      "video_title": "1940_V_A_SO_FREESTYLE_10.mp4",
+      "video_channel_id": "UCke6o2ZrbJ7ZGrzgDI4xM4Q",
+      "campaigns": [
+        "stlflix-video-captação-aniversário"
+      ],
+      "trueview_views": 2680,
+      "engagements": 4114,
+      "views_by_device": {
+        "DESKTOP": 65,
+        "MOBILE": 2506,
+        "TABLET": 39,
+        "CONNECTED_TV": 70
+      },
+      "views_by_network": {
+        "YOUTUBE": 2680
+      },
+      "quartile_p25_view_weighted_avg": 0.5799,
+      "quartile_p50_view_weighted_avg": 0.4126,
+      "quartile_p75_view_weighted_avg": 0.3408,
+      "quartile_p100_view_weighted_avg": 0.2994
+    },
+    {
+      "video_id": "mTwxBvcJ68E",
+      "video_title": "1938_V_A_SO_FREESTYLE_8.mp4",
+      "video_channel_id": "UCke6o2ZrbJ7ZGrzgDI4xM4Q",
+      "campaigns": [
+        "stlflix-video-captação-aniversário"
+      ],
+      "trueview_views": 2628,
+      "engagements": 4302,
+      "views_by_device": {
+        "DESKTOP": 68,
+        "MOBILE": 2491,
+        "TABLET": 34,
+        "CONNECTED_TV": 35
+      },
+      "views_by_network": {
+        "YOUTUBE": 2628
+      },
+      "quartile_p25_view_weighted_avg": 0.3505,
+      "quartile_p50_view_weighted_avg": 0.2725,
+      "quartile_p75_view_weighted_avg": 0.213,
+      "quartile_p100_view_weighted_avg": 0.1719
+    },
+    {
+      "video_id": "Qi_0A-jpOvY",
+      "video_title": "1939_V_A_SO_FREESTYLE_9.mp4",
+      "video_channel_id": "UCke6o2ZrbJ7ZGrzgDI4xM4Q",
+      "campaigns": [
+        "stlflix-video-captação-aniversário"
+      ],
+      "trueview_views": 2417,
+      "engagements": 3324,
+      "views_by_device": {
+        "DESKTOP": 29,
+        "MOBILE": 2331,
+        "TABLET": 14,
+        "CONNECTED_TV": 43
+      },
+      "views_by_network": {
+        "YOUTUBE": 2417
+      },
+      "quartile_p25_view_weighted_avg": 0.7983,
+      "quartile_p50_view_weighted_avg": 0.5121,
+      "quartile_p75_view_weighted_avg": 0.4419,
+      "quartile_p100_view_weighted_avg": 0.4023
+    },
+    {
+      "video_id": "giWyoLvPqRU",
+      "video_title": "VIDEO COMPLETO NO CANAL DO YOUTUBE. . História incrível de transformação através do empreendedorismo",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "stlflix-vídeo-shorts-chamadas"
+      ],
+      "trueview_views": 2378,
+      "engagements": 6140,
+      "views_by_device": {
+        "DESKTOP": 61,
+        "MOBILE": 147,
+        "TABLET": 6,
+        "CONNECTED_TV": 2164
+      },
+      "views_by_network": {
+        "YOUTUBE": 2378
+      },
+      "quartile_p25_view_weighted_avg": 0.0505,
+      "quartile_p50_view_weighted_avg": 0.0195,
+      "quartile_p75_view_weighted_avg": 0.0135,
+      "quartile_p100_view_weighted_avg": 0.0098
+    },
+    {
+      "video_id": "AygBiH9CPxs",
+      "video_title": "Dicas para imprimir objetos cônicos🎄 Endless Swirling Tree - Confira nossa plataforma para este arq",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "Vídeo_Inscrição_Topo_STLFLIX"
+      ],
+      "trueview_views": 1843,
+      "engagements": 2460,
+      "views_by_device": {
+        "DESKTOP": 73,
+        "MOBILE": 1770
+      },
+      "views_by_network": {
+        "YOUTUBE": 1841,
+        "DISCOVER": 2
+      },
+      "quartile_p25_view_weighted_avg": 0.4375,
+      "quartile_p50_view_weighted_avg": 0.2742,
+      "quartile_p75_view_weighted_avg": 0.1953,
+      "quartile_p100_view_weighted_avg": 0.1248
+    },
+    {
+      "video_id": "LE5-1QUiOa4",
+      "video_title": "TIPS - Mola impressa 3D?",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "Vídeo_Inscrição_Topo_STLFLIX"
+      ],
+      "trueview_views": 1833,
+      "engagements": 2801,
+      "views_by_device": {
+        "DESKTOP": 68,
+        "MOBILE": 1765
+      },
+      "views_by_network": {
+        "YOUTUBE": 1833
+      },
+      "quartile_p25_view_weighted_avg": 0.3635,
+      "quartile_p50_view_weighted_avg": 0.2133,
+      "quartile_p75_view_weighted_avg": 0.1757,
+      "quartile_p100_view_weighted_avg": 0.1524
+    },
+    {
+      "video_id": "AdU9fJWCNPQ",
+      "video_title": "VIDEO COMPLETO NO CANAL DO YOUTUBE. . História incrível de transformação através do empreendedorismo",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "stlflix-vídeo-shorts-chamadas"
+      ],
+      "trueview_views": 1288,
+      "engagements": 3412,
+      "views_by_device": {
+        "DESKTOP": 48,
+        "MOBILE": 67,
+        "TABLET": 10,
+        "CONNECTED_TV": 1163
+      },
+      "views_by_network": {
+        "YOUTUBE": 1288
+      },
+      "quartile_p25_view_weighted_avg": 0.0136,
+      "quartile_p50_view_weighted_avg": 0.0076,
+      "quartile_p75_view_weighted_avg": 0.0053,
+      "quartile_p100_view_weighted_avg": 0.0041
+    },
+    {
+      "video_id": "cqx3aYC9QAw",
+      "video_title": "Impressão 3d + Pintura vendendo acessórios de board games e RPG | Como Vender impressão 3d EP10",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "Impressão 3d + Pintura vendendo acessórios de board games e RPG | Como Vender impressão 3d EP10"
+      ],
+      "trueview_views": 1173,
+      "engagements": 1272,
+      "views_by_device": {
+        "DESKTOP": 17,
+        "MOBILE": 634,
+        "TABLET": 443,
+        "CONNECTED_TV": 79
+      },
+      "views_by_network": {
+        "YOUTUBE": 1173
+      },
+      "quartile_p25_view_weighted_avg": 0.0767,
+      "quartile_p50_view_weighted_avg": 0.0455,
+      "quartile_p75_view_weighted_avg": 0.0322,
+      "quartile_p100_view_weighted_avg": 0.0149
+    },
+    {
+      "video_id": "atUNc-UmO7M",
+      "video_title": "VIDEO COMPLETO NO CANAL DO YOUTUBE. . História incrível de transformação através do empreendedorismo",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "stlflix-vídeo-shorts-chamadas"
+      ],
+      "trueview_views": 935,
+      "engagements": 2323,
+      "views_by_device": {
+        "DESKTOP": 18,
+        "MOBILE": 108,
+        "TABLET": 5,
+        "CONNECTED_TV": 804
+      },
+      "views_by_network": {
+        "YOUTUBE": 935
+      },
+      "quartile_p25_view_weighted_avg": 0.0242,
+      "quartile_p50_view_weighted_avg": 0.0131,
+      "quartile_p75_view_weighted_avg": 0.0096,
+      "quartile_p100_view_weighted_avg": 0.0077
+    },
+    {
+      "video_id": "XXg0NWacP60",
+      "video_title": "Pai e Filho Empreendendo com Impressão 3D  | Como Vender Impressão 3d EP09",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "Pai e Filho Empreendendo com Impressão 3D | Como Vender Impressão 3d EP09"
+      ],
+      "trueview_views": 914,
+      "engagements": 1069,
+      "views_by_device": {
+        "DESKTOP": 10,
+        "MOBILE": 481,
+        "TABLET": 309,
+        "CONNECTED_TV": 114
+      },
+      "views_by_network": {
+        "YOUTUBE": 914
+      },
+      "quartile_p25_view_weighted_avg": 0.0975,
+      "quartile_p50_view_weighted_avg": 0.0581,
+      "quartile_p75_view_weighted_avg": 0.0463,
+      "quartile_p100_view_weighted_avg": 0.0191
+    },
+    {
+      "video_id": "LdxRcaY7MrM",
+      "video_title": "Arena 3D EP 03 - Intro 02.mp4",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "Teste_Intros-EP03"
+      ],
+      "trueview_views": 740,
+      "engagements": 984,
+      "views_by_device": {
+        "DESKTOP": 22,
+        "MOBILE": 200,
+        "TABLET": 66,
+        "CONNECTED_TV": 452
+      },
+      "views_by_network": {
+        "YOUTUBE": 740
+      },
+      "quartile_p25_view_weighted_avg": 0.6875,
+      "quartile_p50_view_weighted_avg": 0.5758,
+      "quartile_p75_view_weighted_avg": 0.533,
+      "quartile_p100_view_weighted_avg": 0.4956
+    },
+    {
+      "video_id": "ujO961Wp2Fw",
+      "video_title": "VIDEO COMPLETO NO CANAL DO YOUTUBE. . História incrível de transformação através do empreendedorismo",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "stlflix-vídeo-shorts-chamadas"
+      ],
+      "trueview_views": 709,
+      "engagements": 1669,
+      "views_by_device": {
+        "DESKTOP": 20,
+        "MOBILE": 144,
+        "TABLET": 8,
+        "CONNECTED_TV": 537
+      },
+      "views_by_network": {
+        "YOUTUBE": 709
+      },
+      "quartile_p25_view_weighted_avg": 0.0511,
+      "quartile_p50_view_weighted_avg": 0.0271,
+      "quartile_p75_view_weighted_avg": 0.0203,
+      "quartile_p100_view_weighted_avg": 0.0165
+    },
+    {
+      "video_id": "sfVxrDtR0hk",
+      "video_title": "VIDEO COMPLETO NO CANAL DO YOUTUBE. . História incrível de transformação através do empreendedorismo",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "stlflix-vídeo-shorts-chamadas"
+      ],
+      "trueview_views": 495,
+      "engagements": 1093,
+      "views_by_device": {
+        "DESKTOP": 18,
+        "MOBILE": 121,
+        "TABLET": 9,
+        "CONNECTED_TV": 347
+      },
+      "views_by_network": {
+        "YOUTUBE": 495
+      },
+      "quartile_p25_view_weighted_avg": 0.0243,
+      "quartile_p50_view_weighted_avg": 0.0159,
+      "quartile_p75_view_weighted_avg": 0.0129,
+      "quartile_p100_view_weighted_avg": 0.011
+    },
+    {
+      "video_id": "bTt4wme-79E",
+      "video_title": "Ele Largou o Emprego para Vender Impressão 3D… Hoje Fatura R$50 MIL",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "Ele Largou o Emprego para Vender Impressão 3D… Hoje Fatura R$50 MIL"
+      ],
+      "trueview_views": 465,
+      "engagements": 506,
+      "views_by_device": {
+        "DESKTOP": 2,
+        "MOBILE": 205,
+        "TABLET": 220,
+        "CONNECTED_TV": 38
+      },
+      "views_by_network": {
+        "YOUTUBE": 465
+      },
+      "quartile_p25_view_weighted_avg": 0.0799,
+      "quartile_p50_view_weighted_avg": 0.0395,
+      "quartile_p75_view_weighted_avg": 0.0293,
+      "quartile_p100_view_weighted_avg": 0.0134
+    },
+    {
+      "video_id": "YueS6DDvdpk",
+      "video_title": "Em 1 Semana a Primeira Venda de Impressão 3D em Lojas físicas e no TiktokShop! Arena 3D EP02",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "Será que vendeu? 1 Semana tentando Lucrar com Impressão 3D! Arena 3D EP02"
+      ],
+      "trueview_views": 68,
+      "engagements": 69,
+      "views_by_device": {
+        "DESKTOP": 1,
+        "MOBILE": 4,
+        "TABLET": 61,
+        "CONNECTED_TV": 2
+      },
+      "views_by_network": {
+        "YOUTUBE": 68
+      },
+      "quartile_p25_view_weighted_avg": 0.0294,
+      "quartile_p50_view_weighted_avg": 0.0294,
+      "quartile_p75_view_weighted_avg": 0.0,
+      "quartile_p100_view_weighted_avg": 0.0
+    },
+    {
+      "video_id": "_NbprvpJpw4",
+      "video_title": "2020_V_A_UD_v3_7.mp4",
+      "video_channel_id": "UCTKWuk5VvxQd7_R4KP5OeHw",
+      "campaigns": [
+        "Remarketing_Videoview-Lembrete_Aniversário[30d]"
+      ],
+      "trueview_views": 53,
+      "engagements": 77,
+      "views_by_device": {
+        "MOBILE": 47,
+        "TABLET": 1,
+        "CONNECTED_TV": 5
+      },
+      "views_by_network": {
+        "CONTENT": 24,
+        "YOUTUBE": 29
+      },
+      "quartile_p25_view_weighted_avg": 0.8118,
+      "quartile_p50_view_weighted_avg": 0.7546,
+      "quartile_p75_view_weighted_avg": 0.5563,
+      "quartile_p100_view_weighted_avg": 0.4033
+    },
+    {
+      "video_id": "uibzWEl1puA",
+      "video_title": "2017_V_A_UD_v3_4.mp4",
+      "video_channel_id": "UCTKWuk5VvxQd7_R4KP5OeHw",
+      "campaigns": [
+        "Remarketing_Videoview-Lembrete_Aniversário[30d]"
+      ],
+      "trueview_views": 48,
+      "engagements": 84,
+      "views_by_device": {
+        "MOBILE": 37,
+        "DESKTOP": 0,
+        "TABLET": 1,
+        "CONNECTED_TV": 10
+      },
+      "views_by_network": {
+        "CONTENT": 18,
+        "YOUTUBE": 30
+      },
+      "quartile_p25_view_weighted_avg": 0.7175,
+      "quartile_p50_view_weighted_avg": 0.6274,
+      "quartile_p75_view_weighted_avg": 0.4305,
+      "quartile_p100_view_weighted_avg": 0.3033
+    },
+    {
+      "video_id": "dIui5_CSrbk",
+      "video_title": "2021_V_A_UD_v3_8.mp4",
+      "video_channel_id": "UCTKWuk5VvxQd7_R4KP5OeHw",
+      "campaigns": [
+        "Remarketing_Videoview-Lembrete_Aniversário[30d]"
+      ],
+      "trueview_views": 36,
+      "engagements": 51,
+      "views_by_device": {
+        "MOBILE": 31,
+        "CONNECTED_TV": 5
+      },
+      "views_by_network": {
+        "CONTENT": 10,
+        "YOUTUBE": 26
+      },
+      "quartile_p25_view_weighted_avg": 0.7101,
+      "quartile_p50_view_weighted_avg": 0.5183,
+      "quartile_p75_view_weighted_avg": 0.2994,
+      "quartile_p100_view_weighted_avg": 0.2667
+    },
+    {
+      "video_id": "FXUhs98cSHQ",
+      "video_title": "Saiu do Emprego e Hoje Fatura Mais de R$100 MIL/Mês com Impressão 3D",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "Saiu do Emprego e Hoje Fatura Mais de R$100 MIL/Mês com Impressão 3D"
+      ],
+      "trueview_views": 1,
+      "engagements": 1,
+      "views_by_device": {
+        "TABLET": 1
+      },
+      "views_by_network": {
+        "YOUTUBE": 1
+      },
+      "quartile_p25_view_weighted_avg": 0.0,
+      "quartile_p50_view_weighted_avg": 0.0,
+      "quartile_p75_view_weighted_avg": 0.0,
+      "quartile_p100_view_weighted_avg": 0.0
+    },
+    {
+      "video_id": "ULurpr-Ul5I",
+      "video_title": "VIDEO COMPLETO NO CANAL DO YOUTUBE. . História incrível de transformação através do empreendedorismo",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "stlflix-vídeo-shorts-chamadas"
+      ],
+      "trueview_views": 1,
+      "engagements": 3,
+      "views_by_device": {
+        "MOBILE": 1
+      },
+      "views_by_network": {
+        "YOUTUBE": 1
+      },
+      "quartile_p25_view_weighted_avg": 0.0435,
+      "quartile_p50_view_weighted_avg": 0.0435,
+      "quartile_p75_view_weighted_avg": 0.0435,
+      "quartile_p100_view_weighted_avg": 0.0435
+    },
+    {
+      "video_id": "epywe3Uzi0U",
+      "video_title": "VIDEO COMPLETO NO CANAL DO YOUTUBE. . História incrível de transformação através do empreendedorismo",
+      "video_channel_id": "UCb3H1VIsLk9l6xAz6eyyLwQ",
+      "campaigns": [
+        "stlflix-vídeo-shorts-chamadas"
+      ],
+      "trueview_views": 1,
+      "engagements": 5,
+      "views_by_device": {
+        "MOBILE": 0,
+        "CONNECTED_TV": 1
+      },
+      "views_by_network": {
+        "YOUTUBE": 1
+      },
+      "quartile_p25_view_weighted_avg": 0.2,
+      "quartile_p50_view_weighted_avg": 0.2,
+      "quartile_p75_view_weighted_avg": 0.2,
+      "quartile_p100_view_weighted_avg": 0.2
+    }
+  ]
+}

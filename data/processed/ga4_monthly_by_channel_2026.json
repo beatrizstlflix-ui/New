@@ -1,0 +1,605 @@
+{
+  "source": "Windsor.ai googleanalytics4 (530533972 - LP AMBIENTE BR)",
+  "period": {
+    "date_from": "2026-01-01",
+    "date_to": "2026-09-09"
+  },
+  "note": "Linhas brutas vieram particionadas por uma dimensao adicional nao solicitada (provavel stream/medium); esta agregacao soma sessions/totalusers/conversions_purchase por mes+canal para evitar contagem dupla incorreta. Ver decisions.md.",
+  "rows": [
+    {
+      "year_month_name": "Apr 2026",
+      "channel_group": "Paid Social",
+      "sessions": 81191,
+      "totalusers": 74257,
+      "conversions_purchase": 102
+    },
+    {
+      "year_month_name": "Apr 2026",
+      "channel_group": "Direct",
+      "sessions": 18349,
+      "totalusers": 17025,
+      "conversions_purchase": 106
+    },
+    {
+      "year_month_name": "Apr 2026",
+      "channel_group": "Unassigned",
+      "sessions": 16394,
+      "totalusers": 13738,
+      "conversions_purchase": 298
+    },
+    {
+      "year_month_name": "Apr 2026",
+      "channel_group": "Referral",
+      "sessions": 6448,
+      "totalusers": 5773,
+      "conversions_purchase": 108
+    },
+    {
+      "year_month_name": "Apr 2026",
+      "channel_group": "Organic Social",
+      "sessions": 3900,
+      "totalusers": 3672,
+      "conversions_purchase": 36
+    },
+    {
+      "year_month_name": "Apr 2026",
+      "channel_group": "Cross-network",
+      "sessions": 3153,
+      "totalusers": 2895,
+      "conversions_purchase": 19
+    },
+    {
+      "year_month_name": "Apr 2026",
+      "channel_group": "Organic Search",
+      "sessions": 2197,
+      "totalusers": 1855,
+      "conversions_purchase": 30
+    },
+    {
+      "year_month_name": "Apr 2026",
+      "channel_group": "Organic Video",
+      "sessions": 971,
+      "totalusers": 838,
+      "conversions_purchase": 11
+    },
+    {
+      "year_month_name": "Apr 2026",
+      "channel_group": "Paid Other",
+      "sessions": 755,
+      "totalusers": 738,
+      "conversions_purchase": 0
+    },
+    {
+      "year_month_name": "Apr 2026",
+      "channel_group": "Email",
+      "sessions": 112,
+      "totalusers": 107,
+      "conversions_purchase": 2
+    },
+    {
+      "year_month_name": "Apr 2026",
+      "channel_group": "Paid Search",
+      "sessions": 29,
+      "totalusers": 23,
+      "conversions_purchase": 3
+    },
+    {
+      "year_month_name": "Aug 2026",
+      "channel_group": "Paid Social",
+      "sessions": 126640,
+      "totalusers": 116618,
+      "conversions_purchase": 202
+    },
+    {
+      "year_month_name": "Aug 2026",
+      "channel_group": "Direct",
+      "sessions": 42147,
+      "totalusers": 39249,
+      "conversions_purchase": 189
+    },
+    {
+      "year_month_name": "Aug 2026",
+      "channel_group": "Organic Search",
+      "sessions": 33982,
+      "totalusers": 30120,
+      "conversions_purchase": 149
+    },
+    {
+      "year_month_name": "Aug 2026",
+      "channel_group": "Referral",
+      "sessions": 30110,
+      "totalusers": 25313,
+      "conversions_purchase": 284
+    },
+    {
+      "year_month_name": "Aug 2026",
+      "channel_group": "Organic Social",
+      "sessions": 16119,
+      "totalusers": 14627,
+      "conversions_purchase": 61
+    },
+    {
+      "year_month_name": "Aug 2026",
+      "channel_group": "Unassigned",
+      "sessions": 7953,
+      "totalusers": 6751,
+      "conversions_purchase": 267
+    },
+    {
+      "year_month_name": "Aug 2026",
+      "channel_group": "Cross-network",
+      "sessions": 6518,
+      "totalusers": 6017,
+      "conversions_purchase": 29
+    },
+    {
+      "year_month_name": "Aug 2026",
+      "channel_group": "Display",
+      "sessions": 4212,
+      "totalusers": 3658,
+      "conversions_purchase": 17
+    },
+    {
+      "year_month_name": "Aug 2026",
+      "channel_group": "Organic Video",
+      "sessions": 3294,
+      "totalusers": 2903,
+      "conversions_purchase": 17
+    },
+    {
+      "year_month_name": "Aug 2026",
+      "channel_group": "Paid Search",
+      "sessions": 997,
+      "totalusers": 850,
+      "conversions_purchase": 4
+    },
+    {
+      "year_month_name": "Aug 2026",
+      "channel_group": "Email",
+      "sessions": 805,
+      "totalusers": 712,
+      "conversions_purchase": 6
+    },
+    {
+      "year_month_name": "Aug 2026",
+      "channel_group": "Paid Other",
+      "sessions": 426,
+      "totalusers": 376,
+      "conversions_purchase": 0
+    },
+    {
+      "year_month_name": "Aug 2026",
+      "channel_group": "AI Assistant",
+      "sessions": 411,
+      "totalusers": 374,
+      "conversions_purchase": 5
+    },
+    {
+      "year_month_name": "Aug 2026",
+      "channel_group": "Paid Video",
+      "sessions": 206,
+      "totalusers": 196,
+      "conversions_purchase": 0
+    },
+    {
+      "year_month_name": "Jul 2026",
+      "channel_group": "Paid Social",
+      "sessions": 297686,
+      "totalusers": 270145,
+      "conversions_purchase": 304
+    },
+    {
+      "year_month_name": "Jul 2026",
+      "channel_group": "Organic Search",
+      "sessions": 43681,
+      "totalusers": 37557,
+      "conversions_purchase": 788
+    },
+    {
+      "year_month_name": "Jul 2026",
+      "channel_group": "Direct",
+      "sessions": 34498,
+      "totalusers": 32844,
+      "conversions_purchase": 147
+    },
+    {
+      "year_month_name": "Jul 2026",
+      "channel_group": "Referral",
+      "sessions": 30960,
+      "totalusers": 26836,
+      "conversions_purchase": 740
+    },
+    {
+      "year_month_name": "Jul 2026",
+      "channel_group": "Organic Social",
+      "sessions": 20592,
+      "totalusers": 19007,
+      "conversions_purchase": 43
+    },
+    {
+      "year_month_name": "Jul 2026",
+      "channel_group": "Cross-network",
+      "sessions": 13494,
+      "totalusers": 12762,
+      "conversions_purchase": 50
+    },
+    {
+      "year_month_name": "Jul 2026",
+      "channel_group": "Organic Video",
+      "sessions": 6274,
+      "totalusers": 5487,
+      "conversions_purchase": 24
+    },
+    {
+      "year_month_name": "Jul 2026",
+      "channel_group": "Email",
+      "sessions": 4443,
+      "totalusers": 3945,
+      "conversions_purchase": 13
+    },
+    {
+      "year_month_name": "Jul 2026",
+      "channel_group": "Unassigned",
+      "sessions": 4351,
+      "totalusers": 3996,
+      "conversions_purchase": 137
+    },
+    {
+      "year_month_name": "Jul 2026",
+      "channel_group": "Display",
+      "sessions": 3690,
+      "totalusers": 3414,
+      "conversions_purchase": 12
+    },
+    {
+      "year_month_name": "Jul 2026",
+      "channel_group": "Paid Search",
+      "sessions": 1051,
+      "totalusers": 936,
+      "conversions_purchase": 14
+    },
+    {
+      "year_month_name": "Jul 2026",
+      "channel_group": "Paid Other",
+      "sessions": 197,
+      "totalusers": 182,
+      "conversions_purchase": 0
+    },
+    {
+      "year_month_name": "Jul 2026",
+      "channel_group": "AI Assistant",
+      "sessions": 158,
+      "totalusers": 132,
+      "conversions_purchase": 12
+    },
+    {
+      "year_month_name": "Jul 2026",
+      "channel_group": "Paid Video",
+      "sessions": 124,
+      "totalusers": 116,
+      "conversions_purchase": 0
+    },
+    {
+      "year_month_name": "Jun 2026",
+      "channel_group": "Paid Social",
+      "sessions": 227826,
+      "totalusers": 210354,
+      "conversions_purchase": 403
+    },
+    {
+      "year_month_name": "Jun 2026",
+      "channel_group": "Referral",
+      "sessions": 36413,
+      "totalusers": 31139,
+      "conversions_purchase": 972
+    },
+    {
+      "year_month_name": "Jun 2026",
+      "channel_group": "Direct",
+      "sessions": 25889,
+      "totalusers": 24037,
+      "conversions_purchase": 358
+    },
+    {
+      "year_month_name": "Jun 2026",
+      "channel_group": "Organic Search",
+      "sessions": 11923,
+      "totalusers": 10364,
+      "conversions_purchase": 291
+    },
+    {
+      "year_month_name": "Jun 2026",
+      "channel_group": "Organic Social",
+      "sessions": 6272,
+      "totalusers": 5986,
+      "conversions_purchase": 25
+    },
+    {
+      "year_month_name": "Jun 2026",
+      "channel_group": "Cross-network",
+      "sessions": 5367,
+      "totalusers": 4911,
+      "conversions_purchase": 46
+    },
+    {
+      "year_month_name": "Jun 2026",
+      "channel_group": "Organic Video",
+      "sessions": 4002,
+      "totalusers": 3421,
+      "conversions_purchase": 32
+    },
+    {
+      "year_month_name": "Jun 2026",
+      "channel_group": "Unassigned",
+      "sessions": 3511,
+      "totalusers": 3063,
+      "conversions_purchase": 199
+    },
+    {
+      "year_month_name": "Jun 2026",
+      "channel_group": "Display",
+      "sessions": 2296,
+      "totalusers": 2238,
+      "conversions_purchase": 0
+    },
+    {
+      "year_month_name": "Jun 2026",
+      "channel_group": "Paid Search",
+      "sessions": 522,
+      "totalusers": 477,
+      "conversions_purchase": 3
+    },
+    {
+      "year_month_name": "Jun 2026",
+      "channel_group": "Email",
+      "sessions": 385,
+      "totalusers": 354,
+      "conversions_purchase": 8
+    },
+    {
+      "year_month_name": "Jun 2026",
+      "channel_group": "Paid Other",
+      "sessions": 223,
+      "totalusers": 177,
+      "conversions_purchase": 3
+    },
+    {
+      "year_month_name": "Jun 2026",
+      "channel_group": "AI Assistant",
+      "sessions": 71,
+      "totalusers": 60,
+      "conversions_purchase": 5
+    },
+    {
+      "year_month_name": "Jun 2026",
+      "channel_group": "Paid Video",
+      "sessions": 62,
+      "totalusers": 57,
+      "conversions_purchase": 0
+    },
+    {
+      "year_month_name": "Mar 2026",
+      "channel_group": "Referral",
+      "sessions": 27,
+      "totalusers": 18,
+      "conversions_purchase": 0
+    },
+    {
+      "year_month_name": "Mar 2026",
+      "channel_group": "Direct",
+      "sessions": 24,
+      "totalusers": 23,
+      "conversions_purchase": 0
+    },
+    {
+      "year_month_name": "Mar 2026",
+      "channel_group": "Organic Search",
+      "sessions": 4,
+      "totalusers": 4,
+      "conversions_purchase": 0
+    },
+    {
+      "year_month_name": "Mar 2026",
+      "channel_group": "Organic Video",
+      "sessions": 3,
+      "totalusers": 3,
+      "conversions_purchase": 0
+    },
+    {
+      "year_month_name": "Mar 2026",
+      "channel_group": "Organic Social",
+      "sessions": 2,
+      "totalusers": 2,
+      "conversions_purchase": 0
+    },
+    {
+      "year_month_name": "Mar 2026",
+      "channel_group": "Unassigned",
+      "sessions": 2,
+      "totalusers": 1,
+      "conversions_purchase": 0
+    },
+    {
+      "year_month_name": "May 2026",
+      "channel_group": "Paid Social",
+      "sessions": 194524,
+      "totalusers": 175379,
+      "conversions_purchase": 197
+    },
+    {
+      "year_month_name": "May 2026",
+      "channel_group": "Referral",
+      "sessions": 47018,
+      "totalusers": 41438,
+      "conversions_purchase": 580
+    },
+    {
+      "year_month_name": "May 2026",
+      "channel_group": "Direct",
+      "sessions": 18961,
+      "totalusers": 17447,
+      "conversions_purchase": 157
+    },
+    {
+      "year_month_name": "May 2026",
+      "channel_group": "Unassigned",
+      "sessions": 7868,
+      "totalusers": 6512,
+      "conversions_purchase": 194
+    },
+    {
+      "year_month_name": "May 2026",
+      "channel_group": "Organic Social",
+      "sessions": 7720,
+      "totalusers": 7333,
+      "conversions_purchase": 51
+    },
+    {
+      "year_month_name": "May 2026",
+      "channel_group": "Cross-network",
+      "sessions": 5422,
+      "totalusers": 4941,
+      "conversions_purchase": 18
+    },
+    {
+      "year_month_name": "May 2026",
+      "channel_group": "Organic Search",
+      "sessions": 2984,
+      "totalusers": 2481,
+      "conversions_purchase": 70
+    },
+    {
+      "year_month_name": "May 2026",
+      "channel_group": "Organic Video",
+      "sessions": 2277,
+      "totalusers": 1938,
+      "conversions_purchase": 17
+    },
+    {
+      "year_month_name": "May 2026",
+      "channel_group": "Email",
+      "sessions": 207,
+      "totalusers": 193,
+      "conversions_purchase": 1
+    },
+    {
+      "year_month_name": "May 2026",
+      "channel_group": "Display",
+      "sessions": 139,
+      "totalusers": 136,
+      "conversions_purchase": 0
+    },
+    {
+      "year_month_name": "May 2026",
+      "channel_group": "Paid Search",
+      "sessions": 89,
+      "totalusers": 77,
+      "conversions_purchase": 4
+    },
+    {
+      "year_month_name": "May 2026",
+      "channel_group": "Paid Other",
+      "sessions": 1,
+      "totalusers": 1,
+      "conversions_purchase": 0
+    },
+    {
+      "year_month_name": "Sep 2026",
+      "channel_group": "Paid Social",
+      "sessions": 21981,
+      "totalusers": 20413,
+      "conversions_purchase": 34
+    },
+    {
+      "year_month_name": "Sep 2026",
+      "channel_group": "Direct",
+      "sessions": 11915,
+      "totalusers": 11123,
+      "conversions_purchase": 54
+    },
+    {
+      "year_month_name": "Sep 2026",
+      "channel_group": "Unassigned",
+      "sessions": 11283,
+      "totalusers": 10144,
+      "conversions_purchase": 154
+    },
+    {
+      "year_month_name": "Sep 2026",
+      "channel_group": "Organic Search",
+      "sessions": 10259,
+      "totalusers": 9149,
+      "conversions_purchase": 29
+    },
+    {
+      "year_month_name": "Sep 2026",
+      "channel_group": "Referral",
+      "sessions": 9206,
+      "totalusers": 7783,
+      "conversions_purchase": 97
+    },
+    {
+      "year_month_name": "Sep 2026",
+      "channel_group": "Organic Social",
+      "sessions": 3808,
+      "totalusers": 3585,
+      "conversions_purchase": 23
+    },
+    {
+      "year_month_name": "Sep 2026",
+      "channel_group": "Cross-network",
+      "sessions": 1472,
+      "totalusers": 1453,
+      "conversions_purchase": 5
+    },
+    {
+      "year_month_name": "Sep 2026",
+      "channel_group": "Organic Video",
+      "sessions": 1057,
+      "totalusers": 946,
+      "conversions_purchase": 4
+    },
+    {
+      "year_month_name": "Sep 2026",
+      "channel_group": "Display",
+      "sessions": 905,
+      "totalusers": 799,
+      "conversions_purchase": 3
+    },
+    {
+      "year_month_name": "Sep 2026",
+      "channel_group": "Paid Other",
+      "sessions": 503,
+      "totalusers": 415,
+      "conversions_purchase": 0
+    },
+    {
+      "year_month_name": "Sep 2026",
+      "channel_group": "Paid Search",
+      "sessions": 323,
+      "totalusers": 286,
+      "conversions_purchase": 0
+    },
+    {
+      "year_month_name": "Sep 2026",
+      "channel_group": "AI Assistant",
+      "sessions": 158,
+      "totalusers": 138,
+      "conversions_purchase": 3
+    },
+    {
+      "year_month_name": "Sep 2026",
+      "channel_group": "Paid Video",
+      "sessions": 146,
+      "totalusers": 142,
+      "conversions_purchase": 0
+    },
+    {
+      "year_month_name": "Sep 2026",
+      "channel_group": "Email",
+      "sessions": 36,
+      "totalusers": 34,
+      "conversions_purchase": 0
+    }
+  ]
+}

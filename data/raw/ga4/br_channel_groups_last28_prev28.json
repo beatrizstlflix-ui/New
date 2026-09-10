@@ -1,0 +1,39 @@
+{
+  "source": "Windsor.ai MCP -> connector=googleanalytics4, account=530533972 (LP - AMBIENTE BR)",
+  "extracted_at": "2026-09-10",
+  "fields": ["session_default_channel_group","sessions","totalusers","newusers","conversions_qualify_lead","conversions_close_convert_lead","conversions_purchase"],
+  "last28d": {"date_from":"2026-08-13","date_to":"2026-09-09",
+   "rows": [
+{"session_default_channel_group":"Paid Social","sessions":89378,"totalusers":66650,"newusers":55191,"conversions_qualify_lead":0,"conversions_close_convert_lead":0,"conversions_purchase":158},
+{"session_default_channel_group":"Direct","sessions":41031,"totalusers":30586,"newusers":29526,"conversions_qualify_lead":0,"conversions_close_convert_lead":0,"conversions_purchase":222},
+{"session_default_channel_group":"Organic Search","sessions":31150,"totalusers":21726,"newusers":18799,"conversions_qualify_lead":0,"conversions_close_convert_lead":0,"conversions_purchase":165},
+{"session_default_channel_group":"Referral","sessions":29995,"totalusers":17853,"newusers":12231,"conversions_qualify_lead":0,"conversions_close_convert_lead":0,"conversions_purchase":363},
+{"session_default_channel_group":"Organic Social","sessions":15004,"totalusers":12622,"newusers":10026,"conversions_qualify_lead":0,"conversions_close_convert_lead":0,"conversions_purchase":74},
+{"session_default_channel_group":"Unassigned","sessions":16973,"totalusers":13012,"newusers":7180,"conversions_qualify_lead":0,"conversions_close_convert_lead":0,"conversions_purchase":411},
+{"session_default_channel_group":"Cross-network","sessions":2863,"totalusers":2531,"newusers":2082,"conversions_qualify_lead":0,"conversions_close_convert_lead":0,"conversions_purchase":16},
+{"session_default_channel_group":"Display","sessions":3462,"totalusers":2347,"newusers":1818,"conversions_qualify_lead":0,"conversions_close_convert_lead":0,"conversions_purchase":20},
+{"session_default_channel_group":"Organic Video","sessions":3256,"totalusers":2435,"newusers":1805,"conversions_qualify_lead":0,"conversions_close_convert_lead":0,"conversions_purchase":19},
+{"session_default_channel_group":"Paid Search","sessions":857,"totalusers":619,"newusers":541,"conversions_qualify_lead":0,"conversions_close_convert_lead":0,"conversions_purchase":0},
+{"session_default_channel_group":"AI Assistant","sessions":487,"totalusers":385,"newusers":329,"conversions_qualify_lead":0,"conversions_close_convert_lead":0,"conversions_purchase":8},
+{"session_default_channel_group":"Paid Other","sessions":928,"totalusers":474,"newusers":262,"conversions_qualify_lead":0,"conversions_close_convert_lead":0,"conversions_purchase":0},
+{"session_default_channel_group":"Paid Video","sessions":273,"totalusers":256,"newusers":256,"conversions_qualify_lead":0,"conversions_close_convert_lead":0,"conversions_purchase":0},
+{"session_default_channel_group":"Email","sessions":402,"totalusers":251,"newusers":116,"conversions_qualify_lead":0,"conversions_close_convert_lead":0,"conversions_purchase":3}
+   ]},
+  "previous28d": {"date_from":"2026-07-16","date_to":"2026-08-12",
+   "rows": [
+{"session_default_channel_group":"Paid Social","sessions":237341,"totalusers":155079,"newusers":136065,"conversions_qualify_lead":0,"conversions_close_convert_lead":0,"conversions_purchase":191},
+{"session_default_channel_group":"Direct","sessions":29200,"totalusers":25057,"newusers":24668,"conversions_qualify_lead":0,"conversions_close_convert_lead":0,"conversions_purchase":77},
+{"session_default_channel_group":"Organic Search","sessions":34576,"totalusers":22647,"newusers":16949,"conversions_qualify_lead":0,"conversions_close_convert_lead":0,"conversions_purchase":313},
+{"session_default_channel_group":"Cross-network","sessions":14486,"totalusers":12600,"newusers":10890,"conversions_qualify_lead":0,"conversions_close_convert_lead":0,"conversions_purchase":38},
+{"session_default_channel_group":"Referral","sessions":21325,"totalusers":14642,"newusers":8743,"conversions_qualify_lead":0,"conversions_close_convert_lead":0,"conversions_purchase":302},
+{"session_default_channel_group":"Organic Social","sessions":10209,"totalusers":7691,"newusers":4588,"conversions_qualify_lead":0,"conversions_close_convert_lead":0,"conversions_purchase":32},
+{"session_default_channel_group":"Display","sessions":3796,"totalusers":2869,"newusers":2019,"conversions_qualify_lead":0,"conversions_close_convert_lead":0,"conversions_purchase":9},
+{"session_default_channel_group":"Organic Video","sessions":3004,"totalusers":2167,"newusers":1483,"conversions_qualify_lead":0,"conversions_close_convert_lead":0,"conversions_purchase":9},
+{"session_default_channel_group":"Unassigned","sessions":3403,"totalusers":2530,"newusers":1367,"conversions_qualify_lead":0,"conversions_close_convert_lead":0,"conversions_purchase":63},
+{"session_default_channel_group":"Email","sessions":1751,"totalusers":1229,"newusers":577,"conversions_qualify_lead":0,"conversions_close_convert_lead":0,"conversions_purchase":10},
+{"session_default_channel_group":"Paid Search","sessions":912,"totalusers":655,"newusers":522,"conversions_qualify_lead":0,"conversions_close_convert_lead":0,"conversions_purchase":11},
+{"session_default_channel_group":"Paid Video","sessions":131,"totalusers":111,"newusers":113,"conversions_qualify_lead":0,"conversions_close_convert_lead":0,"conversions_purchase":0},
+{"session_default_channel_group":"AI Assistant","sessions":167,"totalusers":137,"newusers":112,"conversions_qualify_lead":0,"conversions_close_convert_lead":0,"conversions_purchase":8},
+{"session_default_channel_group":"Paid Other","sessions":13,"totalusers":10,"newusers":2,"conversions_qualify_lead":0,"conversions_close_convert_lead":0,"conversions_purchase":0}
+   ]}
+}
