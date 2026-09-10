@@ -14,6 +14,7 @@ import {
   getCaptionsCoverage,
   getYoutubeStudioAnalytics,
   getSeriesViews,
+  getMediaAssertividade,
   brl,
   num,
 } from '@/lib/auditData'
@@ -55,6 +56,7 @@ export default function AuditoriaPage() {
   const captions = getCaptionsCoverage()
   const studio = getYoutubeStudioAnalytics()
   const seriesData = getSeriesViews()
+  const assertividade = getMediaAssertividade()
 
   const cadenceData = Object.entries(organic.publish_cadence_by_month).map(([month, videos]) => ({ month, videos }))
   const periodLabels: Record<string, string> = { P1: 'YTD 2026', P2: '90 dias', P3: '28 dias', P4: '28d anteriores', P5: 'BF 2025' }
@@ -428,6 +430,157 @@ export default function AuditoriaPage() {
             Conclusão do anúncio (quartil 100%) não é a curva de retenção do YouTube Studio — não comparável
             diretamente. Ver <code>docs/dicionario_metricas.md</code>.
           </p>
+        </div>
+      </section>
+
+      {/* ASSERTIVIDADE DA MÍDIA PAGA (ÚLTIMOS 4 MESES) */}
+      <section className="flex flex-col gap-4">
+        <h2 className="text-lg font-semibold border-b border-border pb-2">
+          Estamos sendo assertivos na mídia paga? (Mai–Set/26)
+        </h2>
+        <div className="bg-panel border border-bad/50 rounded-xl p-4">
+          <div className="flex items-center gap-2 mb-2">
+            <span className="font-semibold text-bad">Veredito: Não.</span>
+            <ConfidenceTag level="alta" />
+          </div>
+          <p className="text-sm text-muted">
+            Nos dados dos últimos 4 meses de campanhas de vídeo-reconhecimento, o orçamento não é
+            redirecionado com base em desempenho: campanhas com resultado muito diferente recebem
+            praticamente o mesmo investimento mensal. Escopo: apenas campanhas VIDEO
+            ({assertividade.scope}). Detalhe completo em{' '}
+            <code>docs/analise_assertividade_midia_paga.md</code>.
+          </p>
+        </div>
+
+        <div className="bg-panel border border-border rounded-xl p-4 overflow-x-auto">
+          <h3 className="text-sm text-muted mb-3">
+            Correlação entre custo e resultado, campanha a campanha, dentro do mesmo mês
+          </h3>
+          <table className="w-full text-xs">
+            <thead className="text-muted text-left">
+              <tr>
+                <th className="pb-2 pr-2">Mês</th>
+                <th className="pb-2 pr-2 text-right">Campanhas</th>
+                <th className="pb-2 pr-2 text-right">corr(custo, valor de conversão)</th>
+                <th className="pb-2 pr-2 text-right">corr(custo, follow-on-views)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {assertividade.correlation_cost_vs_result_by_month.map((m) => (
+                <tr key={m.year_month_name} className="border-t border-border/60">
+                  <td className="py-1.5 pr-2">{m.month_label}</td>
+                  <td className="py-1.5 pr-2 text-right">{m.n_campaigns}</td>
+                  <td className="py-1.5 pr-2 text-right">{m.corr_cost_vs_value?.toFixed(3) ?? '—'}</td>
+                  <td className="py-1.5 pr-2 text-right">{m.corr_cost_vs_follow_on_views?.toFixed(3) ?? '—'}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <p className="text-[11px] text-muted mt-3">
+            1 = orçamento acompanha perfeitamente o resultado; 0 = nenhuma relação. Jun e Ago ficam
+            perto de 0. Set/26 é mês parcial — correlação mais alta ali é lida com cautela (efeito de
+            calendário, não necessariamente maior assertividade).
+          </p>
+        </div>
+
+        {assertividade.august_2026_cross_section && (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <StatCard
+              label="Variação do custo (Ago/26)"
+              value={`${assertividade.august_2026_cross_section.cost_coefficient_of_variation_pct?.toFixed(1)}%`}
+              previous="coeficiente de variação entre campanhas"
+            />
+            <StatCard
+              label="Variação do valor gerado (Ago/26)"
+              value={`${assertividade.august_2026_cross_section.value_coefficient_of_variation_pct?.toFixed(1)}%`}
+              previous="~7× mais disperso que o custo"
+            />
+            <StatCard
+              label="Campanhas com custo entre R$1.520-1.524"
+              value="13 de 20"
+              previous="mesma faixa de orçamento, resultado de 15x a 33x diferente"
+            />
+            <StatCard
+              label="Campanhas com zero resultado (Ago/26)"
+              value={`${assertividade.august_2026_cross_section.n_campaigns_zero_result} de ${assertividade.august_2026_cross_section.n_campaigns}`}
+              previous={`${assertividade.august_2026_cross_section.pct_campaigns_zero_result}% do total`}
+            />
+          </div>
+        )}
+
+        <div className="bg-panel border border-border rounded-xl p-4">
+          <h3 className="text-sm text-muted mb-3">
+            Caso concreto: campanha com zero resultado recebeu +486% de orçamento
+          </h3>
+          <table className="w-full text-xs mb-3">
+            <thead className="text-muted text-left">
+              <tr>
+                <th className="pb-2 pr-2">Mês</th>
+                <th className="pb-2 pr-2 text-right">Custo</th>
+                <th className="pb-2 pr-2 text-right">Follow-on views</th>
+                <th className="pb-2 pr-2 text-right">Inscrições</th>
+                <th className="pb-2 pr-2 text-right">Valor de conversão</th>
+              </tr>
+            </thead>
+            <tbody>
+              {assertividade.case_study_zero_result_campaign_como_ele_escalou.months.map((m, i) => (
+                <tr key={i} className="border-t border-border/60">
+                  <td className="py-1.5 pr-2">{m.month_label}</td>
+                  <td className="py-1.5 pr-2 text-right">{brl(m.cost_brl)}</td>
+                  <td className="py-1.5 pr-2 text-right">{m.follow_on_views}</td>
+                  <td className="py-1.5 pr-2 text-right">{m.subscriptions}</td>
+                  <td className="py-1.5 pr-2 text-right">{brl(m.conversions_value_brl)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <p className="text-xs text-muted">{assertividade.case_study_zero_result_campaign_como_ele_escalou.finding}</p>
+        </div>
+
+        <div className="bg-panel border border-border rounded-xl p-4 grid md:grid-cols-2 gap-4">
+          <div>
+            <h3 className="text-sm text-muted mb-2">Top 5 por custo (Ago/26)</h3>
+            <table className="w-full text-xs">
+              <tbody>
+                {assertividade.august_2026_cross_section?.top5_by_cost.map((c, i) => (
+                  <tr key={i} className="border-t border-border/60">
+                    <td className="py-1 pr-2 max-w-[180px] truncate" title={c.campaign_name}>{c.campaign_name}</td>
+                    <td className="py-1 pr-2 text-right">{brl(c.cost_brl)}</td>
+                    <td className="py-1 pr-2 text-right text-muted">{brl(c.conversions_value_brl)} valor</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div>
+            <h3 className="text-sm text-muted mb-2">Bottom 5 por custo (Ago/26)</h3>
+            <table className="w-full text-xs">
+              <tbody>
+                {assertividade.august_2026_cross_section?.bottom5_by_cost.map((c, i) => (
+                  <tr key={i} className="border-t border-border/60">
+                    <td className="py-1 pr-2 max-w-[180px] truncate" title={c.campaign_name}>{c.campaign_name}</td>
+                    <td className="py-1 pr-2 text-right">{brl(c.cost_brl)}</td>
+                    <td className="py-1 pr-2 text-right text-muted">{brl(c.conversions_value_brl)} valor</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="text-[11px] text-muted md:col-span-2">
+            Note que a campanha de maior custo em Ago/26 (&quot;Vídeo_Reconhecimento_Topo_STLFLIX&quot;,
+            {' '}{brl(assertividade.august_2026_cross_section?.top5_by_cost[0]?.cost_brl ?? 0)}) gerou apenas{' '}
+            {brl(assertividade.august_2026_cross_section?.top5_by_cost[0]?.conversions_value_brl ?? 0)} de valor —
+            pior relação custo/resultado do mês entre as campanhas de maior investimento.
+          </p>
+        </div>
+
+        <div className="text-xs text-muted bg-panel border border-border rounded-xl p-4">
+          <p className="font-semibold mb-1">Limitações desta análise</p>
+          <ul className="list-disc list-inside space-y-1">
+            {assertividade.caveats.map((c, i) => (
+              <li key={i}>{c}</li>
+            ))}
+          </ul>
         </div>
       </section>
 

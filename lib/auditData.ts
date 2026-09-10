@@ -207,6 +207,56 @@ export function getSeriesViews(): { series: Record<string, SeriesData>; borderli
   return readJSON('data/processed/series_views.json')
 }
 
+export interface MediaAssertividade {
+  scope: string
+  caveats: string[]
+  month_totals: Array<{
+    year_month_name: string
+    month_label: string
+    cost_brl: number
+    follow_on_views: number
+    subscriptions: number
+    conversions_value_brl: number
+    n_campaigns: number
+    cost_per_follow_on_view_brl: number | null
+    cost_per_subscription_brl: number | null
+  }>
+  correlation_cost_vs_result_by_month: Array<{
+    year_month_name: string
+    month_label: string
+    n_campaigns: number
+    corr_cost_vs_value: number | null
+    corr_cost_vs_follow_on_views: number | null
+  }>
+  august_2026_cross_section: {
+    n_campaigns: number
+    cost_min_brl: number
+    cost_max_brl: number
+    cost_avg_brl: number
+    cost_coefficient_of_variation_pct: number | null
+    value_coefficient_of_variation_pct: number | null
+    n_campaigns_zero_result: number
+    pct_campaigns_zero_result: number
+    top5_by_cost: Array<{ campaign_name: string; cost_brl: number; follow_on_views: number; subscriptions: number; conversions_value_brl: number }>
+    bottom5_by_cost: Array<{ campaign_name: string; cost_brl: number; follow_on_views: number; subscriptions: number; conversions_value_brl: number }>
+  } | null
+  case_study_zero_result_campaign_como_ele_escalou: {
+    campaign_name: string | null
+    months: Array<{ month_label: string; cost_brl: number; follow_on_views: number; subscriptions: number; conversions_value_brl: number }>
+    finding: string
+  }
+  zero_result_transitions_summary: {
+    n_transitions_from_zero_result_month: number
+    n_cost_cut_25pct_or_more: number
+    n_cost_flat_within_25pct: number
+    n_cost_increased_25pct_or_more: number
+  }
+}
+
+export function getMediaAssertividade(): MediaAssertividade {
+  return readJSON('data/processed/media_assertividade_4m.json')
+}
+
 export function brl(v: number): string {
   return v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 })
 }
