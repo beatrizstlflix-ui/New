@@ -1,0 +1,24 @@
+{
+  "source": "Windsor.ai googleanalytics4 (530533972 - LP AMBIENTE BR)",
+  "extracted_at": "2026-09-10",
+  "date_from": "2026-06-12",
+  "date_to": "2026-09-09",
+  "fields": ["session_default_channel_group","sessions","totalusers","add_to_carts","checkouts","ecommerce_purchases","purchase_revenue"],
+  "note": "add_to_carts=0 em todas as linhas: evento nao instrumentado/nao mapeado para este campo (nao significa ausencia real de adicoes ao carrinho). Ver decisoes_metodologicas.md.",
+  "rows": [
+{"session_default_channel_group":"Paid Social","sessions":605614,"totalusers":394147,"add_to_carts":0,"checkouts":24655,"ecommerce_purchases":849,"purchase_revenue":675679.2701},
+{"session_default_channel_group":"Referral","sessions":88885,"totalusers":52940,"add_to_carts":0,"checkouts":18267,"ecommerce_purchases":1762,"purchase_revenue":803020.0596},
+{"session_default_channel_group":"Organic Search","sessions":96694,"totalusers":59820,"add_to_carts":0,"checkouts":12864,"ecommerce_purchases":1215,"purchase_revenue":470220.5095},
+{"session_default_channel_group":"Direct","sessions":104146,"totalusers":86049,"add_to_carts":0,"checkouts":10037,"ecommerce_purchases":627,"purchase_revenue":391732.6237},
+{"session_default_channel_group":"Unassigned","sessions":25245,"totalusers":19262,"add_to_carts":0,"checkouts":6773,"ecommerce_purchases":700,"purchase_revenue":428617.2547},
+{"session_default_channel_group":"Organic Social","sessions":43326,"totalusers":35152,"add_to_carts":0,"checkouts":4342,"ecommerce_purchases":147,"purchase_revenue":126520.2219},
+{"session_default_channel_group":"Cross-network","sessions":25181,"totalusers":20856,"add_to_carts":0,"checkouts":2160,"ecommerce_purchases":114,"purchase_revenue":97101.84},
+{"session_default_channel_group":"Organic Video","sessions":12873,"totalusers":8753,"add_to_carts":0,"checkouts":1899,"ecommerce_purchases":69,"purchase_revenue":48318.3},
+{"session_default_channel_group":"Display","sessions":10687,"totalusers":8130,"add_to_carts":0,"checkouts":715,"ecommerce_purchases":32,"purchase_revenue":45565.76},
+{"session_default_channel_group":"Email","sessions":5414,"totalusers":3549,"add_to_carts":0,"checkouts":688,"ecommerce_purchases":24,"purchase_revenue":18639.29},
+{"session_default_channel_group":"AI Assistant","sessions":800,"totalusers":614,"add_to_carts":0,"checkouts":271,"ecommerce_purchases":25,"purchase_revenue":9853.99},
+{"session_default_channel_group":"Paid Search","sessions":2774,"totalusers":2036,"add_to_carts":0,"checkouts":185,"ecommerce_purchases":21,"purchase_revenue":16400.47},
+{"session_default_channel_group":"Paid Other","sessions":1347,"totalusers":720,"add_to_carts":0,"checkouts":30,"ecommerce_purchases":3,"purchase_revenue":2350.59},
+{"session_default_channel_group":"Paid Video","sessions":526,"totalusers":471,"add_to_carts":0,"checkouts":0,"ecommerce_purchases":0,"purchase_revenue":0}
+  ]
+}

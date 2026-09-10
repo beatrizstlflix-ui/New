@@ -54,18 +54,40 @@ o que depende disso, o que preciso, como resolver, o que continuo fazendo).
   não-interativa). Idem para Stripe, se relevante para identificar clientes
   existentes/novos compradores.
 
-## 5. [MÉDIO] CRM não identificado
-- Não encontramos nenhum conector de CRM (HubSpot, RD Station, etc.) nas
-  integrações disponíveis. Existe uma base de leads/clientes fora do
-  GA4/Ads/YouTube? Se sim, qual ferramenta e como posso acessá-la (exportação,
-  leitura)?
+## 5. [MÉDIO — atualizado] CRM parcialmente identificado via Google Ads
+- **Achado novo**: existe um público `CRM_BASED` no Google Ads chamado
+  "ALL_Clientes [Outubro]" (30.000 pessoas, Customer Match) — ver
+  `docs/auditoria_publicos_remarketing.md`. Isso confirma que existe (ou existiu)
+  uma base própria de clientes em algum sistema, exportada manualmente.
+- **Pergunta**: qual é a fonte desse arquivo (planilha, e-commerce, outra
+  ferramenta)? Com que frequência é atualizado? Ainda não encontramos nenhum
+  conector de CRM (HubSpot, RD Station etc.) nas integrações disponíveis — se
+  existir uma ferramenta de CRM separada, preciso do nome dela para avaliar acesso.
 
 ## 6. [BAIXO/A CONFIRMAR] Data e meta da Black Friday
 - Assumi Black Friday em 2026-11-27 (convenção padrão). Confirma a data? Existe meta
   comercial (receita, nº de leads, nº de vendas) e investimento planejado em mídia
   para o período? Sem isso, as projeções da seção 16 do escopo ficam limitadas a
   cenários de audiência/tráfego, não de vendas.
+- **Contexto encontrado**: campanhas da Black Friday do ano passado (BF25) começaram
+  entre 2025-10-16 e 2025-10-30 (~4-6 semanas antes da BF) — ver
+  `data/raw/google_ads/br_campaign_dates_budget.json`. Vou usar esse prazo como
+  referência de planejamento até você confirmar a data/estratégia deste ano.
 
 ## 7. [BAIXO] Data de início do "aquecimento" para BF26
 - Existe uma data de início definida para a estratégia de aquecimento deste ano?
-  Isso ajuda a segmentar "antes/durante/depois" nas séries temporais.
+  **Observação**: a onda atual de campanhas "vídeo-reconhecimento" começou de forma
+  concentrada em 2026-06-01 (dezenas de campanhas com a mesma data de início) e
+  segue recebendo novos vídeos quase toda semana até hoje — pode já ser o
+  aquecimento em curso. Confirma?
+
+## 8. [MÉDIO — achado de mensuração] Divergência entre valor de conversão do Google Ads e receita do GA4
+- **Achado**: a campanha `Pmax_Fundo-de-Funil_Vendas_Oferta-Anual` reporta
+  R$463.061 em `conversions_value` nos últimos 90 dias (dado do próprio Google
+  Ads). Já o canal do GA4 onde campanhas Performance Max tendem a cair
+  ("Cross-network") mostra apenas R$97.101 em receita de compras no mesmo
+  período, somando *todas* as fontes desse canal. São fontes com metodologia de
+  atribuição diferentes (não devem bater exatamente), mas essa diferença é grande
+  o suficiente para merecer investigação antes de usar qualquer um dos dois
+  números como "a" verdade em decisões de investimento. Vou tratar isso como
+  achado de auditoria de mensuração (não vou reconciliar arbitrariamente).

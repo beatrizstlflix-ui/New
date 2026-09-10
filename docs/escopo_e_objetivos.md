@@ -16,8 +16,21 @@ frente de produto claramente distintas — não tratar como uma oferta única:
 - **Conteúdo "vídeo-reconhecimento"**: dezenas de campanhas VIDEO, uma por vídeo,
   contando histórias de alunos/clientes que monetizam com impressão 3D — objetivo de
   topo de funil (reconhecimento/inscrição), não venda direta.
-- **Black Friday**: já existem campanhas de BF do ano anterior (BF25) identificadas
-  — ver `docs/registro_extracoes.md`.
+- **Black Friday**: já existem campanhas de BF do ano anterior (BF25) identificadas,
+  iniciadas entre 2025-10-16 e 2025-10-30 — ver `docs/registro_extracoes.md`.
+
+### Ofertas confirmadas por landing page (GA4, tráfego real, últimos 90 dias)
+Evita presumir uma oferta única — as páginas de destino reais mostram pelo menos:
+- `/assine` e `/assine-stlai`: assinatura/curso (produto recorrente).
+- `/lote-especial` (e variações `-2`, `-cta`): oferta de lote/pacote especial —
+  maior concentração de sessões de vídeo (orgânico e pago) das páginas analisadas.
+- `/aniversario-stlflix-4-anos` (e variações): campanha sazonal de aniversário,
+  não é a Black Friday.
+- `/central-de-links-live` e `/central-de-links-whatsapp`: hubs de link
+  (provavelmente para live/comunidade/WhatsApp, não venda direta).
+- `/cotrim-kit-catalogo`: catálogo de kit associado a um parceiro/criador
+  específico ("Cotrim") — possível parceria de afiliado/influenciador.
+Ver `data/processed/ga4_landing_pages_last90d.json` para a lista completa.
 
 Uma pessoa perto de comprar uma impressora está em estágio diferente de alguém que já
 imprime e busca modelos/monetização. Isso deve ser respeitado na segmentação de

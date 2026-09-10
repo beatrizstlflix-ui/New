@@ -19,6 +19,11 @@ parâmetros (conector, conta, campos, período) — ver comando exato em cada ar
 | 10 | GA4 Global | (inline) | account=530495512, tentativa dos mesmos campos custom | erro | Campos custom de conversão não existem nesta propriedade |
 | 11 | YouTube Data API v3 (direto, sem Windsor) | — | `channels.list` com API key fornecida pelo usuário + channel_id `UCb3H1VIsLk9l6xAz6eyyLwQ` | erro `API_KEY_INVALID` | Bloqueado — ver `bloqueios_e_pedidos.md` |
 
+| 12 | Google Ads | `data/raw/google_ads/br_campaign_dates_budget.json` | account=445-144-0907, start_date/end_date/budget/bidding por campanha (metadado, sem período de métrica) | 80 | OK |
+| 13 | Google Ads | `data/raw/google_ads/br_user_lists_remarketing.json` | account=445-144-0907, públicos de remarketing (user_list_*) | 18 | OK — auditado em `docs/auditoria_publicos_remarketing.md` |
+| 14 | GA4 BR | `data/raw/ga4/br_landing_pages_by_channel_last90d_RAW.json` → agregado em `data/processed/ga4_landing_pages_last90d.json` | account=530533972, landing_page x canal, 2026-06-12..2026-09-09 | 1940 linhas brutas → 1940 combinações agregadas | OK |
+| 15 | GA4 BR | (inline) | account=530533972, funil de e-commerce (add_to_carts/checkouts/ecommerce_purchases/purchase_revenue) por canal, 2026-06-12..2026-09-09 | 14 canais | OK — achado: Paid Video = 0 purchases/0 revenue no período |
+
 ## Ainda não extraído (próximos passos, ver `plano_execucao.md`)
 - Google Ads: datas de início/fim de campanha, orçamento, público-alvo, exclusões,
   posicionamentos, comparação com BF25 (ano anterior) em detalhe.
