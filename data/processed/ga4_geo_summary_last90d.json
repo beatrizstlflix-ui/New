@@ -1,0 +1,120 @@
+{
+  "source": "Windsor.ai googleanalytics4 (530533972)",
+  "extracted_at": "2026-09-10",
+  "date_from": "2026-06-12",
+  "date_to": "2026-09-09",
+  "note": "Confirma que a propriedade GA4 \"BR\" nao e filtrada por pais - inclui trafego e compras globais.",
+  "total_sessions_all_countries": 1048564,
+  "total_purchases_all_countries": 5588,
+  "total_revenue_all_countries": 3134020.18,
+  "brazil_pct_sessions": 92.87,
+  "brazil_pct_purchases": 96.01,
+  "brazil_pct_revenue": 96.03,
+  "top_15_countries": [
+    {
+      "country": "Brazil",
+      "sessions": 973777,
+      "totalusers": 585017,
+      "conversions_purchase": 5365,
+      "purchase_revenue": 3009507.9601
+    },
+    {
+      "country": "United States",
+      "sessions": 33128,
+      "totalusers": 22616,
+      "conversions_purchase": 65,
+      "purchase_revenue": 40156.3266
+    },
+    {
+      "country": "Portugal",
+      "sessions": 6896,
+      "totalusers": 4389,
+      "conversions_purchase": 61,
+      "purchase_revenue": 26482.6087
+    },
+    {
+      "country": "United Kingdom",
+      "sessions": 3516,
+      "totalusers": 2209,
+      "conversions_purchase": 23,
+      "purchase_revenue": 14807.56
+    },
+    {
+      "country": "Canada",
+      "sessions": 2637,
+      "totalusers": 1721,
+      "conversions_purchase": 10,
+      "purchase_revenue": 3466.7194
+    },
+    {
+      "country": "Türkiye",
+      "sessions": 2240,
+      "totalusers": 1820,
+      "conversions_purchase": 0,
+      "purchase_revenue": 0
+    },
+    {
+      "country": "France",
+      "sessions": 2048,
+      "totalusers": 1492,
+      "conversions_purchase": 2,
+      "purchase_revenue": 0
+    },
+    {
+      "country": "Argentina",
+      "sessions": 1898,
+      "totalusers": 1508,
+      "conversions_purchase": 1,
+      "purchase_revenue": 758.85
+    },
+    {
+      "country": "Germany",
+      "sessions": 1774,
+      "totalusers": 1339,
+      "conversions_purchase": 0,
+      "purchase_revenue": 0
+    },
+    {
+      "country": "Spain",
+      "sessions": 1674,
+      "totalusers": 1226,
+      "conversions_purchase": 8,
+      "purchase_revenue": 5089.97
+    },
+    {
+      "country": "Mexico",
+      "sessions": 1360,
+      "totalusers": 1065,
+      "conversions_purchase": 1,
+      "purchase_revenue": 849.0184
+    },
+    {
+      "country": "Ireland",
+      "sessions": 1283,
+      "totalusers": 1038,
+      "conversions_purchase": 7,
+      "purchase_revenue": 6329.03
+    },
+    {
+      "country": "Italy",
+      "sessions": 1092,
+      "totalusers": 843,
+      "conversions_purchase": 7,
+      "purchase_revenue": 1801.38
+    },
+    {
+      "country": "Australia",
+      "sessions": 1056,
+      "totalusers": 740,
+      "conversions_purchase": 7,
+      "purchase_revenue": 3275.82
+    },
+    {
+      "country": "Sweden",
+      "sessions": 999,
+      "totalusers": 974,
+      "conversions_purchase": 0,
+      "purchase_revenue": 0
+    }
+  ]
+}

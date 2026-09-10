@@ -123,3 +123,27 @@ o que depende disso, o que preciso, como resolver, o que continuo fazendo).
   (erro 401 confirmado com a chave de API) — ou seja, depende da mesma correção
   do item 1. Não é um impedimento novo, é o mesmo de sempre, agora com uma rota
   de solução mais clara (usar a API oficial via OAuth, não scraping).
+
+## 11. [MÉDIO — quantificado] Propriedade GA4 "BR" inclui ~7% de tráfego fora do Brasil
+- **Achado**: medido nos últimos 90 dias — Brasil é 92,9% das sessões, 96,0% das
+  compras e 96,0% da receita da propriedade "LP - AMBIENTE BR". O resto vem
+  principalmente de EUA, Portugal e Reino Unido.
+- **Não bloqueia** as conclusões direcionais deste relatório, mas todo número
+  "BR" aqui carrega essa margem até refazermos as extrações com filtro
+  `country=Brazil` explícito.
+- **Não preciso de nada seu aqui** — é só um registro de precisão.
+
+## 12. [MÉDIO] "STLFLIX Assinatura" com receita zero e produto "Lote Especial + STLAI" com valores discrepantes
+- **Achado 1**: 2.083 unidades do item "STLFLIX Assinatura" foram registradas
+  como compradas no GA4 nos últimos 90 dias, todas com R$ 0 de receita.
+- **Pergunta**: é um produto gratuito/trial (faz sentido não ter receita) ou é
+  falha de instrumentação de valor no evento de compra? Isso muda a leitura de
+  quantas pessoas realmente pagam algo.
+- **Achado 2**: o item "Lote Especial STLFLIX + STLAI" tem duas combinações
+  canal×valor muito acima da média (Unassigned: 54 unidades por R$1.640.455;
+  Organic Social: 26 unidades por R$814.342 — ~R$30-31 mil/unidade contra ~R$5.814
+  nos demais canais). Pode ser venda por atacado/B2B real ou um erro de valor.
+- **Pergunta**: você reconhece essas transações como reais (ex.: vendas
+  corporativas/atacado)? Se sim, ótimo — só não vou usá-las para calcular ticket
+  médio "típico" sem essa distinção. Se não, pode ser um bug de checkout a
+  investigar antes da Black Friday.

@@ -42,3 +42,22 @@
 9. **Sem dado ≠ zero**: quando uma métrica não pôde ser extraída (ex.: YouTube),
    marcamos explicitamente como "bloqueado"/"indisponível" nos documentos e no
    dashboard — nunca como 0 ou vazio silencioso.
+10. **Propriedade GA4 "BR" não é filtrada por país — medido, não estimado**:
+    nos últimos 90 dias, Brasil representa 92,9% das sessões, 96,0% das compras e
+    96,0% da receita da propriedade (ver `data/processed/ga4_geo_summary_last90d.json`).
+    Ou seja, os números que rotulamos "BR" ao longo deste projeto carregam ~7% de
+    sessões e ~4% de receita de fora do Brasil (EUA, Portugal, Reino Unido e outros
+    lideram). Não é grande o bastante para invalidar as conclusões direcionais, mas
+    o suficiente para não tratar os totais como 100% Brasil sem essa ressalva.
+    Refazer com filtro `country=Brazil` explícito antes de qualquer número que vá
+    para uma decisão de investimento fina.
+11. **Item de e-commerce "Lote Especial STLFLIX + STLAI" tem 2 combinações
+    canal×valor muito acima da média** (Unassigned: 54 un. = R$1.640.455,75;
+    Organic Social: 26 un. = R$814.342,00 — média ~R$30-31 mil/unidade contra
+    ~R$5.814/unidade nos demais canais). Tratado como possível anomalia de dados
+    (venda atacado/B2B agrupada, ou erro de valor) — não usado para calcular
+    ticket médio até confirmação. Ver `data/raw/ga4/br_items_aggregated_last90d.json`.
+12. **"STLFLIX Assinatura" (item de e-commerce) tem receita zero em todas as
+    2.083 unidades "compradas" no período** — tratado como não-instrumentado
+    (preço não capturado no evento de compra) ou item gratuito, não como receita
+    real igual a zero por design do produto. Precisa confirmação do usuário.

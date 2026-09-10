@@ -1,0 +1,28 @@
+{
+  "source": "Windsor.ai googleanalytics4 (530533972 - LP AMBIENTE BR)",
+  "extracted_at": "2026-09-10",
+  "date_from": "2026-06-12",
+  "date_to": "2026-09-09",
+  "fields": ["item_category","item_name","items_purchased","item_revenue"],
+  "rows": [
+{"item_category":"subcategory.hobbies.name","item_name":"Lote Especial STLFLIX","items_purchased":2168,"item_revenue":2024423.0264},
+{"item_category":"(not set)","item_name":"STLFLIX Assinatura","items_purchased":2083,"item_revenue":0},
+{"item_category":"subcategory.hobbies.name","item_name":"Lote Especial STLFLIX + STLAI","items_purchased":557,"item_revenue":3238687.3717},
+{"item_category":"subcategory.hobbies.name","item_name":"Lote Especial 1 ano de STL Academy","items_purchased":5,"item_revenue":5043.05},
+{"item_category":"subcategory.education.name","item_name":"Lote Especial Curso de Modelagem 3D","items_purchased":2,"item_revenue":621.3},
+{"item_category":"subcategory.hobbies.name","item_name":"STLAI + Diagnóstico para vender 3D","items_purchased":7,"item_revenue":6344.32},
+{"item_category":"subcategory.hobbies.name","item_name":"Lote Especial Larissa Mendes","items_purchased":8,"item_revenue":6512.42},
+{"item_category":"subcategory.business_and_careers.name","item_name":"Assinatura STLFLIX - Comercial Anual","items_purchased":209,"item_revenue":208366.4076},
+{"item_category":"subcategory.business_and_careers.name","item_name":"STLFLIX 4 ANOS - Plano Vendas","items_purchased":87,"item_revenue":283150.3406},
+{"item_category":"subcategory.business_and_careers.name","item_name":"Assinatura STLFLIX - Comercial Mensal","items_purchased":312,"item_revenue":28104.6844},
+{"item_category":"subcategory.business_and_careers.name","item_name":"Assinatura STLAI - Pessoal Mensal","items_purchased":51,"item_revenue":2538.7701},
+{"item_category":"subcategory.business_and_careers.name","item_name":"Assinatura STLAI - Comercial Mensal","items_purchased":52,"item_revenue":5192.351},
+{"item_category":"subcategory.business_and_careers.name","item_name":"Assinatura STLAI - Pessoal Anual","items_purchased":8,"item_revenue":4062.22},
+{"item_category":"subcategory.business_and_careers.name","item_name":"Assinatura STLAI - Comercial Anual","items_purchased":14,"item_revenue":14502.7039},
+{"item_category":"subcategory.business_and_careers.name","item_name":"Assinatura STLFLIX - Pessoal Mensal ","items_purchased":16,"item_revenue":638.4},
+{"item_category":"subcategory.hobbies.name","item_name":"STLAI Comercial Anual + Diagnóstico para Vender 3D","items_purchased":5,"item_revenue":4575.15},
+{"item_category":"subcategory.business_and_careers.name","item_name":"Assinatura STLFLIX - Pessoal Anual","items_purchased":2,"item_revenue":852},
+{"item_category":"subcategory.education.name","item_name":"STLFLIX + STLAI Lote Especial ","items_purchased":2,"item_revenue":3260.27}
+  ],
+  "note_anomalia": "Na versao com quebra por canal (ver docs/decisoes_metodologicas.md), 'Lote Especial STLFLIX + STLAI' teve 54 unidades = R$1.640.455,75 no canal Unassigned (media R$30.379/unidade) e 26 unidades = R$814.342,00 no canal Organic Social (media R$31.321/unidade) - contra uma media geral de ~R$5.814/unidade nos demais canais. Tratar como possivel anomalia de dados (ex.: venda B2B/atacado agrupada, ou erro de valor) ate confirmacao - nao usar no calculo de ticket medio sem segregar."
+}

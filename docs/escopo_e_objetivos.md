@@ -32,6 +32,30 @@ Evita presumir uma oferta única — as páginas de destino reais mostram pelo m
   específico ("Cotrim") — possível parceria de afiliado/influenciador.
 Ver `data/processed/ga4_landing_pages_last90d.json` para a lista completa.
 
+### Produtos e receita confirmados por item de e-commerce (GA4, 90 dias)
+Fonte: `data/raw/ga4/br_items_aggregated_last90d.json`. Isto é o retrato mais
+confiável dos produtos reais (não presumido):
+| Produto | Unidades | Receita |
+|---|---|---|
+| **Lote Especial STLFLIX** (produto-carro-chefe) | 2.168 | R$ 2.024.423 |
+| **Lote Especial STLFLIX + STLAI** (combo com IA) | 557 | R$ 3.238.687 (⚠️ inclui 2 combinações canal×valor muito acima da média — ver `decisoes_metodologicas.md` #11) |
+| STLFLIX Assinatura | 2.083 | **R$ 0** (⚠️ ver `decisoes_metodologicas.md` #12) |
+| Assinatura STLFLIX Comercial (Anual/Mensal) | 521 | R$ 236.471 |
+| STLFLIX 4 ANOS - Plano Vendas (aniversário) | 87 | R$ 283.150 |
+| Assinatura STLAI (Pessoal/Comercial, Anual/Mensal) | 125 | R$ 26.296 |
+| Lote Especial 1 ano de STL Academy | 5 | R$ 5.043 |
+| Lote Especial Curso de Modelagem 3D | 2 | R$ 621 |
+| Lote Especial Larissa Mendes (afiliado/influenciador) | 8 | R$ 6.512 |
+| STLAI + Diagnóstico para vender 3D | 7 | R$ 6.344 |
+
+**Confirmado**: "STLAI" é um produto/serviço de IA vendido em combo com o STLFLIX
+(maior ticket médio que o lote sozinho). Existe pelo menos um parceiro/afiliado
+de conteúdo com produto próprio ("Larissa Mendes"). Impressoras físicas (Bambulab,
+Creality etc.) aparecem como campanhas de mídia ativas (Google Ads) mas **não
+aparecem neste recorte de itens de e-commerce dos últimos 90 dias** — a confirmar
+se estão em outro fluxo/conta de checkout não capturado por este item_category, ou
+se a venda direta de impressoras está pausada atualmente.
+
 Uma pessoa perto de comprar uma impressora está em estágio diferente de alguém que já
 imprime e busca modelos/monetização. Isso deve ser respeitado na segmentação de
 narrativas e na leitura do funil (não presumir jornada única).
