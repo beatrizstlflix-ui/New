@@ -23,11 +23,16 @@ parâmetros (conector, conta, campos, período) — ver comando exato em cada ar
 | 13 | Google Ads | `data/raw/google_ads/br_user_lists_remarketing.json` | account=445-144-0907, públicos de remarketing (user_list_*) | 18 | OK — auditado em `docs/auditoria_publicos_remarketing.md` |
 | 14 | GA4 BR | `data/raw/ga4/br_landing_pages_by_channel_last90d_RAW.json` → agregado em `data/processed/ga4_landing_pages_last90d.json` | account=530533972, landing_page x canal, 2026-06-12..2026-09-09 | 1940 linhas brutas → 1940 combinações agregadas | OK |
 | 15 | GA4 BR | (inline) | account=530533972, funil de e-commerce (add_to_carts/checkouts/ecommerce_purchases/purchase_revenue) por canal, 2026-06-12..2026-09-09 | 14 canais | OK — achado: Paid Video = 0 purchases/0 revenue no período |
+| 16 | Google Ads | `data/raw/google_ads/br_campaign_metrics_bf25_2025-10-15_2025-11-30.json` | account=445-144-0907, métricas de campanha, 2025-10-15..2025-11-30 (BF25) | 10 (com atividade) | OK — ver `docs/black_friday_2025_baseline.md` |
+| 17 | GA4 BR | `data/raw/ga4/br_items_aggregated_last90d.json` | account=530533972, itens de e-commerce (item_category/item_name/items_purchased/item_revenue), 2026-06-12..2026-09-09 | 18 produtos | OK — achados de qualidade de dado, ver `decisoes_metodologicas.md` #11-12 |
+| 18 | GA4 BR | `data/processed/ga4_geo_summary_last90d.json` | account=530533972, país (sessions/purchases/revenue), 2026-06-12..2026-09-09 | 163 países (raw não persistido — ver nota) | OK — Brasil = 92,9% sessões / 96,0% receita |
+| 19 | YouTube Studio | `data/raw/youtube/STLFLIX_auditoria_YouTube_studio_2026-09-10.xlsx` → `data/processed/youtube_studio_analytics.json` | Coleta manual assistida (Claude in Chrome) pelo usuário — visão geral, alcance/tráfego, engajamento por tipo de conteúdo, público-alvo (recorrência, demografia, dispositivo, localização), série de inscritos, retenção de 5 vídeos. 5 períodos (YTD, 90d, 28d, 28d anteriores, BF25) | 8 abas | OK — ver caveats no próprio arquivo (instabilidade de views no dia da coleta, mudança de contagem em 27/08/2026, aba Público sempre 28d) |
 
 ## Ainda não extraído (próximos passos, ver `plano_execucao.md`)
-- Google Ads: datas de início/fim de campanha, orçamento, público-alvo, exclusões,
-  posicionamentos, comparação com BF25 (ano anterior) em detalhe.
-- GA4: landing pages, eventos de e-commerce detalhados (`begin_checkout`,
-  `add_to_cart`), sobreposição de públicos, `customevent_vsl_seconds` (parece ser
-  vídeo de vendas — relevante para preparação comercial).
-- YouTube: tudo (bloqueado).
+- Google Ads: público-alvo/segmentação por campanha, exclusões, posicionamentos.
+- GA4: eventos de e-commerce detalhados (`begin_checkout`, `add_to_cart`),
+  sobreposição de públicos, `customevent_vsl_seconds`, GA4 do período BF25
+  (2025-10-15 a 2025-11-30) para reconciliar com os totais do Ads.
+- YouTube: acesso automatizado/contínuo (a coleta manual do item 19 resolve o
+  retrato atual, mas não se atualiza sozinha — ver `bloqueios_e_pedidos.md` #1).
+- Transcrição de vídeos além da amostra de 198 (bloqueado por cota de API).

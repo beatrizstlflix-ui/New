@@ -2,6 +2,7 @@ import StatCard from '@/components/StatCard'
 import MonthlyChannelChart, { MonthlyChannelPoint } from '@/components/MonthlyChannelChart'
 import MediaPagaBarChart from '@/components/MediaPagaBarChart'
 import CadenceChart from '@/components/CadenceChart'
+import SubscribersMonthlyChart from '@/components/SubscribersMonthlyChart'
 import {
   getMediaPagaResumo,
   getGA4Last28,
@@ -11,6 +12,7 @@ import {
   getVideoAdSummary,
   getOrganicSummary,
   getCaptionsCoverage,
+  getYoutubeStudioAnalytics,
   brl,
   num,
 } from '@/lib/auditData'
@@ -50,8 +52,13 @@ export default function AuditoriaPage() {
   const videoAds = getVideoAdSummary()
   const organic = getOrganicSummary()
   const captions = getCaptionsCoverage()
+  const studio = getYoutubeStudioAnalytics()
 
   const cadenceData = Object.entries(organic.publish_cadence_by_month).map(([month, videos]) => ({ month, videos }))
+  const periodLabels: Record<string, string> = { P1: 'YTD 2026', P2: '90 dias', P3: '28 dias', P4: '28d anteriores', P5: 'BF 2025' }
+  const traffic28d = studio.traffic_sources.P3
+  const contentType90d = studio.content_type_engagement.P2
+  const nvr = studio.new_vs_returning
 
   const paidVideoLast28 = ga4_28.last28d.rows.find((r) => r.session_default_channel_group === 'Paid Video')
   const paidVideoPrev28 = ga4_28.previous28d.rows.find((r) => r.session_default_channel_group === 'Paid Video')
@@ -96,9 +103,10 @@ export default function AuditoriaPage() {
       <header>
         <h1 className="text-xl font-semibold">Auditoria YouTube STLFLIX Brasil — rumo à Black Friday 2026</h1>
         <p className="text-xs text-muted mt-1">
-          Dados reais e estáticos, extraídos em 2026-09-10 via Windsor.ai (Google Ads + GA4). Ver{' '}
-          <code>docs/instrucoes_execucao.md</code> para atualizar. Seções marcadas como bloqueadas dependem de
-          correção de acesso ao YouTube — ver <code>docs/bloqueios_e_pedidos.md</code>.
+          Dados reais e estáticos, extraídos em 2026-09-10: Google Ads + GA4 (Windsor.ai) e YouTube (Data API v3 +
+          coleta manual assistida no Studio). Ver <code>docs/instrucoes_execucao.md</code> para atualizar. Caveats
+          da coleta do YouTube Studio (instabilidade de views no dia, mudança de contagem em 27/08/2026) em{' '}
+          <code>docs/bloqueios_e_pedidos.md</code>.
         </p>
       </header>
 
@@ -107,36 +115,34 @@ export default function AuditoriaPage() {
         <h2 className="text-lg font-semibold border-b border-border pb-2">Visão executiva</h2>
         <div className="bg-panel border border-border rounded-xl p-4 text-sm leading-relaxed">
           <p className="font-semibold mb-2">
-            Estamos construindo uma base para a Black Friday? <ConfidenceTag level="media" />
+            Estamos construindo uma base para a Black Friday? <ConfidenceTag level="alta" />
           </p>
           <p className="text-muted">
-            Resposta parcial (falta o lado orgânico do YouTube, bloqueado — ver abaixo). Com os dados disponíveis
-            (Google Ads + GA4, últimos 90 dias): a mídia paga do YouTube gera engajamento mensurável{' '}
-            <em>dentro da plataforma</em> ({num(mediaPaga.totals.youtube_follow_on_views)} visualizações
-            subsequentes e {num(mediaPaga.totals.youtube_channel_subscriptions)} inscrições atribuídas), mas
-            praticamente não gera sessões qualificadas no site (canal &quot;Paid Video&quot; do GA4: apenas{' '}
-            {num(paidVideoFunil?.sessions ?? 0)} sessões, {num(paidVideoFunil?.checkouts ?? 0)} checkouts e{' '}
-            {num(paidVideoFunil?.ecommerce_purchases ?? 0)} compras em 90 dias). Não há, hoje, nenhum evento de
-            captura de lead identificável disparando no GA4 (qualify_lead/close_convert_lead = 0 em 20 meses).
-            Ou seja: há evidência de audiência e engajamento crescendo dentro do YouTube, mas não de leads
-            identificados nem de tráfego qualificado ao site vindo da mídia paga em vídeo.
+            Sim, no orgânico — e a dependência de mídia paga está caindo, o que é bom sinal: das visualizações do
+            canal, 89,8% vinham de anúncios na Black Friday de 2025, contra 70,9% no acumulado de 2026 e apenas
+            55,1% nos últimos 28 dias. Espectadores recorrentes seguram 66-71% do tempo assistido em{' '}
+            <em>todos</em> os períodos analisados. Conteúdo longo e lives geraram ~86% dos novos inscritos nos
+            últimos 90 dias, contra 4,1% dos Shorts. O ponto fraco segue sendo comercial: nenhum evento de captura
+            de lead dispara no GA4 há 20 meses, e a mídia paga de vídeo quase não gera sessão qualificada no site
+            (canal &quot;Paid Video&quot; do GA4: {num(paidVideoFunil?.sessions ?? 0)} sessões, 0 compras em 90d).
           </p>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <StatCard label="Investimento em mídia (90d)" value={brl(mediaPaga.totals.cost_brl)} />
-          <StatCard label="Follow-on views (YouTube Ads)" value={num(mediaPaga.totals.youtube_follow_on_views)} />
-          <StatCard label="Inscrições atribuídas (Ads)" value={num(mediaPaga.totals.youtube_channel_subscriptions)} />
+          <StatCard label="Dependência de mídia paga (views)" value="55,1% (28d) ← 89,8% (BF25)" />
+          <StatCard label="Tempo assistido por recorrentes" value="66-71% (todos os períodos)" />
+          <StatCard label="Inscritos via conteúdo longo/lives (90d)" value="~86%" />
           <StatCard label="Compras via 'Paid Video' (GA4, 90d)" value={num(paidVideoFunil?.ecommerce_purchases ?? 0)} />
         </div>
 
         <div className="bg-panel border border-border rounded-xl p-4 text-sm">
           <p className="font-semibold mb-2">Principais riscos e prioridades</p>
           <ul className="list-disc list-inside text-muted space-y-1">
-            <li>YouTube Analytics real (orgânico, retenção, recorrência) está bloqueado — sem isso não dá para
-              avaliar a maior parte da preparação de audiência. <strong>Prioridade máxima.</strong></li>
-            <li>Nenhum evento de lead identificável funcionando no GA4 — a base "própria" hoje é só a lista
-              CRM_BASED de 30 mil pessoas carregada manualmente em algum outubro passado.</li>
+            <li>Nenhum evento de lead identificável funcionando no GA4 — a base &quot;própria&quot; hoje é só a
+              lista CRM_BASED de 30 mil pessoas carregada manualmente em algum outubro passado.
+              <strong> Gargalo mais crítico e mais acionável.</strong></li>
+            <li>Mídia paga traz público majoritariamente novo e pouco engajado na BF25 (62,3% views novas, mas
+              duração média de só 1:11) — bom para alcance, ruim para conversão sem nutrição.</li>
             <li>&quot;Paid Social&quot; (provavelmente Meta, não conectado) é o maior canal pago de sessões do
               site — maior que todo o YouTube Ads — e está fora do escopo mensurado aqui.</li>
             <li>Divergência relevante entre valor de conversão reportado pelo Google Ads e receita observada no
@@ -151,22 +157,90 @@ export default function AuditoriaPage() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <StatCard label="Inscritos no canal (total)" value={num(organic.channel.subscriber_count)} />
           <StatCard
-            label="Sessões 'Paid Video' (28d)"
+            label="Sessões 'Paid Video' no site (28d)"
             value={num(paidVideoLast28?.sessions ?? 0)}
             rawCurrent={paidVideoLast28?.sessions}
             rawPrevious={paidVideoPrev28?.sessions}
           />
-          <StatCard label="Sessões 'Organic Video' (28d)" value={num(organicVideoLast28?.sessions ?? 0)} />
-          <StatCard label="Sessões 'Paid Social' (28d)" value={num(paidSocialLast28?.sessions ?? 0)} />
+          <StatCard label="Sessões 'Organic Video' no site (28d)" value={num(organicVideoLast28?.sessions ?? 0)} />
+          <StatCard label="Sessões 'Paid Social' no site (28d)" value={num(paidSocialLast28?.sessions ?? 0)} />
         </div>
         <p className="text-xs text-muted -mt-2">
-          Inscritos: contagem vitalícia do YouTube Data API (ponto no tempo, não bounded pelo período). Sessões:
-          GA4 (LP - AMBIENTE BR), tráfego no site por canal de aquisição — não é o mesmo que espectadores no
-          YouTube.
+          Inscritos: contagem vitalícia do YouTube Data API. Sessões: GA4 (LP - AMBIENTE BR), tráfego no
+          <em> site</em> por canal — diferente de espectadores <em>no YouTube</em> (tabela abaixo).
         </p>
-        <BlockedBanner title="Espectadores/audiência ativa/recorrente (definição YouTube Studio), inscritos ganhos por período, demografia">
-          Requer YouTube Analytics (OAuth) do canal correto. Ver <code>docs/bloqueios_e_pedidos.md</code> item 1.
-        </BlockedBanner>
+
+        <div className="bg-panel border border-border rounded-xl p-4 overflow-x-auto">
+          <h3 className="text-sm text-muted mb-1">Espectadores recorrentes vs. novos, por período (YouTube Studio)</h3>
+          <p className="text-[11px] text-muted mb-3">
+            &quot;Desconhecido&quot; = tráfego de Shorts/deslogados. Fonte: coleta assistida no YouTube Studio, 2026-09-10.
+          </p>
+          <table className="w-full text-xs">
+            <thead className="text-muted text-left">
+              <tr>
+                <th className="pb-2 pr-2">Período</th>
+                <th className="pb-2 pr-2 text-right">Novos % views</th>
+                <th className="pb-2 pr-2 text-right">Novos dur.</th>
+                <th className="pb-2 pr-2 text-right">Recorrentes % views</th>
+                <th className="pb-2 pr-2 text-right">Recorrentes % tempo</th>
+                <th className="pb-2 pr-2 text-right">Recorrentes dur.</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Object.entries(nvr).map(([p, v]) => (
+                <tr key={p} className="border-t border-border/60">
+                  <td className="py-1.5 pr-2 text-white">{periodLabels[p]}</td>
+                  <td className="py-1.5 pr-2 text-right">{v.new_views_pct}%</td>
+                  <td className="py-1.5 pr-2 text-right">{v.new_avg_duration}</td>
+                  <td className="py-1.5 pr-2 text-right">{v.returning_views_pct}%</td>
+                  <td className="py-1.5 pr-2 text-right font-semibold text-good">{v.returning_hours_pct}%</td>
+                  <td className="py-1.5 pr-2 text-right">{v.returning_avg_duration}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <p className="text-[11px] text-muted mt-3">
+            Recorrentes são minoria em número de views, mas seguram 66-71% do tempo assistido em todos os
+            períodos — assistem ~2x mais por sessão que espectadores novos.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-4">
+          <div className="bg-panel border border-border rounded-xl p-4">
+            <h3 className="text-sm text-muted mb-3">Perfil do público (retrato de 28 dias, estável)</h3>
+            <div className="grid grid-cols-2 gap-4 text-xs">
+              <div>
+                <p className="text-muted mb-1">Idade (% views)</p>
+                {Object.entries(studio.audience_profile_28d_snapshot.age_pct).map(([k, v]) => (
+                  <div key={k} className="flex justify-between"><span className="text-muted">{k}</span><span>{v}%</span></div>
+                ))}
+              </div>
+              <div>
+                <p className="text-muted mb-1">Gênero / Dispositivo (tempo)</p>
+                {Object.entries(studio.audience_profile_28d_snapshot.gender_pct).map(([k, v]) => (
+                  <div key={k} className="flex justify-between"><span className="text-muted capitalize">{k}</span><span>{v}%</span></div>
+                ))}
+                <div className="h-2" />
+                {Object.entries(studio.audience_profile_28d_snapshot.device_hours_pct).map(([k, v]) => (
+                  <div key={k} className="flex justify-between"><span className="text-muted">{k}</span><span>{v}%</span></div>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div className="bg-panel border border-border rounded-xl p-4 text-xs">
+            <h3 className="text-sm text-muted mb-3">Localização e horário de pico</h3>
+            {Object.entries(studio.audience_profile_28d_snapshot.location_views_pct).map(([k, v]) => (
+              <div key={k} className="flex justify-between"><span className="text-muted">{k}</span><span>{v}%</span></div>
+            ))}
+            <p className="text-muted mt-3">{studio.audience_profile_28d_snapshot.peak_hours_local_brt}</p>
+            <p className="text-muted mt-3 mb-1">Canais também assistidos pelo público:</p>
+            <ul className="list-disc list-inside">
+              {studio.audience_profile_28d_snapshot.also_watched_channels.map((c) => (
+                <li key={c.name}>{c.name} ({num(c.subscribers)} inscritos){c.note ? ` — ${c.note}` : ''}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </section>
 
       {/* ORGÂNICO */}
@@ -184,6 +258,69 @@ export default function AuditoriaPage() {
           <StatCard label="Shorts / Longos" value={`${num(organic.by_format.short ?? 0)} / ${num(organic.by_format.long ?? 0)}`} />
         </div>
         <CadenceChart data={cadenceData} />
+        <SubscribersMonthlyChart data={studio.subscribers_monthly_2026} />
+
+        <div className="bg-panel border border-border rounded-xl p-4 overflow-x-auto">
+          <h3 className="text-sm text-muted mb-1">Origem do tráfego, últimos 28 dias (YouTube Studio)</h3>
+          <p className="text-[11px] text-muted mb-3">
+            Dependência de mídia paga caindo: 89,8% (BF25) → 70,9% (YTD) → 55,1% (28d). &quot;Vídeos sugeridos&quot;
+            tem poucas views mas a maior duração média (13:20) — conteúdo longo retém muito via sugeridos.
+          </p>
+          <table className="w-full text-xs">
+            <thead className="text-muted text-left">
+              <tr>
+                <th className="pb-2 pr-2">Origem</th>
+                <th className="pb-2 pr-2 text-right">% views</th>
+                <th className="pb-2 pr-2 text-right">% tempo</th>
+                <th className="pb-2 pr-2 text-right">Duração média</th>
+              </tr>
+            </thead>
+            <tbody>
+              {traffic28d.map((t) => (
+                <tr key={t.source} className="border-t border-border/60">
+                  <td className="py-1.5 pr-2 text-white">{t.source}</td>
+                  <td className="py-1.5 pr-2 text-right">{t.views_pct}%</td>
+                  <td className="py-1.5 pr-2 text-right">{t.hours_pct}%</td>
+                  <td className="py-1.5 pr-2 text-right">{t.avg_duration}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="bg-panel border border-border rounded-xl p-4 overflow-x-auto">
+          <h3 className="text-sm text-muted mb-1">Shorts x Vídeos longos x Lives, últimos 90 dias</h3>
+          <p className="text-[11px] text-muted mb-3">
+            Shorts geram volume de views; vídeos longos e lives geram o tempo assistido e ~86% dos novos inscritos
+            (ver <code>subscribers_by_content_type_P2</code>).
+          </p>
+          <table className="w-full text-xs">
+            <thead className="text-muted text-left">
+              <tr>
+                <th className="pb-2 pr-2">Tipo</th>
+                <th className="pb-2 pr-2 text-right">% views</th>
+                <th className="pb-2 pr-2 text-right">% tempo</th>
+                <th className="pb-2 pr-2 text-right">Duração média</th>
+                <th className="pb-2 pr-2 text-right">% dos inscritos (90d)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {contentType90d.map((t) => {
+                const subs = studio.subscribers_by_content_type_P2.find((s) => s.type === t.type)
+                return (
+                  <tr key={t.type} className="border-t border-border/60">
+                    <td className="py-1.5 pr-2 text-white">{t.type}</td>
+                    <td className="py-1.5 pr-2 text-right">{t.views_pct}%</td>
+                    <td className="py-1.5 pr-2 text-right">{t.hours_pct}%</td>
+                    <td className="py-1.5 pr-2 text-right">{t.avg_duration}</td>
+                    <td className="py-1.5 pr-2 text-right font-semibold text-good">{subs ? `${subs.pct}%` : '—'}</td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        </div>
+
         <div className="bg-panel border border-border rounded-xl p-4 overflow-x-auto">
           <h3 className="text-sm text-muted mb-3">Top 10 vídeos por visualizações (vitalício)</h3>
           <table className="w-full text-xs">
@@ -224,11 +361,6 @@ export default function AuditoriaPage() {
             {captions.quotaExhausted && ' para o plano de continuidade.'} Baixar o texto em si ainda exige OAuth (bloqueio #1).
           </p>
         </div>
-        <BlockedBanner title="Retenção, origem de tráfego (orgânico x pago), inscritos por período, demografia, recorrência de audiência">
-          Isso exige o YouTube Analytics (OAuth), não coberto pela chave de API pública usada acima. Corrigir em
-          <code> https://onboard.windsor.ai/connect?connector=youtube&next=/youtube/authorize</code> selecionando o
-          canal correto na tela de consentimento, ou configurando OAuth completo no próprio app (ver README).
-        </BlockedBanner>
       </section>
 
       {/* MÍDIA PAGA */}
@@ -313,10 +445,42 @@ export default function AuditoriaPage() {
       {/* RETENÇÃO */}
       <section className="flex flex-col gap-4">
         <h2 className="text-lg font-semibold border-b border-border pb-2">Retenção</h2>
-        <BlockedBanner title="Curvas de retenção do YouTube Studio">
-          Não disponível sem o YouTube Analytics do canal correto. O que temos (conclusão do anúncio por quartil,
-          seção de mídia paga acima) não deve ser lido como retenção orgânica.
-        </BlockedBanner>
+        <p className="text-xs text-muted">
+          Retenção vitalícia (desde a publicação) de 5 vídeos priorizados — 3 Shorts de alto investimento/consumo,
+          1 vídeo longo da série de estudo de caso, 1 com maior investimento em mídia (proxy: impressões
+          vitalícias). Fonte: YouTube Studio, coleta assistida 2026-09-10.
+        </p>
+        <div className="bg-panel border border-border rounded-xl p-4 overflow-x-auto">
+          <table className="w-full text-xs">
+            <thead className="text-muted text-left">
+              <tr>
+                <th className="pb-2 pr-2">Vídeo</th>
+                <th className="pb-2 pr-2">Formato</th>
+                <th className="pb-2 pr-2 text-right">Views vitalício</th>
+                <th className="pb-2 pr-2 text-right">% assistida</th>
+                <th className="pb-2 pr-2">Ponto-chave de retenção</th>
+                <th className="pb-2 pr-2 text-right">Continuaram*</th>
+              </tr>
+            </thead>
+            <tbody>
+              {studio.retention_videos.map((v) => (
+                <tr key={v.title} className="border-t border-border/60">
+                  <td className="py-1.5 pr-2 text-white max-w-xs truncate" title={v.title}>{v.title}</td>
+                  <td className="py-1.5 pr-2 text-muted">{v.format}</td>
+                  <td className="py-1.5 pr-2 text-right">{v.views_lifetime > 0 ? num(v.views_lifetime) : '—'}</td>
+                  <td className="py-1.5 pr-2 text-right">{v.pct_watched != null ? `${v.pct_watched}%` : '—'}</td>
+                  <td className="py-1.5 pr-2 text-muted">{v.retention_key ?? v.note ?? '—'}</td>
+                  <td className="py-1.5 pr-2 text-right">{v.continued_pct != null ? `${v.continued_pct}%` : '—'}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <p className="text-[11px] text-muted mt-3">
+            * &quot;Continuaram&quot; = % que não pulou o Short nos primeiros segundos. O vídeo &quot;Eleve o nível
+            do Nintendo Switch&quot; (maior investimento em mídia: 11,3M impressões vitalícias, CTR 8,4%) tem
+            retenção de 60-180% — indica loops/rewatches, criativo de anúncio muito otimizado.
+          </p>
+        </div>
       </section>
 
       {/* CONTEÚDO E NARRATIVAS */}
@@ -394,10 +558,10 @@ export default function AuditoriaPage() {
             </thead>
             <tbody>
               <tr className="border-t border-border/60 align-top">
-                <td className="py-2 pr-2">YouTube conectado ao canal errado</td>
-                <td className="py-2 pr-2 text-muted">Bloqueia ~40% do escopo da auditoria (orgânico, retenção, audiência real)</td>
-                <td className="py-2 pr-2 text-muted">Canal &quot;Beatriz stlflix&quot;, 0 vídeos/inscritos</td>
-                <td className="py-2 pr-2 text-muted">Reconectar no Windsor.ai selecionando o canal certo</td>
+                <td className="py-2 pr-2">YouTube Analytics sem acesso automatizado</td>
+                <td className="py-2 pr-2 text-muted">Resolvido via coleta manual assistida (Studio) — mas não se atualiza sozinho a cada rodada</td>
+                <td className="py-2 pr-2 text-muted">Conector Windsor.ai ainda no canal pessoal; OAuth do app incompleto (falta client_id/secret)</td>
+                <td className="py-2 pr-2 text-muted">Reconectar no Windsor.ai ou completar client_id/secret do OAuth, se quiser atualização automatizada</td>
               </tr>
               <tr className="border-t border-border/60 align-top">
                 <td className="py-2 pr-2">Eventos de lead nunca disparam no GA4</td>

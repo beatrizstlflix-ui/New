@@ -1,5 +1,11 @@
 # Perguntas obrigatórias — status em 2026-09-10
 
+> ⚠️ **Versão superada.** Após a coleta de YouTube Analytics real (YouTube
+> Studio), várias respostas abaixo mudaram de confiança/conclusão. A versão
+> atualizada e completa das 20 perguntas está em `docs/resumo_executivo.md`
+> (revisão 2). Este arquivo fica só como registro histórico do status antes
+> dessa coleta.
+
 Legenda: 🟢 respondida com evidência · 🟡 parcialmente respondida · 🔴 pendente (bloqueio)
 
 1. 🟡 Estamos construindo uma base útil para a BF? — Indícios mistos: mídia paga de

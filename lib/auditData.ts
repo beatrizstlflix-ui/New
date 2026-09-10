@@ -147,6 +147,30 @@ export function getCaptionsCoverage(): { checked: number; withCaptions: number; 
   return { checked: valid.length, withCaptions, withAsrPt, quotaExhausted }
 }
 
+export interface YoutubeStudioAnalytics {
+  caveats: string[]
+  periods: Record<string, { label: string; date_from: string; date_to: string }>
+  overview: Record<string, { views: number; watch_hours: number; avg_duration: string; subscribers_net: number; revenue_usd: number; impressions: number; ctr_pct: number }>
+  traffic_sources: Record<string, Array<{ source: string; views: number; views_pct: number; hours: number; hours_pct: number; avg_duration: string }>>
+  content_type_engagement: Record<string, Array<{ type: string; views: number; views_pct: number; hours: number; hours_pct: number; avg_duration: string }>>
+  subscribers_by_content_type_P2: Array<{ type: string; subscribers_net: number; pct: number }>
+  new_vs_returning: Record<string, { new_views_pct: number; new_hours_pct: number; new_avg_duration: string; returning_views_pct: number; returning_hours_pct: number; returning_avg_duration: string; unknown_views_pct: number }>
+  audience_profile_28d_snapshot: {
+    age_pct: Record<string, number>
+    gender_pct: Record<string, number>
+    device_hours_pct: Record<string, number>
+    location_views_pct: Record<string, number>
+    peak_hours_local_brt: string
+    also_watched_channels: Array<{ name: string; subscribers: number; note?: string }>
+  }
+  subscribers_monthly_2026: Array<{ month: string; gained: number; lost: number; net: number }>
+  retention_videos: Array<{ video_id: string | null; title: string; format?: string; views_lifetime: number; avg_duration?: string; pct_watched?: number; retention_key?: string; continued_pct?: number | null; subscribers?: number; note?: string; lifetime_impressions?: number; ctr_pct?: number }>
+}
+
+export function getYoutubeStudioAnalytics(): YoutubeStudioAnalytics {
+  return readJSON('data/processed/youtube_studio_analytics.json')
+}
+
 export function brl(v: number): string {
   return v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 })
 }

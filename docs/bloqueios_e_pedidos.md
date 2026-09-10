@@ -3,28 +3,30 @@
 Status em 2026-09-10. Ver protocolo completo na conversa (o que tentei, impedimento,
 o que depende disso, o que preciso, como resolver, o que continuo fazendo).
 
-## 1. [CRÍTICO — parcialmente resolvido] YouTube conectado ao canal errado no Windsor.ai
+## 1. [RESOLVIDO EM 2026-09-10 — via coleta manual assistida] YouTube Analytics
 - **Tentando**: extrair views, tempo assistido, origem de tráfego, retenção,
-  inscritos, demografia do canal STLFLIX BR.
-- **Impedimento**: a conta `beatrizstlflix@gmail.com` no conector `youtube` do
-  Windsor.ai está autenticada no canal pessoal dela (vazio), não no STLFLIX BR.
-- **Resolvido parcialmente em 2026-09-10** via chave de API própria (item 2): já
-  temos inventário completo de vídeos e estatísticas vitalícias (ver
-  `docs/status_videos_transcricoes.md`). **Ainda falta** tudo que só o YouTube
-  Analytics dá: tendência diária, origem de tráfego (orgânico x pago), retenção,
-  inscritos ganhos por período, demografia, recorrência de audiência.
-- **Depende disso agora**: seção "Retenção", parte de "Audiência" (recorrência,
-  ativa) e "Relação mídia x orgânico" com granularidade diária real do YouTube.
-- **Preciso que você**: ainda reconecte o YouTube no Windsor.ai selecionando o
-  canal correto, **ou** gere um `refresh_token` OAuth para o modo completo do
-  próprio dashboard (README original tem o passo a passo via OAuth Playground).
-- **Como fazer (Windsor.ai)**: abra
-  `https://onboard.windsor.ai/connect?connector=youtube&next=/youtube/authorize`,
-  entre com a conta que administra o Windsor.ai, e **na tela de consentimento do
-  Google escolha explicitamente o canal/marca STLFLIX BR** (não "Beatriz stlflix")
-  quando for perguntado qual canal autorizar.
-- **Enquanto isso**: sigo com o que a API key libera (inventário, legendas,
-  estatísticas vitalícias) e o restante do escopo.
+  inscritos, demografia do canal STLFLIX BR por período.
+- **Impedimento original**: o conector `youtube` do Windsor.ai está autenticado
+  no canal pessoal vazio da conta, não no STLFLIX BR; OAuth próprio do app
+  também não estava configurado (refresh_token fornecido depois não pôde ser
+  trocado por falta de `GOOGLE_CLIENT_ID`/`GOOGLE_CLIENT_SECRET` — ver item 2).
+- **Resolvido por caminho alternativo**: o usuário coletou manualmente (via
+  Claude in Chrome, logado no YouTube Studio) os relatórios de Visão Geral,
+  Alcance, Engajamento, Público-alvo, série de inscritos e retenção de 5
+  vídeos, em 5 períodos (YTD, 90d, 28d, 28d anteriores, BF25). Consolidado em
+  `data/raw/youtube/STLFLIX_auditoria_YouTube_studio_2026-09-10.xlsx` e
+  `data/processed/youtube_studio_analytics.json`.
+- **Caveats importantes que vieram junto** (preservados do arquivo original):
+  YouTube mostrava alerta de "problema temporário com os dados" no momento da
+  coleta; mudança na contagem de views a partir de 27/08/2026; a aba
+  "Público-alvo" do Studio é sempre fixa em 28 dias (não é "P1"/"P2" real);
+  vídeo `2tqvuHWPGGY` sem dados de retenção (provável não listado/privado).
+  Tratar os números como leitura de tela cuidadosa, não export bruto
+  verificável byte a byte.
+- **Ainda não resolvido**: acesso automatizado/contínuo (para atualizar sem
+  repetir a coleta manual a cada rodada). Se quiser isso no futuro, os
+  caminhos continuam sendo o Windsor.ai (reconectar no canal certo) ou
+  completar o OAuth do item 2.
 
 ## 2. [RESOLVIDO] Chave de API do YouTube
 - A chave enviada como texto (não screenshot) funcionou: canal confirmado

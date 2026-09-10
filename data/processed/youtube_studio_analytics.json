@@ -1,0 +1,197 @@
+{
+  "source": "YouTube Studio (coleta manual assistida via Claude in Chrome, planilha do usuário)",
+  "raw_file": "data/raw/youtube/STLFLIX_auditoria_YouTube_studio_2026-09-10.xlsx",
+  "collected_at": "2026-09-10",
+  "channel": {"handle": "@stlflix_br", "subscribers_at_collection": 83450},
+  "caveats": [
+    "No dia da coleta, o YouTube Studio exibia um alerta de 'problema temporário com os dados' no card de Visualizações — views recentes (P3 e parte de P2) podem estar instáveis.",
+    "O YouTube mudou a forma de contar visualizações a partir de 27/08/2026 — pode inflar métricas de views recentes (P3 e parte de P2) frente a períodos anteriores.",
+    "A aba 'Público-alvo' do Studio (demografia, dispositivo, localização, legendas, notificações, horários) é sempre fixa em 28 dias — não responde ao seletor de período. Tratagainst como retrato estável, não específico de cada período P1-P5.",
+    "Vídeo 2tqvuHWPGGY não tem dados de retenção (0 visualizações registradas — provavelmente não listado/privado).",
+    "'Investimento em mídia' não é exposto pelo Studio (fica no Google Ads); usamos impressões de miniatura vitalícias como proxy para identificar o vídeo de maior mídia.",
+    "CSVs nativos do YouTube não puderam ser reimportados (caíram na pasta de downloads local); números foram lidos da tela e consolidados manualmente — tratar como precisão de leitura de tela, não export bruto."
+  ],
+  "periods": {
+    "P1": {"label": "Ano corrente (YTD 2026)", "date_from": "2026-01-01", "date_to": "2026-09-09"},
+    "P2": {"label": "Últimos 90 dias", "date_from": "2026-06-12", "date_to": "2026-09-09"},
+    "P3": {"label": "Últimos 28 dias", "date_from": "2026-08-13", "date_to": "2026-09-09"},
+    "P4": {"label": "28 dias anteriores", "date_from": "2026-07-16", "date_to": "2026-08-12"},
+    "P5": {"label": "Black Friday 2025", "date_from": "2025-10-15", "date_to": "2025-11-30"}
+  },
+  "overview": {
+    "P1": {"views": 18942121, "watch_hours": 312672.3, "avg_duration": "2:35", "subscribers_net": 40785, "revenue_usd": 3990.18, "impressions": 24315351, "ctr_pct": 5.8},
+    "P2": {"views": 5370319, "watch_hours": 196788.0, "avg_duration": "4:38", "subscribers_net": 22763, "revenue_usd": 2655.60, "impressions": 11489392, "ctr_pct": 5.3},
+    "P3": {"views": 1439199, "watch_hours": 49313.6, "avg_duration": "3:52", "subscribers_net": 5204, "revenue_usd": 873.66, "impressions": 3472762, "ctr_pct": 5.4},
+    "P4": {"views": 1040948, "watch_hours": 54421.2, "avg_duration": "4:12", "subscribers_net": 5777, "revenue_usd": 869.36, "impressions": 3704360, "ctr_pct": 5.3},
+    "P5": {"views": 3971076, "watch_hours": 44445.7, "avg_duration": "2:08", "subscribers_net": 7389, "revenue_usd": 259.79, "impressions": 2763984, "ctr_pct": 5.1}
+  },
+  "traffic_sources": {
+    "P1": [
+      {"source": "Publicidade no YouTube", "views": 13423221, "views_pct": 70.9, "hours": 93826.3, "hours_pct": 30.0, "avg_duration": "1:27"},
+      {"source": "Feed dos Shorts", "views": 1970193, "views_pct": 10.4, "hours": 6470.2, "hours_pct": 2.1, "avg_duration": "0:20"},
+      {"source": "Recursos de navegação", "views": 1347492, "views_pct": 7.1, "hours": 71892.8, "hours_pct": 23.0, "avg_duration": "4:23", "impressions": 9750047, "ctr_pct": 7.5},
+      {"source": "Pesquisa do YouTube", "views": 1286997, "views_pct": 6.8, "hours": 23467.0, "hours_pct": 7.5, "avg_duration": "1:55", "impressions": 7308065, "ctr_pct": 6.0},
+      {"source": "Vídeos sugeridos", "views": 385839, "views_pct": 2.0, "hours": 72898.5, "hours_pct": 23.3, "avg_duration": "11:25", "impressions": 5006631, "ctr_pct": 3.4},
+      {"source": "Páginas do canal", "views": 207945, "views_pct": 1.1, "hours": 8631.7, "hours_pct": 2.8, "avg_duration": "3:41", "impressions": 2015037, "ctr_pct": 3.1},
+      {"source": "Externa", "views": 124802, "views_pct": 0.7, "hours": 14980.3, "hours_pct": 4.8, "avg_duration": "7:27"},
+      {"source": "Origem direta/desconhecida", "views": 72667, "views_pct": 0.4, "hours": 10587.4, "hours_pct": 3.4, "avg_duration": "9:25"},
+      {"source": "Outros recursos do YouTube", "views": 47255, "views_pct": 0.3, "hours": 6450.2, "hours_pct": 2.1, "avg_duration": "9:55"}
+    ],
+    "P2": [
+      {"source": "Publicidade no YouTube", "views": 3632638, "views_pct": 67.6, "hours": 44576.1, "hours_pct": 22.7, "avg_duration": "2:00"},
+      {"source": "Recursos de navegação", "views": 560835, "views_pct": 10.4, "hours": 49938.2, "hours_pct": 25.4, "avg_duration": "6:59", "impressions": 4413351, "ctr_pct": 6.3},
+      {"source": "Pesquisa do YouTube", "views": 505171, "views_pct": 9.4, "hours": 11808.3, "hours_pct": 6.0, "avg_duration": "2:27", "impressions": 2812778, "ctr_pct": 6.3},
+      {"source": "Vídeos sugeridos", "views": 257436, "views_pct": 4.8, "hours": 55043.9, "hours_pct": 28.0, "avg_duration": "12:57", "impressions": 3070629, "ctr_pct": 3.6},
+      {"source": "Feed dos Shorts", "views": 146440, "views_pct": 2.7, "hours": 536.4, "hours_pct": 0.3, "avg_duration": "0:26"},
+      {"source": "Páginas do canal", "views": 87048, "views_pct": 1.6, "hours": 6196.8, "hours_pct": 3.2, "avg_duration": "5:59", "impressions": 1053409, "ctr_pct": 3.3},
+      {"source": "Externa", "views": 65121, "views_pct": 1.2, "hours": 12126.7, "hours_pct": 6.2, "avg_duration": "11:37"},
+      {"source": "Origem direta/desconhecida", "views": 55609, "views_pct": 1.0, "hours": 9209.0, "hours_pct": 4.7, "avg_duration": "10:58"},
+      {"source": "Outros recursos do YouTube", "views": 24765, "views_pct": 0.5, "hours": 4990.9, "hours_pct": 2.5, "avg_duration": "13:32"}
+    ],
+    "P3": [
+      {"source": "Publicidade no YouTube", "views": 793495, "views_pct": 55.1, "hours": 9978.5, "hours_pct": 20.2, "avg_duration": "1:31"},
+      {"source": "Recursos de navegação", "views": 244385, "views_pct": 17.0, "hours": 12647.3, "hours_pct": 25.7, "avg_duration": "6:07", "impressions": 1326438, "ctr_pct": 6.1},
+      {"source": "Pesquisa do YouTube", "views": 185659, "views_pct": 12.9, "hours": 3059.4, "hours_pct": 6.2, "avg_duration": "1:59", "impressions": 838020, "ctr_pct": 6.9},
+      {"source": "Vídeos sugeridos", "views": 83318, "views_pct": 5.8, "hours": 17997.6, "hours_pct": 36.5, "avg_duration": "13:20", "impressions": 924308, "ctr_pct": 3.7},
+      {"source": "Feed dos Shorts", "views": 45251, "views_pct": 3.1, "hours": 155.9, "hours_pct": 0.3, "avg_duration": "0:24"},
+      {"source": "Páginas do canal", "views": 33780, "views_pct": 2.4, "hours": 1820.7, "hours_pct": 3.7, "avg_duration": "5:23", "impressions": 342397, "ctr_pct": 3.2},
+      {"source": "Origem direta/desconhecida", "views": 27096, "views_pct": 1.9, "hours": 1291.6, "hours_pct": 2.6, "avg_duration": "3:31"},
+      {"source": "Externa", "views": 10160, "views_pct": 0.7, "hours": 509.5, "hours_pct": 1.0, "avg_duration": "3:46"},
+      {"source": "Outros recursos do YouTube", "views": 7064, "views_pct": 0.5, "hours": 1028.7, "hours_pct": 2.1, "avg_duration": "10:11"}
+    ],
+    "P4": [
+      {"source": "Publicidade no YouTube", "views": 543304, "views_pct": 52.2, "hours": 13544.7, "hours_pct": 24.9, "avg_duration": "2:08"},
+      {"source": "Pesquisa do YouTube", "views": 153322, "views_pct": 14.7, "hours": 3275.9, "hours_pct": 6.0, "avg_duration": "2:00", "impressions": 934096, "ctr_pct": 6.5},
+      {"source": "Recursos de navegação", "views": 150924, "views_pct": 14.5, "hours": 15260.6, "hours_pct": 28.0, "avg_duration": "6:14", "impressions": 1447451, "ctr_pct": 6.1},
+      {"source": "Vídeos sugeridos", "views": 80363, "views_pct": 7.7, "hours": 17454.3, "hours_pct": 32.1, "avg_duration": "13:02", "impressions": 976524, "ctr_pct": 3.8},
+      {"source": "Feed dos Shorts", "views": 50106, "views_pct": 4.8, "hours": 172.3, "hours_pct": 0.3, "avg_duration": "0:25"},
+      {"source": "Páginas do canal", "views": 23061, "views_pct": 2.2, "hours": 1570.9, "hours_pct": 2.9, "avg_duration": "5:13", "impressions": 299615, "ctr_pct": 3.3},
+      {"source": "Externa", "views": 12319, "views_pct": 1.2, "hours": 610.6, "hours_pct": 1.1, "avg_duration": "3:01"},
+      {"source": "Origem direta/desconhecida", "views": 9442, "views_pct": 0.9, "hours": 986.3, "hours_pct": 1.8, "avg_duration": "6:16"},
+      {"source": "Notificações", "views": 7827, "views_pct": 0.8, "hours": 136.1, "hours_pct": 0.3, "avg_duration": "1:46"}
+    ],
+    "P5": [
+      {"source": "Publicidade no YouTube", "views": 3567121, "views_pct": 89.8, "hours": 18353.1, "hours_pct": 41.3, "avg_duration": "0:57"},
+      {"source": "Pesquisa do YouTube", "views": 139953, "views_pct": 3.5, "hours": 2885.3, "hours_pct": 6.5, "avg_duration": "2:08", "impressions": 844172, "ctr_pct": 6.0},
+      {"source": "Recursos de navegação", "views": 106510, "views_pct": 2.7, "hours": 7524.4, "hours_pct": 16.9, "avg_duration": "5:21", "impressions": 1011669, "ctr_pct": 6.9},
+      {"source": "Feed dos Shorts", "views": 72007, "views_pct": 1.8, "hours": 215.4, "hours_pct": 0.5, "avg_duration": "0:22"},
+      {"source": "Páginas do canal", "views": 23744, "views_pct": 0.6, "hours": 794.1, "hours_pct": 1.8, "avg_duration": "2:36", "impressions": 562838, "ctr_pct": 2.2},
+      {"source": "Externa", "views": 21822, "views_pct": 0.6, "hours": 6468.8, "hours_pct": 14.6, "avg_duration": "17:58"},
+      {"source": "Vídeos sugeridos", "views": 15838, "views_pct": 0.4, "hours": 2084.6, "hours_pct": 4.7, "avg_duration": "8:04", "impressions": 318227, "ctr_pct": 2.8},
+      {"source": "Origem direta/desconhecida", "views": 8763, "views_pct": 0.2, "hours": 4486.3, "hours_pct": 10.1, "avg_duration": "30:43"},
+      {"source": "Notificações", "views": 8549, "views_pct": 0.2, "hours": 214.9, "hours_pct": 0.5, "avg_duration": "2:21"}
+    ]
+  },
+  "content_type_engagement": {
+    "P1": [
+      {"type": "Shorts", "views": 11082720, "views_pct": 58.5, "hours": 31176.2, "hours_pct": 10.0, "avg_duration": "0:26"},
+      {"type": "Vídeos (longos)", "views": 7794867, "views_pct": 41.2, "hours": 251863.4, "hours_pct": 80.6, "avg_duration": "4:17"},
+      {"type": "Transmissão ao vivo", "views": 64442, "views_pct": 0.3, "hours": 29625.4, "hours_pct": 9.5, "avg_duration": "27:41"}
+    ],
+    "P2": [
+      {"type": "Vídeos (longos)", "views": 4231093, "views_pct": 78.8, "hours": 165035.4, "hours_pct": 83.9, "avg_duration": "4:43"},
+      {"type": "Shorts", "views": 1076964, "views_pct": 20.1, "hours": 2848.2, "hours_pct": 1.5, "avg_duration": "0:24"},
+      {"type": "Transmissão ao vivo", "views": 62170, "views_pct": 1.2, "hours": 28897.1, "hours_pct": 14.7, "avg_duration": "27:59"}
+    ],
+    "P3": [
+      {"type": "Vídeos (longos)", "views": 895267, "views_pct": 62.2, "hours": 47482.0, "hours_pct": 96.3, "avg_duration": "4:29"},
+      {"type": "Shorts", "views": 540710, "views_pct": 37.6, "hours": 1024.4, "hours_pct": 2.1, "avg_duration": "0:24"},
+      {"type": "Transmissão ao vivo", "views": 3222, "views_pct": 0.2, "hours": 807.2, "hours_pct": 1.6, "avg_duration": "16:12"}
+    ],
+    "P4": [
+      {"type": "Vídeos (longos)", "views": 829802, "views_pct": 79.7, "hours": 52940.2, "hours_pct": 97.3, "avg_duration": "4:49"},
+      {"type": "Shorts", "views": 206161, "views_pct": 19.8, "hours": 679.7, "hours_pct": 1.3, "avg_duration": "0:21"},
+      {"type": "Transmissão ao vivo", "views": 4893, "views_pct": 0.5, "hours": 794.1, "hours_pct": 1.5, "avg_duration": "9:44"}
+    ],
+    "P5": [
+      {"type": "Shorts", "views": 2798157, "views_pct": 70.5, "hours": 11271.7, "hours_pct": 25.4, "avg_duration": "0:35"},
+      {"type": "Vídeos (longos)", "views": 1139549, "views_pct": 28.7, "hours": 15326.6, "hours_pct": 34.5, "avg_duration": "2:41"},
+      {"type": "Transmissão ao vivo", "views": 33370, "views_pct": 0.8, "hours": 17847.4, "hours_pct": 40.2, "avg_duration": "32:05"}
+    ]
+  },
+  "subscribers_by_content_type_P2": [
+    {"type": "Vídeos (longos)", "subscribers_net": 14574, "pct": 64.0},
+    {"type": "Transmissão ao vivo", "subscribers_net": 4907, "pct": 21.6},
+    {"type": "Outros", "subscribers_net": 2350, "pct": 10.3},
+    {"type": "Shorts", "subscribers_net": 932, "pct": 4.1}
+  ],
+  "new_vs_returning": {
+    "P1": {"new_views_pct": 54.2, "new_hours_pct": 31.0, "new_avg_duration": "1:44", "returning_views_pct": 37.3, "returning_hours_pct": 67.5, "returning_avg_duration": "3:58", "unknown_views_pct": 7.9},
+    "P2": {"new_views_pct": 42.1, "new_hours_pct": 27.0, "new_avg_duration": "4:01", "returning_views_pct": 34.7, "returning_hours_pct": 71.3, "returning_avg_duration": "7:39", "unknown_views_pct": 21.1},
+    "P3": {"new_views_pct": 36.3, "new_hours_pct": 24.7, "new_avg_duration": "3:43", "returning_views_pct": 33.9, "returning_hours_pct": 70.9, "returning_avg_duration": "7:09", "unknown_views_pct": 22.1},
+    "P4": {"new_views_pct": 37.8, "new_hours_pct": 30.6, "new_avg_duration": "3:35", "returning_views_pct": 38.9, "returning_hours_pct": 69.0, "returning_avg_duration": "7:02", "unknown_views_pct": 23.4},
+    "P5": {"new_views_pct": 62.3, "new_hours_pct": 33.5, "new_avg_duration": "1:11", "returning_views_pct": 37.7, "returning_hours_pct": 66.5, "returning_avg_duration": "3:11", "unknown_views_pct": 0.0}
+  },
+  "subscribed_vs_not": {
+    "P1": {"not_subscribed_views_pct": 94.3, "not_subscribed_avg_duration": "2:07", "subscribed_views_pct": 5.8, "subscribed_avg_duration": "7:09", "subscribed_hours_pct": 24.7},
+    "P5": {"not_subscribed_views_pct": 95.4, "not_subscribed_avg_duration": "1:38", "subscribed_views_pct": 4.6, "subscribed_avg_duration": "8:15", "subscribed_hours_pct": 25.9},
+    "P3": {"not_subscribed_views_pct": 66.9, "subscribed_views_pct": 33.1, "subscribed_hours_pct": 33.1}
+  },
+  "audience_profile_28d_snapshot": {
+    "age_pct": {"13-17": 7.3, "18-24": 5.1, "25-34": 29.0, "35-44": 31.4, "45-54": 17.4, "55-64": 6.6, "65+": 3.1},
+    "gender_pct": {"masculino": 68.6, "feminino": 31.4},
+    "device_hours_pct": {"TV": 48.1, "Computador": 25.1, "Dispositivo móvel": 24.0, "Tablet": 2.3},
+    "location_views_pct": {"Brasil": 84.3, "Portugal": 1.2, "Estados Unidos": 0.5, "México": 0.2, "Argentina": 0.2},
+    "captions_views_pct": {"Sem legendas": 85.6, "Português": 6.5, "Inglês": 0.2},
+    "notifications_pct": {"marcaram_todas": 11.6, "todas_mais_notif_yt_ativas": 7.4},
+    "peak_hours_local_brt": "11h-21h, mais intenso 13h-19h; tardes de sáb/dom fortes; madrugada baixa",
+    "also_watched_channels": [
+      {"name": "Lari Mendes", "subscribers": 154000, "note": "embaixadora — confirma cruzamento com produto 'Lote Especial Larissa Mendes' do GA4"},
+      {"name": "3D Print Academy", "subscribers": 583000},
+      {"name": "CAÇADORES DE RENDA", "subscribers": 143000},
+      {"name": "IMPRESSIONADO3D", "subscribers": 33400},
+      {"name": "Criart 3D", "subscribers": 9400}
+    ]
+  },
+  "subscribers_monthly_2026": [
+    {"month": "Janeiro", "gained": 3257, "lost": 353, "net": 2904},
+    {"month": "Fevereiro", "gained": 2194, "lost": 303, "net": 1891},
+    {"month": "Março", "gained": 2308, "lost": 300, "net": 2008},
+    {"month": "Abril", "gained": 3958, "lost": 414, "net": 3544},
+    {"month": "Maio", "gained": 5744, "lost": 636, "net": 5108},
+    {"month": "Junho", "gained": 6483, "lost": 432, "net": 6051},
+    {"month": "Julho", "gained": 12661, "lost": 763, "net": 11898},
+    {"month": "Agosto", "gained": 6319, "lost": 559, "net": 5760},
+    {"month": "Setembro (até 09)", "gained": 1775, "lost": 154, "net": 1621}
+  ],
+  "retention_videos": [
+    {"video_id": "f5f3TEhFpGo", "title": "TIPS - Dica p/ impressões a prova d'água", "format": "Short 0:45", "views_lifetime": 4085594, "avg_duration": "0:31", "pct_watched": 69, "retention_key": "~36% aos 0:22", "continued_pct": 94.1, "subscribers": 126},
+    {"video_id": "pRFKfBxGRtI", "title": "R$20 Mil/Mês vendendo impressão 3d", "format": "longo 36:04", "views_lifetime": 566591, "avg_duration": "3:34", "pct_watched": 9.8, "retention_key": "69% aos 0:30 (ACIMA da média)", "continued_pct": null, "subscribers": 449},
+    {"video_id": "2tqvuHWPGGY", "title": "Lucrando com impressão 3D", "format": "Short 0:18", "views_lifetime": 0, "note": "SEM DADOS — provavelmente não listado/privado"},
+    {"video_id": "D_kBytQkxT4", "title": "Eu já tinha testado infills PLA", "format": "Short 1:26", "views_lifetime": 476125, "avg_duration": "1:00", "pct_watched": 70, "retention_key": "33% aos 0:30 (ABAIXO da média)", "continued_pct": 73.1, "subscribers": 16},
+    {"video_id": null, "title": "Eleve o nível do Nintendo Switch", "format": "Short 0:18", "note": "maior investimento em mídia (proxy: impressões)", "views_lifetime": 2091681, "avg_duration": "0:18", "pct_watched": 100, "retention_key": "60-180% (loops/rewatch)", "continued_pct": 90.7, "subscribers": 1531, "lifetime_impressions": 11300000, "ctr_pct": 8.4}
+  ],
+  "top_videos": {
+    "P1": [
+      {"title": "TIPS - Dica p/ impressões a prova d'água (0:45)", "views": 3542111, "hours": 6373.2, "subscribers": 108},
+      {"title": "TIPS - Como imprimir menos suportes (0:51)", "views": 1195341, "hours": 4667.7, "subscribers": 30},
+      {"title": "Imprima seu Time: 3D Prints de Futebol (0:23)", "views": 1163402, "hours": 3871.7, "subscribers": 1276},
+      {"title": "Isso ficou muito bom! (0:15)", "views": 1078937, "hours": 2513.9, "subscribers": 1563},
+      {"title": "Dicas p/ imprimir objetos cônicos (0:24)", "views": 836656, "hours": 2102.4, "subscribers": 1},
+      {"title": "490_ADS_H_VENDA_BLACK_FRIDAY (2:47)", "views": 767136, "hours": 8616.7, "subscribers": 7},
+      {"title": "385_ADS_H_VENDA_BLACK_FRIDAY (0:47)", "views": 706242, "hours": 4906.0, "subscribers": 0},
+      {"title": "R$20 Mil/Mês vendendo impressão 3d (36:04)", "views": 566591, "hours": 7289.7, "subscribers": 449},
+      {"title": "Eu já tinha testado infills PLA (1:26)", "views": 565730, "hours": 2766.9, "subscribers": 16},
+      {"title": "TIPS - Mola impressa 3D? (0:25)", "views": 519128, "hours": 1781.3, "subscribers": 9}
+    ],
+    "P5_top_by_watch_hours": [
+      {"title": "4 ANOS STLFLIX | O PROTOCOLO (live 2:20:52)", "views": 57731, "hours": 27895.3, "subscribers": 4887},
+      {"title": "Pediu Demissão do Emprego (32:33)", "views": 264572, "hours": 14576.3, "subscribers": 603},
+      {"title": "Mãe lucra com impressão 3D em casa (31:52)", "views": 377362, "hours": 13765.3, "subscribers": 2706},
+      {"title": "Saiu do Emprego +R$100 MIL (37:07)", "views": 115632, "hours": 12068.1, "subscribers": 1917},
+      {"title": "Ele Fatura R$50 MIL/mês (38:44)", "views": 284948, "hours": 11202.8, "subscribers": 495},
+      {"title": "História da STLFLIX (56:21)", "views": 132142, "hours": 11171.4, "subscribers": 13}
+    ]
+  },
+  "biggest_subscriber_loss_days_2026": [
+    {"date": "2026-07-08", "lost": 163, "note": "dia de live, mas líquido +5.305"},
+    {"date": "2026-04-29", "lost": 69},
+    {"date": "2026-07-09", "lost": 66},
+    {"date": "2026-05-11", "lost": 49},
+    {"date": "2026-04-30", "lost": 48},
+    {"date": "2026-05-09", "lost": 48},
+    {"date": "2026-07-25", "lost": 41},
+    {"date": "2026-05-10", "lost": 41},
+    {"date": "2026-05-15", "lost": 40}
+  ]
+}
