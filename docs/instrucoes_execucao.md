@@ -26,9 +26,22 @@ cd /home/user/New
 npm install
 npm run dev
 ```
-Acesse http://localhost:3000. **Nesta fase, o dashboard ainda usa a versão anterior
-(demo/API própria)** — a versão com os dados reais tratados nesta auditoria está em
-construção (task #7 da lista de tarefas). Ver `plano_execucao.md`.
+Acesse http://localhost:3000 para o dashboard antigo (demo/API própria, não usado
+nesta auditoria) e http://localhost:3000/auditoria para o **dashboard real desta
+auditoria** (dados estáticos tratados em `data/processed` + `data/raw`, lidos
+diretamente do disco por um Server Component — `app/auditoria/page.tsx` +
+`lib/auditData.ts`). Sem chamadas de API em tempo de execução: para atualizar os
+números, é preciso reprocessar os dados (ver seção seguinte) e rodar
+`npm run build` de novo.
+
+**Nota de validação**: ao testar localmente com `npm run start`, se você já tiver
+rodado `npm run build` mais de uma vez com um servidor antigo ainda de pé na mesma
+porta, o `next start` novo falha silenciosamente com `EADDRINUSE` e o navegador
+continua servido pelo processo antigo — os chunks JS do build novo não batem com o
+HTML do processo antigo e os gráficos (recharts) ficam em branco (`ChunkLoadError`
+no console, React error #423). Sempre confirme com
+`ps aux | grep next-server` que só existe um processo antes de testar, ou pare tudo
+(`pkill -f "next start"`) e suba de novo.
 
 ## Atualizar os dados no futuro
 1. Repetir os `get_data` do Windsor.ai com o período desejado (mesmos campos —
