@@ -17,15 +17,16 @@ export interface HotmartSale {
 interface FetchSalesHistoryOptions {
   startDate: Date
   endDate: Date
-  // Se omitido, a propria API da Hotmart retorna apenas status
-  // APPROVED + COMPLETE (equivalente a "Aprovada + Completa").
+  // "Aprovada + Completa", conforme pedido.
   transactionStatus?: string[]
 }
+
+const DEFAULT_TRANSACTION_STATUS = ['APPROVED', 'COMPLETE']
 
 export async function fetchSalesHistory({
   startDate,
   endDate,
-  transactionStatus,
+  transactionStatus = DEFAULT_TRANSACTION_STATUS,
 }: FetchSalesHistoryOptions): Promise<HotmartSale[]> {
   const accessToken = await getHotmartAccessToken()
   const sales: HotmartSale[] = []
@@ -35,13 +36,13 @@ export async function fetchSalesHistory({
     const url = new URL(SALES_HISTORY_URL)
     url.searchParams.set('start_date', String(startDate.getTime()))
     url.searchParams.set('end_date', String(endDate.getTime()))
-    for (const status of transactionStatus ?? []) {
+    for (const status of transactionStatus) {
       url.searchParams.append('transaction_status', status)
     }
     if (pageToken) url.searchParams.set('page_token', pageToken)
 
     const res = await fetch(url.toString(), {
-      headers: { Authorization: `Bearer ${accessToken}` },
+      headers: { Authorization: `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
       cache: 'no-store',
     })
 
