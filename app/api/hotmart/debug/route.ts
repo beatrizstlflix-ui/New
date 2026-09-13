@@ -14,8 +14,10 @@ export async function GET() {
 
   try {
     const accessToken = await getHotmartAccessToken()
-    const res = await fetch('https://developers.hotmart.com/payments/api/v1/sales/history', {
-      headers: { Authorization: `Bearer ${accessToken}` },
+    // Reproduz literalmente o exemplo da documentacao oficial da Hotmart.
+    const res = await fetch('https://developers.hotmart.com/payments/api/v1/sales/history?transaction_status=APPROVED', {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${accessToken}` },
       cache: 'no-store',
     })
     const body = await res.text()
