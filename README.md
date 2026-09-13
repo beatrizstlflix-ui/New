@@ -129,3 +129,15 @@ atras de autenticacao/rede privada.
   organica ou paga.
 - `lib/demoData.ts` — dados de exemplo usados quando nada esta configurado.
 - `app/page.tsx` + `components/*` — interface do dashboard.
+- `lib/hotmartAuth.ts` — troca client_id/client_secret/basic token por um
+  access_token da Hotmart (OAuth2 client_credentials, cacheado em memoria).
+- `lib/hotmart.ts` — busca o historico de vendas na Sales API da Hotmart e
+  resume por moeda (a mesma conta pode vender em R$ e US$ ao mesmo tempo).
+- `app/api/hotmart/route.ts` — endpoint de teste (`/api/hotmart`, aceita
+  `start_date`/`end_date`) que expõe esse resumo.
+
+### Hotmart (receita/vendas)
+
+Requer `HOTMART_CLIENT_ID`, `HOTMART_CLIENT_SECRET` e `HOTMART_BASIC_TOKEN`
+(gerados em Hotmart Developers > Credenciais > Criar credencial > "API
+Hotmart"). Veja `.env.example`.
