@@ -34,7 +34,7 @@ export async function getHotmartAccessToken(): Promise<string> {
   url.searchParams.set('client_secret', clientSecret)
 
   const res = await fetch(url.toString(), {
-    method: 'GET',
+    method: 'POST',
     headers: { Authorization: basicToken },
     cache: 'no-store',
   })
