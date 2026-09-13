@@ -47,7 +47,7 @@ export async function fetchSalesHistory({
 
     if (!res.ok) {
       const body = await res.text()
-      throw new Error(`Hotmart Sales API falhou (${res.status}): ${body}`)
+      throw new Error(`Hotmart Sales API falhou (${res.status}): ${body} | URL: ${url.toString()}`)
     }
 
     const data = await res.json()
