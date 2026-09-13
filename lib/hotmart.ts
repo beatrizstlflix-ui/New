@@ -83,28 +83,42 @@ export interface HotmartProductBreakdown {
   revenue: number
 }
 
-export interface HotmartSummary {
-  netRevenue: number
+export interface HotmartCurrencySummary {
   currency: string
+  netRevenue: number
   salesCount: number
   byProduct: HotmartProductBreakdown[]
 }
 
-export function summarizeSales(sales: HotmartSale[]): HotmartSummary {
-  const currency = sales.find((s) => s.currency)?.currency ?? ''
-  const byProductMap = new Map<string, HotmartProductBreakdown>()
-
+// A mesma conta Hotmart vende em mais de uma moeda (ex.: R$ no publico BR,
+// US$ no publico Global) — por isso o resumo e sempre quebrado por moeda,
+// nunca somado junto (R$ 10 + US$ 10 nao e "20" de nada).
+export function summarizeSales(sales: HotmartSale[]): HotmartCurrencySummary[] {
+  const byCurrency = new Map<string, HotmartSale[]>()
   for (const sale of sales) {
-    const entry = byProductMap.get(sale.productName) ?? { productName: sale.productName, units: 0, revenue: 0 }
-    entry.units += 1
-    entry.revenue += sale.value
-    byProductMap.set(sale.productName, entry)
+    const key = sale.currency || 'DESCONHECIDA'
+    const list = byCurrency.get(key) ?? []
+    list.push(sale)
+    byCurrency.set(key, list)
   }
 
-  return {
-    netRevenue: sales.reduce((sum, s) => sum + s.value, 0),
-    currency,
-    salesCount: sales.length,
-    byProduct: Array.from(byProductMap.values()).sort((a, b) => b.revenue - a.revenue),
+  const summaries: HotmartCurrencySummary[] = []
+  for (const [currency, currencySales] of byCurrency) {
+    const byProductMap = new Map<string, HotmartProductBreakdown>()
+    for (const sale of currencySales) {
+      const entry = byProductMap.get(sale.productName) ?? { productName: sale.productName, units: 0, revenue: 0 }
+      entry.units += 1
+      entry.revenue += sale.value
+      byProductMap.set(sale.productName, entry)
+    }
+
+    summaries.push({
+      currency,
+      netRevenue: currencySales.reduce((sum, s) => sum + s.value, 0),
+      salesCount: currencySales.length,
+      byProduct: Array.from(byProductMap.values()).sort((a, b) => b.revenue - a.revenue),
+    })
   }
+
+  return summaries.sort((a, b) => b.netRevenue - a.netRevenue)
 }

@@ -30,11 +30,11 @@ export async function GET(req: NextRequest) {
     const endDate = parseDateParam(req.nextUrl.searchParams.get('end_date'), defaultEnd)
 
     const sales = await fetchSalesHistory({ startDate, endDate })
-    const summary = summarizeSales(sales)
+    const summaryByCurrency = summarizeSales(sales)
 
     return NextResponse.json({
       range: { start: startDate.toISOString(), end: endDate.toISOString() },
-      summary,
+      summaryByCurrency,
       sales,
     })
   } catch (err: any) {
