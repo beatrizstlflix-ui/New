@@ -23,8 +23,8 @@ export async function GET(req: NextRequest) {
     const defaultStart = new Date(now)
     defaultStart.setUTCDate(defaultStart.getUTCDate() - 1)
     defaultStart.setUTCHours(0, 0, 0, 0)
-    const defaultEnd = new Date(now)
-    defaultEnd.setUTCHours(23, 59, 59, 999)
+    // Nunca manda um end_date no futuro (a Hotmart rejeita).
+    const defaultEnd = now
 
     const startDate = parseDateParam(req.nextUrl.searchParams.get('start_date'), defaultStart)
     const endDate = parseDateParam(req.nextUrl.searchParams.get('end_date'), defaultEnd)
