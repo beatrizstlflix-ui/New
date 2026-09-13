@@ -19,10 +19,23 @@ export async function GET() {
       cache: 'no-store',
     })
     const body = await res.text()
+    let tokenClaims: unknown = null
+    const parts = accessToken?.split('.') ?? []
+    if (parts.length === 3) {
+      try {
+        const payload = parts[1].replace(/-/g, '+').replace(/_/g, '/')
+        const padded = payload + '='.repeat((4 - (payload.length % 4)) % 4)
+        tokenClaims = JSON.parse(Buffer.from(padded, 'base64').toString('utf-8'))
+      } catch {
+        tokenClaims = 'nao foi possivel decodificar (nao e um JWT padrao)'
+      }
+    }
+
     return NextResponse.json({
       status: res.status,
       body,
       tokenLength: accessToken?.length ?? 0,
+      tokenClaims,
     })
   } catch (err: any) {
     return NextResponse.json({ error: err?.message ?? 'Erro desconhecido.' }, { status: 500 })
