@@ -23,12 +23,12 @@ interface FetchSalesHistoryOptions {
 
 const DEFAULT_TRANSACTION_STATUS = ['APPROVED', 'COMPLETE']
 
-export async function fetchSalesHistory({
-  startDate,
-  endDate,
-  transactionStatus = DEFAULT_TRANSACTION_STATUS,
-}: FetchSalesHistoryOptions): Promise<HotmartSale[]> {
-  const accessToken = await getHotmartAccessToken()
+async function fetchSalesHistoryForStatus(
+  startDate: Date,
+  endDate: Date,
+  status: string,
+  accessToken: string
+): Promise<HotmartSale[]> {
   const sales: HotmartSale[] = []
   let pageToken: string | undefined
 
@@ -36,9 +36,7 @@ export async function fetchSalesHistory({
     const url = new URL(SALES_HISTORY_URL)
     url.searchParams.set('start_date', String(startDate.getTime()))
     url.searchParams.set('end_date', String(endDate.getTime()))
-    for (const status of transactionStatus) {
-      url.searchParams.append('transaction_status', status)
-    }
+    url.searchParams.set('transaction_status', status)
     if (pageToken) url.searchParams.set('page_token', pageToken)
 
     const res = await fetch(url.toString(), {
@@ -73,6 +71,18 @@ export async function fetchSalesHistory({
   } while (pageToken)
 
   return sales
+}
+
+export async function fetchSalesHistory({
+  startDate,
+  endDate,
+  transactionStatus = DEFAULT_TRANSACTION_STATUS,
+}: FetchSalesHistoryOptions): Promise<HotmartSale[]> {
+  const accessToken = await getHotmartAccessToken()
+  const results = await Promise.all(
+    transactionStatus.map((status) => fetchSalesHistoryForStatus(startDate, endDate, status, accessToken))
+  )
+  return results.flat()
 }
 
 export interface HotmartProductBreakdown {
