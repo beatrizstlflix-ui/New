@@ -19,7 +19,11 @@ export async function GET() {
       cache: 'no-store',
     })
     const body = await res.text()
-    return NextResponse.json({ status: res.status, body })
+    return NextResponse.json({
+      status: res.status,
+      body,
+      tokenLength: accessToken?.length ?? 0,
+    })
   } catch (err: any) {
     return NextResponse.json({ error: err?.message ?? 'Erro desconhecido.' }, { status: 500 })
   }
