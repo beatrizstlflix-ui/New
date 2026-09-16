@@ -174,7 +174,12 @@ const dashboardData = {
       metaSpend: 9695.44,
       googleSpend: 1129.59,
       hotmartRevenue: 63000.08,
-      hotmartSales: 105
+      hotmartSales: 105,
+      // Produtos identificados como BF/aniversário na lista de "Visão por
+      // produto" de ontem enviada pelo usuário (não é meta/estimativa).
+      promoRevenue: 535.48,
+      promoSales: 2,
+      promoNote: "Identificado na lista de produtos vendidos ontem: [BF25] [USD] Lifetime STLFLIX + STLACADEMY (2 vendas, R$ 535,48). Essa lista de produtos soma R$ 59.294,79 dos R$ 63.000,08 totais do dia — pode haver outras vendas BF/aniversário nos R$ 3.705,29 restantes que não estavam detalhados no print."
     },
     last4Days: {
       // 12/09/2026 a 15/09/2026 (mesmo recorte mostrado no painel de vendas)
@@ -614,6 +619,10 @@ function renderBusinessSummary(container){
 function periodCard(title, data, kind){
   const total = (isNum(data.metaSpend) && isNum(data.googleSpend)) ? data.metaSpend + data.googleSpend : null;
   const roas = roasValue(data.hotmartRevenue, total);
+  const hasPromo = isNum(data.promoRevenue) && data.promoRevenue>0;
+  const revenueExPromo = hasPromo && isNum(data.hotmartRevenue) ? data.hotmartRevenue - data.promoRevenue : null;
+  const roasExPromo = hasPromo ? roasValue(revenueExPromo, total) : null;
+
   const card = el("div", {class:`card period-card ${kind==='yesterday'?'yesterday':'last4'}`});
   card.appendChild(el("div",{class:"period-head"}, `<h3>${title}</h3>`));
 
@@ -621,8 +630,12 @@ function periodCard(title, data, kind){
     ["meta","Investimento Meta Ads", fmtBRL(data.metaSpend)],
     ["google","Investimento Google Ads", fmtBRL(data.googleSpend)],
     [null,"Investimento total (Meta + Google)", fmtBRL(total)],
-    ["hotmart","Receita líquida Hotmart", fmtBRL(data.hotmartRevenue)]
+    ["hotmart", hasPromo ? "Receita líquida Hotmart (total)" : "Receita líquida Hotmart", fmtBRL(data.hotmartRevenue)]
   ];
+  if(hasPromo){
+    rows.push([null, "&nbsp;&nbsp;— dos quais BF/aniversário identificados", `− ${fmtBRL(data.promoRevenue)}`]);
+    rows.push(["hotmart", "Receita líquida excluindo BF/aniversário", fmtBRL(revenueExPromo)]);
+  }
   rows.forEach(([src,label,val])=>{
     const li = el("div",{class:"line-item"});
     li.appendChild(el("span",{class:"lbl"}, `${src?`<span class="dot ${src}"></span>`:""}${label}`));
@@ -631,7 +644,10 @@ function periodCard(title, data, kind){
     card.appendChild(li);
   });
   if(isNum(data.hotmartSales)){
-    card.appendChild(el("div",{class:"metric-sub"}, `${fmtNum(data.hotmartSales)} vendas registradas no período`));
+    card.appendChild(el("div",{class:"metric-sub"}, `${fmtNum(data.hotmartSales)} vendas registradas no período${hasPromo?` (${fmtNum(data.promoSales)} identificadas como BF/aniversário)`:""}`));
+  }
+  if(hasPromo && data.promoNote){
+    card.appendChild(el("div",{class:"note"}, data.promoNote));
   }
 
   const roasBox = el("div",{class:"roas-box"});
@@ -641,6 +657,9 @@ function periodCard(title, data, kind){
     roasBox.appendChild(el("div",{class:"note"}, "Calculado só quando investimento Meta, Google e receita Hotmart do mesmo período estão disponíveis."));
   } else {
     roasBox.appendChild(el("div",{class:"roas-value ok"}, roas.toFixed(2).replace(".",",") + "x"));
+    if(hasPromo && roasExPromo!==null){
+      roasBox.appendChild(el("div",{class:"metric-sub", style:"margin-top:8px;"}, `ROAS excluindo BF/aniversário: <b style="color:var(--text)">${roasExPromo.toFixed(2).replace(".",",")}x</b>`));
+    }
   }
   card.appendChild(roasBox);
   return card;
