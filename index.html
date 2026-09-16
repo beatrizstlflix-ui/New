@@ -664,15 +664,18 @@ function periodCard(title, data, kind){
   }
 
   const roasBox = el("div",{class:"roas-box"});
-  roasBox.appendChild(el("div",{class:"lbl", html:"ROAS global (receita Hotmart ÷ investimento total)"}));
+  const showExPromoAsMain = hasPromo && roasExPromo!==null;
+  roasBox.appendChild(el("div",{class:"lbl", html: showExPromoAsMain
+    ? "ROAS global excluindo BF/aniversário (receita Hotmart sem promo ÷ investimento total)"
+    : "ROAS global (receita Hotmart ÷ investimento total)"}));
   if(roas===null){
     roasBox.appendChild(el("div",{class:"roas-value na"}, "Não informado"));
     roasBox.appendChild(el("div",{class:"note"}, "Calculado só quando investimento Meta, Google e receita Hotmart do mesmo período estão disponíveis."));
+  } else if(showExPromoAsMain){
+    roasBox.appendChild(el("div",{class:"roas-value ok"}, roasExPromo.toFixed(2).replace(".",",") + "x"));
+    roasBox.appendChild(el("div",{class:"metric-sub", style:"margin-top:8px;"}, `ROAS com receita total (incl. BF/aniversário): <b style="color:var(--text)">${roas.toFixed(2).replace(".",",")}x</b>`));
   } else {
     roasBox.appendChild(el("div",{class:"roas-value ok"}, roas.toFixed(2).replace(".",",") + "x"));
-    if(hasPromo && roasExPromo!==null){
-      roasBox.appendChild(el("div",{class:"metric-sub", style:"margin-top:8px;"}, `ROAS excluindo BF/aniversário: <b style="color:var(--text)">${roasExPromo.toFixed(2).replace(".",",")}x</b>`));
-    }
   }
   card.appendChild(roasBox);
   return card;
