@@ -188,6 +188,10 @@ const dashboardData = {
   // janela usada em "Performance por funil" e nos gráficos: 09/09 a 15/09/2026
   funnelWindow: { from: "2026-09-09", to: "2026-09-15" },
 
+  generalDemands: [
+    "Aguardando URL atualizada para ativar STLAI"
+  ],
+
   funnels: [
     {
       id: "assine",
@@ -361,6 +365,9 @@ const dashboardData = {
       id: "downsell",
       name: "DOWNSELL",
       color: "#a855f7",
+      demands: [
+        "Ativação de novos criativos"
+      ],
       campaigns: [
         {
           name: "[BRA] [DOWNSELL] conversão-vendas-downsell",
@@ -1135,6 +1142,18 @@ function renderCampaignAuditBlock(item){
   details.appendChild(body);
   return details;
 }
+
+function renderGeneralDemands(container){
+  if(!dashboardData.generalDemands || !dashboardData.generalDemands.length) return;
+  const sec = el("section");
+  sec.appendChild(el("div",{class:"section-title"}, `<h2>Demandas gerais</h2>`));
+  const card = el("div",{class:"card"});
+  const ul = el("ul",{style:"margin:0;padding-left:18px;"});
+  dashboardData.generalDemands.forEach(d=> ul.appendChild(el("li",{style:"margin-bottom:6px;font-size:13px;"}, d)));
+  card.appendChild(ul);
+  sec.appendChild(card);
+  container.appendChild(sec);
+}
 </script>
 
 <script>
@@ -1153,7 +1172,7 @@ function render(){
   header.appendChild(el("div",{class:"updated"}, `Última atualização: <b>${dashboardData.updatedAt}</b>`));
   app.appendChild(header);
 
-  [renderBusinessSummary, renderFunnelShareOverview, renderFunnels].forEach(fn=>{
+  [renderBusinessSummary, renderFunnelShareOverview, renderFunnels, renderGeneralDemands].forEach(fn=>{
     try{ fn(app); }
     catch(err){
       console.error(fn.name, err);
