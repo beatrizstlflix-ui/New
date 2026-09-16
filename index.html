@@ -735,6 +735,22 @@ function drawFunnelDailyChart(funnel, cardEl, canvas){
   }
   const cpaSeries = series.map(d => (isNum(d.spend) && isNum(d.conversions) && d.conversions>0) ? d.spend/d.conversions : null);
 
+  const dailyTableWrap = el("div",{class:"table-scroll", style:"margin-top:12px;"});
+  const dailyTable = el("table");
+  dailyTable.appendChild(el("thead",{},`<tr><th>Data</th><th>Investimento</th><th>Conversões</th><th>CPA</th></tr>`));
+  const dailyTbody = el("tbody");
+  series.forEach((d,i)=>{
+    const tr = el("tr");
+    tr.appendChild(el("td",{}, fmtDateBR(d.date)));
+    tr.appendChild(el("td",{}, fmtBRL(d.spend)));
+    tr.appendChild(el("td",{}, fmtNum(d.conversions)));
+    tr.appendChild(el("td",{}, cpaSeries[i]===null ? "Sem conversões" : fmtBRL(cpaSeries[i])));
+    dailyTbody.appendChild(tr);
+  });
+  dailyTable.appendChild(dailyTbody);
+  dailyTableWrap.appendChild(dailyTable);
+  cardEl.appendChild(dailyTableWrap);
+
   funnelChartInstances[funnel.id] = funnelChartInstances[funnel.id] || {};
   funnelChartInstances[funnel.id].daily = new Chart(canvas.getContext("2d"), {
     data:{
