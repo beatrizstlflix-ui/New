@@ -112,26 +112,9 @@ tr.inactive-row{opacity:.6;}
 .tab-btn{background:var(--card-2);border:1px solid var(--border);color:var(--text-dim);padding:7px 14px;border-radius:8px;font-size:12.5px;cursor:pointer;}
 .tab-btn.active{background:var(--accent);color:#fff;border-color:var(--accent);}
 .chart-box{position:relative;height:320px;}
-.chart-box.short{height:220px;}
 .empty-state{color:var(--text-faint);font-size:13px;padding:40px 10px;text-align:center;border:1px dashed var(--border);border-radius:8px;}
 
 select, .select{background:var(--card-2);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:8px;font-size:12.5px;}
-
-.facts-list{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
-@media (max-width:800px){.facts-list{grid-template-columns:1fr;}}
-.fact{background:var(--card-2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-size:13px;}
-.fact b{color:var(--text);}
-
-/* audit */
-.audit-summary-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:16px;}
-@media (max-width:1000px){.audit-summary-grid{grid-template-columns:repeat(2,1fr);}}
-.audit-count{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center;}
-.audit-count .n{font-size:24px;font-weight:800;}
-.audit-count .l{font-size:11px;color:var(--text-dim);margin-top:2px;}
-.audit-count.healthy .n{color:#4ade80;}
-.audit-count.attention .n{color:#f0a63a;}
-.audit-count.critical .n{color:#f87171;}
-.audit-count.insufficient .n{color:var(--text-faint);}
 
 .class-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;padding:4px 10px;border-radius:6px;font-weight:700;}
 .class-badge.healthy{background:rgba(34,197,94,.14);color:#4ade80;}
@@ -159,27 +142,6 @@ select, .select{background:var(--card-2);border:1px solid var(--border);color:va
 .insight-block .ik{font-weight:700;color:var(--text-dim);font-size:11px;text-transform:uppercase;letter-spacing:.03em;}
 .insight-block p{margin:3px 0 8px;}
 .insight-block p:last-child{margin-bottom:0;}
-.reco-line{display:flex;gap:8px;margin-top:8px;font-size:12.5px;}
-.reco-line .prio{font-size:10.5px;padding:2px 8px;border-radius:5px;font-weight:700;white-space:nowrap;height:fit-content;}
-.prio.urgente{background:rgba(239,68,68,.18);color:#f87171;}
-.prio.alta{background:rgba(240,166,58,.18);color:#f0a63a;}
-.prio.media{background:rgba(91,140,255,.18);color:#8ab0ff;}
-.prio.baixa{background:rgba(255,255,255,.07);color:var(--text-dim);}
-
-.filters-bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:16px;}
-.filters-bar select{min-width:140px;}
-.chk-btn{display:flex;align-items:center;gap:7px;background:var(--card-2);border:1px solid var(--border);padding:8px 14px;border-radius:8px;font-size:12.5px;cursor:pointer;}
-.chk-btn input{accent-color:var(--accent);}
-
-.action-status{background:var(--card-2);border:1px solid var(--border);color:var(--text);padding:5px 8px;border-radius:6px;font-size:11.5px;}
-.exec-summary{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:18px;}
-@media (max-width:800px){.exec-summary{grid-template-columns:1fr;}}
-.exec-box{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px;}
-.exec-box .k{font-size:11px;color:var(--text-faint);text-transform:uppercase;letter-spacing:.03em;margin-bottom:6px;}
-.exec-box .v{font-size:13px;}
-.conclusion-box{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px;margin-top:18px;}
-.conclusion-box ol{margin:8px 0 0;padding-left:20px;}
-.conclusion-box li{margin-bottom:6px;}
 
 footer{color:var(--text-faint);font-size:11.5px;text-align:center;padding-top:20px;border-top:1px solid var(--border);}
 </style>
@@ -691,7 +653,6 @@ function renderFunnels(container){
   });
   sec.appendChild(grid);
 
-  sec.appendChild(renderFacts(meta7));
   container.appendChild(sec);
 }
 
@@ -734,23 +695,13 @@ function renderFunnelCard(funnel, meta7, auditModel){
   const body = el("div",{class:"funnel-body"});
   body.appendChild(renderCampaignTable(funnel, stats));
 
-  const chartsGrid = el("div",{class:"grid grid-2", style:"margin-top:16px;"});
-  const dailyCard = el("div",{class:"card"});
-  dailyCard.appendChild(el("h3",{}, "Evolução diária (investimento e conversões)"));
-  const dailyBoxWrap = el("div",{class:"chart-box short"});
+  const dailyCard = el("div",{class:"card", style:"margin-top:16px;"});
+  dailyCard.appendChild(el("h3",{}, "Evolução diária (investimento, conversões e CPA)"));
+  const dailyBoxWrap = el("div",{class:"chart-box"});
   const dailyCanvas = el("canvas");
   dailyBoxWrap.appendChild(dailyCanvas);
   dailyCard.appendChild(dailyBoxWrap);
-  chartsGrid.appendChild(dailyCard);
-
-  const campCard = el("div",{class:"card"});
-  campCard.appendChild(el("h3",{}, "Investimento por campanha"));
-  const campBoxWrap = el("div",{class:"chart-box short"});
-  const campCanvas = el("canvas");
-  campBoxWrap.appendChild(campCanvas);
-  campCard.appendChild(campBoxWrap);
-  chartsGrid.appendChild(campCard);
-  body.appendChild(chartsGrid);
+  body.appendChild(dailyCard);
 
   const auditWrap = el("div",{style:"margin-top:18px;"});
   auditWrap.appendChild(el("h3",{style:"font-size:12.5px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px;"}, "Auditoria das campanhas deste funil"));
@@ -766,7 +717,6 @@ function renderFunnelCard(funnel, meta7, auditModel){
     if(body.classList.contains("open") && !drawn){
       drawn = true;
       drawFunnelDailyChart(funnel, dailyCard, dailyCanvas);
-      drawFunnelCampaignChart(funnel, campCard, campCanvas);
     }
   });
 
@@ -783,49 +733,31 @@ function drawFunnelDailyChart(funnel, cardEl, canvas){
     canvas.replaceWith(el("div",{class:"empty-state"}, "Não há detalhamento diário disponível para este funil."));
     return;
   }
+  const cpaSeries = series.map(d => (isNum(d.spend) && isNum(d.conversions) && d.conversions>0) ? d.spend/d.conversions : null);
+
   funnelChartInstances[funnel.id] = funnelChartInstances[funnel.id] || {};
   funnelChartInstances[funnel.id].daily = new Chart(canvas.getContext("2d"), {
     data:{
       labels: series.map(d=>fmtDateBR(d.date)),
       datasets:[
         { type:"bar", label:"Investimento (R$)", data: series.map(d=>d.spend), backgroundColor: funnel.color+"99", borderRadius:4, yAxisID:"y" },
-        { type:"line", label:"Conversões", data: series.map(d=>d.conversions), borderColor:"#4ade80", backgroundColor:"#4ade80", tension:.3, yAxisID:"y1" }
+        { type:"line", label:"Conversões", data: series.map(d=>d.conversions), borderColor:"#4ade80", backgroundColor:"#4ade80", tension:.3, yAxisID:"y1" },
+        { type:"line", label:"CPA (R$)", data: cpaSeries, borderColor:"#f0a63a", backgroundColor:"#f0a63a", borderDash:[5,3], tension:.3, spanGaps:true, yAxisID:"y2" }
       ]
     },
     options:{
       responsive:true, maintainAspectRatio:false,
       plugins:{ legend:{labels:{color:"#e7ebf1", boxWidth:10}}, tooltip:{ callbacks:{ label: ctx => {
         if(ctx.dataset.label.indexOf("Investimento")>=0) return ` ${fmtBRL(ctx.parsed.y)}`;
+        if(ctx.dataset.label.indexOf("CPA")>=0) return ctx.parsed.y===null ? " CPA: sem conversões" : ` CPA: ${fmtBRL(ctx.parsed.y)}`;
         return ` ${fmtNum(ctx.parsed.y)} conversões`;
       }}}},
       scales:{
         y:{ position:"left", ticks:{ color:"#9aa7b8", callback:v=>fmtBRL(v)}, grid:{color:"#232a35"} },
         y1:{ position:"right", ticks:{ color:"#9aa7b8" }, grid:{display:false} },
+        y2:{ position:"right", display:false },
         x:{ ticks:{ color:"#e7ebf1", font:{size:10.5} }, grid:{display:false} }
       }
-    }
-  });
-}
-
-function drawFunnelCampaignChart(funnel, cardEl, canvas){
-  const camps = funnel.campaigns.filter(c=>isNum(c.spend7d)).map(c=>({name:c.name, spend:c.spend7d}));
-  if(!chartsAvailable()){
-    canvas.replaceWith(el("div",{class:"empty-state"}, "Não foi possível carregar a biblioteca de gráficos."));
-    return;
-  }
-  if(!camps.length || camps.every(c=>c.spend===0)){
-    canvas.replaceWith(el("div",{class:"empty-state"}, "Sem investimento registrado nas campanhas deste funil."));
-    return;
-  }
-  camps.sort((a,b)=>b.spend-a.spend);
-  funnelChartInstances[funnel.id] = funnelChartInstances[funnel.id] || {};
-  funnelChartInstances[funnel.id].campaigns = new Chart(canvas.getContext("2d"), {
-    type:"bar",
-    data:{ labels: camps.map(c=>c.name.length>30?c.name.slice(0,28)+"…":c.name), datasets:[{ data: camps.map(c=>c.spend), backgroundColor: funnel.color, borderRadius:6 }]},
-    options:{
-      indexAxis:"y", responsive:true, maintainAspectRatio:false,
-      plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: ctx => ` ${fmtBRL(ctx.parsed.x)}`, title: items => camps[items[0].dataIndex].name }}},
-      scales:{ x:{ ticks:{ color:"#9aa7b8", callback:v=>fmtBRL(v)}, grid:{color:"#232a35"} }, y:{ ticks:{ color:"#e7ebf1", font:{size:10} }, grid:{display:false} } }
     }
   });
 }
@@ -905,61 +837,6 @@ function renderCampaignTable(funnel, funnelStats){
   return wrap;
 }
 
-function renderFacts(meta7){
-  const box = el("div",{class:"card", style:"margin-top:16px;"});
-  box.appendChild(el("h3",{}, "Indicadores automáticos"));
-  const facts = [];
-
-  const funnelStatsList = dashboardData.funnels.map(f=>({f, s:computeFunnelStats(f)}));
-  const withSpend = funnelStatsList.filter(x=>isNum(x.s.spend) && x.s.spend>0);
-  const withConv = funnelStatsList.filter(x=>isNum(x.s.conv) && x.s.conv>0);
-  const withCPA = funnelStatsList.filter(x=>isNum(x.s.cpa));
-
-  if(withSpend.length){
-    const top = withSpend.reduce((a,b)=> b.s.spend>a.s.spend?b:a);
-    facts.push(`O funil <b>${top.f.name}</b> concentrou ${fmtPct(top.s.spend/meta7.spend)} do investimento Meta dos últimos 7 dias (${fmtBRL(top.s.spend)}).`);
-  }
-  if(withConv.length){
-    const top = withConv.reduce((a,b)=> b.s.conv>a.s.conv?b:a);
-    facts.push(`O funil <b>${top.f.name}</b> reportou o maior número de conversões: ${fmtNum(top.s.conv)} (${fmtPct(top.s.conv/meta7.conv)} do total).`);
-  }
-  if(withCPA.length){
-    const best = withCPA.reduce((a,b)=> b.s.cpa<a.s.cpa?b:a);
-    facts.push(`Entre os funis com conversões, <b>${best.f.name}</b> tem o menor custo por resultado consolidado: ${fmtBRL(best.s.cpa)}.`);
-  }
-
-  let topCampaign=null;
-  dashboardData.funnels.forEach(f=>f.campaigns.forEach(c=>{
-    if(isNum(c.spend7d) && (!topCampaign || c.spend7d>topCampaign.spend7d)) topCampaign={...c, funnel:f.name};
-  }));
-  if(topCampaign) facts.push(`A campanha com maior investimento é <b>${topCampaign.name}</b> (funil ${topCampaign.funnel}), com ${fmtBRL(topCampaign.spend7d)}.`);
-
-  const noConvSpend = [];
-  dashboardData.funnels.forEach(f=>f.campaigns.forEach(c=>{
-    if(isNum(c.spend7d) && c.spend7d>0 && c.conversions7d===0) noConvSpend.push({...c, funnel:f.name});
-  }));
-  if(noConvSpend.length){
-    noConvSpend.forEach(c=> facts.push(`A campanha <b>${c.name}</b> (funil ${c.funnel}) teve investimento (${fmtBRL(c.spend7d)}) sem nenhuma conversão registrada no período.`));
-  } else {
-    facts.push("Nenhuma campanha com investimento no período ficou sem conversões registradas.");
-  }
-
-  const inactiveWithResult = [];
-  dashboardData.funnels.forEach(f=>f.campaigns.forEach(c=>{
-    if(c.status==="inactive" && ((isNum(c.spend7d)&&c.spend7d>0) || (isNum(c.conversions7d)&&c.conversions7d>0))) inactiveWithResult.push({...c, funnel:f.name});
-  }));
-  if(inactiveWithResult.length){
-    inactiveWithResult.forEach(c=> facts.push(`A campanha desativada <b>${c.name}</b> (funil ${c.funnel}) ainda registrou investimento/conversões no período — vale revisar se o desligamento foi intencional.`));
-  } else {
-    facts.push("Nenhuma campanha desativada registrou investimento ou conversões no período.");
-  }
-
-  const list = el("div",{class:"facts-list"});
-  facts.forEach(f=> list.appendChild(el("div",{class:"fact", html:f})));
-  box.appendChild(list);
-  box.appendChild(el("div",{class:"note"}, "Sem meta de CPA ou ROAS cadastrada em auditConfig, nenhum funil é classificado como \"bom\" ou \"ruim\" — apenas fatos observados nos dados."));
-  return box;
-}
 </script>
 
 <script>
@@ -1084,15 +961,6 @@ function buildAuditModel(){
   return model;
 }
 
-function actionPriority(item){
-  if(item.classification==="critical") return "urgente";
-  if(item.classification==="attention" && item.confidence==="alta") return "alta";
-  if(item.classification==="attention") return "media";
-  if(item.classification==="scale_opportunity") return "media";
-  if(item.classification==="insufficient") return "baixa";
-  return "baixa";
-}
-
 function recommendationFor(item){
   switch(item.classification){
     case "critical": return "Revisar oferta, pixel/API de conversões e UTMs antes de qualquer novo aporte de verba.";
@@ -1178,97 +1046,6 @@ function bottleneckHypothesis(camp, funnel){
   return {...m, notes, flat};
 }
 
-let auditFilters = {funnel:"all", priority:"all"};
-let actionStatusStore = {};
-try{ actionStatusStore = JSON.parse(localStorage.getItem("stlflix_action_status")||"{}"); }catch(e){ actionStatusStore = {}; }
-function saveActionStatus(){ try{ localStorage.setItem("stlflix_action_status", JSON.stringify(actionStatusStore)); }catch(e){} }
-
-function renderAudit(container){
-  const sec = el("section");
-  sec.appendChild(el("div",{class:"section-title"}, `<h2>Auditoria estratégica das campanhas</h2><span class="tag">Gerada automaticamente a partir dos dados cadastrados</span>`));
-
-  const model = buildAuditModel();
-
-  // resumo executivo
-  const counts = {healthy:0, attention:0, critical:0, insufficient:0, scale_opportunity:0};
-  model.forEach(m=>counts[m.classification]++);
-
-  const summaryGrid = el("div",{class:"audit-summary-grid"});
-  [["healthy","Saudáveis"],["scale_opportunity","Oport. de escala"],["attention","Atenção"],["critical","Críticas"],["insufficient","Dados insuf."]].forEach(([k,l])=>{
-    const box = el("div",{class:`audit-count ${k}`});
-    box.appendChild(el("div",{class:"n"}, String(counts[k])));
-    box.appendChild(el("div",{class:"l"}, l));
-    summaryGrid.appendChild(box);
-  });
-  sec.appendChild(summaryGrid);
-
-  const exec = el("div",{class:"exec-summary"});
-  const meta7 = metaTotals7d();
-  const funnelStatsList = dashboardData.funnels.map(f=>({f,s:computeFunnelStats(f)}));
-
-  const bestPositive = model.filter(m=>m.classification==="scale_opportunity")
-    .sort((a,b)=> (b.camp.conversions7d - cpaValue(b.camp.spend7d,b.camp.conversions7d)) - (a.camp.conversions7d - cpaValue(a.camp.spend7d,a.camp.conversions7d)))[0]
-    || model.filter(m=>m.classification==="healthy").sort((a,b)=>b.camp.conversions7d-a.camp.conversions7d)[0];
-  const mainRisk = model.filter(m=>m.classification==="critical")[0] || model.filter(m=>m.classification==="attention").sort((a,b)=>b.camp.spend7d-a.camp.spend7d)[0];
-  const withSpendF = funnelStatsList.filter(x=>isNum(x.s.spend)&&x.s.spend>0);
-  const topFunnelSpend = withSpendF.length ? withSpendF.reduce((a,b)=>b.s.spend>a.s.spend?b:a) : null;
-  const urgentItem = model.filter(m=>actionPriority(m)==="urgente")[0] || model.filter(m=>actionPriority(m)==="alta")[0];
-
-  const execData = [
-    ["Campanhas analisadas", `${model.length} campanhas em ${dashboardData.funnels.length} funis.`],
-    ["Principal ponto positivo", bestPositive ? `A campanha <b>${bestPositive.camp.name}</b> (funil ${bestPositive.funnel.name}) gerou ${fmtNum(bestPositive.camp.conversions7d)} conversões a um CPA de ${cpaLabel(bestPositive.camp.spend7d,bestPositive.camp.conversions7d)}.` : "Nenhuma campanha atingiu volume suficiente para ser destacada como oportunidade de escala neste período."],
-    ["Principal risco identificado", mainRisk ? `A campanha <b>${mainRisk.camp.name}</b> (funil ${mainRisk.funnel.name}) — ${mainRisk.reason}` : "Nenhuma campanha em situação crítica ou de atenção neste período."],
-    ["Maior oportunidade de otimização", topFunnelSpend ? `O funil <b>${topFunnelSpend.f.name}</b> concentra ${fmtPct(topFunnelSpend.s.spend/meta7.spend)} do investimento monitorado — qualquer ganho de eficiência ali tem o maior impacto absoluto.` : "Não informado."],
-    ["Ação mais urgente recomendada", urgentItem ? `${recommendationFor(urgentItem)} (campanha ${urgentItem.camp.name}).` : "Nenhuma ação de prioridade urgente ou alta identificada neste período."]
-  ];
-  execData.forEach(([k,v])=>{
-    const box = el("div",{class:"exec-box"});
-    box.appendChild(el("div",{class:"k"}, k));
-    box.appendChild(el("div",{class:"v", html:v}));
-    exec.appendChild(box);
-  });
-  sec.appendChild(exec);
-
-  sec.appendChild(el("div",{class:"note"}, "O detalhamento por campanha (diagnóstico, recomendação e hipóteses de gargalo) está dentro de cada funil, na seção \"Performance por funil\" acima. Abaixo, o plano de ação prioritário cruzando todos os funis."));
-
-  // filtros leves — só para o plano de ação
-  const filtersBar = el("div",{class:"filters-bar"});
-  const selFunnel = el("select");
-  selFunnel.appendChild(el("option",{value:"all"},"Todos os funis"));
-  dashboardData.funnels.forEach(f=>selFunnel.appendChild(el("option",{value:f.id},f.name)));
-  const selPrio = el("select");
-  selPrio.innerHTML = `<option value="all">Toda prioridade</option>` + Object.keys(PRIO_LABEL).map(k=>`<option value="${k}">${PRIO_LABEL[k]}</option>`).join("");
-  [selFunnel,selPrio].forEach(s=>filtersBar.appendChild(s));
-  sec.appendChild(el("h3",{style:"margin:20px 0 10px;font-size:14px;"}, "Plano de ação recomendado"));
-  sec.appendChild(filtersBar);
-
-  const planWrap = el("div");
-  sec.appendChild(planWrap);
-
-  const conclusion = el("div",{class:"conclusion-box"});
-  sec.appendChild(conclusion);
-
-  function applyFilters(){
-    return model.filter(m=>{
-      if(auditFilters.funnel!=="all" && m.funnel.id!==auditFilters.funnel) return false;
-      if(auditFilters.priority!=="all" && actionPriority(m)!==auditFilters.priority) return false;
-      return true;
-    });
-  }
-
-  function redraw(){
-    const filtered = applyFilters();
-    renderActionPlan(planWrap, filtered);
-    renderConclusion(conclusion, model, funnelStatsList, meta7);
-  }
-
-  selFunnel.addEventListener("change",()=>{auditFilters.funnel=selFunnel.value; redraw();});
-  selPrio.addEventListener("change",()=>{auditFilters.priority=selPrio.value; redraw();});
-
-  redraw();
-  container.appendChild(sec);
-}
-
 function renderCampaignAuditBlock(item){
   const {camp, funnel, fStats, medianCPA} = item;
   const details = el("details",{class:"campaign-audit"});
@@ -1323,92 +1100,6 @@ function renderCampaignAuditBlock(item){
   details.appendChild(body);
   return details;
 }
-
-function renderActionPlan(container, items){
-  container.innerHTML = "";
-  const actionable = items.filter(i=>["critical","attention","scale_opportunity","insufficient"].includes(i.classification));
-  if(!actionable.length){ container.appendChild(el("div",{class:"empty-state"},"Nenhuma ação pendente para os filtros atuais.")); return; }
-
-  const order = {urgente:0, alta:1, media:2, baixa:3};
-  actionable.sort((a,b)=> order[actionPriority(a)] - order[actionPriority(b)]);
-
-  const table = el("table");
-  table.appendChild(el("thead",{},`<tr>
-    <th>Prioridade</th><th>Funil</th><th>Campanha</th><th>Problema/Oportunidade</th>
-    <th>Evidência</th><th>Ação recomendada</th><th>Confiança</th><th>Status</th></tr>`));
-  const tbody = el("tbody");
-  actionable.forEach(item=>{
-    const prio = actionPriority(item);
-    const rowId = item.funnel.id + "::" + item.camp.name;
-    const tr = el("tr");
-    tr.appendChild(el("td",{}, `<span class="prio ${prio}">${PRIO_LABEL[prio]}</span>`));
-    tr.appendChild(el("td",{}, item.funnel.name));
-    tr.appendChild(el("td",{}, item.camp.name));
-    tr.appendChild(el("td",{}, CLASS_LABEL[item.classification]));
-    tr.appendChild(el("td",{}, item.evidence[0] || "—"));
-    tr.appendChild(el("td",{}, recommendationFor(item)));
-    tr.appendChild(el("td",{}, item.confidence));
-    const statusTd = el("td");
-    const sel = el("select",{class:"action-status"});
-    ["Pendente","Em análise","Em execução","Concluída"].forEach(s=>sel.appendChild(el("option",{value:s},s)));
-    sel.value = actionStatusStore[rowId] || "Pendente";
-    sel.addEventListener("change", ()=>{ actionStatusStore[rowId]=sel.value; saveActionStatus(); });
-    statusTd.appendChild(sel);
-    tr.appendChild(statusTd);
-    tbody.appendChild(tr);
-  });
-  table.appendChild(tbody);
-  const scrollWrap = el("div",{class:"table-scroll"});
-  scrollWrap.appendChild(table);
-  container.appendChild(scrollWrap);
-}
-
-function renderConclusion(container, model, funnelStatsList, meta7){
-  container.innerHTML = "";
-  container.appendChild(el("h3",{style:"font-size:14px;margin-bottom:10px;"}, "Conclusão executiva"));
-
-  const scaleOps = model.filter(m=>m.classification==="scale_opportunity");
-  const attention = model.filter(m=>m.classification==="attention");
-  const critical = model.filter(m=>m.classification==="critical");
-  const insufficient = model.filter(m=>m.classification==="insufficient");
-  const withSpendF = funnelStatsList.filter(x=>isNum(x.s.spend)&&x.s.spend>0);
-  const mostAttentionFunnelId = attention.length ? attention.reduce((acc,m)=>{ acc[m.funnel.id]=(acc[m.funnel.id]||0)+1; return acc; },{}) : {};
-  const funnelNeedsAttention = Object.keys(mostAttentionFunnelId).length
-    ? dashboardData.funnels.find(f=>f.id===Object.entries(mostAttentionFunnelId).sort((a,b)=>b[1]-a[1])[0][0])
-    : null;
-  const bestOpportunity = scaleOps.sort((a,b)=>b.camp.conversions7d-a.camp.conversions7d)[0];
-
-  const workingText = scaleOps.length
-    ? `${scaleOps.length} campanha(s) reúnem volume de conversões suficiente e CPA em linha com o funil, indicando espaço para escalar investimento com segurança.`
-    : "Nenhuma campanha reuniu, no período, volume e CPA suficientes para recomendação de escala.";
-
-  const inefficiencyText = critical.length
-    ? `A maior ineficiência está nas ${critical.length} campanha(s) críticas, com investimento sem retorno registrado.`
-    : attention.length
-      ? `A maior ineficiência aparece nas ${attention.length} campanha(s) em atenção, com CPA acima do funil ou distribuição de verba desproporcional aos resultados.`
-      : "Não foram identificadas ineficiências relevantes com os critérios configurados atualmente.";
-
-  const p = (t)=> el("p",{style:"margin:4px 0 12px;"}, t);
-  container.appendChild(p(workingText));
-  container.appendChild(p(inefficiencyText));
-  container.appendChild(p(funnelNeedsAttention ? `O funil que mais precisa de atenção é <b>${funnelNeedsAttention.name}</b>.` : "Nenhum funil concentrou sinais de atenção suficientes para destaque."));
-  container.appendChild(p(bestOpportunity ? `A melhor oportunidade identificada é a campanha <b>${bestOpportunity.camp.name}</b> (funil ${bestOpportunity.funnel.name}).` : "Nenhuma campanha se destacou como melhor oportunidade neste período."));
-  container.appendChild(p(insufficient.length ? `Antes de qualquer mudança, investigar as ${insufficient.length} campanha(s) com dados insuficientes (desativadas, em análise ou com poucas conversões) para não tomar decisão precipitada.` : "Não há campanhas com dados insuficientes pendentes de investigação."));
-
-  const top3 = model
-    .filter(m=>["critical","attention","scale_opportunity"].includes(m.classification))
-    .sort((a,b)=>{ const o={critical:0,attention:1,scale_opportunity:2}; return o[a.classification]-o[b.classification]; })
-    .slice(0,3);
-  const ol = el("ol");
-  if(top3.length){
-    top3.forEach(m=> ol.appendChild(el("li",{}, `${recommendationFor(m)} — ${m.camp.name} (${funnel_name_of(m)})`)));
-  } else {
-    ol.appendChild(el("li",{}, "Manter monitoramento diário; nenhuma ação prioritária identificada neste ciclo."));
-  }
-  container.appendChild(el("div",{},"<b>Três ações prioritárias para o próximo ciclo:</b>"));
-  container.appendChild(ol);
-}
-function funnel_name_of(m){ return m.funnel.name; }
 </script>
 
 <script>
@@ -1427,7 +1118,7 @@ function render(){
   header.appendChild(el("div",{class:"updated"}, `Última atualização: <b>${dashboardData.updatedAt}</b>`));
   app.appendChild(header);
 
-  [renderBusinessSummary, renderFunnelShareOverview, renderFunnels, renderAudit].forEach(fn=>{
+  [renderBusinessSummary, renderFunnelShareOverview, renderFunnels].forEach(fn=>{
     try{ fn(app); }
     catch(err){
       console.error(fn.name, err);
