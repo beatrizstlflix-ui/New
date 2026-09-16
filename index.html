@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Executivo | STLFLIX</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<style>
+:root{
+  --bg:#0c0f13; --bg-elev:#12161c; --card:#161b22; --card-2:#1b212a;
+  --border:#262d38; --text:#e7ebf1; --text-dim:#9aa7b8; --text-faint:#6b7688;
+  --accent:#5b8cff;
+  --assine:#6366f1; --lari:#14b8a6; --lote:#f0a63a; --downsell:#a855f7;
+  --green:#22c55e; --red:#ef4444; --amber:#f0a63a;
+  --radius:12px;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif;font-size:14px;line-height:1.5;}
+.wrap{max-width:1400px;margin:0 auto;padding:20px 24px 80px;}
+a{color:inherit;}
+h1,h2,h3,h4{margin:0;font-weight:600;}
+.header{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;padding-bottom:20px;border-bottom:1px solid var(--border);margin-bottom:24px;}
+.header h1{font-size:22px;letter-spacing:-0.02em;}
+.header .sub{color:var(--text-dim);font-size:13px;margin-top:4px;}
+.updated{background:var(--card);border:1px solid var(--border);border-radius:999px;padding:8px 16px;font-size:12.5px;color:var(--text-dim);white-space:nowrap;}
+.updated b{color:var(--text);}
+section{margin-bottom:36px;}
+.section-title{display:flex;align-items:baseline;gap:10px;margin-bottom:14px;}
+.section-title h2{font-size:16px;}
+.section-title .tag{font-size:11px;color:var(--text-faint);text-transform:uppercase;letter-spacing:.06em;}
+.note{color:var(--text-faint);font-size:12px;margin-top:6px;}
+.grid{display:grid;gap:16px;}
+.grid-2{grid-template-columns:repeat(2,1fr);}
+.grid-3{grid-template-columns:repeat(3,1fr);}
+.grid-4{grid-template-columns:repeat(4,1fr);}
+.grid-5{grid-template-columns:repeat(5,1fr);}
+@media (max-width:1100px){.grid-4{grid-template-columns:repeat(2,1fr);} .grid-5{grid-template-columns:repeat(3,1fr);} .grid-3{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:640px){.grid-2,.grid-3,.grid-4,.grid-5{grid-template-columns:1fr;}}
+
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;}
+.card h3{font-size:12.5px;color:var(--text-dim);font-weight:500;text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px;}
+.metric{font-size:26px;font-weight:700;letter-spacing:-0.02em;}
+.metric.small{font-size:19px;}
+.metric-sub{color:var(--text-dim);font-size:12.5px;margin-top:4px;}
+.na{color:var(--text-faint);font-weight:500;font-style:italic;font-size:16px;}
+
+.source-pill{display:inline-flex;align-items:center;gap:6px;font-size:11px;padding:3px 9px;border-radius:999px;border:1px solid var(--border);color:var(--text-dim);}
+.dot{width:7px;height:7px;border-radius:50%;display:inline-block;}
+.dot.meta{background:#5b8cff;} .dot.google{background:#f0a63a;} .dot.hotmart{background:#22c55e;}
+
+.period-card{border-top:3px solid var(--accent);}
+.period-card.yesterday{border-top-color:#5b8cff;}
+.period-card.last4{border-top-color:#22c55e;}
+.period-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+.period-head h3{font-size:14px;color:var(--text);text-transform:none;letter-spacing:0;}
+.roas-box{margin-top:14px;padding-top:14px;border-top:1px dashed var(--border);}
+.roas-value{font-size:32px;font-weight:800;}
+.roas-value.ok{color:var(--green);}
+.line-item{display:flex;justify-content:space-between;padding:6px 0;font-size:13px;border-bottom:1px solid rgba(255,255,255,0.03);}
+.line-item:last-child{border-bottom:none;}
+.line-item .lbl{color:var(--text-dim);display:flex;align-items:center;gap:7px;}
+.line-item .val{font-weight:600;}
+
+/* funnel cards */
+.funnel-card{border-left:4px solid var(--fc);border-radius:var(--radius);background:var(--card);border-top:1px solid var(--border);border-right:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;}
+.funnel-top{padding:18px 20px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:flex-start;}
+.funnel-name{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:700;}
+.funnel-swatch{width:11px;height:11px;border-radius:3px;background:var(--fc);}
+.funnel-metrics{display:flex;gap:26px;flex-wrap:wrap;margin-top:14px;}
+.fm{min-width:100px;}
+.fm .lbl{font-size:11px;color:var(--text-faint);text-transform:uppercase;letter-spacing:.04em;}
+.fm .val{font-size:18px;font-weight:700;margin-top:2px;}
+.funnel-badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:2px;}
+.badge{font-size:10.5px;padding:3px 8px;border-radius:6px;font-weight:600;letter-spacing:.02em;}
+.badge.active{background:rgba(34,197,94,.14);color:#4ade80;}
+.badge.inactive{background:rgba(255,255,255,.06);color:var(--text-faint);}
+.badge.in_review{background:rgba(240,166,58,.16);color:#f0a63a;}
+.toggle-btn{background:var(--card-2);border:1px solid var(--border);color:var(--text);padding:8px 14px;border-radius:8px;font-size:12.5px;cursor:pointer;white-space:nowrap;}
+.toggle-btn:hover{background:#232b36;}
+.funnel-body{display:none;border-top:1px solid var(--border);background:var(--bg-elev);padding:16px 20px 20px;}
+.funnel-body.open{display:block;}
+
+.table-scroll{overflow-x:auto;max-width:100%;}
+table{width:100%;border-collapse:collapse;font-size:12.5px;}
+th{text-align:left;color:var(--text-faint);font-weight:600;text-transform:uppercase;font-size:10.5px;letter-spacing:.04em;padding:8px 10px;border-bottom:1px solid var(--border);cursor:pointer;user-select:none;white-space:nowrap;}
+th:hover{color:var(--text);}
+th.sorted::after{content:" ▾";}
+td{padding:9px 10px;border-bottom:1px solid rgba(255,255,255,0.04);vertical-align:middle;}
+tr.inactive-row td{color:var(--text-faint);}
+tr.inactive-row{opacity:.6;}
+.status-dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:6px;}
+.status-dot.active{background:var(--green);}
+.status-dot.inactive{background:var(--text-faint);}
+.status-dot.in_review{background:var(--amber);}
+
+.tabs{display:flex;gap:6px;margin-bottom:12px;}
+.tab-btn{background:var(--card-2);border:1px solid var(--border);color:var(--text-dim);padding:7px 14px;border-radius:8px;font-size:12.5px;cursor:pointer;}
+.tab-btn.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+.chart-box{position:relative;height:320px;}
+.chart-box.short{height:220px;}
+.empty-state{color:var(--text-faint);font-size:13px;padding:40px 10px;text-align:center;border:1px dashed var(--border);border-radius:8px;}
+
+select, .select{background:var(--card-2);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:8px;font-size:12.5px;}
+
+.facts-list{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+@media (max-width:800px){.facts-list{grid-template-columns:1fr;}}
+.fact{background:var(--card-2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-size:13px;}
+.fact b{color:var(--text);}
+
+/* audit */
+.audit-summary-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:16px;}
+@media (max-width:1000px){.audit-summary-grid{grid-template-columns:repeat(2,1fr);}}
+.audit-count{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center;}
+.audit-count .n{font-size:24px;font-weight:800;}
+.audit-count .l{font-size:11px;color:var(--text-dim);margin-top:2px;}
+.audit-count.healthy .n{color:#4ade80;}
+.audit-count.attention .n{color:#f0a63a;}
+.audit-count.critical .n{color:#f87171;}
+.audit-count.insufficient .n{color:var(--text-faint);}
+
+.class-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;padding:4px 10px;border-radius:6px;font-weight:700;}
+.class-badge.healthy{background:rgba(34,197,94,.14);color:#4ade80;}
+.class-badge.scale_opportunity{background:rgba(91,140,255,.16);color:#8ab0ff;}
+.class-badge.attention{background:rgba(240,166,58,.16);color:#f0a63a;}
+.class-badge.critical{background:rgba(239,68,68,.16);color:#f87171;}
+.class-badge.insufficient{background:rgba(255,255,255,.06);color:var(--text-faint);}
+
+.confidence{font-size:11px;padding:2px 8px;border-radius:5px;background:var(--card-2);border:1px solid var(--border);color:var(--text-dim);}
+
+.campaign-audit{border:1px solid var(--border);border-radius:10px;margin-bottom:10px;background:var(--card);}
+.campaign-audit summary{list-style:none;cursor:pointer;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;}
+.campaign-audit summary::-webkit-details-marker{display:none;}
+.campaign-audit .ca-title{display:flex;flex-direction:column;gap:4px;}
+.campaign-audit .ca-name{font-weight:700;font-size:13.5px;}
+.campaign-audit .ca-meta{font-size:11.5px;color:var(--text-faint);}
+.campaign-audit .ca-right{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+.campaign-audit .ca-body{padding:0 16px 18px;border-top:1px solid var(--border);}
+.ca-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0;}
+@media (max-width:800px){.ca-metrics{grid-template-columns:repeat(2,1fr);}}
+.ca-metric{background:var(--card-2);border-radius:8px;padding:10px 12px;}
+.ca-metric .l{font-size:10.5px;color:var(--text-faint);text-transform:uppercase;}
+.ca-metric .v{font-size:15px;font-weight:700;margin-top:2px;}
+.insight-block{background:var(--card-2);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:12px 14px;margin:8px 0;font-size:12.5px;}
+.insight-block .ik{font-weight:700;color:var(--text-dim);font-size:11px;text-transform:uppercase;letter-spacing:.03em;}
+.insight-block p{margin:3px 0 8px;}
+.insight-block p:last-child{margin-bottom:0;}
+.reco-line{display:flex;gap:8px;margin-top:8px;font-size:12.5px;}
+.reco-line .prio{font-size:10.5px;padding:2px 8px;border-radius:5px;font-weight:700;white-space:nowrap;height:fit-content;}
+.prio.urgente{background:rgba(239,68,68,.18);color:#f87171;}
+.prio.alta{background:rgba(240,166,58,.18);color:#f0a63a;}
+.prio.media{background:rgba(91,140,255,.18);color:#8ab0ff;}
+.prio.baixa{background:rgba(255,255,255,.07);color:var(--text-dim);}
+
+.filters-bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:16px;}
+.filters-bar select{min-width:140px;}
+.chk-btn{display:flex;align-items:center;gap:7px;background:var(--card-2);border:1px solid var(--border);padding:8px 14px;border-radius:8px;font-size:12.5px;cursor:pointer;}
+.chk-btn input{accent-color:var(--accent);}
+
+.action-status{background:var(--card-2);border:1px solid var(--border);color:var(--text);padding:5px 8px;border-radius:6px;font-size:11.5px;}
+.exec-summary{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:18px;}
+@media (max-width:800px){.exec-summary{grid-template-columns:1fr;}}
+.exec-box{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px;}
+.exec-box .k{font-size:11px;color:var(--text-faint);text-transform:uppercase;letter-spacing:.03em;margin-bottom:6px;}
+.exec-box .v{font-size:13px;}
+.conclusion-box{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px;margin-top:18px;}
+.conclusion-box ol{margin:8px 0 0;padding-left:20px;}
+.conclusion-box li{margin-bottom:6px;}
+
+footer{color:var(--text-faint);font-size:11.5px;text-align:center;padding-top:20px;border-top:1px solid var(--border);}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+
+<script>
+/* =========================================================
+   1. DADOS — única fonte de verdade do dashboard.
+   Meta Ads e Google Ads: extraídos via Windsor.ai (API oficial),
+   conta "Stlflix Português" (Meta) e "STLFLIX Brasil" (Google Ads),
+   período de 09/09/2026 a 15/09/2026.
+   Hotmart: números lidos dos prints do painel de vendas enviados
+   na conversa (não há conector Hotmart/Stripe conectado no Windsor
+   nesta sessão). Onde o dado não estava disponível, o campo é null
+   e a interface exibe "Não informado" — nunca zero inventado.
+   ========================================================= */
+const dashboardData = {
+  updatedAt: "16/09/2026 10:10",
+  currency: "BRL",
+
+  // Investimento total da conta Meta (todas as campanhas, não só os funis
+  // monitorados) nos últimos 7 dias completos — usado só para contexto.
+  metaAccountTotalSpend7d: 73979.82,
+
+  businessSummary: {
+    yesterday: {
+      // 15/09/2026
+      metaSpend: 9695.44,
+      googleSpend: 1129.59,
+      hotmartRevenue: null,
+      hotmartSales: null
+    },
+    last4Days: {
+      // 12/09/2026 a 15/09/2026 (mesmo recorte mostrado no painel de vendas)
+      metaSpend: 43143.13,
+      googleSpend: 4551.02,
+      hotmartRevenue: 201223.24,
+      hotmartSales: 324
+    }
+  },
+
+  // janela usada em "Performance por funil" e nos gráficos: 09/09 a 15/09/2026
+  funnelWindow: { from: "2026-09-09", to: "2026-09-15" },
+
+  funnels: [
+    {
+      id: "assine",
+      name: "ASSINE",
+      color: "#6366f1",
+      campaigns: [
+        {
+          name: "[BRA] [ASSINE] conversão-vendas-drops-automação",
+          status: "active",
+          spend7d: 5752.36,
+          conversions7d: 14,
+          impressions7d: 346361,
+          linkClicks7d: 3767,
+          reach7d: 264638,
+          landingPageViews7d: 2040,
+          daily: [
+            {date:"2026-09-09", spend:780.25, conversions:1, impressions:45646, linkClicks:344, reach:34084, landingPageViews:97},
+            {date:"2026-09-10", spend:910.56, conversions:5, impressions:56210, linkClicks:429, reach:40697, landingPageViews:177},
+            {date:"2026-09-11", spend:680.26, conversions:2, impressions:49890, linkClicks:515, reach:36619, landingPageViews:287},
+            {date:"2026-09-12", spend:734.09, conversions:2, impressions:44427, linkClicks:609, reach:34289, landingPageViews:360},
+            {date:"2026-09-13", spend:960.22, conversions:1, impressions:60392, linkClicks:855, reach:44791, landingPageViews:551},
+            {date:"2026-09-14", spend:1020.40, conversions:1, impressions:48563, linkClicks:637, reach:39479, landingPageViews:386},
+            {date:"2026-09-15", spend:666.58, conversions:2, impressions:41233, linkClicks:378, reach:34679, landingPageViews:182}
+          ]
+        }
+      ]
+    },
+    {
+      id: "lari",
+      name: "LARI",
+      color: "#14b8a6",
+      campaigns: [
+        {
+          name: "[BRA] [LARI] conversão-vendas-collab-lari",
+          status: "active",
+          spend7d: 3011.00,
+          conversions7d: 8,
+          impressions7d: 102139,
+          linkClicks7d: 1864,
+          reach7d: 61080,
+          landingPageViews7d: 1333,
+          daily: [
+            {date:"2026-09-09", spend:396.80, conversions:1, impressions:13088, linkClicks:199, reach:7626, landingPageViews:48},
+            {date:"2026-09-10", spend:416.67, conversions:1, impressions:13161, linkClicks:195, reach:7722, landingPageViews:130},
+            {date:"2026-09-11", spend:391.62, conversions:0, impressions:14778, linkClicks:243, reach:8535, landingPageViews:169},
+            {date:"2026-09-12", spend:372.10, conversions:1, impressions:12075, linkClicks:254, reach:7296, landingPageViews:192},
+            {date:"2026-09-13", spend:476.05, conversions:2, impressions:19429, linkClicks:372, reach:11147, landingPageViews:301},
+            {date:"2026-09-14", spend:447.47, conversions:1, impressions:15184, linkClicks:322, reach:8959, landingPageViews:262},
+            {date:"2026-09-15", spend:510.29, conversions:2, impressions:14424, linkClicks:279, reach:9795, landingPageViews:231}
+          ]
+        },
+        {
+          name: "[STL] conversão-vendas-lari",
+          status: "inactive",
+          spend7d: 0,
+          conversions7d: 0,
+          impressions7d: null,
+          linkClicks7d: null,
+          reach7d: null,
+          landingPageViews7d: null,
+          daily: []
+        }
+      ]
+    },
+    {
+      id: "lote_especial",
+      name: "LOTE ESPECIAL",
+      color: "#f0a63a",
+      campaigns: [
+        {
+          name: "[BRA] [LOTE ESPECIAL] conversão-vendas-advantage-influencers",
+          status: "active",
+          spend7d: 11591.19,
+          conversions7d: 34,
+          impressions7d: 445304,
+          linkClicks7d: 7740,
+          reach7d: 374218,
+          landingPageViews7d: 5177,
+          daily: [
+            {date:"2026-09-09", spend:1445.86, conversions:1, impressions:61364, linkClicks:954, reach:52207, landingPageViews:325},
+            {date:"2026-09-10", spend:1651.57, conversions:10, impressions:59623, linkClicks:987, reach:49685, landingPageViews:574},
+            {date:"2026-09-11", spend:1581.07, conversions:6, impressions:63226, linkClicks:1066, reach:53393, landingPageViews:701},
+            {date:"2026-09-12", spend:1572.76, conversions:5, impressions:57702, linkClicks:1078, reach:49785, landingPageViews:794},
+            {date:"2026-09-13", spend:1905.14, conversions:3, impressions:82019, linkClicks:1566, reach:67866, landingPageViews:1148},
+            {date:"2026-09-14", spend:1766.51, conversions:3, impressions:66911, linkClicks:1201, reach:55815, landingPageViews:957},
+            {date:"2026-09-15", spend:1668.28, conversions:6, impressions:54459, linkClicks:888, reach:45467, landingPageViews:678}
+          ]
+        },
+        {
+          name: "[BRA] [LOTE ESPECIAL] conversão-vendas-adv",
+          status: "in_review",
+          spend7d: 0,
+          conversions7d: 0,
+          impressions7d: null,
+          linkClicks7d: null,
+          reach7d: null,
+          landingPageViews7d: null,
+          daily: []
+        },
+        {
+          name: "[BRA] [LOTE ESPECIAL] conversão-vendas-drops_feed_STLFLIX",
+          status: "active",
+          spend7d: 9233.22,
+          conversions7d: 31,
+          impressions7d: 570100,
+          linkClicks7d: 7697,
+          reach7d: 500540,
+          landingPageViews7d: 3965,
+          daily: [
+            {date:"2026-09-09", spend:1146.33, conversions:3, impressions:54730, linkClicks:717, reach:46195, landingPageViews:198},
+            {date:"2026-09-10", spend:1393.36, conversions:3, impressions:69040, linkClicks:882, reach:58384, landingPageViews:413},
+            {date:"2026-09-11", spend:1206.12, conversions:5, impressions:71116, linkClicks:849, reach:62379, landingPageViews:443},
+            {date:"2026-09-12", spend:1267.23, conversions:6, impressions:87207, linkClicks:1068, reach:78972, landingPageViews:613},
+            {date:"2026-09-13", spend:1605.80, conversions:4, impressions:148040, linkClicks:2239, reach:132950, landingPageViews:1172},
+            {date:"2026-09-14", spend:1301.23, conversions:3, impressions:87900, linkClicks:1321, reach:78889, landingPageViews:723},
+            {date:"2026-09-15", spend:1313.15, conversions:7, impressions:52067, linkClicks:621, reach:42771, landingPageViews:403}
+          ]
+        },
+        {
+          name: "[BRA] [LOTE ESPECIAL] conversão-vendas-drops_feed_STLIA",
+          status: "active",
+          spend7d: 8177.91,
+          conversions7d: 35,
+          impressions7d: 425982,
+          linkClicks7d: 4028,
+          reach7d: 321279,
+          landingPageViews7d: 2611,
+          daily: [
+            {date:"2026-09-09", spend:1144.27, conversions:0, impressions:63313, linkClicks:614, reach:46836, landingPageViews:207},
+            {date:"2026-09-10", spend:1194.18, conversions:3, impressions:60753, linkClicks:522, reach:46339, landingPageViews:327},
+            {date:"2026-09-11", spend:1005.52, conversions:8, impressions:56566, linkClicks:505, reach:42637, landingPageViews:368},
+            {date:"2026-09-12", spend:970.35, conversions:8, impressions:43866, linkClicks:480, reach:33482, landingPageViews:364},
+            {date:"2026-09-13", spend:1380.98, conversions:1, impressions:68240, linkClicks:777, reach:49962, landingPageViews:531},
+            {date:"2026-09-14", spend:1142.78, conversions:5, impressions:58086, linkClicks:589, reach:44525, landingPageViews:417},
+            {date:"2026-09-15", spend:1339.83, conversions:10, impressions:75158, linkClicks:541, reach:57498, landingPageViews:397}
+          ]
+        },
+        {
+          name: "[BRA] [LOTE ESPECIAL]  conversão-vendas-remarketing",
+          status: "active",
+          spend7d: 3777.03,
+          conversions7d: 17,
+          impressions7d: 85213,
+          linkClicks7d: 1780,
+          reach7d: 69803,
+          landingPageViews7d: 1278,
+          daily: [
+            {date:"2026-09-09", spend:631.62, conversions:1, impressions:15484, linkClicks:404, reach:12133, landingPageViews:195},
+            {date:"2026-09-10", spend:619.10, conversions:4, impressions:15652, linkClicks:281, reach:12522, landingPageViews:190},
+            {date:"2026-09-11", spend:629.33, conversions:1, impressions:15355, linkClicks:306, reach:12936, landingPageViews:239},
+            {date:"2026-09-12", spend:589.26, conversions:1, impressions:11784, linkClicks:245, reach:9845, landingPageViews:219},
+            {date:"2026-09-13", spend:496.86, conversions:6, impressions:10917, linkClicks:217, reach:9089, landingPageViews:169},
+            {date:"2026-09-14", spend:476.10, conversions:2, impressions:10148, linkClicks:202, reach:8551, landingPageViews:155},
+            {date:"2026-09-15", spend:334.76, conversions:2, impressions:5873, linkClicks:125, reach:4727, landingPageViews:111}
+          ]
+        }
+      ]
+    },
+    {
+      id: "downsell",
+      name: "DOWNSELL",
+      color: "#a855f7",
+      campaigns: [
+        {
+          name: "[BRA] [DOWNSELL] conversão-vendas-downsell",
+          status: "active",
+          spend7d: 23265.10,
+          conversions7d: 62,
+          impressions7d: 676256,
+          linkClicks7d: 11307,
+          reach7d: 545470,
+          landingPageViews7d: 1124,
+          daily: [
+            {date:"2026-09-09", spend:3037.34, conversions:5, impressions:76690, linkClicks:1183, reach:63110, landingPageViews:326},
+            {date:"2026-09-10", spend:3282.51, conversions:12, impressions:78741, linkClicks:1373, reach:64453, landingPageViews:600},
+            {date:"2026-09-11", spend:3064.48, conversions:6, impressions:91754, linkClicks:1398, reach:74270, landingPageViews:24},
+            {date:"2026-09-12", spend:3356.78, conversions:10, impressions:93840, linkClicks:1762, reach:76648, landingPageViews:35},
+            {date:"2026-09-13", spend:3675.38, conversions:9, impressions:122417, linkClicks:2161, reach:99548, landingPageViews:44},
+            {date:"2026-09-14", spend:3636.70, conversions:7, impressions:113171, linkClicks:1947, reach:92684, landingPageViews:61},
+            {date:"2026-09-15", spend:3211.91, conversions:13, impressions:99643, linkClicks:1483, reach:74757, landingPageViews:34}
+          ]
+        }
+      ]
+    }
+  ]
+};
+
+// limites e parâmetros da auditoria — nenhuma meta oficial foi cadastrada,
+// então CPA/ROAS não são julgados como "caros" ou "baratos" de forma absoluta.
+const auditConfig = {
+  minimumConversionsMediumConfidence: 3,
+  minimumConversionsHighConfidence: 10,
+  minimumSpendForAlert: null,
+  targetCPA: null,
+  targetROAS: null,
+  cpaAboveFunnelMultiplier: 1.2,      // CPA 20% acima do CPA do funil => atenção
+  highSpendShareThreshold: 0.4,       // concentra >40% do investimento do funil
+  lowConversionShareThreshold: 0.15,  // mas gera <15% das conversões do funil
+  dominantFunnelShareThreshold: 0.7,  // uma campanha responde por >70% do funil
+  trendRecentDays: 3
+};
+</script>
+
+<script>
+/* =========================================================
+   2. UTILITÁRIOS
+   ========================================================= */
+const fmtBRL = v => (v===null||v===undefined||isNaN(v)) ? "Não informado" :
+  v.toLocaleString("pt-BR", {style:"currency", currency:"BRL"});
+const fmtNum = (v,d=0) => (v===null||v===undefined||isNaN(v)) ? "Não informado" :
+  v.toLocaleString("pt-BR", {minimumFractionDigits:d, maximumFractionDigits:d});
+const fmtPct = (v,d=1) => (v===null||v===undefined||isNaN(v)) ? "Não informado" :
+  (v*100).toLocaleString("pt-BR",{minimumFractionDigits:d,maximumFractionDigits:d}) + "%";
+const fmtDateBR = iso => { const [y,m,d]=iso.split("-"); return `${d}/${m}/${y}`; };
+const isNum = v => typeof v === "number" && !isNaN(v);
+
+function cpaValue(spend, conv){
+  if(!isNum(spend) || !isNum(conv) || conv<=0) return null;
+  return spend/conv;
+}
+function cpaLabel(spend, conv){
+  if(!isNum(spend) || !isNum(conv)) return "Não informado";
+  if(conv===0) return "Sem conversões";
+  return fmtBRL(spend/conv);
+}
+function shareLabel(part, total){
+  if(!isNum(part) || !isNum(total) || total<=0) return "Não informado";
+  return fmtPct(part/total);
+}
+function roasValue(revenue, spend){
+  if(!isNum(revenue) || !isNum(spend) || spend<=0) return null;
+  return revenue/spend;
+}
+const STATUS_LABEL = {active:"Ativa", inactive:"Desativada", in_review:"Em análise"};
+const CLASS_LABEL = {
+  healthy:"Saudável", scale_opportunity:"Oportunidade de escala",
+  attention:"Atenção", critical:"Crítica", insufficient:"Dados insuficientes"
+};
+const PRIO_LABEL = {urgente:"Urgente", alta:"Alta", media:"Média", baixa:"Baixa"};
+
+function el(tag, attrs={}, html){
+  const e = document.createElement(tag);
+  for(const k in attrs){
+    if(k==="class") e.className = attrs[k];
+    else if(k==="html") e.innerHTML = attrs[k];
+    else e.setAttribute(k, attrs[k]);
+  }
+  if(html!==undefined) e.innerHTML = html;
+  return e;
+}
+</script>
+
+<script>
+/* =========================================================
+   3. CÁLCULOS DERIVADOS
+   Tudo abaixo é calculado a partir de dashboardData — nenhum
+   total, percentual, CPA ou ROAS é digitado manualmente.
+   ========================================================= */
+function computeFunnelStats(funnel){
+  const camps = funnel.campaigns;
+  const spendVals = camps.map(c=>c.spend7d).filter(isNum);
+  const convVals  = camps.map(c=>c.conversions7d).filter(isNum);
+  const spend = spendVals.length ? spendVals.reduce((a,b)=>a+b,0) : null;
+  const conv  = convVals.length ? convVals.reduce((a,b)=>a+b,0) : null;
+  return {
+    spend, conv,
+    cpa: cpaValue(spend, conv),
+    cpaLabel: cpaLabel(spend, conv),
+    campaignCount: camps.length,
+    activeCount: camps.filter(c=>c.status==="active").length,
+    hasAnyDelivery: camps.some(c=>isNum(c.spend7d) && c.spend7d>0)
+  };
+}
+
+function metaTotals7d(){
+  let spend=0, conv=0;
+  dashboardData.funnels.forEach(f=>{
+    f.campaigns.forEach(c=>{
+      if(isNum(c.spend7d)) spend += c.spend7d;
+      if(isNum(c.conversions7d)) conv += c.conversions7d;
+    });
+  });
+  return {spend, conv};
+}
+
+function trend(daily, field, recentDays){
+  const valid = daily.filter(d=>isNum(d[field]));
+  if(valid.length < recentDays+1) return null;
+  const recent = valid.slice(-recentDays);
+  const prior = valid.slice(0, valid.length-recentDays);
+  if(!prior.length) return null;
+  const avg = arr => arr.reduce((a,b)=>a+b[field],0)/arr.length;
+  const recentAvg = avg(recent), priorAvg = avg(prior);
+  if(priorAvg===0) return null;
+  return (recentAvg-priorAvg)/priorAvg;
+}
+
+function median(arr){
+  if(!arr.length) return null;
+  const s=[...arr].sort((a,b)=>a-b);
+  const mid=Math.floor(s.length/2);
+  return s.length%2 ? s[mid] : (s[mid-1]+s[mid])/2;
+}
+
+function classifyCampaign(camp, funnelStats, funnel, cfg){
+  const spend = camp.spend7d, conv = camp.conversions7d;
+  const evidence = [];
+  if(!isNum(spend) || !isNum(conv) || (spend===0 && conv===0 && (!camp.daily || camp.daily.length===0))){
+    return {
+      classification:"insufficient", confidence:"baixa",
+      evidence:["Sem investimento ou conversões registrados no período analisado."],
+      reason: camp.status==="inactive"
+        ? "Campanha desativada e sem veiculação no período — não há base para diagnóstico."
+        : camp.status==="in_review"
+          ? "Campanha em análise pelo Meta, sem veiculação no período — não há base para diagnóstico."
+          : "Sem dados de investimento/conversão suficientes no período."
+    };
+  }
+  if(conv===0){
+    if(isNum(cfg.minimumSpendForAlert) && spend>=cfg.minimumSpendForAlert){
+      return {classification:"critical", confidence:"média",
+        evidence:[`Investimento de ${fmtBRL(spend)} no período sem nenhuma conversão registrada.`],
+        reason:"Investimento relevante (acima do limite configurado) sem nenhum resultado."};
+    }
+    return {classification:"attention", confidence:"baixa",
+      evidence:[`Investimento de ${fmtBRL(spend)} no período sem nenhuma conversão registrada.`],
+      reason:"Investimento sem conversões. Sem um limite de gasto configurado (minimumSpendForAlert), não é possível confirmar gravidade — tratar como atenção até nova checagem."};
+  }
+  if(conv < cfg.minimumConversionsMediumConfidence){
+    return {classification:"insufficient", confidence:"baixa",
+      evidence:[`Apenas ${conv} conversão(ões) no período — abaixo do mínimo de ${cfg.minimumConversionsMediumConfidence} para leitura confiável.`],
+      reason:"Volume de conversões insuficiente para uma conclusão segura."};
+  }
+  const confidence = conv >= cfg.minimumConversionsHighConfidence ? "alta" : "média";
+  const cpa = spend/conv;
+  const funnelCPA = funnelStats.cpa;
+  const spendShare = isNum(funnelStats.spend) && funnelStats.spend>0 ? spend/funnelStats.spend : null;
+  const convShare = isNum(funnelStats.conv) && funnelStats.conv>0 ? conv/funnelStats.conv : null;
+
+  let cpaFlag = false, cpaDelta = null;
+  if(isNum(cfg.targetCPA)){
+    cpaFlag = cpa > cfg.targetCPA;
+    evidence.push(`CPA de ${fmtBRL(cpa)} vs meta cadastrada de ${fmtBRL(cfg.targetCPA)}.`);
+  } else if(isNum(funnelCPA) && funnelCPA>0){
+    cpaDelta = (cpa-funnelCPA)/funnelCPA;
+    cpaFlag = cpaDelta > (cfg.cpaAboveFunnelMultiplier-1);
+    evidence.push(`CPA da campanha: ${fmtBRL(cpa)}; CPA consolidado do funil ${funnel.name}: ${fmtBRL(funnelCPA)} (${cpaDelta>=0?"+":""}${fmtPct(cpaDelta)}).`);
+  }
+
+  let dispropFlag = false;
+  if(isNum(spendShare) && isNum(convShare)){
+    dispropFlag = spendShare > cfg.highSpendShareThreshold && convShare < cfg.lowConversionShareThreshold;
+    evidence.push(`Participação no investimento do funil: ${fmtPct(spendShare)}; participação nas conversões do funil: ${fmtPct(convShare)}.`);
+  }
+
+  const convTrend = trend(camp.daily, "conversions", auditConfig.trendRecentDays);
+  const spendTrend = trend(camp.daily, "spend", auditConfig.trendRecentDays);
+  let decliningFlag = false;
+  if(convTrend!==null){
+    decliningFlag = convTrend < -0.25;
+    evidence.push(`Variação de conversões (últimos ${auditConfig.trendRecentDays} dias vs dias anteriores): ${convTrend>=0?"+":""}${fmtPct(convTrend)}.`);
+  }
+  let spendUpNoResult = false;
+  if(convTrend!==null && spendTrend!==null){
+    spendUpNoResult = spendTrend > 0.2 && convTrend <= 0;
+  }
+
+  if(cpaFlag || dispropFlag || decliningFlag || spendUpNoResult){
+    return {classification:"attention", confidence, evidence,
+      reason: cpaFlag ? "CPA acima do parâmetro de referência disponível."
+        : dispropFlag ? "Concentra investimento do funil de forma desproporcional aos resultados que gera."
+        : spendUpNoResult ? "Investimento cresceu sem crescimento proporcional de conversões."
+        : "Queda relevante de conversões nos dias mais recentes."};
+  }
+
+  if(confidence==="alta" && (cpaDelta===null || cpaDelta<=0) && (convShare===null || convShare>=spendShare)){
+    return {classification:"scale_opportunity", confidence, evidence,
+      reason:"Volume de conversões alto, CPA em linha ou melhor que o funil, e participação nas conversões igual ou maior que a participação no investimento."};
+  }
+
+  return {classification:"healthy", confidence, evidence,
+    reason:"Volume de dados suficiente e desempenho em linha com o restante do funil, sem sinais de alerta configurados."};
+}
+</script>
+
+<script>
+/* =========================================================
+   4. RENDER — Visão global do negócio
+   ========================================================= */
+function renderBusinessSummary(container){
+  const sec = el("section");
+  sec.appendChild(el("div", {class:"section-title"}, `<h2>Visão global do negócio</h2><span class="tag">Meta + Google + Hotmart</span>`));
+
+  const grid = el("div", {class:"grid grid-2"});
+  grid.appendChild(periodCard("Ontem (15/09/2026)", dashboardData.businessSummary.yesterday, "yesterday"));
+  grid.appendChild(periodCard("Últimos 4 dias (12 a 15/09/2026)", dashboardData.businessSummary.last4Days, "last4"));
+  sec.appendChild(grid);
+
+  sec.appendChild(el("div",{class:"note"},
+    "Os períodos acima (ontem / últimos 4 dias) nunca são combinados com a janela de 7 dias usada na seção \"Performance por funil\" — são recortes independentes."));
+  container.appendChild(sec);
+}
+
+function periodCard(title, data, kind){
+  const total = (isNum(data.metaSpend) && isNum(data.googleSpend)) ? data.metaSpend + data.googleSpend : null;
+  const roas = roasValue(data.hotmartRevenue, total);
+  const card = el("div", {class:`card period-card ${kind==='yesterday'?'yesterday':'last4'}`});
+  card.appendChild(el("div",{class:"period-head"}, `<h3>${title}</h3>`));
+
+  const rows = [
+    ["meta","Investimento Meta Ads", fmtBRL(data.metaSpend)],
+    ["google","Investimento Google Ads", fmtBRL(data.googleSpend)],
+    [null,"Investimento total (Meta + Google)", fmtBRL(total)],
+    ["hotmart","Receita líquida Hotmart", fmtBRL(data.hotmartRevenue)]
+  ];
+  rows.forEach(([src,label,val])=>{
+    const li = el("div",{class:"line-item"});
+    li.appendChild(el("span",{class:"lbl"}, `${src?`<span class="dot ${src}"></span>`:""}${label}`));
+    const valSpan = el("span",{class: val==="Não informado" ? "val na" : "val"}, val);
+    li.appendChild(valSpan);
+    card.appendChild(li);
+  });
+  if(isNum(data.hotmartSales)){
+    card.appendChild(el("div",{class:"metric-sub"}, `${fmtNum(data.hotmartSales)} vendas registradas no período`));
+  }
+
+  const roasBox = el("div",{class:"roas-box"});
+  roasBox.appendChild(el("div",{class:"lbl", html:"ROAS global (receita Hotmart ÷ investimento total)"}));
+  if(roas===null){
+    roasBox.appendChild(el("div",{class:"roas-value na"}, "Não informado"));
+    roasBox.appendChild(el("div",{class:"note"}, "Calculado só quando investimento Meta, Google e receita Hotmart do mesmo período estão disponíveis."));
+  } else {
+    roasBox.appendChild(el("div",{class:"roas-value ok"}, roas.toFixed(2).replace(".",",") + "x"));
+  }
+  card.appendChild(roasBox);
+  return card;
+}
+</script>
+
+<script>
+/* =========================================================
+   5. RENDER — Performance por funil + gráficos
+   ========================================================= */
+let sortState = {}; // por funil: {key, dir}
+let dailyChartInstance=null, campaignChartInstance=null, distChartInstance=null, compareChartInstance=null;
+let compareMetric = "spend";
+let selectedFunnelId = "all";
+
+function renderFunnels(container){
+  const sec = el("section");
+  sec.appendChild(el("div",{class:"section-title"},
+    `<h2>Performance por funil</h2><span class="tag">Meta Ads · Últimos 7 dias (${fmtDateBR(dashboardData.funnelWindow.from)} a ${fmtDateBR(dashboardData.funnelWindow.to)})</span>`));
+
+  const meta7 = metaTotals7d();
+  sec.appendChild(el("div",{class:"note"},
+    `Os 4 funis monitorados somaram ${fmtBRL(meta7.spend)} de investimento nesta janela — ${fmtPct(meta7.spend/dashboardData.metaAccountTotalSpend7d)} do investimento total da conta Meta (${fmtBRL(dashboardData.metaAccountTotalSpend7d)}), que inclui outras campanhas fora do escopo deste dashboard.`));
+
+  const grid = el("div",{class:"grid", style:"grid-template-columns:1fr;gap:16px;margin-top:12px;"});
+  dashboardData.funnels.forEach(funnel=>{
+    grid.appendChild(renderFunnelCard(funnel, meta7));
+  });
+  sec.appendChild(grid);
+
+  sec.appendChild(renderFacts(meta7));
+  container.appendChild(sec);
+}
+
+function renderFunnelCard(funnel, meta7){
+  const stats = computeFunnelStats(funnel);
+  const card = el("div",{class:"funnel-card", style:`--fc:${funnel.color}`});
+  const top = el("div",{class:"funnel-top"});
+
+  const left = el("div");
+  left.appendChild(el("div",{class:"funnel-name"}, `<span class="funnel-swatch"></span>${funnel.name}`));
+  const badges = el("div",{class:"funnel-badges"});
+  const statusCounts = {};
+  funnel.campaigns.forEach(c=>statusCounts[c.status]=(statusCounts[c.status]||0)+1);
+  Object.keys(statusCounts).forEach(s=>{
+    badges.appendChild(el("span",{class:`badge ${s}`}, `${statusCounts[s]} ${STATUS_LABEL[s]}`));
+  });
+  left.appendChild(badges);
+  top.appendChild(left);
+
+  const metrics = el("div",{class:"funnel-metrics"});
+  const spendShare = isNum(stats.spend) && isNum(meta7.spend) && meta7.spend>0 ? stats.spend/meta7.spend : null;
+  const convShare = isNum(stats.conv) && isNum(meta7.conv) && meta7.conv>0 ? stats.conv/meta7.conv : null;
+  [
+    ["Investimento 7d", fmtBRL(stats.spend)],
+    ["Conversões (Meta)", fmtNum(stats.conv)],
+    ["Custo por resultado", stats.cpaLabel],
+    ["% do investimento total", shareLabel(stats.spend, meta7.spend)],
+    ["% das conversões totais", shareLabel(stats.conv, meta7.conv)],
+    ["Campanhas", `${stats.campaignCount} (${stats.activeCount} ativa${stats.activeCount!==1?"s":""})`]
+  ].forEach(([l,v])=>{
+    const fm = el("div",{class:"fm"});
+    fm.appendChild(el("div",{class:"lbl"}, l));
+    fm.appendChild(el("div",{class:"val" + (v==="Não informado"||v==="Sem conversões" ? " na" : "")}, v));
+    metrics.appendChild(fm);
+  });
+  left.appendChild(metrics);
+
+  const btn = el("button",{class:"toggle-btn"}, "Ver campanhas");
+  top.appendChild(btn);
+  card.appendChild(top);
+
+  const body = el("div",{class:"funnel-body"});
+  body.appendChild(renderCampaignTable(funnel, stats));
+  card.appendChild(body);
+
+  btn.addEventListener("click", ()=>{
+    body.classList.toggle("open");
+    btn.textContent = body.classList.contains("open") ? "Ocultar campanhas" : "Ver campanhas";
+  });
+
+  return card;
+}
+
+function renderCampaignTable(funnel, funnelStats){
+  const wrap = el("div", {class:"table-scroll"});
+  const key = funnel.id;
+  if(!sortState[key]) sortState[key] = {field:"spend7d", dir:-1};
+
+  const cols = [
+    {k:"name", l:"Campanha"},
+    {k:"status", l:"Status"},
+    {k:"spend7d", l:"Investimento 7d"},
+    {k:"conversions7d", l:"Conversões"},
+    {k:"cpa", l:"Custo/resultado"},
+    {k:"spendShare", l:"% invest. funil"},
+    {k:"convShare", l:"% conv. funil"}
+  ];
+
+  function buildRows(){
+    return funnel.campaigns.map(c=>({
+      c,
+      spendShare: isNum(c.spend7d) && isNum(funnelStats.spend) && funnelStats.spend>0 ? c.spend7d/funnelStats.spend : null,
+      convShare: isNum(c.conversions7d) && isNum(funnelStats.conv) && funnelStats.conv>0 ? c.conversions7d/funnelStats.conv : null,
+      cpa: cpaValue(c.spend7d, c.conversions7d)
+    }));
+  }
+
+  function draw(){
+    wrap.innerHTML = "";
+    const table = el("table");
+    const thead = el("thead");
+    const trh = el("tr");
+    cols.forEach(col=>{
+      const th = el("th", {}, col.l);
+      if(sortState[key].field===col.k) th.classList.add("sorted");
+      th.addEventListener("click", ()=>{
+        if(sortState[key].field===col.k) sortState[key].dir *= -1;
+        else { sortState[key].field = col.k; sortState[key].dir = -1; }
+        draw();
+      });
+      trh.appendChild(th);
+    });
+    thead.appendChild(trh);
+    table.appendChild(thead);
+
+    let rows = buildRows();
+    const {field, dir} = sortState[key];
+    rows.sort((a,b)=>{
+      const get = r => field==="spendShare"||field==="convShare"||field==="cpa" ? r[field]
+        : field==="name" ? r.c.name : field==="status" ? r.c.status : r.c[field];
+      let va = get(a), vb = get(b);
+      if(va===null||va===undefined) return 1;
+      if(vb===null||vb===undefined) return -1;
+      if(typeof va==="string") return -dir * va.localeCompare(vb);
+      return dir>0 ? va-vb : vb-va;
+    });
+
+    const tbody = el("tbody");
+    rows.forEach(r=>{
+      const c = r.c;
+      const tr = el("tr");
+      if(c.status!=="active") tr.classList.add("inactive-row");
+      tr.appendChild(el("td",{}, c.name));
+      tr.appendChild(el("td",{}, `<span class="status-dot ${c.status}"></span>${STATUS_LABEL[c.status]}`));
+      tr.appendChild(el("td",{}, fmtBRL(c.spend7d)));
+      tr.appendChild(el("td",{}, fmtNum(c.conversions7d)));
+      tr.appendChild(el("td",{}, cpaLabel(c.spend7d, c.conversions7d)));
+      tr.appendChild(el("td",{}, r.spendShare===null? "Não informado" : fmtPct(r.spendShare)));
+      tr.appendChild(el("td",{}, r.convShare===null? "Não informado" : fmtPct(r.convShare)));
+      tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+    wrap.appendChild(table);
+  }
+  draw();
+  return wrap;
+}
+
+function renderFacts(meta7){
+  const box = el("div",{class:"card", style:"margin-top:16px;"});
+  box.appendChild(el("h3",{}, "Indicadores automáticos"));
+  const facts = [];
+
+  const funnelStatsList = dashboardData.funnels.map(f=>({f, s:computeFunnelStats(f)}));
+  const withSpend = funnelStatsList.filter(x=>isNum(x.s.spend) && x.s.spend>0);
+  const withConv = funnelStatsList.filter(x=>isNum(x.s.conv) && x.s.conv>0);
+  const withCPA = funnelStatsList.filter(x=>isNum(x.s.cpa));
+
+  if(withSpend.length){
+    const top = withSpend.reduce((a,b)=> b.s.spend>a.s.spend?b:a);
+    facts.push(`O funil <b>${top.f.name}</b> concentrou ${fmtPct(top.s.spend/meta7.spend)} do investimento Meta dos últimos 7 dias (${fmtBRL(top.s.spend)}).`);
+  }
+  if(withConv.length){
+    const top = withConv.reduce((a,b)=> b.s.conv>a.s.conv?b:a);
+    facts.push(`O funil <b>${top.f.name}</b> reportou o maior número de conversões: ${fmtNum(top.s.conv)} (${fmtPct(top.s.conv/meta7.conv)} do total).`);
+  }
+  if(withCPA.length){
+    const best = withCPA.reduce((a,b)=> b.s.cpa<a.s.cpa?b:a);
+    facts.push(`Entre os funis com conversões, <b>${best.f.name}</b> tem o menor custo por resultado consolidado: ${fmtBRL(best.s.cpa)}.`);
+  }
+
+  let topCampaign=null;
+  dashboardData.funnels.forEach(f=>f.campaigns.forEach(c=>{
+    if(isNum(c.spend7d) && (!topCampaign || c.spend7d>topCampaign.spend7d)) topCampaign={...c, funnel:f.name};
+  }));
+  if(topCampaign) facts.push(`A campanha com maior investimento é <b>${topCampaign.name}</b> (funil ${topCampaign.funnel}), com ${fmtBRL(topCampaign.spend7d)}.`);
+
+  const noConvSpend = [];
+  dashboardData.funnels.forEach(f=>f.campaigns.forEach(c=>{
+    if(isNum(c.spend7d) && c.spend7d>0 && c.conversions7d===0) noConvSpend.push({...c, funnel:f.name});
+  }));
+  if(noConvSpend.length){
+    noConvSpend.forEach(c=> facts.push(`A campanha <b>${c.name}</b> (funil ${c.funnel}) teve investimento (${fmtBRL(c.spend7d)}) sem nenhuma conversão registrada no período.`));
+  } else {
+    facts.push("Nenhuma campanha com investimento no período ficou sem conversões registradas.");
+  }
+
+  const inactiveWithResult = [];
+  dashboardData.funnels.forEach(f=>f.campaigns.forEach(c=>{
+    if(c.status==="inactive" && ((isNum(c.spend7d)&&c.spend7d>0) || (isNum(c.conversions7d)&&c.conversions7d>0))) inactiveWithResult.push({...c, funnel:f.name});
+  }));
+  if(inactiveWithResult.length){
+    inactiveWithResult.forEach(c=> facts.push(`A campanha desativada <b>${c.name}</b> (funil ${c.funnel}) ainda registrou investimento/conversões no período — vale revisar se o desligamento foi intencional.`));
+  } else {
+    facts.push("Nenhuma campanha desativada registrou investimento ou conversões no período.");
+  }
+
+  const list = el("div",{class:"facts-list"});
+  facts.forEach(f=> list.appendChild(el("div",{class:"fact", html:f})));
+  box.appendChild(list);
+  box.appendChild(el("div",{class:"note"}, "Sem meta de CPA ou ROAS cadastrada em auditConfig, nenhum funil é classificado como \"bom\" ou \"ruim\" — apenas fatos observados nos dados."));
+  return box;
+}
+</script>
+
+<script>
+/* =========================================================
+   6. RENDER — Gráficos (distribuição, comparação, diário)
+   ========================================================= */
+function chartPalette(){ return dashboardData.funnels.map(f=>f.color); }
+function chartsAvailable(){ return typeof Chart !== "undefined"; }
+
+function renderCharts(container){
+  const sec = el("section");
+  sec.appendChild(el("div",{class:"section-title"}, `<h2>Distribuição do investimento por funil</h2><span class="tag">Meta Ads · Últimos 7 dias</span>`));
+
+  const grid = el("div",{class:"grid grid-2"});
+
+  const distCard = el("div",{class:"card"});
+  distCard.appendChild(el("h3",{}, "Investimento por funil (R$)"));
+  const distBoxWrap = el("div",{class:"chart-box"});
+  const distCanvas = el("canvas");
+  distBoxWrap.appendChild(distCanvas);
+  distCard.appendChild(distBoxWrap);
+  grid.appendChild(distCard);
+
+  const cmpCard = el("div",{class:"card"});
+  cmpCard.appendChild(el("h3",{}, "Comparação entre funis"));
+  const tabs = el("div",{class:"tabs"});
+  ["spend","conv","cpa"].forEach(m=>{
+    const label = m==="spend"?"Investimento":m==="conv"?"Conversões":"CPA";
+    const b = el("button",{class:"tab-btn"+(m===compareMetric?" active":"")}, label);
+    b.addEventListener("click",()=>{ compareMetric=m; drawCompare(); [...tabs.children].forEach(x=>x.classList.remove("active")); b.classList.add("active"); });
+    tabs.appendChild(b);
+  });
+  cmpCard.appendChild(tabs);
+  const cmpBoxWrap = el("div",{class:"chart-box"});
+  const cmpCanvas = el("canvas");
+  cmpBoxWrap.appendChild(cmpCanvas);
+  cmpCard.appendChild(cmpBoxWrap);
+  grid.appendChild(cmpCard);
+
+  sec.appendChild(grid);
+  container.appendChild(sec);
+
+  const stats = dashboardData.funnels.map(f=>({f, s:computeFunnelStats(f)}));
+  const anySpend = stats.some(x=>isNum(x.s.spend) && x.s.spend>0);
+
+  if(!chartsAvailable()){
+    distBoxWrap.replaceWith(el("div",{class:"empty-state"},"Não foi possível carregar a biblioteca de gráficos (Chart.js via CDN). Os números continuam disponíveis nas tabelas e cards."));
+  } else if(!anySpend){
+    distBoxWrap.replaceWith(el("div",{class:"empty-state"},"Sem dados de investimento suficientes para exibir este gráfico."));
+  } else {
+    const total = stats.reduce((a,x)=>a+(x.s.spend||0),0);
+    if(distChartInstance) distChartInstance.destroy();
+    distChartInstance = new Chart(distCanvas.getContext("2d"), {
+      type:"bar",
+      data:{
+        labels: stats.map(x=>x.f.name),
+        datasets:[{ data: stats.map(x=>x.s.spend||0), backgroundColor: stats.map(x=>x.f.color), borderRadius:6 }]
+      },
+      options:{
+        indexAxis:"y", responsive:true, maintainAspectRatio:false,
+        plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: ctx => {
+          const v = ctx.parsed.x; return ` ${fmtBRL(v)} (${fmtPct(v/total)})`;
+        }}}},
+        scales:{ x:{ ticks:{ color:"#9aa7b8", callback:v=>fmtBRL(v) }, grid:{color:"#232a35"} },
+                 y:{ ticks:{ color:"#e7ebf1" }, grid:{display:false} } }
+      }
+    });
+  }
+
+  function drawCompare(){
+    if(compareChartInstance) compareChartInstance.destroy();
+    const hasData = stats.some(x => compareMetric==="cpa" ? isNum(x.s.cpa) : isNum(x.s[compareMetric==="spend"?"spend":"conv"]));
+    let existingEmpty = cmpCard.querySelector(".empty-state");
+    if(existingEmpty) existingEmpty.remove();
+    if(!chartsAvailable()){
+      cmpCanvas.style.display = "none";
+      cmpCard.appendChild(el("div",{class:"empty-state"}, "Não foi possível carregar a biblioteca de gráficos (Chart.js via CDN)."));
+      return;
+    }
+    cmpCanvas.style.display = hasData ? "block" : "none";
+    if(!hasData){
+      cmpCard.appendChild(el("div",{class:"empty-state"}, "Sem dados suficientes para esta métrica."));
+      return;
+    }
+    const vals = stats.map(x => compareMetric==="spend"?x.s.spend : compareMetric==="conv"?x.s.conv : x.s.cpa);
+    compareChartInstance = new Chart(cmpCanvas.getContext("2d"), {
+      type:"bar",
+      data:{ labels: stats.map(x=>x.f.name), datasets:[{ data: vals.map(v=>v||0), backgroundColor: stats.map(x=>x.f.color), borderRadius:6 }]},
+      options:{
+        responsive:true, maintainAspectRatio:false,
+        plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: ctx => {
+          const v = ctx.parsed.y;
+          return compareMetric==="conv" ? ` ${fmtNum(v)} conversões` : ` ${fmtBRL(v)}`;
+        }}}},
+        scales:{ y:{ ticks:{ color:"#9aa7b8", callback:v=> compareMetric==="conv"?v:fmtBRL(v) }, grid:{color:"#232a35"} },
+                 x:{ ticks:{ color:"#e7ebf1" }, grid:{display:false} } }
+      }
+    });
+  }
+  drawCompare();
+}
+</script>
+
+<script>
+/* =========================================================
+   7. RENDER — Evolução diária
+   ========================================================= */
+function fnById(id){ return dashboardData.funnels.find(f=>f.id===id); }
+
+function aggregateDailyForFunnels(funnels){
+  const dateMap = {};
+  funnels.forEach(f=>f.campaigns.forEach(c=>{
+    (c.daily||[]).forEach(d=>{
+      if(!dateMap[d.date]) dateMap[d.date] = {spend:0, conversions:0};
+      if(isNum(d.spend)) dateMap[d.date].spend += d.spend;
+      if(isNum(d.conversions)) dateMap[d.date].conversions += d.conversions;
+    });
+  }));
+  return Object.keys(dateMap).sort().map(date=>({date, ...dateMap[date]}));
+}
+
+function renderDailyEvolution(container){
+  const sec = el("section");
+  sec.appendChild(el("div",{class:"section-title"}, `<h2>Evolução diária</h2><span class="tag">Últimos 7 dias</span>`));
+
+  const controls = el("div",{class:"filters-bar"});
+  const select = el("select");
+  select.appendChild(el("option",{value:"all"}, "Todos os funis"));
+  dashboardData.funnels.forEach(f=> select.appendChild(el("option",{value:f.id}, f.name)));
+  select.value = selectedFunnelId;
+  select.addEventListener("change", ()=>{ selectedFunnelId = select.value; drawDaily(); drawCampaignChart(); });
+  controls.appendChild(select);
+  sec.appendChild(controls);
+
+  const grid = el("div",{class:"grid grid-2"});
+  const dailyCard = el("div",{class:"card"});
+  dailyCard.appendChild(el("h3",{}, "Investimento e conversões por dia (Meta Ads)"));
+  const dailyBox = el("div",{class:"chart-box"});
+  const dailyCanvas = el("canvas");
+  dailyBox.appendChild(dailyCanvas);
+  dailyCard.appendChild(dailyBox);
+  grid.appendChild(dailyCard);
+
+  const campCard = el("div",{class:"card"});
+  campCard.appendChild(el("h3",{}, "Investimento por campanha"));
+  const campBox = el("div",{class:"chart-box"});
+  const campCanvas = el("canvas");
+  campBox.appendChild(campCanvas);
+  campCard.appendChild(campBox);
+  grid.appendChild(campCard);
+
+  sec.appendChild(grid);
+  container.appendChild(sec);
+
+  function drawDaily(){
+    const funnels = selectedFunnelId==="all" ? dashboardData.funnels : [fnById(selectedFunnelId)];
+    const series = aggregateDailyForFunnels(funnels);
+    let empty = dailyCard.querySelector(".empty-state");
+    if(empty) empty.remove();
+    if(!chartsAvailable()){
+      dailyCanvas.style.display="none";
+      dailyCard.appendChild(el("div",{class:"empty-state"}, "Não foi possível carregar a biblioteca de gráficos (Chart.js via CDN)."));
+      return;
+    }
+    dailyCanvas.style.display="block";
+    if(!series.length){
+      dailyCanvas.style.display="none";
+      dailyCard.appendChild(el("div",{class:"empty-state"}, "Não há detalhamento diário disponível para este recorte."));
+      if(dailyChartInstance){ dailyChartInstance.destroy(); dailyChartInstance=null; }
+      return;
+    }
+    if(dailyChartInstance) dailyChartInstance.destroy();
+    dailyChartInstance = new Chart(dailyCanvas.getContext("2d"), {
+      data:{
+        labels: series.map(d=>fmtDateBR(d.date)),
+        datasets:[
+          { type:"bar", label:"Investimento (R$)", data: series.map(d=>d.spend), backgroundColor:"#5b8cff88", borderRadius:4, yAxisID:"y" },
+          { type:"line", label:"Conversões", data: series.map(d=>d.conversions), borderColor:"#4ade80", backgroundColor:"#4ade80", tension:.3, yAxisID:"y1" }
+        ]
+      },
+      options:{
+        responsive:true, maintainAspectRatio:false,
+        plugins:{ legend:{labels:{color:"#e7ebf1"}}, tooltip:{ callbacks:{ label: ctx => {
+          if(ctx.dataset.label.indexOf("Investimento")>=0) return ` ${fmtBRL(ctx.parsed.y)}`;
+          return ` ${fmtNum(ctx.parsed.y)} conversões`;
+        }}}},
+        scales:{
+          y:{ position:"left", ticks:{ color:"#9aa7b8", callback:v=>fmtBRL(v)}, grid:{color:"#232a35"} },
+          y1:{ position:"right", ticks:{ color:"#9aa7b8" }, grid:{display:false} },
+          x:{ ticks:{ color:"#e7ebf1" }, grid:{display:false} }
+        }
+      }
+    });
+  }
+
+  function drawCampaignChart(){
+    const funnels = selectedFunnelId==="all" ? dashboardData.funnels : [fnById(selectedFunnelId)];
+    const camps = [];
+    funnels.forEach(f=>f.campaigns.forEach(c=>{ if(isNum(c.spend7d)) camps.push({name:c.name, spend:c.spend7d, color:f.color}); }));
+    let empty = campCard.querySelector(".empty-state");
+    if(empty) empty.remove();
+    if(!chartsAvailable()){
+      campCanvas.style.display="none";
+      campCard.appendChild(el("div",{class:"empty-state"}, "Não foi possível carregar a biblioteca de gráficos (Chart.js via CDN)."));
+      return;
+    }
+    campCanvas.style.display="block";
+    if(!camps.length){
+      campCanvas.style.display="none";
+      campCard.appendChild(el("div",{class:"empty-state"}, "Sem dados de investimento por campanha para este recorte."));
+      if(campaignChartInstance){ campaignChartInstance.destroy(); campaignChartInstance=null; }
+      return;
+    }
+    camps.sort((a,b)=>b.spend-a.spend);
+    if(campaignChartInstance) campaignChartInstance.destroy();
+    campaignChartInstance = new Chart(campCanvas.getContext("2d"), {
+      type:"bar",
+      data:{ labels: camps.map(c=>c.name.length>28?c.name.slice(0,26)+"…":c.name), datasets:[{ data: camps.map(c=>c.spend), backgroundColor: camps.map(c=>c.color), borderRadius:6 }]},
+      options:{
+        indexAxis:"y", responsive:true, maintainAspectRatio:false,
+        plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: ctx => ` ${fmtBRL(ctx.parsed.x)}`, title: items => camps[items[0].dataIndex].name }}},
+        scales:{ x:{ ticks:{ color:"#9aa7b8", callback:v=>fmtBRL(v)}, grid:{color:"#232a35"} }, y:{ ticks:{ color:"#e7ebf1", font:{size:10.5} }, grid:{display:false} } }
+      }
+    });
+  }
+
+  drawDaily();
+  drawCampaignChart();
+}
+</script>
+
+<script>
+/* =========================================================
+   8. AUDITORIA ESTRATÉGICA
+   ========================================================= */
+function buildAuditModel(){
+  const model = [];
+  dashboardData.funnels.forEach(funnel=>{
+    const fStats = computeFunnelStats(funnel);
+    const cpas = funnel.campaigns.map(c=>cpaValue(c.spend7d,c.conversions7d)).filter(isNum);
+    const medianCPA = median(cpas);
+    funnel.campaigns.forEach(camp=>{
+      const result = classifyCampaign(camp, fStats, funnel, auditConfig);
+      model.push({funnel, camp, fStats, medianCPA, ...result});
+    });
+  });
+  return model;
+}
+
+function actionPriority(item){
+  if(item.classification==="critical") return "urgente";
+  if(item.classification==="attention" && item.confidence==="alta") return "alta";
+  if(item.classification==="attention") return "media";
+  if(item.classification==="scale_opportunity") return "media";
+  if(item.classification==="insufficient") return "baixa";
+  return "baixa";
+}
+
+function recommendationFor(item){
+  switch(item.classification){
+    case "critical": return "Revisar oferta, pixel/API de conversões e UTMs antes de qualquer novo aporte de verba.";
+    case "attention": return item.reason.indexOf("desproporcional")>=0
+        ? "Revisar a distribuição de verba dentro do funil; investigar criativos, público e página antes de escalar."
+        : item.reason.indexOf("cresceu")>=0
+          ? "Avaliar redução gradual do investimento até o resultado voltar a acompanhar o gasto."
+          : item.reason.indexOf("Queda")>=0
+            ? "Monitorar por mais alguns dias e revisar criativos/público antes de novas decisões."
+            : item.reason.indexOf("acima do parâmetro")>=0
+              ? "Avaliar redução gradual de investimento nesta campanha em favor das campanhas do funil com CPA melhor, e revisar público, posicionamentos e criativos."
+              : item.reason.indexOf("Investimento sem conversões")>=0 || item.reason.indexOf("investimento sem")>=0
+                ? "Verificar pixel, API de conversões e UTMs, e revisar oferta e página de destino antes de manter o investimento."
+                : "Comparar Meta Ads e Hotmart e revisar criativos e página de destino.";
+    case "scale_opportunity": return "Avaliar aumento gradual do investimento, mantendo o monitoramento diário do CPA.";
+    case "insufficient": return camp_status_reco(item);
+    default: return "Manter a campanha e monitorar por mais tempo.";
+  }
+}
+function camp_status_reco(item){
+  if(item.camp.status==="inactive") return "Campanha desativada sem veiculação — nenhuma ação necessária além de confirmar que o desligamento foi intencional.";
+  if(item.camp.status==="in_review") return "Aguardar aprovação/veiculação do Meta antes de avaliar performance.";
+  return "Monitorar por mais tempo até acumular volume suficiente de conversões.";
+}
+
+function bottleneckHypothesis(camp){
+  const c = camp;
+  if(!isNum(c.spend7d) || !isNum(c.impressions7d) || c.impressions7d===0) return null;
+  const cpm = c.spend7d/c.impressions7d*1000;
+  const ctr = isNum(c.linkClicks7d) ? c.linkClicks7d/c.impressions7d : null;
+  const freq = isNum(c.reach7d) && c.reach7d>0 ? c.impressions7d/c.reach7d : null;
+  const lpRate = isNum(c.landingPageViews7d) && isNum(c.linkClicks7d) && c.linkClicks7d>0 ? c.landingPageViews7d/c.linkClicks7d : null;
+  const convRate = isNum(c.conversions7d) && isNum(c.landingPageViews7d) && c.landingPageViews7d>0 ? c.conversions7d/c.landingPageViews7d : null;
+
+  const notes = [];
+  if(freq!==null && freq>2.2) notes.push(`Os dados sugerem possível saturação de audiência: frequência de ${freq.toFixed(2)} no período.`);
+  if(ctr!==null && ctr<0.01) notes.push(`O principal indício está na comunicação: CTR de link de ${fmtPct(ctr)}, abaixo de 1%. Vale investigar criativos e copy.`);
+  if(lpRate!==null && lpRate<0.5 && isNum(c.linkClicks7d) && c.linkClicks7d>50) notes.push(`Vale investigar a página de destino: apenas ${fmtPct(lpRate)} dos cliques no link chegaram a gerar visualização de página.`);
+  if(convRate!==null && convRate>0 && convRate<0.02 && c.landingPageViews7d>30) notes.push(`Bom volume de visualização de página, mas baixa taxa de conversão (${fmtPct(convRate)}) — vale investigar oferta e comunicação da página.`);
+  if(!notes.length) notes.push("Ainda não existem dados suficientes para confirmar em qual camada (entrega, criativo, página ou rastreamento) está o principal gargalo.");
+  return {cpm, ctr, freq, lpRate, convRate, notes};
+}
+
+let auditFilters = {funnel:"all", status:"all", classification:"all", priority:"all", confidence:"all", onlyAction:false};
+let actionStatusStore = {};
+try{ actionStatusStore = JSON.parse(localStorage.getItem("stlflix_action_status")||"{}"); }catch(e){ actionStatusStore = {}; }
+function saveActionStatus(){ try{ localStorage.setItem("stlflix_action_status", JSON.stringify(actionStatusStore)); }catch(e){} }
+
+function renderAudit(container){
+  const sec = el("section");
+  sec.appendChild(el("div",{class:"section-title"}, `<h2>Auditoria estratégica das campanhas</h2><span class="tag">Gerada automaticamente a partir dos dados cadastrados</span>`));
+
+  const model = buildAuditModel();
+
+  // resumo executivo
+  const counts = {healthy:0, attention:0, critical:0, insufficient:0, scale_opportunity:0};
+  model.forEach(m=>counts[m.classification]++);
+
+  const summaryGrid = el("div",{class:"audit-summary-grid"});
+  [["healthy","Saudáveis"],["scale_opportunity","Oport. de escala"],["attention","Atenção"],["critical","Críticas"],["insufficient","Dados insuf."]].forEach(([k,l])=>{
+    const box = el("div",{class:`audit-count ${k}`});
+    box.appendChild(el("div",{class:"n"}, String(counts[k])));
+    box.appendChild(el("div",{class:"l"}, l));
+    summaryGrid.appendChild(box);
+  });
+  sec.appendChild(summaryGrid);
+
+  const exec = el("div",{class:"exec-summary"});
+  const meta7 = metaTotals7d();
+  const funnelStatsList = dashboardData.funnels.map(f=>({f,s:computeFunnelStats(f)}));
+
+  const bestPositive = model.filter(m=>m.classification==="scale_opportunity")
+    .sort((a,b)=> (b.camp.conversions7d - cpaValue(b.camp.spend7d,b.camp.conversions7d)) - (a.camp.conversions7d - cpaValue(a.camp.spend7d,a.camp.conversions7d)))[0]
+    || model.filter(m=>m.classification==="healthy").sort((a,b)=>b.camp.conversions7d-a.camp.conversions7d)[0];
+  const mainRisk = model.filter(m=>m.classification==="critical")[0] || model.filter(m=>m.classification==="attention").sort((a,b)=>b.camp.spend7d-a.camp.spend7d)[0];
+  const withSpendF = funnelStatsList.filter(x=>isNum(x.s.spend)&&x.s.spend>0);
+  const topFunnelSpend = withSpendF.length ? withSpendF.reduce((a,b)=>b.s.spend>a.s.spend?b:a) : null;
+  const urgentItem = model.filter(m=>actionPriority(m)==="urgente")[0] || model.filter(m=>actionPriority(m)==="alta")[0];
+
+  const execData = [
+    ["Campanhas analisadas", `${model.length} campanhas em ${dashboardData.funnels.length} funis.`],
+    ["Principal ponto positivo", bestPositive ? `A campanha <b>${bestPositive.camp.name}</b> (funil ${bestPositive.funnel.name}) gerou ${fmtNum(bestPositive.camp.conversions7d)} conversões a um CPA de ${cpaLabel(bestPositive.camp.spend7d,bestPositive.camp.conversions7d)}.` : "Nenhuma campanha atingiu volume suficiente para ser destacada como oportunidade de escala neste período."],
+    ["Principal risco identificado", mainRisk ? `A campanha <b>${mainRisk.camp.name}</b> (funil ${mainRisk.funnel.name}) — ${mainRisk.reason}` : "Nenhuma campanha em situação crítica ou de atenção neste período."],
+    ["Maior oportunidade de otimização", topFunnelSpend ? `O funil <b>${topFunnelSpend.f.name}</b> concentra ${fmtPct(topFunnelSpend.s.spend/meta7.spend)} do investimento monitorado — qualquer ganho de eficiência ali tem o maior impacto absoluto.` : "Não informado."],
+    ["Ação mais urgente recomendada", urgentItem ? `${recommendationFor(urgentItem)} (campanha ${urgentItem.camp.name}).` : "Nenhuma ação de prioridade urgente ou alta identificada neste período."]
+  ];
+  execData.forEach(([k,v])=>{
+    const box = el("div",{class:"exec-box"});
+    box.appendChild(el("div",{class:"k"}, k));
+    box.appendChild(el("div",{class:"v", html:v}));
+    exec.appendChild(box);
+  });
+  sec.appendChild(exec);
+
+  // filtros
+  const filtersBar = el("div",{class:"filters-bar"});
+  const selFunnel = el("select");
+  selFunnel.appendChild(el("option",{value:"all"},"Todos os funis"));
+  dashboardData.funnels.forEach(f=>selFunnel.appendChild(el("option",{value:f.id},f.name)));
+  const selStatus = el("select");
+  selStatus.innerHTML = `<option value="all">Todos os status</option><option value="active">Ativa</option><option value="inactive">Desativada</option><option value="in_review">Em análise</option>`;
+  const selClass = el("select");
+  selClass.innerHTML = `<option value="all">Toda classificação</option>` + Object.keys(CLASS_LABEL).map(k=>`<option value="${k}">${CLASS_LABEL[k]}</option>`).join("");
+  const selPrio = el("select");
+  selPrio.innerHTML = `<option value="all">Toda prioridade</option>` + Object.keys(PRIO_LABEL).map(k=>`<option value="${k}">${PRIO_LABEL[k]}</option>`).join("");
+  const selConf = el("select");
+  selConf.innerHTML = `<option value="all">Toda confiança</option><option value="alta">Alta</option><option value="média">Média</option><option value="baixa">Baixa</option>`;
+  const onlyActionBtn = el("label",{class:"chk-btn"}, `<input type="checkbox" id="onlyAction"> Mostrar apenas campanhas que exigem ação`);
+
+  [selFunnel,selStatus,selClass,selPrio,selConf].forEach(s=>filtersBar.appendChild(s));
+  filtersBar.appendChild(onlyActionBtn);
+  sec.appendChild(filtersBar);
+
+  const listWrap = el("div");
+  sec.appendChild(listWrap);
+
+  const planWrap = el("div");
+  sec.appendChild(el("h3",{style:"margin:26px 0 12px;font-size:14px;"}, "Plano de ação recomendado"));
+  sec.appendChild(planWrap);
+
+  const conclusion = el("div",{class:"conclusion-box"});
+  sec.appendChild(conclusion);
+
+  function applyFilters(){
+    return model.filter(m=>{
+      if(auditFilters.funnel!=="all" && m.funnel.id!==auditFilters.funnel) return false;
+      if(auditFilters.status!=="all" && m.camp.status!==auditFilters.status) return false;
+      if(auditFilters.classification!=="all" && m.classification!==auditFilters.classification) return false;
+      if(auditFilters.priority!=="all" && actionPriority(m)!==auditFilters.priority) return false;
+      if(auditFilters.confidence!=="all" && m.confidence!==auditFilters.confidence) return false;
+      if(auditFilters.onlyAction && !["critical","attention","scale_opportunity"].includes(m.classification)) return false;
+      return true;
+    });
+  }
+
+  function redraw(){
+    const filtered = applyFilters();
+    renderCampaignAudits(listWrap, filtered);
+    renderActionPlan(planWrap, filtered.length?filtered:model);
+    renderConclusion(conclusion, model, funnelStatsList, meta7);
+  }
+
+  selFunnel.addEventListener("change",()=>{auditFilters.funnel=selFunnel.value; redraw();});
+  selStatus.addEventListener("change",()=>{auditFilters.status=selStatus.value; redraw();});
+  selClass.addEventListener("change",()=>{auditFilters.classification=selClass.value; redraw();});
+  selPrio.addEventListener("change",()=>{auditFilters.priority=selPrio.value; redraw();});
+  selConf.addEventListener("change",()=>{auditFilters.confidence=selConf.value; redraw();});
+  onlyActionBtn.querySelector("input").addEventListener("change",e=>{auditFilters.onlyAction=e.target.checked; redraw();});
+
+  redraw();
+  container.appendChild(sec);
+}
+
+function renderCampaignAudits(wrap, items){
+  wrap.innerHTML = "";
+  if(!items.length){ wrap.appendChild(el("div",{class:"empty-state"},"Nenhuma campanha corresponde aos filtros selecionados.")); return; }
+
+  // agrupar por funil mantendo hierarquia
+  const byFunnel = {};
+  items.forEach(i=>{ (byFunnel[i.funnel.id] = byFunnel[i.funnel.id]||[]).push(i); });
+
+  dashboardData.funnels.forEach(f=>{
+    const list = byFunnel[f.id];
+    if(!list) return;
+    const groupTitle = el("div",{style:`display:flex;align-items:center;gap:8px;margin:16px 0 8px;color:${f.color};font-weight:700;font-size:12.5px;text-transform:uppercase;letter-spacing:.03em;`},
+      `<span style="width:9px;height:9px;border-radius:3px;background:${f.color};display:inline-block;"></span>${f.name}`);
+    wrap.appendChild(groupTitle);
+    list.forEach(item=> wrap.appendChild(renderCampaignAuditBlock(item)));
+  });
+}
+
+function renderCampaignAuditBlock(item){
+  const {camp, funnel, fStats, medianCPA} = item;
+  const details = el("details",{class:"campaign-audit"});
+  const summary = el("summary");
+  const titleBox = el("div",{class:"ca-title"});
+  titleBox.appendChild(el("div",{class:"ca-name"}, camp.name));
+  titleBox.appendChild(el("div",{class:"ca-meta"}, `${funnel.name} · ${STATUS_LABEL[camp.status]}`));
+  summary.appendChild(titleBox);
+  const right = el("div",{class:"ca-right"});
+  right.appendChild(el("span",{class:`class-badge ${item.classification}`}, CLASS_LABEL[item.classification]));
+  right.appendChild(el("span",{class:"confidence"}, `Confiança: ${item.confidence}`));
+  summary.appendChild(right);
+  details.appendChild(summary);
+
+  const body = el("div",{class:"ca-body"});
+  const spendShare = isNum(camp.spend7d)&&isNum(fStats.spend)&&fStats.spend>0 ? camp.spend7d/fStats.spend : null;
+  const convShare = isNum(camp.conversions7d)&&isNum(fStats.conv)&&fStats.conv>0 ? camp.conversions7d/fStats.conv : null;
+  const metricsGrid = el("div",{class:"ca-metrics"});
+  [
+    ["Investimento 7d", fmtBRL(camp.spend7d)],
+    ["Conversões (Meta)", fmtNum(camp.conversions7d)],
+    ["Custo por resultado", cpaLabel(camp.spend7d, camp.conversions7d)],
+    ["% invest. do funil", spendShare===null?"Não informado":fmtPct(spendShare)],
+    ["% conversões do funil", convShare===null?"Não informado":fmtPct(convShare)],
+    ["CPA mediano do funil", isNum(medianCPA)?fmtBRL(medianCPA):"Não informado"],
+    ["Impressões 7d", fmtNum(camp.impressions7d)],
+    ["Alcance 7d", fmtNum(camp.reach7d)]
+  ].forEach(([l,v])=>{
+    const m = el("div",{class:"ca-metric"});
+    m.appendChild(el("div",{class:"l"}, l));
+    m.appendChild(el("div",{class:"v"}, v));
+    metricsGrid.appendChild(m);
+  });
+  body.appendChild(metricsGrid);
+
+  // evidência / diagnóstico / impacto / recomendação
+  const insight = el("div",{class:"insight-block"});
+  insight.appendChild(el("div",{class:"ik"},"Evidência"));
+  insight.appendChild(el("p",{}, item.evidence.length ? item.evidence.join(" ") : "Sem evidência numérica adicional disponível."));
+  insight.appendChild(el("div",{class:"ik"},"Diagnóstico"));
+  insight.appendChild(el("p",{}, item.reason));
+  const impactText = item.classification==="critical" ? "Se mantido, o investimento nessa campanha tende a não retornar em vendas, reduzindo a eficiência geral do funil."
+    : item.classification==="attention" ? "Pode estar reduzindo a eficiência média do funil e distorcendo o CPA consolidado."
+    : item.classification==="scale_opportunity" ? "Um aumento gradual de verba aqui tende a ter o melhor retorno marginal dentro do funil."
+    : item.classification==="insufficient" ? "Ainda não é possível estimar o impacto no funil com segurança."
+    : "Contribui de forma equilibrada para o resultado do funil.";
+  insight.appendChild(el("div",{class:"ik"},"Impacto"));
+  insight.appendChild(el("p",{}, impactText));
+  insight.appendChild(el("div",{class:"ik"},"Recomendação"));
+  insight.appendChild(el("p",{}, recommendationFor(item)));
+  body.appendChild(insight);
+
+  // gargalo (entrega/criativo/página/rastreamento)
+  const bottleneck = bottleneckHypothesis(camp);
+  if(bottleneck){
+    const bBlock = el("div",{class:"insight-block", style:"border-left-color:#f0a63a;"});
+    bBlock.appendChild(el("div",{class:"ik"},"Hipótese de gargalo"));
+    bottleneck.notes.forEach(n=> bBlock.appendChild(el("p",{}, n)));
+    body.appendChild(bBlock);
+  }
+
+  // evolução diária resumida
+  if(camp.daily && camp.daily.length){
+    const dailyLine = camp.daily.map(d=>`${fmtDateBR(d.date)}: ${fmtBRL(d.spend)} / ${fmtNum(d.conversions)} conv.`).join(" · ");
+    body.appendChild(el("div",{class:"note", style:"margin-top:10px;"}, `Evolução diária: ${dailyLine}`));
+  }
+
+  details.appendChild(body);
+  return details;
+}
+
+function renderActionPlan(container, items){
+  container.innerHTML = "";
+  const actionable = items.filter(i=>["critical","attention","scale_opportunity","insufficient"].includes(i.classification));
+  if(!actionable.length){ container.appendChild(el("div",{class:"empty-state"},"Nenhuma ação pendente para os filtros atuais.")); return; }
+
+  const order = {urgente:0, alta:1, media:2, baixa:3};
+  actionable.sort((a,b)=> order[actionPriority(a)] - order[actionPriority(b)]);
+
+  const table = el("table");
+  table.appendChild(el("thead",{},`<tr>
+    <th>Prioridade</th><th>Funil</th><th>Campanha</th><th>Problema/Oportunidade</th>
+    <th>Evidência</th><th>Ação recomendada</th><th>Confiança</th><th>Status</th></tr>`));
+  const tbody = el("tbody");
+  actionable.forEach(item=>{
+    const prio = actionPriority(item);
+    const rowId = item.funnel.id + "::" + item.camp.name;
+    const tr = el("tr");
+    tr.appendChild(el("td",{}, `<span class="prio ${prio}">${PRIO_LABEL[prio]}</span>`));
+    tr.appendChild(el("td",{}, item.funnel.name));
+    tr.appendChild(el("td",{}, item.camp.name));
+    tr.appendChild(el("td",{}, CLASS_LABEL[item.classification]));
+    tr.appendChild(el("td",{}, item.evidence[0] || "—"));
+    tr.appendChild(el("td",{}, recommendationFor(item)));
+    tr.appendChild(el("td",{}, item.confidence));
+    const statusTd = el("td");
+    const sel = el("select",{class:"action-status"});
+    ["Pendente","Em análise","Em execução","Concluída"].forEach(s=>sel.appendChild(el("option",{value:s},s)));
+    sel.value = actionStatusStore[rowId] || "Pendente";
+    sel.addEventListener("change", ()=>{ actionStatusStore[rowId]=sel.value; saveActionStatus(); });
+    statusTd.appendChild(sel);
+    tr.appendChild(statusTd);
+    tbody.appendChild(tr);
+  });
+  table.appendChild(tbody);
+  const scrollWrap = el("div",{class:"table-scroll"});
+  scrollWrap.appendChild(table);
+  container.appendChild(scrollWrap);
+}
+
+function renderConclusion(container, model, funnelStatsList, meta7){
+  container.innerHTML = "";
+  container.appendChild(el("h3",{style:"font-size:14px;margin-bottom:10px;"}, "Conclusão executiva"));
+
+  const scaleOps = model.filter(m=>m.classification==="scale_opportunity");
+  const attention = model.filter(m=>m.classification==="attention");
+  const critical = model.filter(m=>m.classification==="critical");
+  const insufficient = model.filter(m=>m.classification==="insufficient");
+  const withSpendF = funnelStatsList.filter(x=>isNum(x.s.spend)&&x.s.spend>0);
+  const mostAttentionFunnelId = attention.length ? attention.reduce((acc,m)=>{ acc[m.funnel.id]=(acc[m.funnel.id]||0)+1; return acc; },{}) : {};
+  const funnelNeedsAttention = Object.keys(mostAttentionFunnelId).length
+    ? dashboardData.funnels.find(f=>f.id===Object.entries(mostAttentionFunnelId).sort((a,b)=>b[1]-a[1])[0][0])
+    : null;
+  const bestOpportunity = scaleOps.sort((a,b)=>b.camp.conversions7d-a.camp.conversions7d)[0];
+
+  const workingText = scaleOps.length
+    ? `${scaleOps.length} campanha(s) reúnem volume de conversões suficiente e CPA em linha com o funil, indicando espaço para escalar investimento com segurança.`
+    : "Nenhuma campanha reuniu, no período, volume e CPA suficientes para recomendação de escala.";
+
+  const inefficiencyText = critical.length
+    ? `A maior ineficiência está nas ${critical.length} campanha(s) críticas, com investimento sem retorno registrado.`
+    : attention.length
+      ? `A maior ineficiência aparece nas ${attention.length} campanha(s) em atenção, com CPA acima do funil ou distribuição de verba desproporcional aos resultados.`
+      : "Não foram identificadas ineficiências relevantes com os critérios configurados atualmente.";
+
+  const p = (t)=> el("p",{style:"margin:4px 0 12px;"}, t);
+  container.appendChild(p(workingText));
+  container.appendChild(p(inefficiencyText));
+  container.appendChild(p(funnelNeedsAttention ? `O funil que mais precisa de atenção é <b>${funnelNeedsAttention.name}</b>.` : "Nenhum funil concentrou sinais de atenção suficientes para destaque."));
+  container.appendChild(p(bestOpportunity ? `A melhor oportunidade identificada é a campanha <b>${bestOpportunity.camp.name}</b> (funil ${bestOpportunity.funnel.name}).` : "Nenhuma campanha se destacou como melhor oportunidade neste período."));
+  container.appendChild(p(insufficient.length ? `Antes de qualquer mudança, investigar as ${insufficient.length} campanha(s) com dados insuficientes (desativadas, em análise ou com poucas conversões) para não tomar decisão precipitada.` : "Não há campanhas com dados insuficientes pendentes de investigação."));
+
+  const top3 = model
+    .filter(m=>["critical","attention","scale_opportunity"].includes(m.classification))
+    .sort((a,b)=>{ const o={critical:0,attention:1,scale_opportunity:2}; return o[a.classification]-o[b.classification]; })
+    .slice(0,3);
+  const ol = el("ol");
+  if(top3.length){
+    top3.forEach(m=> ol.appendChild(el("li",{}, `${recommendationFor(m)} — ${m.camp.name} (${funnel_name_of(m)})`)));
+  } else {
+    ol.appendChild(el("li",{}, "Manter monitoramento diário; nenhuma ação prioritária identificada neste ciclo."));
+  }
+  container.appendChild(el("div",{},"<b>Três ações prioritárias para o próximo ciclo:</b>"));
+  container.appendChild(ol);
+}
+function funnel_name_of(m){ return m.funnel.name; }
+</script>
+
+<script>
+/* =========================================================
+   9. BOOT
+   ========================================================= */
+function render(){
+  const app = document.getElementById("app");
+  app.innerHTML = "";
+
+  const header = el("div",{class:"header"});
+  const left = el("div");
+  left.appendChild(el("h1",{},"Dashboard Executivo de Campanhas — STLFLIX"));
+  left.appendChild(el("div",{class:"sub"},"Acompanhamento diário por funil · Meta Ads, Google Ads e Hotmart"));
+  header.appendChild(left);
+  header.appendChild(el("div",{class:"updated"}, `Última atualização: <b>${dashboardData.updatedAt}</b>`));
+  app.appendChild(header);
+
+  [renderBusinessSummary, renderFunnels, renderCharts, renderDailyEvolution, renderAudit].forEach(fn=>{
+    try{ fn(app); }
+    catch(err){
+      console.error(fn.name, err);
+      app.appendChild(el("div",{class:"card", style:"border-color:#ef4444;"}, `Falha ao renderizar a seção "${fn.name}": ${err.message}`));
+    }
+  });
+
+  const foot = el("footer");
+  foot.appendChild(el("div",{},"Meta Ads e Google Ads: dados extraídos via Windsor.ai. Hotmart: dados lidos manualmente dos prints do painel de vendas — sem conector automático nesta versão."));
+  app.appendChild(foot);
+}
+render();
+</script>
+</body>
+</html>
