@@ -193,6 +193,9 @@ const dashboardData = {
       id: "assine",
       name: "ASSINE",
       color: "#6366f1",
+      demands: [
+        "Entendendo a possibilidade de trocar pela URL do lote especial"
+      ],
       campaigns: [
         {
           name: "[BRA] [ASSINE] conversão-vendas-drops-automação",
@@ -219,6 +222,9 @@ const dashboardData = {
       id: "lari",
       name: "LARI",
       color: "#14b8a6",
+      demands: [
+        "Adição de novos criativos"
+      ],
       campaigns: [
         {
           name: "[BRA] [LARI] conversão-vendas-collab-lari",
@@ -256,6 +262,10 @@ const dashboardData = {
       id: "lote_especial",
       name: "LOTE ESPECIAL",
       color: "#f0a63a",
+      demands: [
+        "Ativação de novos criativos",
+        "Briefing de novos criativos estáticos"
+      ],
       campaigns: [
         {
           name: "[BRA] [LOTE ESPECIAL] conversão-vendas-advantage-influencers",
@@ -694,6 +704,15 @@ function renderFunnelCard(funnel, meta7, auditModel){
 
   const body = el("div",{class:"funnel-body"});
   body.appendChild(renderCampaignTable(funnel, stats));
+
+  if(funnel.demands && funnel.demands.length){
+    const demandsCard = el("div",{class:"card", style:"margin-top:16px;"});
+    demandsCard.appendChild(el("h3",{}, "Demandas do funil"));
+    const ul = el("ul",{style:"margin:0;padding-left:18px;"});
+    funnel.demands.forEach(d=> ul.appendChild(el("li",{style:"margin-bottom:6px;font-size:13px;"}, d)));
+    demandsCard.appendChild(ul);
+    body.appendChild(demandsCard);
+  }
 
   const dailyCard = el("div",{class:"card", style:"margin-top:16px;"});
   dailyCard.appendChild(el("h3",{}, "Evolução diária (investimento, conversões e CPA)"));
