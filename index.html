@@ -174,7 +174,7 @@ footer{color:var(--text-faint);font-size:11.5px;text-align:center;padding-top:20
    e a interface exibe "Não informado" — nunca zero inventado.
    ========================================================= */
 const dashboardData = {
-  updatedAt: "16/09/2026 10:10",
+  updatedAt: "17/09/2026 08:30",
   currency: "BRL",
 
   // Investimento total da conta Meta (todas as campanhas, não só os funis
@@ -183,25 +183,39 @@ const dashboardData = {
 
   businessSummary: {
     yesterday: {
-      // 15/09/2026
-      metaSpend: 9695.44,
-      googleSpend: 1129.59,
-      hotmartRevenue: 63000.08,
-      hotmartSales: 105,
-      // Produtos identificados como BF/aniversário na lista de "Visão por
-      // produto" de ontem enviada pelo usuário (não é meta/estimativa).
-      promoRevenue: 535.48,
-      promoSales: 2,
-      promoNote: "Identificado na lista de produtos vendidos ontem: [BF25] [USD] Lifetime STLFLIX + STLACADEMY (2 vendas, R$ 535,48). Essa lista de produtos soma R$ 59.294,79 dos R$ 63.000,08 totais do dia — pode haver outras vendas BF/aniversário nos R$ 3.705,29 restantes que não estavam detalhados no print."
+      // 16/09/2026
+      metaSpend: 11307.03,
+      googleSpend: 1000.61,
+      hotmartRevenue: 61620.20,
+      hotmartSales: 90,
+      promoRevenue: 0,
+      promoSales: 0,
+      promoNote: null
     },
     last4Days: {
-      // 12/09/2026 a 15/09/2026 (mesmo recorte mostrado no painel de vendas)
-      metaSpend: 43143.13,
-      googleSpend: 4551.02,
-      hotmartRevenue: 201223.24,
-      hotmartSales: 324
+      // 13/09/2026 a 16/09/2026
+      metaSpend: 44020.68,
+      googleSpend: 4415.95,
+      hotmartRevenue: 212651.17,
+      hotmartSales: 342,
+      promoRevenue: 535.48,
+      promoSales: 2,
+      promoNote: "BF identificado em 15/09: [BF25] Lifetime STLFLIX + STLACADEMY (2 vendas, R$ 535,48)."
     }
   },
+
+  // Receita/custo/ROAS diário do negócio (últimos 7 dias, 10 a 16/09/2026).
+  // Receita = Hotmart líquida do dia; promoRevenue = BF/aniversário identificado
+  // nos produtos daquele dia (retirado do ROAS); custo = Meta + Google (Windsor.ai).
+  dailyBusiness: [
+    { date:"2026-09-10", hotmartRevenue:54542.95, hotmartSales:103, promoRevenue:0, metaSpend:10991.13, googleSpend:1023.70 },
+    { date:"2026-09-11", hotmartRevenue:41240.71, hotmartSales:70, promoRevenue:446.66, metaSpend:10309.08, googleSpend:1032.05 },
+    { date:"2026-09-12", hotmartRevenue:46213.27, hotmartSales:65, promoRevenue:478.04, metaSpend:10443.91, googleSpend:1127.51 },
+    { date:"2026-09-13", hotmartRevenue:40240.40, hotmartSales:64, promoRevenue:0, metaSpend:12170.58, googleSpend:1141.34 },
+    { date:"2026-09-14", hotmartRevenue:51674.59, hotmartSales:89, promoRevenue:0, metaSpend:10833.64, googleSpend:1149.70 },
+    { date:"2026-09-15", hotmartRevenue:59115.98, hotmartSales:99, promoRevenue:535.48, metaSpend:9709.43, googleSpend:1124.30 },
+    { date:"2026-09-16", hotmartRevenue:61620.20, hotmartSales:90, promoRevenue:0, metaSpend:11307.03, googleSpend:1000.61 }
+  ],
 
   // janela usada em "Performance por funil" e nos gráficos: 09/09 a 15/09/2026
   funnelWindow: { from: "2026-09-09", to: "2026-09-15" },
@@ -620,12 +634,9 @@ function renderBusinessSummary(container){
   sec.appendChild(el("div", {class:"section-title"}, `<h2>Visão global do negócio</h2><span class="tag">Meta + Google + Hotmart</span>`));
 
   const grid = el("div", {class:"grid grid-2"});
-  grid.appendChild(periodCard("Ontem (15/09/2026)", dashboardData.businessSummary.yesterday, "yesterday"));
-  grid.appendChild(periodCard("Últimos 4 dias (12 a 15/09/2026)", dashboardData.businessSummary.last4Days, "last4"));
+  grid.appendChild(periodCard("Ontem (16/09/2026)", dashboardData.businessSummary.yesterday, "yesterday"));
+  grid.appendChild(periodCard("Últimos 4 dias (13 a 16/09/2026)", dashboardData.businessSummary.last4Days, "last4"));
   sec.appendChild(grid);
-
-  sec.appendChild(el("div",{class:"note"},
-    "Os períodos acima (ontem / últimos 4 dias) nunca são combinados com a janela de 7 dias usada na seção \"Performance por funil\" — são recortes independentes."));
   container.appendChild(sec);
 }
 
@@ -679,6 +690,92 @@ function periodCard(title, data, kind){
   }
   card.appendChild(roasBox);
   return card;
+}
+</script>
+
+<script>
+/* =========================================================
+   4b. RENDER — Evolução diária do negócio (receita, custo, ROAS real)
+   Receita = Hotmart líquida, já sem BF/aniversário identificado.
+   Custo = Meta + Google. ROAS aqui é o real do negócio, não atribuído
+   pelo Meta — por isso não leva o rótulo "(Meta)".
+   ========================================================= */
+function renderGlobalDailyEvolution(container){
+  const days = dashboardData.dailyBusiness || [];
+  if(!days.length) return;
+  const sec = el("section");
+  sec.appendChild(el("div",{class:"section-title"}, `<h2>Evolução diária do negócio</h2><span class="tag">Receita, custo e ROAS · Últimos 7 dias</span>`));
+
+  const rows = days.map(d=>{
+    const revenue = d.hotmartRevenue - (d.promoRevenue||0);
+    const cost = (d.metaSpend||0) + (d.googleSpend||0);
+    const roas = roasValue(revenue, cost);
+    return {...d, revenue, cost, roas};
+  });
+
+  const grid = el("div",{class:"grid grid-2"});
+  const chartCard = el("div",{class:"card"});
+  chartCard.appendChild(el("h3",{}, "Receita, custo e ROAS por dia"));
+  const chartBoxWrap = el("div",{class:"chart-box"});
+  const canvas = el("canvas");
+  chartBoxWrap.appendChild(canvas);
+  chartCard.appendChild(chartBoxWrap);
+  grid.appendChild(chartCard);
+
+  const tableCard = el("div",{class:"card"});
+  const tableWrap = el("div",{class:"table-scroll"});
+  const table = el("table");
+  table.appendChild(el("thead",{},`<tr><th>Data</th><th>Receita</th><th>Custo</th><th>ROAS</th></tr>`));
+  const tbody = el("tbody");
+  rows.forEach(r=>{
+    const tr = el("tr");
+    tr.appendChild(el("td",{}, fmtDateBR(r.date)));
+    tr.appendChild(el("td",{}, fmtBRL(r.revenue)));
+    tr.appendChild(el("td",{}, fmtBRL(r.cost)));
+    tr.appendChild(el("td",{}, isNum(r.roas) ? r.roas.toFixed(2).replace(".",",")+"x" : "Não informado"));
+    tbody.appendChild(tr);
+  });
+  table.appendChild(tbody);
+  tableWrap.appendChild(table);
+  tableCard.appendChild(tableWrap);
+  const totalRevenue = rows.reduce((a,r)=>a+r.revenue,0);
+  const totalCost = rows.reduce((a,r)=>a+r.cost,0);
+  const totalRoas = roasValue(totalRevenue, totalCost);
+  tableCard.appendChild(el("div",{class:"metric-sub", style:"margin-top:10px;"},
+    `Total 7d: ${fmtBRL(totalRevenue)} receita / ${fmtBRL(totalCost)} custo → <b style="color:var(--text)">${isNum(totalRoas)?totalRoas.toFixed(2).replace(".",",")+"x":"Não informado"}</b>`));
+  grid.appendChild(tableCard);
+
+  sec.appendChild(grid);
+  container.appendChild(sec);
+
+  if(!chartsAvailable()){
+    chartBoxWrap.replaceWith(el("div",{class:"empty-state"}, "Não foi possível carregar a biblioteca de gráficos."));
+    return;
+  }
+  new Chart(canvas.getContext("2d"), {
+    data:{
+      labels: rows.map(r=>fmtDateBR(r.date)),
+      datasets:[
+        { type:"bar", label:"Custo (R$)", data: rows.map(r=>r.cost), backgroundColor:"#5b8cff88", borderRadius:4, yAxisID:"y" },
+        { type:"line", label:"Receita (R$)", data: rows.map(r=>r.revenue), borderColor:"#22c55e", backgroundColor:"#22c55e", tension:.3, yAxisID:"y" },
+        { type:"line", label:"ROAS", data: rows.map(r=>r.roas), borderColor:"#f472b6", backgroundColor:"#f472b6", borderDash:[5,3], tension:.3, spanGaps:true, yAxisID:"y2",
+          datalabels:{ color:"#f472b6", font:{size:10,weight:"600"}, align:"top", offset:4, display: ctx => isNum(rows[ctx.dataIndex].roas), formatter: v => isNum(v)? v.toFixed(2).replace(".",",")+"x":"" } }
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      layout:{ padding:{top:16} },
+      plugins:{ legend:{labels:{color:"#e7ebf1", boxWidth:10}}, tooltip:{ callbacks:{ label: ctx => {
+        if(ctx.dataset.label.indexOf("ROAS")>=0) return ` ROAS: ${ctx.parsed.y.toFixed(2).replace(".",",")}x`;
+        return ` ${ctx.dataset.label}: ${fmtBRL(ctx.parsed.y)}`;
+      }}}},
+      scales:{
+        y:{ position:"left", ticks:{ color:"#9aa7b8", callback:v=>fmtBRL(v) }, grid:{color:"#232a35"} },
+        y2:{ position:"right", display:false },
+        x:{ ticks:{ color:"#e7ebf1", font:{size:10.5} }, grid:{display:false} }
+      }
+    }
+  });
 }
 </script>
 
@@ -1227,7 +1324,7 @@ function render(){
   header.appendChild(el("div",{class:"updated"}, `Última atualização: <b>${dashboardData.updatedAt}</b>`));
   app.appendChild(header);
 
-  [renderBusinessSummary, renderFunnelShareOverview, renderFunnels, renderGeneralDemands].forEach(fn=>{
+  [renderBusinessSummary, renderGlobalDailyEvolution, renderFunnelShareOverview, renderFunnels, renderGeneralDemands].forEach(fn=>{
     try{ fn(app); }
     catch(err){
       console.error(fn.name, err);
