@@ -1,0 +1,359 @@
+<title>Consolidação Lote Especial</title>
+<style>
+  :root{
+    --bg:#f3f5f8;
+    --surface:#ffffff;
+    --surface-2:#eef1f6;
+    --border:#dbe1ea;
+    --text:#161a22;
+    --text-dim:#5c6577;
+    --accent:#a8620f;
+    --accent-soft:#f3e3c8;
+    --accent-2:#1f7a6e;
+    --accent-2-soft:#d9efe9;
+    --danger:#a92f41;
+    --danger-soft:#f7dde1;
+    --good:#1f7a45;
+    --good-soft:#dcf0e4;
+    --shadow: 0 1px 2px rgba(20,24,32,.04), 0 8px 24px -12px rgba(20,24,32,.12);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0c0f15;
+      --surface:#12161f;
+      --surface-2:#171c27;
+      --border:#252c3a;
+      --text:#e7eaf0;
+      --text-dim:#8b93a6;
+      --accent:#e2a94a;
+      --accent-soft:#3a2f18;
+      --accent-2:#4bbcae;
+      --accent-2-soft:#12332e;
+      --danger:#e5677a;
+      --danger-soft:#3a1e24;
+      --good:#5fcf8c;
+      --good-soft:#15301f;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 28px -14px rgba(0,0,0,.55);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0c0f15;
+    --surface:#12161f;
+    --surface-2:#171c27;
+    --border:#252c3a;
+    --text:#e7eaf0;
+    --text-dim:#8b93a6;
+    --accent:#e2a94a;
+    --accent-soft:#3a2f18;
+    --accent-2:#4bbcae;
+    --accent-2-soft:#12332e;
+    --danger:#e5677a;
+    --danger-soft:#3a1e24;
+    --good:#5fcf8c;
+    --good-soft:#15301f;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 28px -14px rgba(0,0,0,.55);
+  }
+
+  * { box-sizing: border-box; }
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    padding: 0 16px;
+    padding-block: 40px;
+    line-height: 1.5;
+  }
+  .page{ max-width: 880px; margin: 0 auto; }
+  h1,h2,h3{ font-family:"Archivo", "Public Sans", sans-serif; text-wrap: balance; letter-spacing:-0.01em; }
+  .eyebrow{
+    font-family:"IBM Plex Mono", monospace;
+    font-size:12px; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
+    color: var(--accent);
+  }
+  h1{ font-size: 34px; font-weight: 800; margin: 10px 0 14px; color: var(--text); }
+  .lede{ font-size: 16px; color: var(--text-dim); max-width: 640px; margin: 0 0 28px; }
+  .lede strong{ color: var(--text); }
+
+  .stat-strip{
+    display:flex; flex-wrap:wrap; gap:14px;
+    margin-bottom: 40px;
+  }
+  .stat{
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    box-shadow: var(--shadow);
+    flex: 1 1 160px;
+    min-width: 150px;
+  }
+  .stat .l{ font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--text-dim); margin-bottom:6px; }
+  .stat .v{ font-family:"IBM Plex Mono",monospace; font-variant-numeric: tabular-nums; font-size:21px; font-weight:600; }
+
+  section{ margin-bottom: 44px; }
+  h2{ font-size:20px; font-weight:800; margin: 0 0 6px; }
+  .section-note{ color:var(--text-dim); font-size:14px; margin: 0 0 16px; max-width:640px; }
+
+  .table-wrap{ overflow-x:auto; border:1px solid var(--border); border-radius:12px; background:var(--surface); box-shadow:var(--shadow); }
+  table{ width:100%; border-collapse:collapse; font-size:13.5px; min-width:640px; }
+  th,td{ padding:11px 14px; text-align:left; border-bottom:1px solid var(--border); white-space:nowrap; }
+  th{ font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--text-dim); font-weight:600; }
+  tbody tr:last-child td{ border-bottom:none; }
+  td.num, th.num{ font-family:"IBM Plex Mono",monospace; font-variant-numeric: tabular-nums; }
+  tr.survivor{ background: var(--accent-2-soft); }
+  .tag{
+    display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:.04em; text-transform:uppercase;
+    padding:3px 8px; border-radius:100px; background:var(--accent-2-soft); color:var(--accent-2);
+  }
+
+  .callout{
+    border-radius: 12px; padding: 16px 18px; font-size:14px; margin-top:16px; border:1px solid transparent;
+  }
+  .callout.warn{ background:var(--accent-soft); color:var(--text); border-color: color-mix(in srgb, var(--accent) 35%, transparent); }
+  .callout.warn strong{ color: var(--accent); }
+  .callout.danger{ background:var(--danger-soft); border-color: color-mix(in srgb, var(--danger) 35%, transparent); }
+  .callout.danger strong{ color:var(--danger); }
+  .callout.good{ background:var(--good-soft); border-color: color-mix(in srgb, var(--good) 35%, transparent); }
+
+  .rules-grid{ display:grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap:14px; }
+  .rule{
+    background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:16px 18px; box-shadow:var(--shadow);
+  }
+  .rule .n{ font-family:"IBM Plex Mono",monospace; color:var(--accent); font-size:12px; font-weight:700; margin-bottom:6px; }
+  .rule p{ margin:0; font-size:13.5px; color:var(--text-dim); }
+  .rule strong{ color:var(--text); }
+
+  .timeline{ position:relative; padding-left: 34px; }
+  .timeline::before{
+    content:""; position:absolute; left:11px; top:6px; bottom:6px; width:2px; background:var(--border);
+  }
+  .phase{ position:relative; margin-bottom:32px; }
+  .phase:last-child{ margin-bottom:0; }
+  .phase-marker{
+    position:absolute; left:-34px; top:0; width:24px; height:24px; border-radius:50%;
+    background:var(--surface); border:2px solid var(--accent); color:var(--accent);
+    display:flex; align-items:center; justify-content:center; font-family:"IBM Plex Mono",monospace; font-size:12px; font-weight:700;
+  }
+  .phase-card{
+    background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:20px 22px; box-shadow:var(--shadow);
+  }
+  .phase-head{ display:flex; justify-content:space-between; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:4px; }
+  .phase-head h3{ font-size:17px; margin:0; }
+  .phase-dates{ font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--text-dim); }
+  .phase-target{ font-size:13px; color:var(--text-dim); margin: 2px 0 16px; }
+  .phase-target b{ color:var(--text); }
+
+  .steps{ list-style:none; margin:0 0 16px; padding:0; display:flex; flex-direction:column; gap:9px; }
+  .steps li{ font-size:14px; padding-left:20px; position:relative; }
+  .steps li::before{ content:"→"; position:absolute; left:0; color:var(--accent); font-weight:700; }
+
+  .mini-table{ font-size:12.5px; margin: 12px 0 16px; }
+  .mini-table table{ min-width:100%; }
+
+  .checkpoint{
+    display:flex; gap:10px; align-items:flex-start; background:var(--surface-2); border-radius:10px; padding:12px 14px; font-size:13px; color:var(--text-dim);
+  }
+  .checkpoint b{ color:var(--good); }
+
+  .finish-grid{ display:grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap:16px; }
+  .finish-card{ background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:18px 20px; box-shadow:var(--shadow); }
+  .finish-card h3{ font-size:14px; margin:0 0 8px; }
+  .finish-card p{ margin:0; font-size:13.5px; color:var(--text-dim); }
+
+  footer{ margin-top:48px; padding-top:20px; border-top:1px solid var(--border); font-size:12px; color:var(--text-dim); }
+
+  @media (max-width: 560px){
+    h1{ font-size:26px; }
+    .timeline{ padding-left:28px; }
+    .phase-marker{ left:-28px; width:20px; height:20px; font-size:10px; }
+    th,td{ padding:9px 10px; }
+  }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+<div class="page">
+
+  <header>
+    <div class="eyebrow">Plano de ação · 30 dias</div>
+    <h1>Consolidação do funil Lote Especial em 1 campanha</h1>
+    <p class="lede">
+      Hoje o Lote Especial roda em <strong>5 campanhas</strong> competindo pelo mesmo público e leilão.
+      A meta é chegar a <strong>1 única campanha — Advantage-influencers</strong>, que já está recebendo
+      orçamento extra nos últimos 2 dias — desligando as outras uma por vez, sem deixar a receita do funil despencar.
+    </p>
+    <div class="stat-strip">
+      <div class="stat"><div class="l">Campanhas hoje</div><div class="v">5 → 1</div></div>
+      <div class="stat"><div class="l">Investimento 7d (funil)</div><div class="v">R$ 35.824,75</div></div>
+      <div class="stat"><div class="l">Conversões 7d (Meta)</div><div class="v">157</div></div>
+      <div class="stat"><div class="l">Duração do plano</div><div class="v">~30 dias</div></div>
+    </div>
+  </header>
+
+  <section>
+    <h2>Diagnóstico de hoje</h2>
+    <p class="section-note">Últimos 7 dias completos (11 a 17/09). ROAS (Meta) = valor de conversão atribuído pelo Meta ÷ investimento — não é a receita real da Hotmart, mas é o que dá para comparar campanha a campanha.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Campanha</th>
+            <th class="num">Invest. 7d</th>
+            <th class="num">Conversões</th>
+            <th class="num">CPA</th>
+            <th class="num">ROAS (Meta)</th>
+            <th>Papel no plano</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="survivor">
+            <td>Advantage-influencers <span class="tag">Sobrevivente</span></td>
+            <td class="num">R$ 11.476,34</td>
+            <td class="num">46</td>
+            <td class="num">R$ 249,48</td>
+            <td class="num">3,67x</td>
+            <td>Recebe todo o orçamento ao final</td>
+          </tr>
+          <tr>
+            <td>Drops feed STLIA</td>
+            <td class="num">R$ 9.143,67</td>
+            <td class="num">44</td>
+            <td class="num">R$ 207,81</td>
+            <td class="num">4,56x</td>
+            <td>Desliga por último (semana 4)</td>
+          </tr>
+          <tr>
+            <td>Drops feed STLFLIX</td>
+            <td class="num">R$ 9.454,24</td>
+            <td class="num">37</td>
+            <td class="num">R$ 255,52</td>
+            <td class="num">3,61x</td>
+            <td>Desliga na semana 2</td>
+          </tr>
+          <tr>
+            <td>Remarketing</td>
+            <td class="num">R$ 3.898,06</td>
+            <td class="num">19</td>
+            <td class="num">R$ 205,16</td>
+            <td class="num">5,01x</td>
+            <td>Desliga na semana 3</td>
+          </tr>
+          <tr>
+            <td>Adv</td>
+            <td class="num">R$ 1.852,44</td>
+            <td class="num">11</td>
+            <td class="num">R$ 168,40</td>
+            <td class="num">6,00x*</td>
+            <td>Desliga primeiro (semana 1)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="section-note" style="margin-top:10px;">* Adv só tem 2 dias de histórico (começou em 16/09) — o ROAS alto ainda não é confiável, por isso ela sai primeiro: é a que tem menos dado acumulado para perder.</p>
+    <div class="callout warn">
+      <strong>Ponto de atenção:</strong> no dia 17/09 o funil gastou <strong>R$ 6.066,21</strong> no total, contra uma média de <strong>R$ 5.117,82/dia</strong> nos últimos 7 dias — ou seja, até agora o orçamento extra de Advantage está sendo <em>somado</em>, não <em>redirecionado</em> das outras 4. A partir de hoje, cada real que sobe em Advantage precisa sair de outra campanha no mesmo dia, para o funil não crescer de custo sem crescer de receita.
+    </div>
+  </section>
+
+  <section>
+    <h2>Regras de segurança</h2>
+    <p class="section-note">Valem para as 4 semanas — são o que evita a receita cair enquanto as campanhas são fundidas.</p>
+    <div class="rules-grid">
+      <div class="rule"><div class="n">01</div><p><strong>Nunca corte mais de 20–25%</strong> do orçamento de uma campanha em um único dia. Corte maior reseta a fase de aprendizado do Meta e piora a entrega por alguns dias.</p></div>
+      <div class="rule"><div class="n">02</div><p><strong>Todo real cortado entra em Advantage no mesmo dia.</strong> O orçamento total do funil deve ficar estável — a ideia é redistribuir, não reduzir.</p></div>
+      <div class="rule"><div class="n">03</div><p><strong>Espere 2–3 dias entre cada corte</strong> na mesma campanha, para o leilão estabilizar antes do próximo ajuste.</p></div>
+      <div class="rule"><div class="n">04</div><p><strong>Acompanhe pelo funil, não pela campanha isolada.</strong> Durante a migração a atribuição do Meta se move entre campanhas — o número que importa é o total do Lote Especial no dashboard.</p></div>
+      <div class="rule"><div class="n">05</div><p><strong>Pause, nunca exclua</strong> uma campanha ao chegar a zero. Ligar de novo reseta o aprendizado, mas ainda serve de plano B se algo der errado.</p></div>
+      <div class="rule"><div class="n">06</div><p><strong>Gatilho de freio:</strong> se receita ou conversões do funil caírem mais de 15% por 2 dias seguidos vs. a média dos 7 dias anteriores, pare o corte em andamento e espere estabilizar antes de continuar.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Cronograma — campanha por campanha</h2>
+    <p class="section-note">Datas a partir de hoje (18/09). Ajuste os valores em reais pelos números do dia — o que importa é o ritmo dos cortes, não o valor exato.</p>
+
+    <div class="timeline">
+
+      <div class="phase">
+        <div class="phase-marker">1</div>
+        <div class="phase-card">
+          <div class="phase-head"><h3>Semana 1 — estabilizar e desligar "Adv"</h3><span class="phase-dates">18–24/09</span></div>
+          <p class="phase-target">Objetivo: confirmar que o aumento recente em <b>Advantage</b> não piorou o CPA antes de tocar nas outras, e remover a campanha mais nova e com menos histórico.</p>
+          <ul class="steps">
+            <li>Dias 1–2: não subir mais o orçamento de Advantage — deixar estabilizar depois dos aumentos recentes.</li>
+            <li>Dia 3: cortar ~20% do orçamento de <b>Adv</b> e mover o valor para Advantage no mesmo dia.</li>
+            <li>Dia 5: cortar mais ~30% de Adv (chegando perto de 50% do original), mover para Advantage.</li>
+            <li>Dia 7: zerar Adv — pausar (não excluir) — e transferir o restante para Advantage.</li>
+          </ul>
+          <div class="checkpoint">☑ <span><b>Checkpoint dia 7:</b> conversões e receita (Meta) do funil Lote Especial não caíram mais de 15% vs. a média das últimas 2 semanas, e o CPA de Advantage não subiu mais que ~20%.</span></div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-marker">2</div>
+        <div class="phase-card">
+          <div class="phase-head"><h3>Semana 2 — desligar "Drops feed STLFLIX"</h3><span class="phase-dates">25/09–01/10</span></div>
+          <p class="phase-target">Objetivo: remover o menor desempenho relativo do grupo (ROAS 3,61x, CPA R$ 255,52) — é a segunda maior verba e a que menos contribui em eficiência.</p>
+          <ul class="steps">
+            <li>Dia 3: cortar ~20–25% do orçamento de STLFLIX, mover para Advantage.</li>
+            <li>Dia 5: cortar outros ~30%, mover para Advantage.</li>
+            <li>Dia 7 (01/10): zerar STLFLIX — pausar — e mover o restante.</li>
+          </ul>
+          <div class="checkpoint">☑ <span><b>Checkpoint:</b> mesmo critério da semana 1. Se o CPA de Advantage estiver subindo de forma consistente, espaçar os próximos cortes para 3–4 dias em vez de 2–3.</span></div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-marker">3</div>
+        <div class="phase-card">
+          <div class="phase-head"><h3>Semana 3 — desligar "Remarketing"</h3><span class="phase-dates">02–08/10</span></div>
+          <p class="phase-target">Objetivo: essa campanha tem o 2º melhor ROAS do grupo (5,01x) mesmo sendo pequena — reduzir com mais cautela do que as anteriores.</p>
+          <ul class="steps">
+            <li>Cortes menores, de ~15–20% por vez (em vez de 25%), com 3 dias de espera entre cada um.</li>
+            <li>Dia 8–9: zerar Remarketing — pausar — e mover o restante para Advantage.</li>
+          </ul>
+          <div class="checkpoint">☑ <span><b>Checkpoint reforçado:</b> se a receita do funil cair aqui, é o sinal mais forte de que Advantage não está cobrindo o público de remarketing sozinha — pausar o corte e revisar os públicos/criativos de Advantage antes de continuar.</span></div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-marker">4</div>
+        <div class="phase-card">
+          <div class="phase-head"><h3>Semana 4 — desligar "Drops feed STLIA"</h3><span class="phase-dates">09–15/10</span></div>
+          <p class="phase-target">Objetivo: a etapa mais delicada — é a campanha com o melhor ROAS do grupo fora a sobrevivente (4,56x, CPA R$ 207,81) e o segundo maior orçamento. Vai por último, no ritmo mais lento.</p>
+          <ul class="steps">
+            <li>Cortes de ~15% por vez, a cada 3 dias — 4 a 5 ajustes ao longo da semana.</li>
+            <li>Dia final (~15/10): zerar STLIA — pausar — transferindo o restante para Advantage.</li>
+            <li>Lote Especial passa a rodar 100% em Advantage-influencers.</li>
+          </ul>
+          <div class="checkpoint">☑ <span><b>Checkpoint final:</b> mesmos critérios — se algo destoar, é melhor deixar essa última fatia rodando 1–2 semanas extra do que arriscar a receita do funil.</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <h2>Revisão de 30 dias (por volta de 16–18/10)</h2>
+    <div class="finish-grid">
+      <div class="finish-card">
+        <h3>O que comparar</h3>
+        <p>Receita real (Hotmart) e ROAS real do negócio nos 30 dias pós-consolidação vs. os 30 dias anteriores, usando a visão global do dashboard — não apenas o número do Meta.</p>
+      </div>
+      <div class="finish-card">
+        <h3>Sinal de sucesso</h3>
+        <p>Mesmo investimento total do funil, CPA estável ou melhor, e uma única campanha aprendendo com todo o volume de dados em vez de 5 campanhas competindo entre si.</p>
+      </div>
+      <div class="finish-card">
+        <h3>Próximo passo natural</h3>
+        <p>Se funcionar aqui, o mesmo raciocínio pode ser aplicado aos outros funis (ASSINE, LARI, DOWNSELL) — hoje já rodam com 1 ou 2 campanhas cada, então o ganho de consolidação é menor, mas vale revisar.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Baseado nos dados de Meta Ads extraídos via Windsor.ai (11–17/09/2026) e no funil Lote Especial do dashboard executivo STLFLIX. Ritmo dos cortes segue a prática recomendada pelo próprio Meta de não alterar orçamento em mais de ~20–25% por dia.
+  </footer>
+
+</div>
