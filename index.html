@@ -471,6 +471,10 @@ function roasValue(revenue, spend){
   if(!isNum(revenue) || !isNum(spend) || spend<=0) return null;
   return revenue/spend;
 }
+function roasLabel(revenue, spend){
+  const r = roasValue(revenue, spend);
+  return isNum(r) ? r.toFixed(2).replace(".",",")+"x" : "Não informado";
+}
 const STATUS_LABEL = {active:"Ativa", inactive:"Desativada", in_review:"Em análise"};
 const CLASS_LABEL = {
   healthy:"Saudável", scale_opportunity:"Oportunidade de escala",
@@ -502,10 +506,16 @@ function computeFunnelStats(funnel){
   const convVals  = camps.map(c=>c.conversions7d).filter(isNum);
   const spend = spendVals.length ? spendVals.reduce((a,b)=>a+b,0) : null;
   const conv  = convVals.length ? convVals.reduce((a,b)=>a+b,0) : null;
+  const revenueVals = camps
+    .filter(c => c.daily && c.daily.length)
+    .map(c => c.daily.reduce((a,d)=>a+(isNum(d.metaConvValue)?d.metaConvValue:0),0));
+  const revenue = revenueVals.length ? revenueVals.reduce((a,b)=>a+b,0) : null;
   return {
-    spend, conv,
+    spend, conv, revenue,
     cpa: cpaValue(spend, conv),
     cpaLabel: cpaLabel(spend, conv),
+    roas: roasValue(revenue, spend),
+    roasLabel: roasLabel(revenue, spend),
     campaignCount: camps.length,
     activeCount: camps.filter(c=>c.status==="active").length,
     hasAnyDelivery: camps.some(c=>isNum(c.spend7d) && c.spend7d>0)
@@ -800,6 +810,7 @@ function renderFunnelCard(funnel, meta7, auditModel){
     ["Investimento 7d", fmtBRL(stats.spend)],
     ["Conversões (Meta)", fmtNum(stats.conv)],
     ["Custo por resultado", stats.cpaLabel],
+    ["ROAS 7d (Meta)", stats.roasLabel],
     ["% do investimento total", shareLabel(stats.spend, meta7.spend)],
     ["% das conversões totais", shareLabel(stats.conv, meta7.conv)],
     ["Campanhas", `${stats.campaignCount} (${stats.activeCount} ativa${stats.activeCount!==1?"s":""})`]
