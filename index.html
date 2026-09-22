@@ -223,7 +223,8 @@ const dashboardData = {
   funnelWindow: { from: "2026-09-15", to: "2026-09-21" },
 
   generalDemands: [
-    "Aguardando URL atualizada para ativar STLAI"
+    { title: "Ativações recentes", items: ["Reativação STLIA", "Reativação Downsell"] },
+    { title: "Ativações pendentes", items: ["Marketplace Luan", "Downsell Luan"] }
   ],
 
   funnels: [
@@ -1323,9 +1324,12 @@ function renderGeneralDemands(container){
   const sec = el("section");
   sec.appendChild(el("div",{class:"section-title"}, `<h2>Demandas gerais</h2>`));
   const card = el("div",{class:"card"});
-  const ul = el("ul",{style:"margin:0;padding-left:18px;"});
-  dashboardData.generalDemands.forEach(d=> ul.appendChild(el("li",{style:"margin-bottom:6px;font-size:13px;"}, d)));
-  card.appendChild(ul);
+  dashboardData.generalDemands.forEach((group, i)=>{
+    card.appendChild(el("h3",{style:`font-size:12.5px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.04em;margin:${i===0?"0":"18px"} 0 8px;`}, group.title));
+    const ul = el("ul",{style:"margin:0;padding-left:18px;"});
+    group.items.forEach(d=> ul.appendChild(el("li",{style:"margin-bottom:6px;font-size:13px;"}, d)));
+    card.appendChild(ul);
+  });
   sec.appendChild(card);
   container.appendChild(sec);
 }
