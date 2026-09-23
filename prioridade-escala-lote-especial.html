@@ -1,0 +1,269 @@
+<title>Prioridade de Escala</title>
+<style>
+  :root{
+    --bg:#0d1117;
+    --surface:#151b23;
+    --surface-2:#1c232d;
+    --border:#2a323d;
+    --text:#e8edf2;
+    --text-dim:#8b96a3;
+    --text-faint:#5b6572;
+    --accent:#5eb8b0;
+    --accent-soft:#12302d;
+    --scale:#4caf7d;
+    --scale-soft:#15301f;
+    --hold:#d9a441;
+    --hold-soft:#332711;
+    --avoid:#d1667a;
+    --avoid-soft:#341b21;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 28px -14px rgba(0,0,0,.55);
+  }
+  @media (prefers-color-scheme: light){
+    :root:not([data-theme="dark"]){
+      --bg:#f4f6f8;
+      --surface:#ffffff;
+      --surface-2:#eef1f4;
+      --border:#dde3ea;
+      --text:#161b22;
+      --text-dim:#5c6675;
+      --text-faint:#8791a0;
+      --accent:#1f7a72;
+      --accent-soft:#dcefec;
+      --scale:#1f7a45;
+      --scale-soft:#dcf0e4;
+      --hold:#9a6a13;
+      --hold-soft:#f5ecd8;
+      --avoid:#a3324a;
+      --avoid-soft:#f7dfe3;
+      --shadow: 0 1px 2px rgba(20,24,32,.05), 0 8px 24px -12px rgba(20,24,32,.12);
+      color-scheme: light;
+    }
+  }
+  :root[data-theme="dark"], :root{ color-scheme: dark; }
+
+  *{box-sizing:border-box;}
+  body{
+    background:var(--bg); color:var(--text);
+    font-family:"Public Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    padding:0 16px; padding-block:40px; line-height:1.5;
+  }
+  .page{max-width:920px; margin:0 auto;}
+  h1,h2,h3{font-family:"IBM Plex Sans Condensed","Public Sans",sans-serif; text-wrap:balance; letter-spacing:-0.01em;}
+  .mono{font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums;}
+
+  .eyebrow{font-family:"IBM Plex Mono",monospace; font-size:12px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--accent);}
+  h1{font-size:32px; font-weight:700; margin:10px 0 14px;}
+  .lede{font-size:16px; color:var(--text-dim); max-width:640px; margin:0 0 32px;}
+  .lede strong{color:var(--text);}
+
+  section{margin-bottom:40px;}
+  h2{font-size:19px; font-weight:700; margin:0 0 6px;}
+  .section-note{color:var(--text-dim); font-size:13.5px; margin:0 0 16px; max-width:660px;}
+
+  .table-wrap{overflow-x:auto; border:1px solid var(--border); border-radius:12px; background:var(--surface); box-shadow:var(--shadow);}
+  table{width:100%; border-collapse:collapse; font-size:13.5px; min-width:680px;}
+  th,td{padding:11px 14px; text-align:left; border-bottom:1px solid var(--border); white-space:nowrap;}
+  th{font-size:10.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--text-dim); font-weight:600;}
+  tbody tr:last-child td{border-bottom:none;}
+  td.num,th.num{font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums;}
+  td.roas-up{color:var(--scale); font-weight:700;}
+  td.roas-down{color:var(--avoid); font-weight:700;}
+  td.roas-flat{color:var(--text-dim);}
+  .campaign-name{font-weight:600;}
+
+  .verdict-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:14px;}
+  .verdict{background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:18px 20px; box-shadow:var(--shadow); display:flex; flex-direction:column; gap:10px;}
+  .verdict-head{display:flex; justify-content:space-between; align-items:flex-start; gap:10px;}
+  .verdict-head h3{font-size:15px; margin:0;}
+  .pill{display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:4px 10px; border-radius:100px; white-space:nowrap;}
+  .pill.scale{background:var(--scale-soft); color:var(--scale);}
+  .pill.hold{background:var(--hold-soft); color:var(--hold);}
+  .pill.avoid{background:var(--avoid-soft); color:var(--avoid);}
+  .verdict-trend{font-family:"IBM Plex Mono",monospace; font-size:13px; color:var(--text-dim); font-variant-numeric:tabular-nums;}
+  .verdict-trend b{color:var(--text); font-weight:700;}
+  .verdict p{margin:0; font-size:13.5px; color:var(--text-dim);}
+
+  .timeline{position:relative; padding-left:32px;}
+  .timeline::before{content:""; position:absolute; left:10px; top:6px; bottom:6px; width:2px; background:var(--border);}
+  .step{position:relative; margin-bottom:20px;}
+  .step:last-child{margin-bottom:0;}
+  .step-marker{position:absolute; left:-32px; top:2px; width:22px; height:22px; border-radius:50%; background:var(--surface); border:2px solid var(--accent); color:var(--accent); display:flex; align-items:center; justify-content:center; font-family:"IBM Plex Mono",monospace; font-size:11px; font-weight:700;}
+  .step-card{background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:16px 18px; box-shadow:var(--shadow);}
+  .step-card h3{font-size:14.5px; margin:0 0 4px;}
+  .step-date{font-family:"IBM Plex Mono",monospace; font-size:11.5px; color:var(--text-dim); text-transform:uppercase; letter-spacing:.04em;}
+  .step-card p{margin:6px 0 0; font-size:13.5px; color:var(--text-dim);}
+
+  .callout{border-radius:12px; padding:18px 20px; font-size:14px; margin-top:4px; border:1px solid transparent; background:var(--hold-soft); border-color:color-mix(in srgb, var(--hold) 35%, transparent);}
+  .callout strong{color:var(--hold);}
+
+  footer{margin-top:48px; padding-top:20px; border-top:1px solid var(--border); font-size:12px; color:var(--text-faint);}
+
+  @media (max-width:560px){
+    h1{font-size:26px;}
+    .timeline{padding-left:26px;}
+    .step-marker{left:-26px; width:20px; height:20px; font-size:10px;}
+    th,td{padding:9px 10px;}
+  }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@600;700&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+<div class="page">
+
+  <header>
+    <div class="eyebrow">Prioridade de escala · Lote Especial</div>
+    <h1>Onde aumentar investimento sem furar o ROAS de 3,8x</h1>
+    <p class="lede">
+      Análise de <strong>3 semanas</strong> (02–08, 09–15 e 16–22/09) por campanha — uma semana só engana.
+      O objetivo é crescer faturamento sem deixar o ROAS real do negócio (hoje ~3,93x nos últimos 7 dias)
+      cair abaixo do piso de <strong>3,8x</strong>.
+    </p>
+  </header>
+
+  <section>
+    <h2>Tendência de 3 semanas (ROAS Meta)</h2>
+    <p class="section-note">Cada célula é o ROAS daquela campanha naquela semana inteira — não um dia isolado. "—" significa que a campanha praticamente não rodou naquela semana.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Campanha</th>
+            <th class="num">Sem. 1 (02–08/09)</th>
+            <th class="num">Sem. 2 (09–15/09)</th>
+            <th class="num">Sem. 3 (16–22/09)</th>
+            <th>Leitura</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="campaign-name">REMARKETING</td>
+            <td class="num roas-flat">—</td>
+            <td class="num roas-up">4,90x</td>
+            <td class="num roas-up">6,08x</td>
+            <td>Subindo, 2 semanas seguidas confirmando</td>
+          </tr>
+          <tr>
+            <td class="campaign-name">ADVANTAGE-INFLUENCERS</td>
+            <td class="num roas-down">2,07x</td>
+            <td class="num roas-down">2,48x</td>
+            <td class="num roas-up">5,02x</td>
+            <td>Salto grande, mas só 1 semana forte em 3</td>
+          </tr>
+          <tr>
+            <td class="campaign-name">DROPS FEED STLFLIX</td>
+            <td class="num roas-up">5,27x</td>
+            <td class="num roas-down">3,09x</td>
+            <td class="num roas-up">4,43x</td>
+            <td>Oscila — já caiu abaixo do piso há 2 semanas</td>
+          </tr>
+          <tr>
+            <td class="campaign-name">DROPS FEED STLIA</td>
+            <td class="num roas-down">2,55x</td>
+            <td class="num roas-up">4,11x</td>
+            <td class="num roas-down">2,89x</td>
+            <td>Piorou na semana mais recente</td>
+          </tr>
+          <tr>
+            <td class="campaign-name">ADV <span class="pill hold" style="margin-left:6px;">sobrevivente do plano</span></td>
+            <td class="num roas-flat">—</td>
+            <td class="num roas-flat">—</td>
+            <td class="num roas-down">2,59x</td>
+            <td>Só 7 dias de vida — pior campanha do funil hoje</td>
+          </tr>
+          <tr>
+            <td class="campaign-name">STLIA (antiga / reativada)</td>
+            <td class="num roas-down">0,57x</td>
+            <td class="num roas-flat">quase parada</td>
+            <td class="num roas-flat">2,70x (1 dia)</td>
+            <td>Historicamente fraca, reativação ainda não provou nada</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Veredito por campanha</h2>
+    <div class="verdict-grid">
+      <div class="verdict">
+        <div class="verdict-head"><h3>Remarketing</h3><span class="pill scale">Escalar</span></div>
+        <div class="verdict-trend">4,90x <b>→</b> 6,08x · CPA R$ 222 → <b>R$ 162</b></div>
+        <p>Única com 2 semanas seguidas de melhora confirmada. Primeira e mais segura escolha para receber orçamento novo.</p>
+      </div>
+      <div class="verdict">
+        <div class="verdict-head"><h3>Advantage-influencers ("influ")</h3><span class="pill hold">Manter</span></div>
+        <div class="verdict-trend">2,48x <b>→</b> 5,02x · 1 semana forte em 3</div>
+        <p>Deixa rodando no nível atual. Confirma numa 2ª semana antes de aumentar — pode ser criativo novo pegando ou uma semana de sorte.</p>
+      </div>
+      <div class="verdict">
+        <div class="verdict-head"><h3>Drops feed STLFLIX</h3><span class="pill hold">Manter</span></div>
+        <div class="verdict-trend">3,09x <b>→</b> 4,43x · já caiu abaixo do piso</div>
+        <p>Recuperou essa semana, mas mostrou que oscila. Não é hora de aumentar — é hora de confirmar estabilidade.</p>
+      </div>
+      <div class="verdict">
+        <div class="verdict-head"><h3>Drops feed STLIA</h3><span class="pill avoid">Revisar</span></div>
+        <div class="verdict-trend">4,11x <b>→</b> 2,89x · piorando</div>
+        <p>Tendência de queda, não de alta. O problema aqui é criativo/público, não orçamento — não aumentar.</p>
+      </div>
+      <div class="verdict">
+        <div class="verdict-head"><h3>Adv</h3><span class="pill avoid">Não aumentar</span></div>
+        <div class="verdict-trend">2,59x · CPA R$ 355 · 7 dias de vida</div>
+        <p>É a sobrevivente escolhida pelo plano de consolidação do Lote Especial — mas hoje é a pior campanha do funil. Ver nota abaixo.</p>
+      </div>
+      <div class="verdict">
+        <div class="verdict-head"><h3>STLIA CBO / Downsell Luan</h3><span class="pill avoid">Só observar</span></div>
+        <div class="verdict-trend">Sem histórico confiável</div>
+        <p>Reativação recente e campanha nova, respectivamente — sem dado suficiente para qualquer decisão de orçamento ainda.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>O que fazer, começando sexta-feira</h2>
+    <p class="section-note">Um passo por vez — aumento de ~20% é o teto seguro para não resetar a fase de aprendizado do Meta.</p>
+    <div class="timeline">
+      <div class="step">
+        <div class="step-marker">1</div>
+        <div class="step-card">
+          <div class="step-date">Sexta-feira</div>
+          <h3>Aumentar Remarketing em ~20%</h3>
+          <p>Única campanha que já confirmou 2 semanas seguidas de melhora — é a única que recebe orçamento novo neste passo.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-marker">2</div>
+        <div class="step-card">
+          <div class="step-date">Próximos 7 dias</div>
+          <h3>Observar Advantage-influencers e Drops feed STLFLIX</h3>
+          <p>Sem mudança de orçamento. Se a semana 4 confirmar o nível da semana 3 (ROAS acima de ~4,5x), essas duas entram no próximo aumento.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-marker">3</div>
+        <div class="step-card">
+          <div class="step-date">Próximos 7 dias</div>
+          <h3>Segurar o plano de consolidação (Fase 1 — absorver Drops feed STLIA pela Adv)</h3>
+          <p>Não faz sentido esvaziar uma campanha decente para alimentar a Adv enquanto ela performa pior que todo o funil. Esperar a Adv provar 2–3 semanas antes de avançar a fase.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-marker">4</div>
+        <div class="step-card">
+          <div class="step-date">Contínuo</div>
+          <h3>Drops feed STLIA — revisar criativo/público, não orçamento</h3>
+          <p>A queda de 4,11x para 2,89x não se resolve com mais verba. Vale um brief de criativo novo antes de qualquer decisão de investimento.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="callout">
+    <strong>Ponto de atenção:</strong> a Adv é a campanha escolhida para ser a sobrevivente do plano de consolidação do Lote Especial (por ter mais histórico de conta) — mas com dados reais de 7 dias, ela é hoje a <strong>pior campanha do funil</strong> (2,59x, CPA R$ 355). Vale considerar atrasar o cronograma de absorção até ela mostrar 2–3 semanas de performance competitiva, para não trocar campanhas boas por uma campanha fraca só por causa da estrutura.
+  </div>
+
+  <footer>
+    Baseado em dados de Meta Ads extraídos via Windsor.ai (02/09 a 22/09/2026), conta Stlflix Português. ROAS (Meta) = valor de conversão atribuído pela plataforma ÷ investimento — usado aqui como referência comparável entre campanhas, calibrado contra o ROAS real do negócio no dashboard executivo.
+  </footer>
+
+</div>
