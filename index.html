@@ -184,9 +184,9 @@ const dashboardData = {
       googleSpend: 735.21,
       hotmartRevenue: 69221.82,
       hotmartSales: 100,
-      promoRevenue: 8558.09,
-      promoSales: 29,
-      promoNote: "BF (1 venda, R$ 478,04) + Assinaturas recorrentes (28 vendas, R$ 8.080,05) excluídas do ROAS real."
+      promoRevenue: 9562.79,
+      promoSales: 32,
+      promoNote: "BF (1 venda, R$ 478,04) + Assinaturas recorrentes (28 vendas, R$ 8.080,05) + STLFLIX 4 ANOS (3 vendas, R$ 1.004,70) — recorrência — excluídos do ROAS real."
     },
     last4Days: {
       // 19/09/2026 a 22/09/2026
@@ -194,29 +194,30 @@ const dashboardData = {
       googleSpend: 2994.80,
       hotmartRevenue: 213605.54,
       hotmartSales: 337,
-      promoRevenue: 22981.06,
-      promoSales: 99,
-      promoNote: "Assinaturas recorrentes nos 4 dias + BF em 21/09 (R$ 218,94) e 22/09 (R$ 478,04) — total R$ 22.981,06 excluído."
+      promoRevenue: 26894.66,
+      promoSales: 110,
+      promoNote: "Assinaturas e STLFLIX 4 ANOS (recorrência) nos 4 dias + BF em 21/09 (R$ 218,94) e 22/09 (R$ 478,04) — total R$ 26.894,66 excluído."
     }
   },
 
   // Receita/custo/ROAS diário do negócio (últimos 7 dias, 16 a 22/09/2026).
-  // Receita = Hotmart líquida do dia; promoRevenue = BF/aniversário + produtos de
-  // Assinatura recorrente (mensal/anual) identificados no top-10 de produtos daquele
-  // dia (retirados do ROAS real, pois não são vendas novas geradas pela campanha do
-  // dia); custo = Meta + Google (Windsor.ai).
+  // Receita = Hotmart líquida do dia; promoRevenue = BF/aniversário + qualquer produto
+  // de recorrência (Assinatura mensal/anual, STLFLIX 4 ANOS) identificado no top-10 de
+  // produtos daquele dia (retirados do ROAS real e de qualquer análise de crescimento,
+  // pois não são vendas novas geradas pela campanha do dia); custo = Meta + Google
+  // (Windsor.ai).
   // Valores da Hotmart são revisados conforme reembolsos/chargebacks processam nos
   // dias seguintes — os números abaixo refletem a versão mais recente enviada.
   // Observação: como a tabela de produtos da Hotmart só mostra os 10 maiores, pode
-  // haver receita de assinatura fora do top-10 que não entrou no corte.
+  // haver receita de recorrência fora do top-10 que não entrou no corte.
   dailyBusiness: [
-    { date:"2026-09-16", hotmartRevenue:56353.01, hotmartSales:85, promoRevenue:1523.60, metaSpend:11321.47, googleSpend:999.83 },
-    { date:"2026-09-17", hotmartRevenue:54771.41, hotmartSales:94, promoRevenue:5970.98, metaSpend:11150.65, googleSpend:862.21 },
-    { date:"2026-09-18", hotmartRevenue:40449.52, hotmartSales:66, promoRevenue:3499.89, metaSpend:10889.99, googleSpend:762.62 },
-    { date:"2026-09-19", hotmartRevenue:54356.56, hotmartSales:85, promoRevenue:1308.30, metaSpend:11301.78, googleSpend:769.13 },
-    { date:"2026-09-20", hotmartRevenue:36728.72, hotmartSales:68, promoRevenue:2329.23, metaSpend:10535.36, googleSpend:752.68 },
-    { date:"2026-09-21", hotmartRevenue:53298.44, hotmartSales:84, promoRevenue:10785.44, metaSpend:9139.08, googleSpend:737.78 },
-    { date:"2026-09-22", hotmartRevenue:69221.82, hotmartSales:100, promoRevenue:8558.09, metaSpend:12280.97, googleSpend:735.21 }
+    { date:"2026-09-16", hotmartRevenue:56353.01, hotmartSales:85, promoRevenue:2695.74, metaSpend:11321.47, googleSpend:999.83 },
+    { date:"2026-09-17", hotmartRevenue:54771.41, hotmartSales:94, promoRevenue:8439.78, metaSpend:11150.65, googleSpend:862.21 },
+    { date:"2026-09-18", hotmartRevenue:40449.52, hotmartSales:66, promoRevenue:4169.69, metaSpend:10889.99, googleSpend:762.62 },
+    { date:"2026-09-19", hotmartRevenue:54356.56, hotmartSales:85, promoRevenue:2587.83, metaSpend:11301.78, googleSpend:769.13 },
+    { date:"2026-09-20", hotmartRevenue:36728.72, hotmartSales:68, promoRevenue:2953.90, metaSpend:10535.36, googleSpend:752.68 },
+    { date:"2026-09-21", hotmartRevenue:53298.44, hotmartSales:84, promoRevenue:11790.14, metaSpend:9139.08, googleSpend:737.78 },
+    { date:"2026-09-22", hotmartRevenue:69221.82, hotmartSales:100, promoRevenue:9562.79, metaSpend:12280.97, googleSpend:735.21 }
   ],
 
   // janela usada em "Performance por funil" e nos gráficos: 16/09 a 22/09/2026
@@ -827,10 +828,11 @@ function renderGlobalDailyEvolution(container){
   });
 }
 
-// produto "Assinatura..." = recorrência/renovação; "[BF..." = promoção — mesmo
-// critério usado para excluir do ROAS real, aplicado aqui para isolar receita nova.
+// produto "Assinatura..." ou "STLFLIX 4 ANOS..." = recorrência/renovação;
+// "[BF..." = promoção — mesmo critério usado para excluir do ROAS real,
+// aplicado aqui para isolar receita nova.
 function isRecurringOrPromoProduct(name){
-  return name.startsWith("Assinatura") || name.startsWith("[BF");
+  return name.startsWith("Assinatura") || name.startsWith("[BF") || name.startsWith("STLFLIX 4 ANOS");
 }
 
 function renderProductGrowth(container){
