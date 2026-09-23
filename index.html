@@ -1133,6 +1133,8 @@ function renderCampaignTable(funnel, funnelStats){
     {k:"status", l:"Status"},
     {k:"spend7d", l:"Investimento 7d"},
     {k:"conversions7d", l:"Conversões"},
+    {k:"ctr", l:"CTR"},
+    {k:"connectRate", l:"Connect rate"},
     {k:"cpa", l:"Custo/resultado"},
     {k:"roas", l:"ROAS 7d (Meta)"},
     {k:"spendShare", l:"% invest. funil"},
@@ -1148,6 +1150,8 @@ function renderCampaignTable(funnel, funnelStats){
         c,
         spendShare: isNum(c.spend7d) && isNum(funnelStats.spend) && funnelStats.spend>0 ? c.spend7d/funnelStats.spend : null,
         convShare: isNum(c.conversions7d) && isNum(funnelStats.conv) && funnelStats.conv>0 ? c.conversions7d/funnelStats.conv : null,
+        ctr: isNum(c.linkClicks7d) && isNum(c.impressions7d) && c.impressions7d>0 ? c.linkClicks7d/c.impressions7d : null,
+        connectRate: isNum(c.landingPageViews7d) && isNum(c.linkClicks7d) && c.linkClicks7d>0 ? c.landingPageViews7d/c.linkClicks7d : null,
         cpa: cpaValue(c.spend7d, c.conversions7d),
         roas: roasValue(revenue7d, c.spend7d)
       };
@@ -1175,7 +1179,7 @@ function renderCampaignTable(funnel, funnelStats){
     let rows = buildRows();
     const {field, dir} = sortState[key];
     rows.sort((a,b)=>{
-      const get = r => field==="spendShare"||field==="convShare"||field==="cpa"||field==="roas" ? r[field]
+      const get = r => field==="spendShare"||field==="convShare"||field==="cpa"||field==="roas"||field==="ctr"||field==="connectRate" ? r[field]
         : field==="name" ? r.c.name : field==="status" ? r.c.status : r.c[field];
       let va = get(a), vb = get(b);
       if(va===null||va===undefined) return 1;
@@ -1193,6 +1197,8 @@ function renderCampaignTable(funnel, funnelStats){
       tr.appendChild(el("td",{}, `<span class="status-dot ${c.status}"></span>${STATUS_LABEL[c.status]}${c.startsToday?" · começa hoje":""}${c.noteTag?` · (${c.noteTag})`:""}`));
       tr.appendChild(el("td",{}, fmtBRL(c.spend7d)));
       tr.appendChild(el("td",{}, fmtNum(c.conversions7d)));
+      tr.appendChild(el("td",{}, r.ctr===null? "Não informado" : fmtPct(r.ctr)));
+      tr.appendChild(el("td",{}, r.connectRate===null? "Não informado" : fmtPct(r.connectRate)));
       tr.appendChild(el("td",{}, cpaLabel(c.spend7d, c.conversions7d)));
       tr.appendChild(el("td",{}, isNum(r.roas) ? r.roas.toFixed(2).replace(".",",")+"x" : "Não informado"));
       tr.appendChild(el("td",{}, r.spendShare===null? "Não informado" : fmtPct(r.spendShare)));
