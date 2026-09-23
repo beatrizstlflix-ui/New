@@ -138,7 +138,8 @@ select, .select{background:var(--card-2);border:1px solid var(--border);color:va
 .campaign-audit summary{list-style:none;cursor:pointer;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;}
 .campaign-audit summary::-webkit-details-marker{display:none;}
 .campaign-audit .ca-title{display:flex;flex-direction:column;gap:4px;}
-.campaign-audit .ca-name{font-weight:700;font-size:13.5px;}
+.campaign-audit .ca-name{font-weight:700;font-size:13.5px;text-transform:uppercase;}
+.camp-name{text-transform:uppercase;}
 .campaign-audit .ca-meta{font-size:11.5px;color:var(--text-faint);}
 .campaign-audit .ca-right{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
 .campaign-audit .ca-body{padding:0 16px 18px;border-top:1px solid var(--border);}
@@ -463,7 +464,7 @@ const dashboardData = {
       ],
       campaigns: [
         {
-          name: "Downsell Hugo",
+          name: "DOWNSELL HUGO",
           status: "active",
           spend7d: 16053.86,
           conversions7d: 63,
@@ -485,12 +486,12 @@ const dashboardData = {
     },
     {
       id: "downsell_luan",
-      name: "Downsell Luan",
+      name: "DOWNSELL LUAN",
       color: "#fb7185",
       demands: [],
       campaigns: [
         {
-          name: "Downsell Luan",
+          name: "DOWNSELL LUAN",
           status: "active",
           noteTag: "novo, não rodado",
           spend7d: null,
@@ -1212,7 +1213,7 @@ function renderCampaignTable(funnel, funnelStats){
       const c = r.c;
       const tr = el("tr");
       if(c.status!=="active") tr.classList.add("inactive-row");
-      tr.appendChild(el("td",{}, c.name));
+      tr.appendChild(el("td",{class:"camp-name"}, c.name));
       tr.appendChild(el("td",{}, `<span class="status-dot ${c.status}"></span>${STATUS_LABEL[c.status]}${c.startsToday?" · começa hoje":""}${c.noteTag?` · (${c.noteTag})`:""}`));
       tr.appendChild(el("td",{}, fmtBRL(c.spend7d)));
       tr.appendChild(el("td",{}, fmtNum(c.conversions7d)));
