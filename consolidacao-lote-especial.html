@@ -148,7 +148,10 @@
   .steps li::before{ content:"→"; position:absolute; left:0; color:var(--accent); font-weight:700; }
 
   .mini-table{ font-size:12.5px; margin: 12px 0 16px; }
-  .mini-table table{ min-width:100%; }
+  .mini-table table{ min-width:100%; table-layout:fixed; }
+  .mini-table th:nth-child(1), .mini-table td:nth-child(1){ width:34px; }
+  .mini-table th:nth-child(2), .mini-table td:nth-child(2){ width:78px; }
+  .mini-table th:nth-child(3), .mini-table td:nth-child(3){ white-space:normal; line-height:1.45; }
 
   .checkpoint{
     display:flex; gap:10px; align-items:flex-start; background:var(--surface-2); border-radius:10px; padding:12px 14px; font-size:13px; color:var(--text-dim);
@@ -176,14 +179,15 @@
 <div class="page">
 
   <header>
-    <div class="eyebrow">Plano de ação · ritmo brando · reescrito 23/09</div>
+    <div class="eyebrow">Plano de ação · cronograma fixo de 4 semanas · reescrito 23/09</div>
     <h1>Consolidação do funil Lote Especial em 2 campanhas</h1>
     <p class="lede">
       Hoje o Lote Especial roda em <strong>5 campanhas</strong> competindo pelo mesmo público e leilão.
       A meta é chegar a <strong>2 campanhas: Advantage-influencers</strong> (que passa a absorver Adv, Drops feed STLIA
       e Drops feed STLFLIX) <strong>e Remarketing, que fica como está</strong> — essa não entra no plano, confirmado de
       novo em 23/09. Cada campanha absorvida vai <strong>rodar em paralelo com a sobrevivente por um tempo</strong>
-      antes de qualquer corte — só desliga depois de confirmar que ela aguenta o volume.
+      antes de qualquer corte — só desliga depois de confirmar que ela aguenta o volume. O plano agora segue um
+      <strong>calendário fixo de 4 semanas (28 dias, 24/09 a 21/10)</strong>, com a ação de cada dia definida abaixo.
     </p>
     <div class="callout danger" style="margin-bottom:28px;">
       <strong>Troca de sobrevivente (23/09):</strong> o plano original escolhia a Adv por ter mais histórico de <em>conta</em>.
@@ -196,7 +200,7 @@
       <div class="stat"><div class="l">Campanhas hoje</div><div class="v">5 → 2</div></div>
       <div class="stat"><div class="l">Investimento 7d (funil)</div><div class="v">R$ 47.360,79</div></div>
       <div class="stat"><div class="l">Conversões 7d (Meta)</div><div class="v">209</div></div>
-      <div class="stat"><div class="l">Duração do plano</div><div class="v">~7 semanas + confirmação da semana 4</div></div>
+      <div class="stat"><div class="l">Duração do plano</div><div class="v">4 semanas (24/09 → 21/10)</div></div>
     </div>
   </header>
 
@@ -278,70 +282,104 @@
       <div class="rule"><div class="n">05</div><p><strong>Acompanhe pelo funil, não pela campanha isolada.</strong> Durante a sobreposição a atribuição do Meta se divide entre as duas — o número que importa é o total do Lote Especial no dashboard.</p></div>
       <div class="rule"><div class="n">06</div><p><strong>Pause, nunca exclua</strong> uma campanha ao chegar a zero. Ligar de novo reseta o aprendizado, mas ainda serve de plano B se algo der errado.</p></div>
       <div class="rule"><div class="n">07</div><p><strong>Gatilho de freio:</strong> se receita ou conversões do funil caírem mais de 15% por 2 dias seguidos vs. a média dos 7 dias anteriores, pare no ponto atual — sem avançar nem recuar — até estabilizar.</p></div>
-      <div class="rule"><div class="n">08</div><p><strong>Sem pressa entre fases.</strong> Se uma fase precisar de mais tempo que o previsto, ela estica — o prazo de ~9 semanas é uma estimativa, não um limite.</p></div>
-      <div class="rule"><div class="n">09</div><p><strong>Gatilho de avanço:</strong> a Fase 1 só começa quando a Advantage-influencers confirmar uma <strong>2ª semana seguida com ROAS ≥ ~4x</strong> (ela já tem a semana 3 — falta confirmar a semana 4). Enquanto isso não acontecer, a Fase 0 continua, sem data limite.</p></div>
+      <div class="rule"><div class="n">08</div><p><strong>O calendário é a meta, não uma camisa de força.</strong> Se um checkpoint indicar problema, adie o próximo corte por 1–2 dias dentro da mesma semana antes de forçar — mas o objetivo é fechar os 28 dias no dia 21/10.</p></div>
+      <div class="rule"><div class="n">09</div><p><strong>Calendário fixo, não gatilho de espera:</strong> a pedido, o plano segue datas fixas (semana 1 = absorver Adv, semana 2 = Drops feed STLIA, semanas 3–4 = Drops feed STLFLIX) em vez de esperar a Advantage-influencers confirmar uma 2ª semana seguida acima de 4x antes de começar. Isso é mais rápido que o ritmo originalmente recomendado — por isso a regra 07 (gatilho de freio) fica ainda mais importante: qualquer queda de 15%+ no funil por 2 dias seguidos pausa os ajustes no ponto atual, calendário ou não.</p></div>
     </div>
   </section>
 
   <section>
-    <h2>Cronograma — campanha por campanha</h2>
-    <p class="section-note">A partir daqui as datas da Fase 1 em diante deixaram de ser fixas — cada fase só começa quando a anterior confirmar o gatilho de avanço (regra 09). Ajuste os valores em reais pelos números do dia — o que importa é a lógica de "roda junto, depois desliga", não o valor exato.</p>
+    <h2>Cronograma — dia a dia (4 semanas, 24/09 → 21/10)</h2>
+    <p class="section-note">Calendário fixo, como pedido — cada dia tem uma ação (ou uma observação deliberada, sem ajuste nenhum). Fins de semana ficam só de observação: menor volume, pior momento pra decidir. A regra 07 (gatilho de freio) vale o tempo todo — se o funil cair 15%+ por 2 dias seguidos, pare no ponto atual antes de seguir o calendário.</p>
 
     <div class="timeline">
 
       <div class="phase">
-        <div class="phase-marker">0</div>
-        <div class="phase-card">
-          <div class="phase-head"><h3>Fase 0 — confirmar a Advantage-influencers</h3><span class="phase-dates">23/09 → em andamento, sem data-limite</span></div>
-          <p class="phase-target">Objetivo: a semana de 5,02x foi só 1 em 3 — antes de fazer dela a base do funil inteiro, confirmar que não foi sorte. Sem aumento de orçamento ainda, só observação.</p>
-          <ul class="steps">
-            <li>Deixar a Advantage-influencers rodando no nível atual — sem aumentar nem reduzir — pela semana 4 inteira.</li>
-            <li>Adv, Drops feed STLIA e Drops feed STLFLIX continuam exatamente como estão — nenhum corte ainda. A Remarketing não entra nessa conta em nenhum momento do plano.</li>
-            <li><strong>Não avançar para a Fase 1</strong> até a semana 4 fechar também acima de ~4x de ROAS (Meta).</li>
-          </ul>
-          <div class="checkpoint">☑ <span><b>Checkpoint atual (23/09):</b> semana 3 em 5,02x, CPA R$ 202,78 — falta confirmar a semana 4. Se cair de novo para a faixa de 2,0–2,5x das semanas 1 e 2, reavaliar a escolha da sobrevivente antes de prosseguir.</span></div>
-        </div>
-      </div>
-
-      <div class="phase">
         <div class="phase-marker">1</div>
         <div class="phase-card">
-          <div class="phase-head"><h3>Fase 1 — absorver "Adv"</h3><span class="phase-dates">a definir — só após o gatilho da Fase 0</span></div>
+          <div class="phase-head"><h3>Semana 1 — absorver "Adv"</h3><span class="phase-dates">24/09 → 30/09</span></div>
           <p class="phase-target">A mais nova e mais fraca do grupo (R$ 8.169,25/7d, 2,59x, CPA R$ 355,18) — a que tem menos a perder, por isso começa por ela.</p>
-          <ul class="steps">
-            <li><b>~10 dias de sobreposição:</b> subir a Advantage-influencers em ~20–30%. Adv continua rodando normal, sem cortes.</li>
-            <li><b>~7–10 dias de redução:</b> só depois de confirmar que a sobrevivente está estável, reduzir o orçamento da Adv em fatias de ~20%, a cada 2–3 dias, até chegar a zero.</li>
-            <li>Pausar Adv (não excluir) ao chegar a zero.</li>
-          </ul>
-          <div class="checkpoint">☑ <span><b>Checkpoint:</b> funil sem queda de receita/conversões vs. a média recente antes de seguir para a próxima fase.</span></div>
+          <div class="checkpoint">⚠ <span><b>Risco herdado do plano anterior:</b> a Advantage-influencers teve 3 semanas com ROAS de 2,07x, 2,48x e 5,02x — só 1 das 3 acima de 4x. Este calendário assume que a semana de 5,02x se mantém. Se a semana em curso cair de volta para a faixa de 2,0–2,5x, é o sinal pra usar a regra 07 antes de seguir para o próximo aumento.</span></div>
+          <div class="mini-table table-wrap">
+            <table>
+              <thead><tr><th>Dia</th><th>Data</th><th>Ação</th></tr></thead>
+              <tbody>
+                <tr><td class="num">1</td><td class="num">24/09 qui</td><td>Subir Advantage-influencers ~25–30%. Adv, Drops feed STLIA, Drops feed STLFLIX e Remarketing seguem no orçamento normal.</td></tr>
+                <tr><td class="num">2</td><td class="num">25/09 sex</td><td>Observação — sem novo aumento. Conferir se o CPA da Advantage-influencers não piorou mais que ~20%.</td></tr>
+                <tr><td class="num">3</td><td class="num">26/09 sáb</td><td>Se estável, 2º aumento na Advantage-influencers de ~25–30%. Adv segue normal.</td></tr>
+                <tr><td class="num">4</td><td class="num">27/09 dom</td><td>Observação — fim de semana, sem ajuste em nenhuma campanha.</td></tr>
+                <tr><td class="num">5</td><td class="num">28/09 seg</td><td>Checkpoint de sobreposição (4–5 dias no novo patamar sem piora de CPA). Se ok, iniciar corte da Adv: −30%.</td></tr>
+                <tr><td class="num">6</td><td class="num">29/09 ter</td><td>Reduzir Adv mais −30% (restam ~40% do orçamento original).</td></tr>
+                <tr><td class="num">7</td><td class="num">30/09 qua</td><td>Zerar e pausar a Adv (não excluir). Fechar a semana comparando receita/conversões do funil vs. a média das semanas anteriores.</td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 
       <div class="phase">
         <div class="phase-marker">2</div>
         <div class="phase-card">
-          <div class="phase-head"><h3>Fase 2 — absorver "Drops feed STLIA"</h3><span class="phase-dates">a definir — após a Fase 1</span></div>
+          <div class="phase-head"><h3>Semana 2 — absorver "Drops feed STLIA"</h3><span class="phase-dates">01/10 → 07/10</span></div>
           <p class="phase-target">2ª a ser absorvida (R$ 11.299,29/7d), com ROAS em queda (4,11x → 2,89x na semana mais recente) — revisar criativo/público dela em paralelo, o problema aqui não é só orçamento.</p>
-          <ul class="steps">
-            <li><b>~10 dias de sobreposição:</b> subir a Advantage-influencers em ~30–40% além do nível da Fase 1. STLIA continua rodando normal ao lado.</li>
-            <li><b>~7–10 dias de redução:</b> cortar STLIA em fatias de ~20%, a cada 2–3 dias, até zero.</li>
-            <li>Pausar STLIA (não excluir) ao chegar a zero.</li>
-          </ul>
-          <div class="checkpoint">☑ <span><b>Checkpoint reforçado:</b> como está em queda, qualquer sinal de que a sobreposição não está compensando essa perda é motivo para segurar a redução por mais tempo antes de continuar.</span></div>
+          <div class="mini-table table-wrap">
+            <table>
+              <thead><tr><th>Dia</th><th>Data</th><th>Ação</th></tr></thead>
+              <tbody>
+                <tr><td class="num">8</td><td class="num">01/10 qui</td><td>Subir Advantage-influencers mais ~25–30% (cobrindo o volume que a Adv deixou). Drops feed STLIA segue normal — revisar criativo/público dela em paralelo.</td></tr>
+                <tr><td class="num">9</td><td class="num">02/10 sex</td><td>Observação — conferir CPA da Advantage-influencers no novo patamar.</td></tr>
+                <tr><td class="num">10</td><td class="num">03/10 sáb</td><td>Se estável, 2º aumento de ~20–30%. STLIA segue normal.</td></tr>
+                <tr><td class="num">11</td><td class="num">04/10 dom</td><td>Observação — fim de semana, sem ajuste em nenhuma campanha.</td></tr>
+                <tr><td class="num">12</td><td class="num">05/10 seg</td><td>Checkpoint: como a STLIA já está em queda, qualquer sinal de que a sobreposição não compensa essa perda é motivo pra segurar mais dias. Se ok, iniciar corte: −30%.</td></tr>
+                <tr><td class="num">13</td><td class="num">06/10 ter</td><td>Reduzir STLIA mais −30%.</td></tr>
+                <tr><td class="num">14</td><td class="num">07/10 qua</td><td>Zerar e pausar a Drops feed STLIA. Fechar a semana comparando o funil vs. a média recente.</td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 
       <div class="phase">
         <div class="phase-marker">3</div>
         <div class="phase-card">
-          <div class="phase-head"><h3>Fase 3 — absorver "Drops feed STLFLIX"</h3><span class="phase-dates">a definir — após a Fase 2</span></div>
-          <p class="phase-target">A etapa mais delicada: maior verba do grupo (R$ 10.043,51/7d) e a que mais oscila (3,09x a 5,27x nas últimas 3 semanas) — vai por último, com a sobreposição mais longa de todas.</p>
-          <ul class="steps">
-            <li><b>~2 semanas de sobreposição:</b> subir a Advantage-influencers em passos de ~20–30%, com STLFLIX rodando normal ao lado.</li>
-            <li><b>~1–2 semanas de redução:</b> cortar STLFLIX em fatias de ~15–20%, a cada 3 dias, até zero.</li>
-            <li>Pausar STLFLIX (não excluir) ao chegar a zero — Lote Especial passa a rodar em 2 campanhas: Advantage-influencers (absorvendo Adv, STLIA e STLFLIX) e Remarketing, intocada desde o início.</li>
-          </ul>
-          <div class="checkpoint">☑ <span><b>Checkpoint final:</b> se algo destoar aqui, é melhor esticar essa fase por mais 1–2 semanas do que arriscar a receita do funil no fim do processo.</span></div>
+          <div class="phase-head"><h3>Semana 3 — absorver "Drops feed STLFLIX" (início)</h3><span class="phase-dates">08/10 → 14/10</span></div>
+          <p class="phase-target">A etapa mais delicada: maior verba do grupo (R$ 10.043,51/7d) e a que mais oscila (3,09x a 5,27x nas últimas 3 semanas) — vai por último, com passos de aumento menores e mais cautelosos, e o corte estica pela semana 4.</p>
+          <div class="mini-table table-wrap">
+            <table>
+              <thead><tr><th>Dia</th><th>Data</th><th>Ação</th></tr></thead>
+              <tbody>
+                <tr><td class="num">15</td><td class="num">08/10 qui</td><td>Subir Advantage-influencers ~20–25% (passo menor, por ser a maior verba do grupo a cobrir). STLFLIX segue normal.</td></tr>
+                <tr><td class="num">16</td><td class="num">09/10 sex</td><td>Observação.</td></tr>
+                <tr><td class="num">17</td><td class="num">10/10 sáb</td><td>Se estável, 2º aumento de ~20–25%. STLFLIX segue normal.</td></tr>
+                <tr><td class="num">18</td><td class="num">11/10 dom</td><td>Observação — fim de semana, sem ajuste em nenhuma campanha.</td></tr>
+                <tr><td class="num">19</td><td class="num">12/10 seg</td><td>Checkpoint de sobreposição (5 dias). Se estável, 3º aumento de ~15–20% (passo extra, por ser a mais volátil do grupo).</td></tr>
+                <tr><td class="num">20</td><td class="num">13/10 ter</td><td>Observação — deixar a sobrevivente assentar no novo patamar antes do 1º corte em STLFLIX.</td></tr>
+                <tr><td class="num">21</td><td class="num">14/10 qua</td><td>Iniciar corte da STLFLIX: −20%. Fechar a semana comparando o funil vs. a média recente — se algo destoar, esticar o corte pela semana 4 em vez de forçar.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-marker">4</div>
+        <div class="phase-card">
+          <div class="phase-head"><h3>Semana 4 — fechar "Drops feed STLFLIX" e revisar</h3><span class="phase-dates">15/10 → 21/10</span></div>
+          <p class="phase-target">Termina o corte da campanha mais delicada, estabiliza o funil só com Advantage-influencers + Remarketing, e fecha com a revisão dos 28 dias.</p>
+          <div class="mini-table table-wrap">
+            <table>
+              <thead><tr><th>Dia</th><th>Data</th><th>Ação</th></tr></thead>
+              <tbody>
+                <tr><td class="num">22</td><td class="num">15/10 qui</td><td>Reduzir STLFLIX mais −20%.</td></tr>
+                <tr><td class="num">23</td><td class="num">16/10 sex</td><td>Observação — conferir o funil total antes do próximo corte.</td></tr>
+                <tr><td class="num">24</td><td class="num">17/10 sáb</td><td>Reduzir STLFLIX mais −20% (~60% já cortado desde o início da semana 3).</td></tr>
+                <tr><td class="num">25</td><td class="num">18/10 dom</td><td>Observação — fim de semana, sem ajuste em nenhuma campanha.</td></tr>
+                <tr><td class="num">26</td><td class="num">19/10 seg</td><td>Zerar e pausar a Drops feed STLFLIX. Lote Especial passa a rodar oficialmente em 2 campanhas: Advantage-influencers + Remarketing.</td></tr>
+                <tr><td class="num">27</td><td class="num">20/10 ter</td><td>Estabilização — sem novos ajustes em nenhuma campanha, só monitorar CPA/ROAS/receita do funil consolidado.</td></tr>
+                <tr><td class="num">28</td><td class="num">21/10 qua</td><td>Revisão final dos 28 dias (ver seção abaixo) — decidir se o funil fica assim ou se algum ajuste fino ainda é necessário.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="checkpoint">☑ <span><b>Checkpoint final:</b> se algo destoar em qualquer semana, é melhor esticar essa fase por mais alguns dias do que arriscar a receita do funil no fim do processo — a regra 07 (gatilho de freio) vale do dia 1 ao dia 28.</span></div>
         </div>
       </div>
 
@@ -349,7 +387,7 @@
   </section>
 
   <section>
-    <h2>Revisão final (data em aberto — depende do gatilho da Fase 0)</h2>
+    <h2>Revisão final — dia 28 (21/10/2026)</h2>
     <div class="finish-grid">
       <div class="finish-card">
         <h3>O que comparar</h3>
@@ -367,7 +405,7 @@
   </section>
 
   <footer>
-    Baseado nos dados de Meta Ads extraídos via Windsor.ai (02–22/09/2026, 3 semanas) e no funil Lote Especial do dashboard executivo STLFLIX. Ritmo de aumentos e cortes segue a prática recomendada pelo próprio Meta de não alterar orçamento em mais de ~20–30% por vez, com sobreposição entre campanhas antes de qualquer redução. Reescrito em 23/09: a sobrevivente passou de Adv para Advantage-influencers (dados reais de 3 semanas mostraram a Adv como a mais fraca do grupo), e o cronograma passou a usar gatilhos de performance em vez de datas fixas.
+    Baseado nos dados de Meta Ads extraídos via Windsor.ai (02–22/09/2026, 3 semanas) e no funil Lote Especial do dashboard executivo STLFLIX. Ritmo de aumentos e cortes segue a prática recomendada pelo próprio Meta de não alterar orçamento em mais de ~20–30% por vez, com sobreposição entre campanhas antes de qualquer redução. Reescrito em 23/09: a sobrevivente passou de Adv para Advantage-influencers (dados reais de 3 semanas mostraram a Adv como a mais fraca do grupo) e o cronograma passou a seguir um calendário fixo de 4 semanas (24/09–21/10), dia a dia, em vez de gatilhos de performance.
   </footer>
 
 </div>
