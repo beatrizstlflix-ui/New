@@ -930,72 +930,6 @@ function renderProductGrowth(container){
   container.appendChild(sec);
 }
 
-// "Plano" = produto de assinatura/recorrência vendido como plano (Assinatura...,
-// STL Seller Mensal/Anual, STLFLIX 4 ANOS - Plano Vendas). Não inclui BF/Lifetime
-// (promoção pontual, não é um plano recorrente) nem Lote Especial/Cursos/Trilhas
-// (produtos de campanha, não planos).
-function isPlanProduct(name){
-  return name.startsWith("Assinatura") || name.startsWith("STL Seller") || name.startsWith("STLFLIX 4 ANOS");
-}
-
-function renderPlanComparison(container){
-  const snaps = dashboardData.productSnapshots;
-  if(!snaps || snaps.length < 3) return;
-  const days = snaps.slice(-3);
-
-  const sec = el("section");
-  sec.appendChild(el("div",{class:"section-title"},
-    `<h2>Comparativo de planos vendidos</h2><span class="tag">Hotmart · ${days.map(d=>fmtDateBR(d.date)).join(", ")}</span>`));
-  sec.appendChild(el("div",{class:"note"},
-    `Só produtos de plano/assinatura (Assinatura..., STL Seller Mensal/Anual, STLFLIX 4 ANOS) do top-10 "Visão por produto" de cada dia — não inclui Lote Especial, cursos/trilhas avulsos nem BF/Lifetime. Como o top-10 não cobre 100% das vendas, planos fora dele em algum dia não entram nesta conta.`));
-
-  const dayMaps = days.map(d=>{
-    const m = {};
-    d.products.filter(p=>isPlanProduct(p.name)).forEach(p=> m[p.name]=p);
-    return m;
-  });
-  const names = Array.from(new Set(dayMaps.flatMap(m=>Object.keys(m))));
-  const totals = dayMaps.map(m=> Object.values(m).reduce((acc,p)=>({sales:acc.sales+p.sales, revenue:acc.revenue+p.revenue}), {sales:0, revenue:0}));
-
-  const card = el("div",{class:"card"});
-  const stats = el("div",{class:"stat-tiles"});
-  days.forEach((d,i)=>{
-    const tile = el("div",{class:"stat-tile"});
-    tile.appendChild(el("div",{class:"stat-tile-label"}, fmtDateBR(d.date)));
-    tile.appendChild(el("div",{class:"stat-tile-value"}, `${totals[i].sales} planos`));
-    tile.appendChild(el("div",{class:"metric-sub"}, fmtBRL(totals[i].revenue)));
-    stats.appendChild(tile);
-  });
-  card.appendChild(stats);
-  const lastDelta = totals[2].sales - totals[1].sales;
-  card.appendChild(el("div",{class:"metric-sub", style:"margin-top:6px;"},
-    `${lastDelta>=0?"+":""}${lastDelta} planos de ${fmtDateBR(days[1].date)} para ${fmtDateBR(days[2].date)} (${fmtBRL(totals[2].revenue-totals[1].revenue)} de variação em receita de planos).`));
-
-  const tableWrap = el("div",{class:"table-scroll", style:"margin-top:16px;"});
-  const table = el("table");
-  table.appendChild(el("thead",{},
-    `<tr><th>Plano</th>${days.map(d=>`<th>${fmtDateBR(d.date)}</th>`).join("")}</tr>`));
-  const tbody = el("tbody");
-  names.forEach(name=>{
-    const tr = el("tr");
-    tr.appendChild(el("td",{}, name));
-    dayMaps.forEach(m=>{
-      const p = m[name];
-      tr.appendChild(el("td",{}, p ? `${p.sales} · ${fmtBRL(p.revenue)}` : "—"));
-    });
-    tbody.appendChild(tr);
-  });
-  const totalRow = el("tr",{style:"font-weight:700;border-top:1px solid var(--border);"});
-  totalRow.appendChild(el("td",{}, "Total"));
-  totals.forEach(t=> totalRow.appendChild(el("td",{}, `${t.sales} · ${fmtBRL(t.revenue)}`)));
-  tbody.appendChild(totalRow);
-  table.appendChild(tbody);
-  tableWrap.appendChild(table);
-  card.appendChild(tableWrap);
-  sec.appendChild(card);
-  container.appendChild(sec);
-}
-
 function renderSpendVsResult(container){
   const rows = [];
   dashboardData.funnels.forEach(funnel=>{
@@ -1612,7 +1546,7 @@ function render(){
   header.appendChild(el("div",{class:"updated"}, `Última atualização: <b>${dashboardData.updatedAt}</b>`));
   app.appendChild(header);
 
-  [renderBusinessSummary, renderGlobalDailyEvolution, renderProductGrowth, renderPlanComparison, renderSpendVsResult, renderFunnelShareOverview, renderFunnels, renderGeneralDemands].forEach(fn=>{
+  [renderBusinessSummary, renderGlobalDailyEvolution, renderProductGrowth, renderSpendVsResult, renderFunnelShareOverview, renderFunnels, renderGeneralDemands].forEach(fn=>{
     try{ fn(app); }
     catch(err){
       console.error(fn.name, err);
