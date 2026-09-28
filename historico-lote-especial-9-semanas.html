@@ -1,0 +1,287 @@
+<title>Lote Especial — 9 semanas</title>
+<style>
+  :root{
+    --bg:#f7f6f2; --surface:#ffffff; --surface-2:#eef1f6; --border:#dce1e8;
+    --text:#1c2430; --text-dim:#5b6572; --text-faint:#8892a0;
+    --accent:#2f7d74; --accent-soft:#d9ece9;
+    --good:#2f8f5b; --good-soft:#dbf0e3;
+    --warn:#a86f10; --warn-soft:#f5e6c8;
+    --bad:#af3b52; --bad-soft:#f7dde2;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0d1117; --surface:#141b24; --surface-2:#182029; --border:#232c38;
+      --text:#e6edf3; --text-dim:#94a2b3; --text-faint:#6b7684;
+      --accent:#5eb8b0; --accent-soft:#123330;
+      --good:#4caf7d; --good-soft:#123322;
+      --warn:#d9a441; --warn-soft:#332a11;
+      --bad:#d1667a; --bad-soft:#331a20;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0d1117; --surface:#141b24; --surface-2:#182029; --border:#232c38;
+    --text:#e6edf3; --text-dim:#94a2b3; --text-faint:#6b7684;
+    --accent:#5eb8b0; --accent-soft:#123330;
+    --good:#4caf7d; --good-soft:#123322;
+    --warn:#d9a441; --warn-soft:#332a11;
+    --bad:#d1667a; --bad-soft:#331a20;
+    color-scheme: dark;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:"Public Sans", -apple-system, sans-serif;
+    padding-block:40px;
+  }
+  .wrap{max-width:980px; margin:0 auto; padding-inline:16px;}
+
+  h1,h2,h3{font-family:"IBM Plex Sans Condensed", "Public Sans", sans-serif; text-wrap:balance; margin:0;}
+  .eyebrow{font-family:"IBM Plex Mono", monospace; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); margin-bottom:10px;}
+  h1{font-size:30px; font-weight:700; letter-spacing:-0.01em; margin-bottom:14px;}
+  .lede{font-size:15px; line-height:1.6; color:var(--text-dim); max-width:66ch; margin-bottom:24px;}
+  .lede strong{color:var(--text);}
+
+  .stat-strip{display:flex; gap:20px; flex-wrap:wrap; margin-bottom:36px;}
+  .stat{background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:14px 18px; min-width:150px;}
+  .stat .l{font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--text-faint); margin-bottom:6px;}
+  .stat .v{font-family:"IBM Plex Mono", monospace; font-size:20px; font-weight:600; font-variant-numeric:tabular-nums;}
+
+  section{margin-bottom:36px;}
+  h2{font-size:19px; margin-bottom:6px;}
+  .section-note{font-size:13px; color:var(--text-dim); margin-bottom:18px; max-width:72ch; line-height:1.55;}
+
+  .table-wrap{overflow-x:auto; border:1px solid var(--border); border-radius:12px; background:var(--surface);}
+  table{border-collapse:collapse; width:100%; min-width:820px; font-size:13px;}
+  th,td{padding:10px 12px; text-align:center; border-bottom:1px solid var(--border); border-right:1px solid var(--border);}
+  th:last-child, td:last-child{border-right:none;}
+  tr:last-child td{border-bottom:none;}
+  th{font-family:"IBM Plex Mono", monospace; font-size:10.5px; font-weight:600; color:var(--text-dim); text-transform:uppercase; letter-spacing:.03em; background:var(--surface-2);}
+  th.campaign-col, td.campaign-col{text-align:left; font-family:"Public Sans"; font-weight:600; color:var(--text); white-space:nowrap;}
+  td.week-partial{position:relative;}
+  th.week-partial-h{color:var(--accent);}
+  .cell{font-family:"IBM Plex Mono", monospace; font-variant-numeric:tabular-nums;}
+  .cell .roas{font-size:14px; font-weight:700;}
+  .cell .sub{font-size:10px; color:var(--text-faint); margin-top:2px;}
+  .cell.na{color:var(--text-faint); font-size:12px;}
+  .cell.good{background:var(--good-soft); color:var(--good);}
+  .cell.warn{background:var(--warn-soft); color:var(--warn);}
+  .cell.bad{background:var(--bad-soft); color:var(--bad);}
+
+  .legend{display:flex; gap:18px; flex-wrap:wrap; margin-top:12px; font-size:12px; color:var(--text-dim);}
+  .legend .sw{display:inline-flex; align-items:center; gap:6px;}
+  .legend .dot{width:10px; height:10px; border-radius:3px; display:inline-block;}
+
+  .callout{border:1px solid var(--border); border-left:4px solid var(--accent); background:var(--surface); border-radius:0 10px 10px 0; padding:16px 20px; font-size:14px; line-height:1.6;}
+  .callout.bad{border-left-color:var(--bad);}
+  .callout strong{color:var(--text);}
+  .callout + .callout{margin-top:12px;}
+
+  .campaign-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:14px;}
+  .campaign-card{background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:16px 18px;}
+  .campaign-card h3{font-size:14.5px; margin-bottom:8px;}
+  .campaign-card p{font-size:12.5px; color:var(--text-dim); line-height:1.55; margin:0;}
+  .campaign-card .tag{display:inline-block; font-family:"IBM Plex Mono",monospace; font-size:10.5px; padding:2px 8px; border-radius:20px; margin-bottom:8px;}
+  .tag.good{background:var(--good-soft); color:var(--good);}
+  .tag.warn{background:var(--warn-soft); color:var(--warn);}
+  .tag.bad{background:var(--bad-soft); color:var(--bad);}
+
+  footer{font-size:12px; color:var(--text-faint); line-height:1.6; border-top:1px solid var(--border); padding-top:18px; margin-top:8px;}
+
+  @media (max-width:640px){
+    h1{font-size:24px;}
+    .stat{min-width:130px;}
+  }
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@600;700&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+
+<div class="wrap">
+
+  <div class="eyebrow">Histórico · Lote Especial · Meta Ads via Windsor.ai</div>
+  <h1>9 semanas, campanha por campanha</h1>
+  <p class="lede">
+    28/07 a 28/09/2026, semana a semana (blocos de 7 dias). ROAS (Meta) = valor de conversão atribuído pelo Meta ÷ investimento — o mesmo critério usado no resto do dashboard.
+    A <strong>Semana 9 é parcial</strong> (28/09 ainda não fechou o dia). "—" = campanha não existia ou não teve investimento naquela semana.
+  </p>
+
+  <div class="stat-strip">
+    <div class="stat"><div class="l">Período</div><div class="v" style="font-size:15px;">28/07 → 28/09</div></div>
+    <div class="stat"><div class="l">Investimento total (5 campanhas)</div><div class="v">R$ 297.490</div></div>
+    <div class="stat"><div class="l">Campanhas com histórico completo</div><div class="v">3 de 5</div></div>
+  </div>
+
+  <section>
+    <h2>ROAS (Meta) por semana</h2>
+    <p class="section-note">Cada célula: ROAS da semana, com investimento (R$) e conversões abaixo. Verde ≥ 4x · Âmbar 3–4x · Vermelho &lt; 3x — as mesmas faixas usadas no resto da análise do funil.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th class="campaign-col">Campanha</th>
+            <th>S1<br>28/07–03/08</th>
+            <th>S2<br>04–10/08</th>
+            <th>S3<br>11–17/08</th>
+            <th>S4<br>18–24/08</th>
+            <th>S5<br>25–31/08</th>
+            <th>S6<br>01–07/09</th>
+            <th>S7<br>08–14/09</th>
+            <th>S8<br>15–21/09</th>
+            <th class="week-partial-h">S9<br>22–28/09*</th>
+          </tr>
+        </thead>
+        <tbody id="heatmap-body"></tbody>
+      </table>
+    </div>
+    <div class="legend">
+      <span class="sw"><span class="dot" style="background:var(--good);"></span>≥ 4x</span>
+      <span class="sw"><span class="dot" style="background:var(--warn);"></span>3x – 4x</span>
+      <span class="sw"><span class="dot" style="background:var(--bad);"></span>&lt; 3x</span>
+      <span class="sw">* Semana 9 parcial — 28/09 ainda em andamento</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>O que os 2 meses mostram</h2>
+    <div class="callout bad">
+      <strong>A Advantage-influencers — hoje a "sobrevivente" do plano de consolidação — é a mais instável do grupo, não a mais forte.</strong>
+      Desde que ganhou orçamento relevante (semana 4), ela oscilou entre 2,22x (semana 6) e 5,12x (semanas 4 e 8), sem tendência clara — sobe uma semana, cai na seguinte, sobe de novo. A semana de 5,02x que justificou escolhê-la como sobrevivente foi um pico dentro dessa oscilação, não uma trajetória consolidada.
+    </div>
+    <div class="callout">
+      <strong>A Adv, a campanha que o plano manda cortar primeiro, só tem 2 semanas de vida — e a mais recente é a melhor delas.</strong>
+      Semana 8 (a primeira): 2,27x. Semana 9 (parcial): 4,13x. É pouco dado pra confiar (13 dias no total), mas é o oposto de "a mais fraca do grupo" — hoje ela está entregando o 2º melhor ROAS entre as 5 campanhas, atrás só da Remarketing.
+    </div>
+    <div class="callout">
+      <strong>Drops feed STLIA está em queda constante desde a semana 4</strong> (5,78x → 4,04x → 3,76x → 2,90x → 3,37x → 3,42x → 2,98x) — a única campanha do grupo com uma tendência de longo prazo clara, e ela é de queda, não de alta.
+    </div>
+    <div class="callout">
+      <strong>Remarketing e Drops feed STLFLIX são as duas mais voláteis em valor absoluto</strong>, alternando semanas de 2x com semanas de 6–7x sem um padrão previsível — analisar qualquer uma delas por uma única semana (boa ou ruim) leva a uma conclusão errada na semana seguinte.
+    </div>
+  </section>
+
+  <section>
+    <h2>Leitura por campanha</h2>
+    <div class="campaign-grid" id="campaign-cards"></div>
+  </section>
+
+  <footer>
+    Dados: Meta Ads via Windsor.ai, extraídos em 28/09/2026, conta 855482829150006, campanhas do funil Lote Especial. ROAS (Meta) = <code>action_values_omni_purchase ÷ spend</code>. Semanas são blocos fixos de 7 dias contados a partir de 28/07/2026; a Semana 9 termina em 28/09 mas esse dia ainda estava em andamento no momento da extração. Adv só existe na conta a partir de 16/09 (semana 8); Advantage-influencers a partir de 18/08 (semana 4) — states anteriores aparecem como "—", nunca como zero.
+  </footer>
+
+</div>
+
+<script>
+const WEEKS = [
+  {label:"S1", range:"28/07–03/08"},
+  {label:"S2", range:"04–10/08"},
+  {label:"S3", range:"11–17/08"},
+  {label:"S4", range:"18–24/08"},
+  {label:"S5", range:"25–31/08"},
+  {label:"S6", range:"01–07/09"},
+  {label:"S7", range:"08–14/09"},
+  {label:"S8", range:"15–21/09"},
+  {label:"S9", range:"22–28/09*"}
+];
+
+// spend, conversions, conv_value per week — real data, Windsor.ai (Meta), 28/07–28/09/2026
+const DATA = {
+  "Remarketing": [
+    {spend:3937.37, conv:6, value:14038.78},
+    {spend:4435.53, conv:14, value:27852.25},
+    {spend:4743.70, conv:5, value:9316.51},
+    {spend:5908.74, conv:18, value:40761.90},
+    {spend:2076.20, conv:6, value:8386.38},
+    {spend:0, conv:0, value:0},
+    {spend:3772.96, conv:15, value:16168.27},
+    {spend:6906.60, conv:43, value:40708.64},
+    {spend:9881.28, conv:32, value:34729.56}
+  ],
+  "Drops feed STLIA": [
+    {spend:14130.79, conv:22, value:24095.31},
+    {spend:14421.74, conv:36, value:55686.75},
+    {spend:6630.71, conv:19, value:28361.70},
+    {spend:8186.45, conv:32, value:47295.41},
+    {spend:6223.39, conv:17, value:23412.13},
+    {spend:7828.07, conv:23, value:22720.53},
+    {spend:7841.20, conv:28, value:26425.92},
+    {spend:11394.05, conv:45, value:39018.45},
+    {spend:6239.19, conv:19, value:18598.62}
+  ],
+  "Drops feed STLFLIX": [
+    {spend:20786.66, conv:50, value:67573.36},
+    {spend:20596.71, conv:34, value:47009.21},
+    {spend:9704.15, conv:21, value:39604.32},
+    {spend:9424.21, conv:36, value:50710.23},
+    {spend:7237.61, conv:33, value:34706.38},
+    {spend:5549.65, conv:28, value:28504.24},
+    {spend:8738.29, conv:29, value:25894.97},
+    {spend:9658.16, conv:56, value:50688.37},
+    {spend:12603.79, conv:42, value:39358.53}
+  ],
+  "Adv": [
+    null, null, null, null, null, null, null,
+    {spend:6942.31, conv:17, value:15780.48},
+    {spend:6662.87, conv:27, value:27542.74}
+  ],
+  "Advantage-influencers": [
+    null, null, null,
+    {spend:4163.79, conv:14, value:21332.69},
+    {spend:7185.79, conv:26, value:29045.72},
+    {spend:11182.55, conv:25, value:24864.95},
+    {spend:11391.87, conv:29, value:25446.16},
+    {spend:10301.27, conv:53, value:52759.58},
+    {spend:10802.02, conv:34, value:30064.18}
+  ]
+};
+
+function fmtBRL(n){
+  return "R$ " + n.toLocaleString("pt-BR", {minimumFractionDigits:0, maximumFractionDigits:0});
+}
+
+function band(roas){
+  if(roas === null) return "na";
+  if(roas >= 4) return "good";
+  if(roas >= 3) return "warn";
+  return "bad";
+}
+
+const tbody = document.getElementById("heatmap-body");
+Object.entries(DATA).forEach(([name, weeks])=>{
+  const tr = document.createElement("tr");
+  const nameCell = document.createElement("td");
+  nameCell.className = "campaign-col";
+  nameCell.textContent = name;
+  tr.appendChild(nameCell);
+  weeks.forEach((w, i)=>{
+    const td = document.createElement("td");
+    if(!w || w.spend === 0){
+      td.className = "cell na";
+      td.textContent = "—";
+    } else {
+      const roas = w.value / w.spend;
+      td.className = "cell " + band(roas);
+      td.innerHTML = `<div class="roas">${roas.toFixed(2).replace(".",",")}x</div><div class="sub">${fmtBRL(w.spend)} · ${w.conv} conv.</div>`;
+    }
+    if(i === 8) td.classList.add("week-partial");
+    tr.appendChild(td);
+  });
+  tbody.appendChild(tr);
+});
+
+// per-campaign summary cards
+const CARD_INFO = {
+  "Remarketing": {tag:"good", tagLabel:"Melhor consistência", text:"Oscila em valor absoluto (1,96x a 6,90x) mas raramente fica abaixo de 4x — 6 das 9 semanas em zona verde. Ficou sem verba por 4 dias no início de setembro (S6), depois retomou forte."},
+  "Drops feed STLIA": {tag:"bad", tagLabel:"Em queda desde S4", text:"Único padrão de longo prazo claro do grupo: pico de 5,78x na semana 4, caindo quase toda semana desde então até 2,98x agora. Justifica a revisão de criativo que o plano já previa."},
+  "Drops feed STLFLIX": {tag:"warn", tagLabel:"Volátil, sem tendência", text:"Maior investimento do grupo. Alterna semanas fracas (2,28x, 2,96x) com fortes (5,38x, 5,25x) sem padrão — decisão de orçamento nela não deveria se basear em 1 semana isolada."},
+  "Adv": {tag:"good", tagLabel:"Só 2 semanas, mas subindo", text:"Entrou na conta em 16/09. Única semana completa (S8) foi fraca (2,27x); a parcial (S9) já está em 4,13x — o oposto da leitura que a colocou como 'a mais fraca do grupo' na análise de 3 semanas anterior."},
+  "Advantage-influencers": {tag:"bad", tagLabel:"A mais instável", text:"Desde que ganhou verba relevante (S4), alterna 5,1x com 2,2x quase toda semana — a maior amplitude do grupo. É a sobrevivente escolhida para o plano de consolidação; essa instabilidade merece um novo olhar antes de seguir cortando as outras."}
+};
+
+const grid = document.getElementById("campaign-cards");
+Object.entries(CARD_INFO).forEach(([name, info])=>{
+  const card = document.createElement("div");
+  card.className = "campaign-card";
+  card.innerHTML = `<span class="tag ${info.tag}">${info.tagLabel}</span><h3>${name}</h3><p>${info.text}</p>`;
+  grid.appendChild(card);
+});
+</script>
