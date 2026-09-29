@@ -171,7 +171,7 @@ footer{color:var(--text-faint);font-size:11.5px;text-align:center;padding-top:20
    e a interface exibe "Não informado" — nunca zero inventado.
    ========================================================= */
 const dashboardData = {
-  updatedAt: "23/09/2026 09:20",
+  updatedAt: "29/09/2026 09:00",
   currency: "BRL",
 
   // Investimento total da conta Meta (todas as campanhas, não só os funis
@@ -185,9 +185,9 @@ const dashboardData = {
       googleSpend: 579.19,
       hotmartRevenue: 71880.20,
       hotmartSales: 101,
-      promoRevenue: 13001.00,
-      promoSales: 32,
-      promoNote: "Assinaturas recorrentes (29 vendas, R$ 12.226,70: STLFLIX Comercial Mensal 14/R$1.194,20 + STLFLIX Comercial Anual 12/R$10.747,80 + STLAI Comercial Mensal 3/R$284,70) + BF (3 vendas, R$ 774,30: [BF25] Lifetime STLFLIX+STLACADEMY) — recorrência/promoção — excluídas do ROAS real."
+      promoRevenue: 13285.70,
+      promoSales: 35,
+      promoNote: "Assinaturas/planos recorrentes (32 vendas, R$ 12.511,40: STLFLIX Comercial Mensal 14/R$1.194,20 + STLFLIX Comercial Anual 12/R$10.747,80 + STLAI Comercial Mensal 3/R$284,70 + STL Seller Mensal 3/R$284,70) + BF (3 vendas, R$ 774,30: [BF25] Lifetime STLFLIX+STLACADEMY) — recorrência/promoção — excluídas do ROAS real. Produto \"STLFLIX\" (3 vendas, R$ 695,60, sem prefixo Assinatura/BF) não entrou na exclusão por falta de confirmação do que é — a confirmar."
     },
     last4Days: {
       // dias com detalhamento por produto disponível: 21, 22, 23 e 28/09/2026
@@ -196,9 +196,9 @@ const dashboardData = {
       googleSpend: 2687.02,
       hotmartRevenue: 238932.03,
       hotmartSales: 359,
-      promoRevenue: 40702.72,
-      promoSales: 125,
-      promoNote: "Não é uma janela de 4 dias seguidos — são os 4 dias mais recentes com detalhamento por produto (21, 22, 23 e 28/09); 24 a 27/09 não tiveram print da Hotmart enviado, por isso ficam fora desta soma."
+      promoRevenue: 42647.10,
+      promoSales: 136,
+      promoNote: "Não é uma janela de 4 dias seguidos — são os 4 dias mais recentes com detalhamento por produto (21, 22, 23 e 28/09); 24 a 27/09 não tiveram print da Hotmart enviado, por isso ficam fora desta soma. Inclui STL Seller Mensal/Anual (planos recorrentes) além das Assinaturas e BF."
     }
   },
 
@@ -218,10 +218,10 @@ const dashboardData = {
     { date:"2026-09-18", hotmartRevenue:40449.52, hotmartSales:66, promoRevenue:4169.69, metaSpend:10889.99, googleSpend:762.62 },
     { date:"2026-09-19", hotmartRevenue:54356.56, hotmartSales:85, promoRevenue:2587.83, metaSpend:11301.78, googleSpend:769.13 },
     { date:"2026-09-20", hotmartRevenue:36728.72, hotmartSales:68, promoRevenue:2953.90, metaSpend:10535.36, googleSpend:752.68 },
-    { date:"2026-09-21", hotmartRevenue:51507.14, hotmartSales:82, promoRevenue:9998.84, metaSpend:9139.08, googleSpend:737.78 },
-    { date:"2026-09-22", hotmartRevenue:66249.39, hotmartSales:97, promoRevenue:9562.79, metaSpend:12280.97, googleSpend:735.21 },
-    { date:"2026-09-23", hotmartRevenue:49295.30, hotmartSales:79, promoRevenue:8140.09, metaSpend:11994.43, googleSpend:634.84 },
-    { date:"2026-09-28", hotmartRevenue:71880.20, hotmartSales:101, promoRevenue:13001.00, metaSpend:9613.42, googleSpend:579.19 }
+    { date:"2026-09-21", hotmartRevenue:51507.14, hotmartSales:82, promoRevenue:10473.34, metaSpend:9139.08, googleSpend:737.78 },
+    { date:"2026-09-22", hotmartRevenue:66249.39, hotmartSales:97, promoRevenue:9752.59, metaSpend:12280.97, googleSpend:735.21 },
+    { date:"2026-09-23", hotmartRevenue:49295.30, hotmartSales:79, promoRevenue:9135.47, metaSpend:11994.43, googleSpend:634.84 },
+    { date:"2026-09-28", hotmartRevenue:71880.20, hotmartSales:101, promoRevenue:13285.70, metaSpend:9613.42, googleSpend:579.19 }
   ],
 
   // janela usada em "Performance por funil" e nos gráficos (dados do Meta, sem gap): 22/09 a 28/09/2026
@@ -385,7 +385,8 @@ const dashboardData = {
         },
         {
           name: "[BRA] [LOTE ESPECIAL]  conversão-vendas-adv",
-          status: "active",
+          status: "inactive",
+          noteTag: "pausada — corte da Fase 1 do plano de consolidação",
           spend7d: 6664.73,
           conversions7d: 28,
           impressions7d: 89309,
@@ -804,10 +805,12 @@ function renderGlobalDailyEvolution(container){
 }
 
 // produto "Assinatura..." ou "STLFLIX 4 ANOS..." = recorrência/renovação;
-// "[BF..." = promoção — mesmo critério usado para excluir do ROAS real,
-// aplicado aqui para isolar receita nova.
+// "STL Seller Mensal/Anual" = plano recorrente (mesma lógica, billing mensal/anual,
+// mesmo sem o prefixo "Assinatura"); "[BF..." = promoção — mesmo critério usado
+// para excluir do ROAS real, aplicado aqui para isolar receita nova.
 function isRecurringOrPromoProduct(name){
-  return name.startsWith("Assinatura") || name.startsWith("[BF") || name.startsWith("STLFLIX 4 ANOS");
+  return name.startsWith("Assinatura") || name.startsWith("[BF") || name.startsWith("STLFLIX 4 ANOS")
+    || name === "STL Seller Mensal" || name === "STL Seller Anual";
 }
 
 function renderProductGrowth(container){
