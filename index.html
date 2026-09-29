@@ -176,28 +176,29 @@ const dashboardData = {
 
   // Investimento total da conta Meta (todas as campanhas, não só os funis
   // monitorados) nos últimos 7 dias completos — usado só para contexto.
-  metaAccountTotalSpend7d: 77325.85,
+  metaAccountTotalSpend7d: 82057.86,
 
   businessSummary: {
     yesterday: {
-      // 23/09/2026
-      metaSpend: 11994.43,
-      googleSpend: 634.84,
-      hotmartRevenue: 49295.30,
-      hotmartSales: 79,
-      promoRevenue: 8140.09,
-      promoSales: 29,
-      promoNote: "Assinaturas recorrentes (29 vendas, R$ 8.140,09: STLFLIX Comercial Mensal 17/R$1.450,10 + STLFLIX Comercial Anual 7/R$6.215,49 + STLAI Comercial Mensal 5/R$474,50) — recorrência — excluídas do ROAS real. Sem BF/STLFLIX 4 ANOS no top-10 de produtos deste dia."
+      // 28/09/2026
+      metaSpend: 9613.42,
+      googleSpend: 579.19,
+      hotmartRevenue: 71880.20,
+      hotmartSales: 101,
+      promoRevenue: 13001.00,
+      promoSales: 32,
+      promoNote: "Assinaturas recorrentes (29 vendas, R$ 12.226,70: STLFLIX Comercial Mensal 14/R$1.194,20 + STLFLIX Comercial Anual 12/R$10.747,80 + STLAI Comercial Mensal 3/R$284,70) + BF (3 vendas, R$ 774,30: [BF25] Lifetime STLFLIX+STLACADEMY) — recorrência/promoção — excluídas do ROAS real."
     },
     last4Days: {
-      // 20/09/2026 a 23/09/2026
-      metaSpend: 43949.84,
-      googleSpend: 2860.51,
-      hotmartRevenue: 203780.55,
-      hotmartSales: 326,
-      promoRevenue: 30655.62,
-      promoSales: 93,
-      promoNote: "Receita promo/recorrência revisada nos 4 dias: R$ 30.655,62 (Assinaturas + STLFLIX 4 ANOS + BF). Contagem de vendas: 93 confirmadas produto a produto em 21–23/09; o dia 20/09 não teve detalhamento por produto capturado (o rastreio por produto só começou em 21/09) — a receita dele (R$ 2.953,90) já está somada acima, mas sua parcela de vendas não entra no total de 93."
+      // dias com detalhamento por produto disponível: 21, 22, 23 e 28/09/2026
+      // (24 a 27/09 não têm print da Hotmart — não são "4 dias seguidos")
+      metaSpend: 43027.90,
+      googleSpend: 2687.02,
+      hotmartRevenue: 238932.03,
+      hotmartSales: 359,
+      promoRevenue: 40702.72,
+      promoSales: 125,
+      promoNote: "Não é uma janela de 4 dias seguidos — são os 4 dias mais recentes com detalhamento por produto (21, 22, 23 e 28/09); 24 a 27/09 não tiveram print da Hotmart enviado, por isso ficam fora desta soma."
     }
   },
 
@@ -211,18 +212,20 @@ const dashboardData = {
   // dias seguintes — os números abaixo refletem a versão mais recente enviada.
   // Observação: como a tabela de produtos da Hotmart só mostra os 10 maiores, pode
   // haver receita de recorrência fora do top-10 que não entrou no corte.
+  // Nota: 24 a 27/09 não têm print da Hotmart enviado, então não aparecem aqui —
+  // este array pula direto de 23/09 para 28/09 (gap real de 4 dias, não preenchido).
   dailyBusiness: [
-    { date:"2026-09-17", hotmartRevenue:54771.41, hotmartSales:94, promoRevenue:8439.78, metaSpend:11150.65, googleSpend:862.21 },
     { date:"2026-09-18", hotmartRevenue:40449.52, hotmartSales:66, promoRevenue:4169.69, metaSpend:10889.99, googleSpend:762.62 },
     { date:"2026-09-19", hotmartRevenue:54356.56, hotmartSales:85, promoRevenue:2587.83, metaSpend:11301.78, googleSpend:769.13 },
     { date:"2026-09-20", hotmartRevenue:36728.72, hotmartSales:68, promoRevenue:2953.90, metaSpend:10535.36, googleSpend:752.68 },
     { date:"2026-09-21", hotmartRevenue:51507.14, hotmartSales:82, promoRevenue:9998.84, metaSpend:9139.08, googleSpend:737.78 },
     { date:"2026-09-22", hotmartRevenue:66249.39, hotmartSales:97, promoRevenue:9562.79, metaSpend:12280.97, googleSpend:735.21 },
-    { date:"2026-09-23", hotmartRevenue:49295.30, hotmartSales:79, promoRevenue:8140.09, metaSpend:11994.43, googleSpend:634.84 }
+    { date:"2026-09-23", hotmartRevenue:49295.30, hotmartSales:79, promoRevenue:8140.09, metaSpend:11994.43, googleSpend:634.84 },
+    { date:"2026-09-28", hotmartRevenue:71880.20, hotmartSales:101, promoRevenue:13001.00, metaSpend:9613.42, googleSpend:579.19 }
   ],
 
-  // janela usada em "Performance por funil" e nos gráficos: 17/09 a 23/09/2026
-  funnelWindow: { from: "2026-09-17", to: "2026-09-23" },
+  // janela usada em "Performance por funil" e nos gráficos (dados do Meta, sem gap): 22/09 a 28/09/2026
+  funnelWindow: { from: "2026-09-22", to: "2026-09-28" },
 
   // Detalhamento por produto da Hotmart (top-10 "Visão por produto") nos 2 dias mais
   // recentes — usado só para a visão de "crescimento por produto sem renovação"
@@ -265,6 +268,18 @@ const dashboardData = {
       {name:"Curso Ao vivo Modelagem 3D - Hian Lopes", sales:2, revenue:993.38},
       {name:"Trilha STL Seller + Vivendo de Impressão 3D", sales:1, revenue:716.32},
       {name:"STL Seller Anual", sales:1, revenue:995.38}
+    ]},
+    { date:"2026-09-28", products: [
+      {name:"Lote Especial STLFLIX", sales:30, revenue:27064.28},
+      {name:"Lote Especial STLFLIX + STLAI", sales:15, revenue:22348.54},
+      {name:"Assinatura STLFLIX - Comercial Mensal", sales:14, revenue:1194.20},
+      {name:"Assinatura STLFLIX - Comercial Anual", sales:12, revenue:10747.80},
+      {name:"Curso de Modelagem 3D", sales:6, revenue:1752.22},
+      {name:"Assinatura STLAI - Comercial Mensal", sales:3, revenue:284.70},
+      {name:"Trilha Impressão Sem Medo + Vendas para Lojistas", sales:3, revenue:2357.76},
+      {name:"[BF25] [BRL] Lifetime STLFLIX + STLACADEMY", sales:3, revenue:774.30},
+      {name:"STLFLIX", sales:3, revenue:695.60},
+      {name:"STL Seller Mensal", sales:3, revenue:284.70}
     ]}
   ],
 
@@ -282,20 +297,20 @@ const dashboardData = {
         {
           name: "[BRA] [ASSINE] conversão-vendas-drops-automação",
           status: "active",
-          spend7d: 3475.87,
-          conversions7d: 11,
-          impressions7d: 189773,
-          linkClicks7d: 2044,
-          reach7d: 132817,
-          landingPageViews7d: 1185,
+          spend7d: 3408.96,
+          conversions7d: 12,
+          impressions7d: 152894,
+          linkClicks7d: 1512,
+          reach7d: 98611,
+          landingPageViews7d: 919,
           daily: [
-            {date:"2026-09-17", spend:483.08, conversions:1, impressions:24016, linkClicks:314, reach:16703, landingPageViews:195, metaConvValue:958.04},
-            {date:"2026-09-18", spend:420.07, conversions:2, impressions:23325, linkClicks:218, reach:16720, landingPageViews:132, metaConvValue:1990.78},
-            {date:"2026-09-19", spend:510.62, conversions:1, impressions:32042, linkClicks:310, reach:24063, landingPageViews:157, metaConvValue:981.68},
-            {date:"2026-09-20", spend:669.04, conversions:0, impressions:34738, linkClicks:384, reach:23695, landingPageViews:233, metaConvValue:0},
-            {date:"2026-09-21", spend:534.38, conversions:2, impressions:28463, linkClicks:362, reach:19091, landingPageViews:195, metaConvValue:1764.24},
             {date:"2026-09-22", spend:473.22, conversions:4, impressions:28976, linkClicks:287, reach:20164, landingPageViews:165, metaConvValue:3944.18},
-            {date:"2026-09-23", spend:385.46, conversions:1, impressions:18213, linkClicks:169, reach:12381, landingPageViews:108, metaConvValue:1593.82}
+            {date:"2026-09-23", spend:385.46, conversions:1, impressions:18213, linkClicks:169, reach:12381, landingPageViews:108, metaConvValue:1593.82},
+            {date:"2026-09-24", spend:483.98, conversions:1, impressions:18955, linkClicks:164, reach:12925, landingPageViews:109, metaConvValue:995.38},
+            {date:"2026-09-25", spend:466.03, conversions:0, impressions:20520, linkClicks:211, reach:13944, landingPageViews:126, metaConvValue:0},
+            {date:"2026-09-26", spend:482.48, conversions:1, impressions:21094, linkClicks:217, reach:12786, landingPageViews:122, metaConvValue:795.92},
+            {date:"2026-09-27", spend:613.29, conversions:2, impressions:26210, linkClicks:287, reach:15306, landingPageViews:178, metaConvValue:2551.86},
+            {date:"2026-09-28", spend:504.50, conversions:3, impressions:18926, linkClicks:177, reach:11105, landingPageViews:111, metaConvValue:2864.13}
           ]
         }
       ]
@@ -311,20 +326,20 @@ const dashboardData = {
         {
           name: "[BRA] [LARI] conversão-vendas-collab-lari",
           status: "active",
-          spend7d: 4962.86,
-          conversions7d: 15,
-          impressions7d: 151019,
-          linkClicks7d: 3421,
-          reach7d: 80747,
-          landingPageViews7d: 2594,
+          spend7d: 4904.62,
+          conversions7d: 21,
+          impressions7d: 159427,
+          linkClicks7d: 3285,
+          reach7d: 79836,
+          landingPageViews7d: 2542,
           daily: [
-            {date:"2026-09-17", spend:583.01, conversions:2, impressions:16494, linkClicks:398, reach:9220, landingPageViews:307, metaConvValue:1791.31},
-            {date:"2026-09-18", spend:630.75, conversions:1, impressions:16933, linkClicks:362, reach:10022, landingPageViews:285, metaConvValue:949.08},
-            {date:"2026-09-19", spend:679.30, conversions:0, impressions:18957, linkClicks:450, reach:11536, landingPageViews:337, metaConvValue:0},
-            {date:"2026-09-20", spend:750.60, conversions:4, impressions:22717, linkClicks:563, reach:12959, landingPageViews:403, metaConvValue:3581.51},
-            {date:"2026-09-21", spend:715.80, conversions:1, impressions:23647, linkClicks:528, reach:13238, landingPageViews:394, metaConvValue:1593.82},
             {date:"2026-09-22", spend:970.02, conversions:2, impressions:31686, linkClicks:699, reach:13051, landingPageViews:543, metaConvValue:1532.08},
-            {date:"2026-09-23", spend:633.38, conversions:5, impressions:20585, linkClicks:421, reach:10721, landingPageViews:325, metaConvValue:3751.20}
+            {date:"2026-09-23", spend:633.38, conversions:5, impressions:20585, linkClicks:421, reach:10721, landingPageViews:325, metaConvValue:3751.20},
+            {date:"2026-09-24", spend:531.12, conversions:0, impressions:15217, linkClicks:297, reach:8296, landingPageViews:243, metaConvValue:0},
+            {date:"2026-09-25", spend:630.19, conversions:5, impressions:20620, linkClicks:418, reach:11169, landingPageViews:313, metaConvValue:3128.02},
+            {date:"2026-09-26", spend:667.26, conversions:3, impressions:23484, linkClicks:493, reach:12471, landingPageViews:367, metaConvValue:2833.95},
+            {date:"2026-09-27", spend:723.62, conversions:3, impressions:24325, linkClicks:495, reach:12281, landingPageViews:379, metaConvValue:2557.35},
+            {date:"2026-09-28", spend:749.03, conversions:3, impressions:23510, linkClicks:462, reach:11847, landingPageViews:372, metaConvValue:2278.29}
           ]
         },
         {
@@ -352,171 +367,100 @@ const dashboardData = {
         {
           name: "[BRA] [LOTE ESPECIAL] conversão-vendas-advantage-influencers",
           status: "active",
-          spend7d: 9931.60,
-          conversions7d: 36,
-          impressions7d: 328706,
-          linkClicks7d: 5993,
-          reach7d: 156113,
-          landingPageViews7d: 4292,
+          spend7d: 11868.51,
+          conversions7d: 42,
+          impressions7d: 416795,
+          linkClicks7d: 9199,
+          reach7d: 179038,
+          landingPageViews7d: 6327,
           daily: [
-            {date:"2026-09-17", spend:1364.48, conversions:6, impressions:41736, linkClicks:730, reach:17814, landingPageViews:563, metaConvValue:5667.21},
-            {date:"2026-09-18", spend:986.99, conversions:3, impressions:31227, linkClicks:456, reach:17360, landingPageViews:328, metaConvValue:5066.97},
-            {date:"2026-09-19", spend:1522.07, conversions:10, impressions:45939, linkClicks:681, reach:22808, landingPageViews:492, metaConvValue:9696.12},
-            {date:"2026-09-20", spend:1721.69, conversions:5, impressions:55781, linkClicks:1067, reach:25664, landingPageViews:739, metaConvValue:6340.63},
-            {date:"2026-09-21", spend:1411.82, conversions:6, impressions:44944, linkClicks:850, reach:22139, landingPageViews:644, metaConvValue:5074.69},
             {date:"2026-09-22", spend:1310.95, conversions:2, impressions:50515, linkClicks:819, reach:26765, landingPageViews:578, metaConvValue:1512.23},
-            {date:"2026-09-23", spend:1613.60, conversions:4, impressions:58564, linkClicks:1390, reach:23563, landingPageViews:948, metaConvValue:4380.49}
+            {date:"2026-09-23", spend:1613.60, conversions:4, impressions:58564, linkClicks:1390, reach:23563, landingPageViews:948, metaConvValue:4380.49},
+            {date:"2026-09-24", spend:1764.38, conversions:5, impressions:60158, linkClicks:1418, reach:26953, landingPageViews:959, metaConvValue:4480.88},
+            {date:"2026-09-25", spend:1548.62, conversions:6, impressions:55312, linkClicks:1266, reach:24313, landingPageViews:825, metaConvValue:4947.93},
+            {date:"2026-09-26", spend:1920.27, conversions:6, impressions:70546, linkClicks:1619, reach:28818, landingPageViews:1136, metaConvValue:5281.31},
+            {date:"2026-09-27", spend:1853.70, conversions:6, impressions:62849, linkClicks:1364, reach:24651, landingPageViews:947, metaConvValue:5460.44},
+            {date:"2026-09-28", spend:1856.99, conversions:13, impressions:58851, linkClicks:1323, reach:23975, landingPageViews:934, metaConvValue:11412.44}
           ]
         },
         {
           name: "[BRA] [LOTE ESPECIAL]  conversão-vendas-adv",
           status: "active",
-          spend7d: 8378.42,
-          conversions7d: 21,
-          impressions7d: 118927,
-          linkClicks7d: 2671,
-          reach7d: 74747,
-          landingPageViews7d: 1953,
+          spend7d: 6664.73,
+          conversions7d: 28,
+          impressions7d: 89309,
+          linkClicks7d: 2133,
+          reach7d: 58804,
+          landingPageViews7d: 1593,
           daily: [
-            {date:"2026-09-17", spend:971.23, conversions:8, impressions:15612, linkClicks:342, reach:9822, landingPageViews:268, metaConvValue:9222.38},
-            {date:"2026-09-18", spend:1085.84, conversions:1, impressions:15285, linkClicks:308, reach:9355, landingPageViews:245, metaConvValue:795.92},
-            {date:"2026-09-19", spend:1250.47, conversions:3, impressions:16534, linkClicks:344, reach:10039, landingPageViews:250, metaConvValue:2281.28},
-            {date:"2026-09-20", spend:1407.37, conversions:0, impressions:18926, linkClicks:430, reach:11795, landingPageViews:285, metaConvValue:0},
-            {date:"2026-09-21", spend:1340.09, conversions:2, impressions:19091, linkClicks:457, reach:11582, landingPageViews:319, metaConvValue:1591.84},
             {date:"2026-09-22", spend:1233.04, conversions:6, impressions:18607, linkClicks:453, reach:11942, landingPageViews:339, metaConvValue:5413.87},
-            {date:"2026-09-23", spend:1090.38, conversions:1, impressions:14872, linkClicks:337, reach:10212, landingPageViews:247, metaConvValue:766.04}
+            {date:"2026-09-23", spend:1090.38, conversions:1, impressions:14872, linkClicks:337, reach:10212, landingPageViews:247, metaConvValue:766.04},
+            {date:"2026-09-24", spend:982.33, conversions:7, impressions:12530, linkClicks:340, reach:7741, landingPageViews:238, metaConvValue:6856.79},
+            {date:"2026-09-25", spend:917.48, conversions:3, impressions:12435, linkClicks:272, reach:8298, landingPageViews:197, metaConvValue:3185.65},
+            {date:"2026-09-26", spend:1026.67, conversions:5, impressions:13210, linkClicks:300, reach:8757, landingPageViews:229, metaConvValue:5744.99},
+            {date:"2026-09-27", spend:1114.92, conversions:3, impressions:14238, linkClicks:347, reach:9085, landingPageViews:279, metaConvValue:3185.66},
+            {date:"2026-09-28", spend:299.91, conversions:3, impressions:3417, linkClicks:84, reach:2769, landingPageViews:64, metaConvValue:3185.66}
           ]
         },
         {
           name: "[BRA] [LOTE ESPECIAL] conversão-vendas-drops_feed_STLFLIX",
           status: "active",
-          spend7d: 10492.89,
-          conversions7d: 50,
-          impressions7d: 441698,
-          linkClicks7d: 5683,
-          reach7d: 261499,
-          landingPageViews7d: 3734,
+          spend7d: 14312.12,
+          conversions7d: 48,
+          impressions7d: 655312,
+          linkClicks7d: 9713,
+          reach7d: 356284,
+          landingPageViews7d: 6101,
           daily: [
-            {date:"2026-09-17", spend:1307.20, conversions:6, impressions:46362, linkClicks:558, reach:29344, landingPageViews:377, metaConvValue:4753.78},
-            {date:"2026-09-18", spend:1215.71, conversions:2, impressions:47225, linkClicks:541, reach:30332, landingPageViews:330, metaConvValue:1856.68},
-            {date:"2026-09-19", spend:1238.80, conversions:5, impressions:52975, linkClicks:635, reach:34286, landingPageViews:433, metaConvValue:3672.52},
-            {date:"2026-09-20", spend:1637.64, conversions:15, impressions:65212, linkClicks:903, reach:38099, landingPageViews:591, metaConvValue:10058.39},
-            {date:"2026-09-21", spend:1487.89, conversions:15, impressions:66555, linkClicks:922, reach:36196, landingPageViews:639, metaConvValue:16156.52},
             {date:"2026-09-22", spend:1702.76, conversions:1, impressions:83011, linkClicks:1043, reach:48212, landingPageViews:684, metaConvValue:995.38},
-            {date:"2026-09-23", spend:1902.89, conversions:6, impressions:80358, linkClicks:1081, reach:45030, landingPageViews:680, metaConvValue:6540.67}
+            {date:"2026-09-23", spend:1902.89, conversions:6, impressions:80358, linkClicks:1081, reach:45030, landingPageViews:680, metaConvValue:6540.67},
+            {date:"2026-09-24", spend:1910.71, conversions:8, impressions:71722, linkClicks:1044, reach:40063, landingPageViews:665, metaConvValue:6710.23},
+            {date:"2026-09-25", spend:2042.70, conversions:11, impressions:85174, linkClicks:1378, reach:49219, landingPageViews:827, metaConvValue:9517.24},
+            {date:"2026-09-26", spend:1908.55, conversions:6, impressions:91398, linkClicks:1441, reach:50346, landingPageViews:874, metaConvValue:5152.13},
+            {date:"2026-09-27", spend:2254.04, conversions:8, impressions:121669, linkClicks:1763, reach:63916, landingPageViews:1100, metaConvValue:8452.10},
+            {date:"2026-09-28", spend:2590.47, conversions:8, impressions:121980, linkClicks:1963, reach:59498, landingPageViews:1271, metaConvValue:7898.24}
           ]
         },
         {
           name: "[BRA] [LOTE ESPECIAL] conversão-vendas-drops_feed_STLIA",
           status: "active",
-          spend7d: 10484.19,
-          conversions7d: 37,
-          impressions7d: 497431,
-          linkClicks7d: 5004,
-          reach7d: 273933,
-          landingPageViews7d: 3281,
+          spend7d: 6820.77,
+          conversions7d: 24,
+          impressions7d: 362109,
+          linkClicks7d: 3112,
+          reach7d: 201676,
+          landingPageViews7d: 1989,
           daily: [
-            {date:"2026-09-17", spend:1659.69, conversions:7, impressions:73957, linkClicks:705, reach:39989, landingPageViews:478, metaConvValue:6930.40},
-            {date:"2026-09-18", spend:1500.03, conversions:6, impressions:67821, linkClicks:652, reach:38706, landingPageViews:442, metaConvValue:5096.00},
-            {date:"2026-09-19", spend:1611.61, conversions:4, impressions:78653, linkClicks:747, reach:45760, landingPageViews:486, metaConvValue:1661.08},
-            {date:"2026-09-20", spend:1860.84, conversions:4, impressions:82865, linkClicks:998, reach:43734, landingPageViews:634, metaConvValue:4404.15},
-            {date:"2026-09-21", spend:1768.72, conversions:9, impressions:86999, linkClicks:926, reach:45381, landingPageViews:604, metaConvValue:6767.08},
             {date:"2026-09-22", spend:1253.88, conversions:3, impressions:68928, linkClicks:611, reach:38745, landingPageViews:408, metaConvValue:3325.33},
-            {date:"2026-09-23", spend:829.42, conversions:4, impressions:38208, linkClicks:365, reach:21618, landingPageViews:229, metaConvValue:2764.64}
+            {date:"2026-09-23", spend:829.42, conversions:4, impressions:38208, linkClicks:365, reach:21618, landingPageViews:229, metaConvValue:2764.64},
+            {date:"2026-09-24", spend:892.20, conversions:8, impressions:38377, linkClicks:400, reach:22236, landingPageViews:247, metaConvValue:8128.13},
+            {date:"2026-09-25", spend:964.29, conversions:0, impressions:46412, linkClicks:427, reach:27436, landingPageViews:276, metaConvValue:0},
+            {date:"2026-09-26", spend:928.00, conversions:3, impressions:55148, linkClicks:405, reach:30037, landingPageViews:245, metaConvValue:3385.13},
+            {date:"2026-09-27", spend:1068.02, conversions:0, impressions:71802, linkClicks:476, reach:37602, landingPageViews:301, metaConvValue:0},
+            {date:"2026-09-28", spend:884.96, conversions:6, impressions:43234, linkClicks:428, reach:24002, landingPageViews:283, metaConvValue:6163.25}
           ]
         },
         {
           name: "[BRA] [LOTE ESPECIAL]  conversão-vendas-remarketing",
           status: "active",
-          spend7d: 8855.34,
-          conversions7d: 48,
-          impressions7d: 182583,
-          linkClicks7d: 2885,
-          reach7d: 98321,
-          landingPageViews7d: 2330,
+          spend7d: 10827.58,
+          conversions7d: 39,
+          impressions7d: 225700,
+          linkClicks7d: 3239,
+          reach7d: 110361,
+          landingPageViews7d: 2588,
           daily: [
-            {date:"2026-09-17", spend:763.61, conversions:3, impressions:15527, linkClicks:266, reach:10062, landingPageViews:217, metaConvValue:3096.00},
-            {date:"2026-09-18", spend:1125.85, conversions:3, impressions:22152, linkClicks:407, reach:13143, landingPageViews:339, metaConvValue:2587.23},
-            {date:"2026-09-19", spend:1081.51, conversions:9, impressions:21571, linkClicks:339, reach:12532, landingPageViews:271, metaConvValue:8483.30},
-            {date:"2026-09-20", spend:1676.15, conversions:13, impressions:29055, linkClicks:511, reach:13542, landingPageViews:406, metaConvValue:9883.18},
-            {date:"2026-09-21", spend:1312.88, conversions:9, impressions:27974, linkClicks:440, reach:14052, landingPageViews:349, metaConvValue:10516.98},
             {date:"2026-09-22", spend:1344.50, conversions:8, impressions:34143, linkClicks:474, reach:18892, landingPageViews:393, metaConvValue:9816.67},
-            {date:"2026-09-23", spend:1550.84, conversions:3, impressions:32161, linkClicks:448, reach:16098, landingPageViews:355, metaConvValue:2470.27}
+            {date:"2026-09-23", spend:1550.84, conversions:3, impressions:32161, linkClicks:448, reach:16098, landingPageViews:355, metaConvValue:2470.27},
+            {date:"2026-09-24", spend:1506.55, conversions:2, impressions:28580, linkClicks:438, reach:14460, landingPageViews:329, metaConvValue:3090.39},
+            {date:"2026-09-25", spend:1479.82, conversions:3, impressions:32542, linkClicks:494, reach:14866, landingPageViews:404, metaConvValue:2826.65},
+            {date:"2026-09-26", spend:1472.70, conversions:7, impressions:30880, linkClicks:432, reach:15369, landingPageViews:343, metaConvValue:7030.02},
+            {date:"2026-09-27", spend:1768.06, conversions:6, impressions:34347, linkClicks:490, reach:15469, landingPageViews:380, metaConvValue:6132.73},
+            {date:"2026-09-28", spend:1705.11, conversions:10, impressions:33047, linkClicks:463, reach:15207, landingPageViews:384, metaConvValue:11237.12}
           ]
         }
       ]
     },
-    {
-      id: "stlia",
-      name: "STLIA",
-      color: "#38bdf8",
-      demands: [],
-      campaigns: [
-        {
-          name: "[STLIA] conversão-vendas",
-          status: "active",
-          spend7d: 636.39,
-          conversions7d: 1,
-          impressions7d: 13966,
-          linkClicks7d: 244,
-          reach7d: 10097,
-          landingPageViews7d: 153,
-          daily: [
-            {date:"2026-09-22", spend:368.68, conversions:1, impressions:8316, linkClicks:138, reach:5970, landingPageViews:79, metaConvValue:995.38},
-            {date:"2026-09-23", spend:267.71, conversions:0, impressions:5650, linkClicks:106, reach:4127, landingPageViews:74, metaConvValue:0}
-          ]
-        }
-      ]
-    },
-    {
-      id: "downsell",
-      name: "DOWNSELL HUGO",
-      color: "#a855f7",
-      demands: [
-        "Ativação de novos criativos"
-      ],
-      campaigns: [
-        {
-          name: "DOWNSELL HUGO",
-          status: "active",
-          spend7d: 15735.90,
-          conversions7d: 51,
-          impressions7d: 733124,
-          linkClicks7d: 7985,
-          reach7d: 474608,
-          landingPageViews7d: 1931,
-          daily: [
-            {date:"2026-09-17", spend:3451.89, conversions:17, impressions:104576, linkClicks:1776, reach:52181, landingPageViews:31, metaConvValue:16709.37},
-            {date:"2026-09-18", spend:3379.81, conversions:6, impressions:108353, linkClicks:1781, reach:63571, landingPageViews:25, metaConvValue:3473.52},
-            {date:"2026-09-19", spend:2786.92, conversions:15, impressions:93496, linkClicks:1430, reach:56433, landingPageViews:17, metaConvValue:15960.08},
-            {date:"2026-09-20", spend:0, conversions:3, impressions:0, linkClicks:0, reach:0, landingPageViews:0, metaConvValue:2870.11},
-            {date:"2026-09-21", spend:0, conversions:1, impressions:0, linkClicks:0, reach:0, landingPageViews:0, metaConvValue:1593.82},
-            {date:"2026-09-22", spend:3024.67, conversions:4, impressions:86448, linkClicks:963, reach:44824, landingPageViews:625, metaConvValue:3682.32},
-            {date:"2026-09-23", spend:3092.61, conversions:5, impressions:340251, linkClicks:2035, reach:257599, landingPageViews:1233, metaConvValue:4499.75}
-          ]
-        }
-      ]
-    },
-    {
-      id: "downsell_luan",
-      name: "DOWNSELL LUAN",
-      color: "#fb7185",
-      demands: [],
-      campaigns: [
-        {
-          name: "DOWNSELL LUAN",
-          status: "active",
-          noteTag: "novo, não rodado",
-          spend7d: null,
-          conversions7d: null,
-          impressions7d: null,
-          linkClicks7d: null,
-          reach7d: null,
-          landingPageViews7d: null,
-          daily: []
-        }
-      ]
-    }
   ]
 };
 
@@ -741,8 +685,8 @@ function renderBusinessSummary(container){
   sec.appendChild(el("div", {class:"section-title"}, `<h2>Visão global do negócio</h2><span class="tag">Meta + Google + Hotmart</span>`));
 
   const grid = el("div", {class:"grid grid-2"});
-  grid.appendChild(periodCard("Ontem (23/09/2026)", dashboardData.businessSummary.yesterday, "yesterday"));
-  grid.appendChild(periodCard("Últimos 4 dias (20 a 23/09/2026)", dashboardData.businessSummary.last4Days, "last4"));
+  grid.appendChild(periodCard("Ontem (28/09/2026)", dashboardData.businessSummary.yesterday, "yesterday"));
+  grid.appendChild(periodCard("Dias com dado (21, 22, 23 e 28/09)", dashboardData.businessSummary.last4Days, "last4"));
   sec.appendChild(grid);
   container.appendChild(sec);
 }
