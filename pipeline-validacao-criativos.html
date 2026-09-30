@@ -1,0 +1,255 @@
+<title>Pipeline de Validação de Criativos</title>
+<style>
+  /* Layout: eyebrow+título, faixa de mapeamento atual, fluxo vertical em etapas com
+     1 bifurcação (conceito conhecido? sim/não), painel coerente x não-coerente,
+     nota de replicação por oferta, rodapé de método. Tom: memorando de decisão. */
+  :root{
+    --bg:#0d1117; --surface:#141b24; --surface-2:#182029; --border:#232c38;
+    --text:#e6edf3; --text-dim:#94a2b3; --text-faint:#6b7684;
+    --accent:#5eb8b0; --accent-soft:#123330;
+    --good:#4caf7d; --good-soft:#123322;
+    --warn:#d9a441; --warn-soft:#332a11;
+    --bad:#d1667a; --bad-soft:#331a20;
+    color-scheme: dark;
+  }
+  :root[data-theme="light"]{
+    --bg:#f7f6f2; --surface:#ffffff; --surface-2:#eef1f6; --border:#dce1e8;
+    --text:#1c2430; --text-dim:#5b6572; --text-faint:#8892a0;
+    --accent:#2f7d74; --accent-soft:#d9ece9;
+    --good:#2f8f5b; --good-soft:#dbf0e3;
+    --warn:#a86f10; --warn-soft:#f5e6c8;
+    --bad:#af3b52; --bad-soft:#f7dde2;
+    color-scheme: light;
+  }
+
+  *{box-sizing:border-box;}
+  body{margin:0; background:var(--bg); color:var(--text); font-family:"Public Sans", -apple-system, sans-serif; padding-block:40px;}
+  .wrap{max-width:1000px; margin:0 auto; padding-inline:16px;}
+  h1,h2,h3{font-family:"IBM Plex Sans Condensed","Public Sans",sans-serif; text-wrap:balance; margin:0;}
+  .eyebrow{font-family:"IBM Plex Mono",monospace; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); margin-bottom:10px;}
+  h1{font-size:29px; font-weight:700; letter-spacing:-0.01em; margin-bottom:14px;}
+  .lede{font-size:15px; line-height:1.6; color:var(--text-dim); max-width:70ch; margin-bottom:28px;}
+  .lede strong{color:var(--text);}
+
+  .map-strip{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:14px;}
+  .map-card{background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:12px 16px; flex:1; min-width:180px;}
+  .map-card .l{font-size:10.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--text-faint); margin-bottom:4px;}
+  .map-card .v{font-size:14px; font-weight:700;}
+  .map-card .sub{font-size:11.5px; color:var(--text-dim); margin-top:2px;}
+
+  .uncontrolled{display:inline-flex; align-items:center; gap:8px; background:var(--warn-soft); color:var(--warn); border:1px solid color-mix(in srgb, var(--warn) 40%, transparent); border-radius:20px; padding:6px 14px; font-family:"IBM Plex Mono",monospace; font-size:11.5px; font-weight:600; letter-spacing:.03em; margin-bottom:32px;}
+
+  section{margin-bottom:40px;}
+  h2{font-size:19px; margin-bottom:8px;}
+  .section-note{font-size:13px; color:var(--text-dim); margin-bottom:20px; max-width:74ch; line-height:1.55;}
+
+  /* fluxo vertical */
+  .flow{position:relative; padding-left:34px; isolation:isolate;}
+  .flow::before{content:""; position:absolute; left:11px; top:8px; bottom:8px; width:2px; background:var(--border);}
+  .step{position:relative; margin-bottom:18px;}
+  .step:last-child{margin-bottom:0;}
+  .step-num{position:absolute; left:-34px; top:0; width:24px; height:24px; border-radius:50%; background:var(--surface-2); border:2px solid var(--border); display:flex; align-items:center; justify-content:center; font-family:"IBM Plex Mono",monospace; font-size:11px; font-weight:700; color:var(--text-dim);}
+  .step.accent .step-num{border-color:var(--accent); color:var(--accent); background:var(--accent-soft);}
+  .step-card{background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:13px 16px;}
+  .step-card h3{font-size:14.5px; margin-bottom:4px;}
+  .step-card p{font-size:13px; color:var(--text-dim); line-height:1.5; margin:0;}
+  .step-card .rule{display:inline-block; margin-top:8px; font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--accent); background:var(--accent-soft); border-radius:6px; padding:3px 8px;}
+
+  .branch-wrap{margin:14px 0 4px; position:relative;}
+  .branch-q{background:var(--surface-2); border:1px dashed var(--text-faint); border-radius:10px; padding:12px 16px; font-size:13.5px; font-weight:600; text-align:center;}
+  .branch-arms{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px;}
+  .arm{border-radius:10px; padding:13px 16px; border:1px solid;}
+  .arm.yes{background:var(--good-soft); border-color:color-mix(in srgb, var(--good) 40%, transparent);}
+  .arm.no{background:var(--warn-soft); border-color:color-mix(in srgb, var(--warn) 40%, transparent);}
+  .arm .tag{font-family:"IBM Plex Mono",monospace; font-size:10.5px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; margin-bottom:6px; display:block;}
+  .arm.yes .tag{color:var(--good);}
+  .arm.no .tag{color:var(--warn);}
+  .arm p{font-size:12.5px; color:var(--text-dim); line-height:1.5; margin:0;}
+  .arm strong{color:var(--text);}
+
+  .coherence-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  @media (max-width:680px){ .coherence-grid{grid-template-columns:1fr;} .branch-arms{grid-template-columns:1fr;} }
+  .co-card{border-radius:12px; padding:18px 20px; border:1px solid;}
+  .co-card.good{background:var(--good-soft); border-color:color-mix(in srgb, var(--good) 35%, transparent);}
+  .co-card.bad{background:var(--bad-soft); border-color:color-mix(in srgb, var(--bad) 35%, transparent);}
+  .co-card h3{font-size:14px; margin-bottom:12px; display:flex; align-items:center; gap:8px;}
+  .co-card.good h3{color:var(--good);}
+  .co-card.bad h3{color:var(--bad);}
+  .co-card ul{margin:0; padding-left:20px; display:flex; flex-direction:column; gap:9px;}
+  .co-card li{font-size:12.5px; line-height:1.5; color:var(--text);}
+
+  .offer-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:12px;}
+  .offer-card{background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:14px 16px;}
+  .offer-card h3{font-size:13.5px; margin-bottom:6px;}
+  .offer-card .tag{display:inline-block; font-family:"IBM Plex Mono",monospace; font-size:10px; padding:2px 8px; border-radius:20px; margin-bottom:6px;}
+  .tag.full{background:var(--good-soft); color:var(--good);}
+  .tag.wait{background:var(--warn-soft); color:var(--warn);}
+  .offer-card p{font-size:12px; color:var(--text-dim); margin:0; line-height:1.5;}
+
+  footer{font-size:12px; color:var(--text-faint); line-height:1.6; border-top:1px solid var(--border); padding-top:18px;}
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@600;700&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600;700&display=swap">
+
+<div class="wrap">
+
+  <div class="eyebrow">Validação · Day de amanhã · Lote Especial</div>
+  <h1>Pipeline de validação de criativos</h1>
+  <p class="lede">
+    O caminho completo de um criativo desde a chegada até virar parte estável da campanha validada — usando o Lote Especial
+    como exemplo concreto, porque é a única oferta com volume hoje pra rodar as 3 campanhas completas. O mesmo pipeline
+    se replica pras outras ofertas conforme elas ganham escala (ver final da página).
+  </p>
+
+  <div class="map-strip">
+    <div class="map-card"><div class="l">Teste (hoje)</div><div class="v">Advantage-influencers</div><div class="sub">Onde todo criativo novo estreia</div></div>
+    <div class="map-card"><div class="l">Validada (hoje)</div><div class="v">Drops feed STLFLIX</div><div class="sub">Onde o criativo formado se instala</div></div>
+    <div class="map-card"><div class="l">Remarketing</div><div class="v">Intacta</div><div class="sub">Não entra nesse pipeline</div></div>
+  </div>
+
+  <div class="uncontrolled">⚠ Quantidade de criativo que chega por semana — variável não controlada</div>
+
+  <section>
+    <h2>Etapa a etapa</h2>
+    <p class="section-note">Cada seta abaixo é uma decisão com regra fixa, não uma escolha do dia. O número de criativos que chega (10, 20, 30 — o que for) não muda nenhuma dessas regras; só muda quanto tempo o banco de espera demora pra esvaziar.</p>
+
+    <div class="flow">
+
+      <div class="step">
+        <div class="step-num">0</div>
+        <div class="step-card">
+          <h3>Entrada semanal de criativos</h3>
+          <p>Influenciadores, experts internos e o catálogo de drops geram um volume que a gente não controla — pode ser 10 numa semana, 40 na outra. Tudo entra aqui antes de qualquer coisa: <strong>ninguém vai pro ar direto</strong>.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-card">
+          <h3>Banco de espera</h3>
+          <p>Fila organizada por conceito narrativo (não por pessoa ou produto individual). O tamanho do banco cresce e diminui com a produção da semana — o que não cresce é quanto sobe pro ar de uma vez.</p>
+        </div>
+      </div>
+
+      <div class="step accent">
+        <div class="step-num">2</div>
+        <div class="step-card">
+          <h3>Sobe a onda na Teste (Advantage-influencers)</h3>
+          <p>Só <strong>5 a 6 criativos ativos por vez</strong>, não importa quantos estejam esperando no banco.</p>
+          <span class="rule">regra fixa · 5–6 ativos</span>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-card">
+          <h3>Observação (dias 1 a 3–4)</h3>
+          <p>Sem cortar nada ainda. A fase de aprendizado do conjunto precisa desse tempo pra dar sinal minimamente confiável.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-card">
+          <h3>Checkpoint 1 — corte do óbvio</h3>
+          <p>Zero conversão <strong>e</strong> gasto já relevante (ex.: 2x o CPA médio da conta sem converter) → pausa. Não precisa de mais dado pra confirmar que não está funcionando.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-card">
+          <h3>Acumula amostra real</h3>
+          <p>Os sobreviventes continuam até cada um juntar uma amostra mínima confiável — algo como 5 a 10 conversões, ou um teto de gasto por criativo (ex.: R$500–800). Pode levar mais alguns dias.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">6</div>
+        <div class="step-card">
+          <h3>Checkpoint 2 — ranqueia e corta pra 5–6</h3>
+          <p>Ordena por CPA/ROAS. Mantém só os melhores. O resto pausa — não é ruim, só perdeu pra outro — e volta pro banco, não é excluído.</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">7</div>
+        <div class="step-card">
+          <h3>Confirmação</h3>
+          <p>Os finalistas precisam repetir performance por mais alguns dias antes de "formar" — uma semana boa isolada não é prova, é a mesma regra usada pra decidir sobre campanha inteira, agora no criativo.</p>
+        </div>
+      </div>
+
+      <div class="step accent">
+        <div class="step-num">8</div>
+        <div class="branch-wrap">
+          <div class="branch-q">Esse criativo formado — a narrativa dele já existe como conceito na Validada?</div>
+          <div class="branch-arms">
+            <div class="arm yes">
+              <span class="tag">Sim →</span>
+              <p>Entra como <strong>anúncio novo dentro do conjunto já existente</strong> daquele conceito (ex.: mais uma variação de "Utilidades"). Adição pequena num conjunto já grande e estável — risco de reset baixo.</p>
+            </div>
+            <div class="arm no">
+              <span class="tag">Não →</span>
+              <p>Abre um <strong>conjunto novo dentro da Validada</strong>, dedicado só a esse conceito. Custa um reset de aprendizado nesse conjunto novo — preço aceito uma vez, pra manter a coerência narrativa.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">9</div>
+        <div class="step-card">
+          <h3>Dentro do conjunto (existente ou novo) na Validada</h3>
+          <p>Mesma disciplina de novo: 5–6 ativos, resto no banco. E mais um checkpoint curto — "formado na Teste" não é garantia de repetir na Validada; se não repetir, corta ali também, rápido e barato.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <h2>O que é coerente e o que não é</h2>
+    <p class="section-note">Isso é a régua fixa por trás de cada seta acima — a mesma pergunta, sempre respondida do mesmo jeito, não importa qual criativo ou quantos chegaram na semana.</p>
+    <div class="coherence-grid">
+      <div class="co-card good">
+        <h3>✓ Coerente</h3>
+        <ul>
+          <li>Conjunto de anúncio = <strong>1 conceito narrativo só</strong>.</li>
+          <li>Dentro do conjunto, só variação <strong>do mesmo conceito</strong> (corte de vídeo, thumbnail, estático vs. vídeo).</li>
+          <li><strong>5–6 anúncios ativos</strong> por vez, mesmo com banco infinito esperando.</li>
+          <li>O que não está ativo fica <strong>pausado no banco</strong>, nunca excluído.</li>
+          <li>Decide corte ou promoção só com <strong>amostra mínima</strong> (dias + conversões) — nunca com 1 dia isolado.</li>
+          <li>Migra <strong>1 vencedor por vez</strong> pra Validada — edição pequena, reset mínimo.</li>
+          <li>Abre conjunto novo <strong>só quando o conceito é genuinamente novo</strong>, não uma variação de um que já existe.</li>
+        </ul>
+      </div>
+      <div class="co-card bad">
+        <h3>✗ Não coerente</h3>
+        <ul>
+          <li>Misturar narrativas diferentes (produto + expert, por exemplo) no mesmo conjunto pra "economizar" conjunto.</li>
+          <li>Ativar a leva semanal inteira de uma vez (20, 30 criativos simultâneos).</li>
+          <li>Decidir corte ou promoção com dado de 1 dia.</li>
+          <li>Criar conjunto novo pra uma narrativa que já tem conjunto equivalente rodando.</li>
+          <li>Deixar dezenas de anúncios pausados acumulando dentro do próprio conjunto ativo, sem organizar como banco.</li>
+          <li>Aplicar Teste + Validada + Remarketing numa oferta cujo volume não sustenta nem uma campanha saudável.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Replicação por oferta</h2>
+    <p class="section-note">O pipeline acima é o mesmo pra qualquer oferta — o que muda é <strong>quantas das 3 campanhas ela já sustenta</strong>, de acordo com o volume real de hoje.</p>
+    <div class="offer-grid">
+      <div class="offer-card"><span class="tag full">Estrutura completa</span><h3>Lote Especial</h3><p>Teste + Validada + Remarketing — volume já sustenta as 3.</p></div>
+      <div class="offer-card"><span class="tag wait">Aguardando escala</span><h3>Lari</h3><p>1 campanha por enquanto; teste roda dentro dela em onda, sem campanha de Teste dedicada ainda.</p></div>
+      <div class="offer-card"><span class="tag wait">Aguardando escala</span><h3>Assine</h3><p>Mesma situação da Lari — volume atual não sustenta 3 campanhas.</p></div>
+      <div class="offer-card"><span class="tag wait">Pausada / sem volume</span><h3>STLIA</h3><p>Não sustenta nem 1 campanha saudável hoje — reativa com investimento real antes de estruturar.</p></div>
+    </div>
+  </section>
+
+  <footer>
+    Baseado na análise real de 90 dias da conta (Meta Ads via Windsor.ai) e na estrutura atual de conjuntos de anúncio da Drops feed STLFLIX, cruzado com as diretrizes documentadas do próprio Meta sobre fase de aprendizado (edições significativas reiniciam o aprendizado do conjunto, na proporção do tamanho da mudança) e limite técnico de 50 anúncios por conjunto, com recomendação prática de 5–6 ativos por vez.
+  </footer>
+
+</div>
