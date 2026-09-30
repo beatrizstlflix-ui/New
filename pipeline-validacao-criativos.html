@@ -54,6 +54,18 @@
   .step-card h3{font-size:14.5px; margin-bottom:4px;}
   .step-card p{font-size:13px; color:var(--text-dim); line-height:1.5; margin:0;}
   .step-card .rule{display:inline-block; margin-top:8px; font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--accent); background:var(--accent-soft); border-radius:6px; padding:3px 8px;}
+  .badge-row{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:7px;}
+  .badge{font-family:"IBM Plex Mono",monospace; font-size:11px; font-weight:700; border-radius:6px; padding:3px 9px; white-space:nowrap;}
+  .badge.day{background:var(--surface-2); color:var(--text-dim); border:1px solid var(--border);}
+  .badge.count{background:var(--accent-soft); color:var(--accent);}
+  .badge.count.cut{background:var(--bad-soft); color:var(--bad);}
+  .badge.count.keep{background:var(--good-soft); color:var(--good);}
+
+  .cycle-strip{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:18px;}
+  .cycle-stat{background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:13px 18px; flex:1; min-width:150px; text-align:center;}
+  .cycle-stat .v{font-family:"IBM Plex Mono",monospace; font-size:22px; font-weight:700; color:var(--accent);}
+  .cycle-stat .l{font-size:11px; color:var(--text-faint); text-transform:uppercase; letter-spacing:.04em; margin-top:3px;}
+  .assumption-note{font-size:12px; color:var(--text-faint); font-style:italic; margin:-6px 0 20px;}
 
   .branch-wrap{margin:14px 0 4px; position:relative;}
   .branch-q{background:var(--surface-2); border:1px dashed var(--text-faint); border-radius:10px; padding:12px 16px; font-size:13.5px; font-weight:600; text-align:center;}
@@ -110,7 +122,14 @@
 
   <section>
     <h2>Etapa a etapa</h2>
-    <p class="section-note">Cada seta abaixo é uma decisão com regra fixa, não uma escolha do dia. O número de criativos que chega (10, 20, 30 — o que for) não muda nenhuma dessas regras; só muda quanto tempo o banco de espera demora pra esvaziar.</p>
+    <p class="section-note">Cada seta abaixo é uma decisão com regra fixa, não uma escolha do dia. O número de criativos que chega por semana (10, 20, 30 — o que for) não muda nenhuma dessas regras; só muda quanto tempo o banco de espera demora pra esvaziar.</p>
+
+    <div class="cycle-strip">
+      <div class="cycle-stat"><div class="v">6</div><div class="l">Entram por onda</div></div>
+      <div class="cycle-stat"><div class="v">~14 dias</div><div class="l">Duração do ciclo completo</div></div>
+      <div class="cycle-stat"><div class="v">1–2</div><div class="l">Chegam formados na Validada</div></div>
+    </div>
+    <p class="assumption-note">Os números de sobrevivência (6 → 4–5 → 2 → 1–2) são a premissa de planejamento usada abaixo, baseada no padrão típico de teste de criativo — o resultado real de cada onda varia. Os dias e os tetos de gasto/conversão são a regra fixa; a contagem de quantos sobrevivem em cada corte é a expectativa, não uma garantia.</p>
 
     <div class="flow">
 
@@ -133,8 +152,9 @@
       <div class="step accent">
         <div class="step-num">2</div>
         <div class="step-card">
+          <div class="badge-row"><span class="badge day">Dia 1</span><span class="badge count">6 ativos</span></div>
           <h3>Sobe a onda na Teste (Advantage-influencers)</h3>
-          <p>Só <strong>5 a 6 criativos ativos por vez</strong>, não importa quantos estejam esperando no banco.</p>
+          <p><strong>6 criativos ativos</strong> de uma vez, tirados do topo do banco — nunca mais que isso na mesma onda, não importa quantos estejam esperando.</p>
           <span class="rule">regra fixa · 5–6 ativos</span>
         </div>
       </div>
@@ -142,7 +162,8 @@
       <div class="step">
         <div class="step-num">3</div>
         <div class="step-card">
-          <h3>Observação (dias 1 a 3–4)</h3>
+          <div class="badge-row"><span class="badge day">Dias 1–3</span><span class="badge count">6 ativos, sem corte</span></div>
+          <h3>Observação</h3>
           <p>Sem cortar nada ainda. A fase de aprendizado do conjunto precisa desse tempo pra dar sinal minimamente confiável.</p>
         </div>
       </div>
@@ -150,38 +171,43 @@
       <div class="step">
         <div class="step-num">4</div>
         <div class="step-card">
+          <div class="badge-row"><span class="badge day">Dia 4</span><span class="badge count cut">6 → 4–5</span></div>
           <h3>Checkpoint 1 — corte do óbvio</h3>
-          <p>Zero conversão <strong>e</strong> gasto já relevante (ex.: 2x o CPA médio da conta sem converter) → pausa. Não precisa de mais dado pra confirmar que não está funcionando.</p>
+          <p>Zero conversão <strong>e</strong> gasto já relevante (ex.: 2x o CPA médio da conta sem converter) → pausa. De 6, o esperado é cortar 1 a 2 nesse ponto — não precisa de mais dado pra confirmar que não está funcionando.</p>
         </div>
       </div>
 
       <div class="step">
         <div class="step-num">5</div>
         <div class="step-card">
+          <div class="badge-row"><span class="badge day">Dias 4–8 (+5 dias)</span><span class="badge count">4–5 seguem rodando</span></div>
           <h3>Acumula amostra real</h3>
-          <p>Os sobreviventes continuam até cada um juntar uma amostra mínima confiável — algo como 5 a 10 conversões, ou um teto de gasto por criativo (ex.: R$500–800). Pode levar mais alguns dias.</p>
+          <p>Os 4–5 sobreviventes continuam até cada um juntar uma amostra mínima confiável — 5 a 10 conversões, ou um teto de R$ 500–800 gastos por criativo, o que vier primeiro.</p>
         </div>
       </div>
 
       <div class="step">
         <div class="step-num">6</div>
         <div class="step-card">
-          <h3>Checkpoint 2 — ranqueia e corta pra 5–6</h3>
-          <p>Ordena por CPA/ROAS. Mantém só os melhores. O resto pausa — não é ruim, só perdeu pra outro — e volta pro banco, não é excluído.</p>
+          <div class="badge-row"><span class="badge day">Dia 9</span><span class="badge count cut">4–5 → 2</span></div>
+          <h3>Checkpoint 2 — ranqueia e corta pra 2</h3>
+          <p>Ordena por CPA/ROAS. Mantém só os <strong>2 melhores</strong>. Os outros 2–3 pausam — não são ruins, só perderam pra outro — e voltam pro banco, não são excluídos.</p>
         </div>
       </div>
 
       <div class="step">
         <div class="step-num">7</div>
         <div class="step-card">
+          <div class="badge-row"><span class="badge day">Dias 9–13 (+4 dias)</span><span class="badge count">2 finalistas em confirmação</span></div>
           <h3>Confirmação</h3>
-          <p>Os finalistas precisam repetir performance por mais alguns dias antes de "formar" — uma semana boa isolada não é prova, é a mesma regra usada pra decidir sobre campanha inteira, agora no criativo.</p>
+          <p>Os 2 finalistas precisam repetir performance por mais 4 dias antes de "formar" — uma semana boa isolada não é prova, é a mesma regra usada pra decidir sobre campanha inteira, agora no criativo.</p>
         </div>
       </div>
 
       <div class="step accent">
         <div class="step-num">8</div>
         <div class="branch-wrap">
+          <div class="badge-row" style="justify-content:center;"><span class="badge day">Dia 14</span><span class="badge count keep">1–2 formados</span></div>
           <div class="branch-q">Esse criativo formado — a narrativa dele já existe como conceito na Validada?</div>
           <div class="branch-arms">
             <div class="arm yes">
@@ -199,8 +225,9 @@
       <div class="step">
         <div class="step-num">9</div>
         <div class="step-card">
+          <div class="badge-row"><span class="badge day">Dias 15–18 (+4 dias)</span><span class="badge count">1–2 em observação final</span></div>
           <h3>Dentro do conjunto (existente ou novo) na Validada</h3>
-          <p>Mesma disciplina de novo: 5–6 ativos, resto no banco. E mais um checkpoint curto — "formado na Teste" não é garantia de repetir na Validada; se não repetir, corta ali também, rápido e barato.</p>
+          <p>Mesma disciplina de novo: 5–6 ativos, resto no banco. E mais um checkpoint curto de 4 dias — "formado na Teste" não é garantia de repetir na Validada; se não repetir, corta ali também, rápido e barato.</p>
         </div>
       </div>
 
