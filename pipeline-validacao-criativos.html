@@ -75,6 +75,18 @@
   .qa-row .a{font-size:12.5px; color:var(--text-dim); line-height:1.5;}
   .qa-row .a strong{color:var(--accent);}
 
+  .calc-box{border:1px solid color-mix(in srgb, var(--accent) 35%, var(--border)); background:var(--surface-2); border-radius:8px; margin-top:12px; padding:12px 16px 14px;}
+  .calc-title{font-family:"IBM Plex Mono",monospace; font-size:10.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--accent); margin-bottom:10px;}
+  .calc-chain{display:flex; flex-direction:column; gap:0;}
+  .calc-row{display:grid; grid-template-columns:1fr auto; gap:10px; align-items:baseline; padding:6px 0;}
+  .calc-row + .calc-row{border-top:1px dotted var(--border);}
+  .calc-row .k{font-size:12px; color:var(--text-dim);}
+  .calc-row .v{font-family:"IBM Plex Mono",monospace; font-size:12.5px; font-weight:700; color:var(--text); white-space:nowrap; text-align:right;}
+  .calc-arrow{text-align:center; font-size:11px; color:var(--text-faint); padding:1px 0;}
+  .calc-result{margin-top:10px; padding:10px 14px; background:var(--accent-soft); border-radius:6px; display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap;}
+  .calc-result .k{font-size:12.5px; font-weight:700; color:var(--text);}
+  .calc-result .v{font-family:"IBM Plex Mono",monospace; font-size:16px; font-weight:700; color:var(--accent);}
+
   .branch-wrap{margin:14px 0 4px; position:relative;}
   .branch-q{background:var(--surface-2); border:1px dashed var(--text-faint); border-radius:10px; padding:12px 16px; font-size:13.5px; font-weight:600; text-align:center;}
   .branch-arms{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px;}
@@ -173,6 +185,22 @@
               <div class="q"><span class="mark">?</span>Quantos testamos por semana, então?</div>
               <div class="a">O que controlamos não é um número fixo de criativos — é a regra de abertura: <strong>todo conceito genuinamente novo ganha seu próprio conjunto</strong> dentro da Teste, rodando com o que já existe dele (1, 2, até 6 variações). Quantos conjuntos abrem numa semana varia com quantos conceitos novos realmente chegaram — pode ser 1 conceito bem servido de criativo, ou 3 conceitos com poucas variações cada. O que nunca muda: 1 conjunto = 1 conceito, teto de 5–6 ativos dentro dele.</div>
             </div>
+          </div>
+
+          <div class="calc-box">
+            <div class="calc-title">De onde vem o orçamento por onda</div>
+            <div class="calc-chain">
+              <div class="calc-row"><span class="k">Ticket médio do Lote Especial</span><span class="v">R$ 860 – R$ 1.585</span></div>
+              <div class="calc-arrow">÷ piso de ROAS real (3,8x)</div>
+              <div class="calc-row"><span class="k">CPA máximo aceitável</span><span class="v">R$ 226 – R$ 417</span></div>
+              <div class="calc-row"><span class="k">CPA real observado na conta</span><span class="v">R$ 200 – R$ 355</span></div>
+              <div class="calc-arrow">× meta de amostra por criativo (5 a 10 conversões)</div>
+              <div class="calc-row"><span class="k">Gasto necessário por criativo</span><span class="v">R$ 1.000 – R$ 2.500</span></div>
+              <div class="calc-arrow">× até 6 criativos na onda</div>
+              <div class="calc-row"><span class="k">Gasto total da onda (até o dia 9)</span><span class="v">R$ 6.000 – R$ 15.000</span></div>
+              <div class="calc-arrow">÷ 9 dias (observação + checkpoint 1 + amostra)</div>
+            </div>
+            <div class="calc-result"><span class="k">Premissa por onda cheia</span><span class="v">R$ 700 – R$ 1.700 / dia</span></div>
           </div>
         </div>
       </div>
