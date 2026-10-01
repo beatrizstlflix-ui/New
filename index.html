@@ -914,6 +914,8 @@ function renderLoteEspecialProductTrend(container){
   const flixSales = snaps.map(s=> (findProd(s,"Lote Especial STLFLIX")||{}).sales || 0);
   const flixIaRevenue = snaps.map(s=> (findProd(s,"Lote Especial STLFLIX + STLAI")||{}).revenue || 0);
   const flixIaSales = snaps.map(s=> (findProd(s,"Lote Especial STLFLIX + STLAI")||{}).sales || 0);
+  const totalRevenue = snaps.map((s,i)=> flixRevenue[i] + flixIaRevenue[i]);
+  const totalSales = snaps.map((s,i)=> flixSales[i] + flixIaSales[i]);
 
   const chartCard = el("div",{class:"card"});
   chartCard.appendChild(el("h3",{},"Receita por dia (R$)"));
@@ -927,13 +929,14 @@ function renderLoteEspecialProductTrend(container){
   const tableWrap = el("div",{class:"table-scroll"});
   const table = el("table");
   table.appendChild(el("thead",{},
-    `<tr><th>Data</th><th>Lote Especial STLFLIX</th><th>Lote Especial STLFLIX + STLAI</th></tr>`));
+    `<tr><th>Data</th><th>Lote Especial STLFLIX</th><th>Lote Especial STLFLIX + STLAI</th><th>Total</th></tr>`));
   const tbody = el("tbody");
   snaps.forEach((s,i)=>{
     const tr = el("tr");
     tr.appendChild(el("td",{}, fmtDateBR(s.date)));
     tr.appendChild(el("td",{}, `${fmtBRL(flixRevenue[i])} (${flixSales[i]})`));
     tr.appendChild(el("td",{}, `${fmtBRL(flixIaRevenue[i])} (${flixIaSales[i]})`));
+    tr.appendChild(el("td",{style:"font-weight:600;"}, `${fmtBRL(totalRevenue[i])} (${totalSales[i]})`));
     tbody.appendChild(tr);
   });
   table.appendChild(tbody);
@@ -953,7 +956,8 @@ function renderLoteEspecialProductTrend(container){
       labels: snaps.map(s=>fmtDateBR(s.date)),
       datasets:[
         { label:"Lote Especial STLFLIX", data: flixRevenue, borderColor:"#f0a63a", backgroundColor:"#f0a63a33", tension:.3, fill:false, pointRadius:4 },
-        { label:"Lote Especial STLFLIX + STLAI", data: flixIaRevenue, borderColor:"#5eb8b0", backgroundColor:"#5eb8b033", tension:.3, fill:false, pointRadius:4 }
+        { label:"Lote Especial STLFLIX + STLAI", data: flixIaRevenue, borderColor:"#5eb8b0", backgroundColor:"#5eb8b033", tension:.3, fill:false, pointRadius:4 },
+        { label:"Total (Flix + Flix+IA)", data: totalRevenue, borderColor:"#9b8cff", backgroundColor:"#9b8cff33", borderDash:[5,3], tension:.3, fill:false, pointRadius:3 }
       ]
     },
     options:{
