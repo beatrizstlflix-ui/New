@@ -318,6 +318,17 @@ const dashboardData = {
     ]}
   ],
 
+  // Quanto da receita de "Lote Especial STLFLIX" / "+ STLAI" (já somada acima)
+  // veio do funil Assine, que só começou a aparecer em 01/10/2026 — usado só
+  // pelo gráfico "Flix vs Flix+IA" para separar direto vs Assine dentro de
+  // cada linha. Dias sem entrada aqui = 0 (Assine ainda não existia).
+  assineBreakdown: [
+    { date:"2026-10-01", assineFlix:6855.68, assineFlixIa:0 },
+    { date:"2026-10-02", assineFlix:13735.00, assineFlixIa:10977.40 },
+    { date:"2026-10-03", assineFlix:16795.87, assineFlixIa:4759.16 },
+    { date:"2026-10-04", assineFlix:10790.93, assineFlixIa:4781.46 }
+  ],
+
   generalDemands: [],
 
   funnels: [
@@ -921,18 +932,24 @@ function renderLoteEspecialProductTrend(container){
   sec.appendChild(el("div",{class:"section-title"},
     `<h2>Lote Especial — Flix vs Flix+IA</h2><span class="tag">Hotmart · ${fmtDateBR(snaps[0].date)} a ${fmtDateBR(snaps[snaps.length-1].date)}</span>`));
   sec.appendChild(el("div",{class:"note"},
-    `Receita líquida diária dos dois planos do Lote Especial (sem renovação/promoção), a partir do top-10 "Visão por produto" da Hotmart de cada dia.`));
+    `Receita líquida diária dos dois planos do Lote Especial (sem renovação/promoção), a partir do top-10 "Visão por produto" da Hotmart de cada dia. A partir de 01/10, parte dessa receita passou a vir pelo funil Assine (mesmo plano, canal de venda diferente) — separado abaixo de "direto" (LP original do Lote Especial).`));
 
   const findProd = (snap, name) => snap.products.find(p=>p.name===name);
+  const findAssine = (snap) => (dashboardData.assineBreakdown||[]).find(a=>a.date===snap.date) || {assineFlix:0, assineFlixIa:0};
+
   const flixRevenue = snaps.map(s=> (findProd(s,"Lote Especial STLFLIX")||{}).revenue || 0);
   const flixSales = snaps.map(s=> (findProd(s,"Lote Especial STLFLIX")||{}).sales || 0);
   const flixIaRevenue = snaps.map(s=> (findProd(s,"Lote Especial STLFLIX + STLAI")||{}).revenue || 0);
   const flixIaSales = snaps.map(s=> (findProd(s,"Lote Especial STLFLIX + STLAI")||{}).sales || 0);
+  const assineFlix = snaps.map(s=> findAssine(s).assineFlix || 0);
+  const assineFlixIa = snaps.map(s=> findAssine(s).assineFlixIa || 0);
+  const flixDireto = snaps.map((s,i)=> flixRevenue[i] - assineFlix[i]);
+  const flixIaDireto = snaps.map((s,i)=> flixIaRevenue[i] - assineFlixIa[i]);
   const totalRevenue = snaps.map((s,i)=> flixRevenue[i] + flixIaRevenue[i]);
   const totalSales = snaps.map((s,i)=> flixSales[i] + flixIaSales[i]);
 
   const chartCard = el("div",{class:"card"});
-  chartCard.appendChild(el("h3",{},"Receita por dia (R$)"));
+  chartCard.appendChild(el("h3",{},"Receita por dia (R$) — direto vs Assine"));
   const chartBoxWrap = el("div",{class:"chart-box tall"});
   const canvas = el("canvas");
   chartBoxWrap.appendChild(canvas);
@@ -948,8 +965,14 @@ function renderLoteEspecialProductTrend(container){
   snaps.forEach((s,i)=>{
     const tr = el("tr");
     tr.appendChild(el("td",{}, fmtDateBR(s.date)));
-    tr.appendChild(el("td",{}, `${fmtBRL(flixRevenue[i])} (${flixSales[i]})`));
-    tr.appendChild(el("td",{}, `${fmtBRL(flixIaRevenue[i])} (${flixIaSales[i]})`));
+    const flixCell = el("td",{});
+    flixCell.appendChild(document.createTextNode(`${fmtBRL(flixRevenue[i])} (${flixSales[i]})`));
+    if(assineFlix[i]>0) flixCell.appendChild(el("div",{class:"metric-sub"}, `direto ${fmtBRL(flixDireto[i])} · Assine ${fmtBRL(assineFlix[i])}`));
+    tr.appendChild(flixCell);
+    const flixIaCell = el("td",{});
+    flixIaCell.appendChild(document.createTextNode(`${fmtBRL(flixIaRevenue[i])} (${flixIaSales[i]})`));
+    if(assineFlixIa[i]>0) flixIaCell.appendChild(el("div",{class:"metric-sub"}, `direto ${fmtBRL(flixIaDireto[i])} · Assine ${fmtBRL(assineFlixIa[i])}`));
+    tr.appendChild(flixIaCell);
     tr.appendChild(el("td",{style:"font-weight:600;"}, `${fmtBRL(totalRevenue[i])} (${totalSales[i]})`));
     tbody.appendChild(tr);
   });
@@ -969,8 +992,10 @@ function renderLoteEspecialProductTrend(container){
     data:{
       labels: snaps.map(s=>fmtDateBR(s.date)),
       datasets:[
-        { label:"Lote Especial STLFLIX", data: flixRevenue, borderColor:"#f0a63a", backgroundColor:"#f0a63a33", tension:.3, fill:false, pointRadius:4 },
-        { label:"Lote Especial STLFLIX + STLAI", data: flixIaRevenue, borderColor:"#5eb8b0", backgroundColor:"#5eb8b033", tension:.3, fill:false, pointRadius:4 },
+        { label:"Lote Especial STLFLIX (direto)", data: flixDireto, borderColor:"#f0a63a", backgroundColor:"#f0a63a33", tension:.3, fill:false, pointRadius:4 },
+        { label:"Lote Especial STLFLIX (Assine)", data: assineFlix, borderColor:"#f0a63a", backgroundColor:"#f0a63a33", borderDash:[2,2], tension:.3, fill:false, pointRadius:3 },
+        { label:"Lote Especial STLFLIX + STLAI (direto)", data: flixIaDireto, borderColor:"#5eb8b0", backgroundColor:"#5eb8b033", tension:.3, fill:false, pointRadius:4 },
+        { label:"Lote Especial STLFLIX + STLAI (Assine)", data: assineFlixIa, borderColor:"#5eb8b0", backgroundColor:"#5eb8b033", borderDash:[2,2], tension:.3, fill:false, pointRadius:3 },
         { label:"Total (Flix + Flix+IA)", data: totalRevenue, borderColor:"#9b8cff", backgroundColor:"#9b8cff33", borderDash:[5,3], tension:.3, fill:false, pointRadius:3 }
       ]
     },
