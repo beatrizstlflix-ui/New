@@ -930,79 +930,6 @@ function renderProductGrowth(container){
   container.appendChild(sec);
 }
 
-function renderLoteEspecialProductTrend(container){
-  const snaps = (dashboardData.productSnapshots||[]).filter(s=>s.date>="2026-09-26");
-  if(snaps.length < 2) return;
-
-  const sec = el("section");
-  sec.appendChild(el("div",{class:"section-title"},
-    `<h2>Lote Especial — Flix vs Flix+IA</h2><span class="tag">Hotmart · ${fmtDateBR(snaps[0].date)} a ${fmtDateBR(snaps[snaps.length-1].date)}</span>`));
-  sec.appendChild(el("div",{class:"note"},
-    `Receita líquida diária dos dois planos do Lote Especial (sem renovação/promoção), a partir do top-10 "Visão por produto" da Hotmart de cada dia. Inclui as vendas feitas pelo funil Assine, já somadas às linhas abaixo.`));
-
-  const findProd = (snap, name) => snap.products.find(p=>p.name===name);
-  const flixRevenue = snaps.map(s=> (findProd(s,"Lote Especial STLFLIX")||{}).revenue || 0);
-  const flixSales = snaps.map(s=> (findProd(s,"Lote Especial STLFLIX")||{}).sales || 0);
-  const flixIaRevenue = snaps.map(s=> (findProd(s,"Lote Especial STLFLIX + STLAI")||{}).revenue || 0);
-  const flixIaSales = snaps.map(s=> (findProd(s,"Lote Especial STLFLIX + STLAI")||{}).sales || 0);
-  const totalRevenue = snaps.map((s,i)=> flixRevenue[i] + flixIaRevenue[i]);
-  const totalSales = snaps.map((s,i)=> flixSales[i] + flixIaSales[i]);
-
-  const chartCard = el("div",{class:"card"});
-  chartCard.appendChild(el("h3",{},"Receita por dia (R$)"));
-  const chartBoxWrap = el("div",{class:"chart-box tall"});
-  const canvas = el("canvas");
-  chartBoxWrap.appendChild(canvas);
-  chartCard.appendChild(chartBoxWrap);
-  sec.appendChild(chartCard);
-
-  const tableCard = el("div",{class:"card", style:"margin-top:16px;"});
-  const tableWrap = el("div",{class:"table-scroll"});
-  const table = el("table");
-  table.appendChild(el("thead",{},
-    `<tr><th>Data</th><th>Lote Especial STLFLIX</th><th>Lote Especial STLFLIX + STLAI</th><th>Total</th></tr>`));
-  const tbody = el("tbody");
-  snaps.forEach((s,i)=>{
-    const tr = el("tr");
-    tr.appendChild(el("td",{}, fmtDateBR(s.date)));
-    tr.appendChild(el("td",{}, `${fmtBRL(flixRevenue[i])} (${flixSales[i]})`));
-    tr.appendChild(el("td",{}, `${fmtBRL(flixIaRevenue[i])} (${flixIaSales[i]})`));
-    tr.appendChild(el("td",{style:"font-weight:600;"}, `${fmtBRL(totalRevenue[i])} (${totalSales[i]})`));
-    tbody.appendChild(tr);
-  });
-  table.appendChild(tbody);
-  tableWrap.appendChild(table);
-  tableCard.appendChild(tableWrap);
-  sec.appendChild(tableCard);
-
-  container.appendChild(sec);
-
-  if(!chartsAvailable()){
-    chartBoxWrap.replaceWith(el("div",{class:"empty-state"}, "Não foi possível carregar a biblioteca de gráficos."));
-    return;
-  }
-  new Chart(canvas.getContext("2d"), {
-    type:"line",
-    data:{
-      labels: snaps.map(s=>fmtDateBR(s.date)),
-      datasets:[
-        { label:"Lote Especial STLFLIX", data: flixRevenue, borderColor:"#f0a63a", backgroundColor:"#f0a63a33", tension:.3, fill:false, pointRadius:4 },
-        { label:"Lote Especial STLFLIX + STLAI", data: flixIaRevenue, borderColor:"#5eb8b0", backgroundColor:"#5eb8b033", tension:.3, fill:false, pointRadius:4 },
-        { label:"Total (Flix + Flix+IA)", data: totalRevenue, borderColor:"#9b8cff", backgroundColor:"#9b8cff33", borderDash:[5,3], tension:.3, fill:false, pointRadius:3 }
-      ]
-    },
-    options:{
-      responsive:true, maintainAspectRatio:false,
-      layout:{ padding:{top:16} },
-      plugins:{ legend:{labels:{color:"#e7ebf1", boxWidth:10}}, tooltip:{ callbacks:{ label: ctx => ` ${ctx.dataset.label}: ${fmtBRL(ctx.parsed.y)}` } } },
-      scales:{
-        y:{ ticks:{ color:"#9aa7b8", callback:v=>fmtBRL(v) }, grid:{color:"#232a35"} },
-        x:{ ticks:{ color:"#e7ebf1", font:{size:10.5} }, grid:{display:false} }
-      }
-    }
-  });
-}
-
 function renderSpendVsResult(container){
   const rows = [];
   dashboardData.funnels.forEach(funnel=>{
@@ -1055,86 +982,6 @@ function renderSpendVsResult(container){
   container.appendChild(sec);
 }
 
-function renderCpmByCampaign(container){
-  const rows = [];
-  dashboardData.funnels.forEach(funnel=>{
-    funnel.campaigns.forEach(camp=>{
-      if(!camp.daily || !camp.daily.length) return;
-      if(!isNum(camp.impressions7d) || camp.impressions7d<=0) return;
-      rows.push({
-        funnel: funnel.name,
-        funnelColor: funnel.color,
-        campaign: camp.name,
-        status: camp.status,
-        spend7d: camp.spend7d,
-        impressions7d: camp.impressions7d,
-        cpm7d: camp.spend7d / camp.impressions7d * 1000
-      });
-    });
-  });
-  if(!rows.length) return;
-  rows.sort((a,b)=> b.cpm7d - a.cpm7d);
-
-  const sec = el("section");
-  sec.appendChild(el("div",{class:"section-title"},
-    `<h2>CPM por campanha</h2><span class="tag">Meta Ads · Últimos 7 dias (${fmtDateBR(dashboardData.funnelWindow.from)} a ${fmtDateBR(dashboardData.funnelWindow.to)})</span>`));
-  sec.appendChild(el("div",{class:"note"},
-    `CPM = custo por mil impressões (investimento ÷ impressões × 1.000) de cada campanha na janela de 7 dias. Quanto maior o CPM, mais caro o Meta está cobrando para entregar os anúncios dessa campanha — útil para comparar eficiência de entrega entre campanhas, independente de conversão.`));
-
-  const chartCard = el("div",{class:"card"});
-  chartCard.appendChild(el("h3",{},"CPM por campanha (R$)"));
-  const chartBoxWrap = el("div",{class:"chart-box tall"});
-  const canvas = el("canvas");
-  chartBoxWrap.appendChild(canvas);
-  chartCard.appendChild(chartBoxWrap);
-  sec.appendChild(chartCard);
-
-  const tableCard = el("div",{class:"card", style:"margin-top:16px;"});
-  const tableWrap = el("div",{class:"table-scroll"});
-  const table = el("table");
-  table.appendChild(el("thead",{},
-    `<tr><th>Campanha</th><th>Funil</th><th>Impressões (7d)</th><th>Investimento (7d)</th><th>CPM (7d)</th></tr>`));
-  const tbody = el("tbody");
-  rows.forEach(r=>{
-    const tr = el("tr");
-    if(r.status==="inactive") tr.className = "inactive-row";
-    tr.appendChild(el("td",{}, r.campaign));
-    tr.appendChild(el("td",{}, r.funnel));
-    tr.appendChild(el("td",{}, fmtNum(r.impressions7d)));
-    tr.appendChild(el("td",{}, fmtBRL(r.spend7d)));
-    tr.appendChild(el("td",{style:"font-weight:600;"}, fmtBRL(r.cpm7d)));
-    tbody.appendChild(tr);
-  });
-  table.appendChild(tbody);
-  tableWrap.appendChild(table);
-  tableCard.appendChild(tableWrap);
-  sec.appendChild(tableCard);
-
-  container.appendChild(sec);
-
-  if(!chartsAvailable()){
-    chartBoxWrap.replaceWith(el("div",{class:"empty-state"}, "Não foi possível carregar a biblioteca de gráficos."));
-    return;
-  }
-  new Chart(canvas.getContext("2d"), {
-    type:"bar",
-    data:{
-      labels: rows.map(r=>r.campaign),
-      datasets:[
-        { label:"CPM (R$)", data: rows.map(r=>r.cpm7d), backgroundColor: rows.map(r=>r.funnelColor+"99"), borderRadius:4 }
-      ]
-    },
-    options:{
-      responsive:true, maintainAspectRatio:false,
-      layout:{ padding:{top:16} },
-      plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: ctx => ` CPM: ${fmtBRL(ctx.parsed.y)}` } } },
-      scales:{
-        y:{ ticks:{ color:"#9aa7b8", callback:v=>fmtBRL(v) }, grid:{color:"#232a35"} },
-        x:{ ticks:{ color:"#e7ebf1", font:{size:9.5}, maxRotation:45, minRotation:45 }, grid:{display:false} }
-      }
-    }
-  });
-}
 </script>
 
 <script>
@@ -1319,6 +1166,7 @@ function renderCampaignTable(funnel, funnelStats){
     {k:"name", l:"Campanha"},
     {k:"status", l:"Status"},
     {k:"spend7d", l:"Investimento 7d"},
+    {k:"cpm", l:"CPM"},
     {k:"conversions7d", l:"Conversões"},
     {k:"ctr", l:"CTR"},
     {k:"connectRate", l:"Connect rate"},
@@ -1339,6 +1187,7 @@ function renderCampaignTable(funnel, funnelStats){
         convShare: isNum(c.conversions7d) && isNum(funnelStats.conv) && funnelStats.conv>0 ? c.conversions7d/funnelStats.conv : null,
         ctr: isNum(c.linkClicks7d) && isNum(c.impressions7d) && c.impressions7d>0 ? c.linkClicks7d/c.impressions7d : null,
         connectRate: isNum(c.landingPageViews7d) && isNum(c.linkClicks7d) && c.linkClicks7d>0 ? c.landingPageViews7d/c.linkClicks7d : null,
+        cpm: isNum(c.spend7d) && isNum(c.impressions7d) && c.impressions7d>0 ? c.spend7d/c.impressions7d*1000 : null,
         cpa: cpaValue(c.spend7d, c.conversions7d),
         roas: roasValue(revenue7d, c.spend7d)
       };
@@ -1366,7 +1215,7 @@ function renderCampaignTable(funnel, funnelStats){
     let rows = buildRows();
     const {field, dir} = sortState[key];
     rows.sort((a,b)=>{
-      const get = r => field==="spendShare"||field==="convShare"||field==="cpa"||field==="roas"||field==="ctr"||field==="connectRate" ? r[field]
+      const get = r => field==="spendShare"||field==="convShare"||field==="cpa"||field==="roas"||field==="ctr"||field==="connectRate"||field==="cpm" ? r[field]
         : field==="name" ? r.c.name : field==="status" ? r.c.status : r.c[field];
       let va = get(a), vb = get(b);
       if(va===null||va===undefined) return 1;
@@ -1383,6 +1232,7 @@ function renderCampaignTable(funnel, funnelStats){
       tr.appendChild(el("td",{class:"camp-name"}, c.name));
       tr.appendChild(el("td",{}, `<span class="status-dot ${c.status}"></span>${STATUS_LABEL[c.status]}${c.startsToday?" · começa hoje":""}${c.noteTag?` · (${c.noteTag})`:""}`));
       tr.appendChild(el("td",{}, fmtBRL(c.spend7d)));
+      tr.appendChild(el("td",{}, r.cpm===null ? "Não informado" : fmtBRL(r.cpm)));
       tr.appendChild(el("td",{}, fmtNum(c.conversions7d)));
       tr.appendChild(el("td",{}, r.ctr===null? "Não informado" : fmtPct(r.ctr)));
       tr.appendChild(el("td",{}, r.connectRate===null? "Não informado" : fmtPct(r.connectRate)));
@@ -1700,7 +1550,7 @@ function render(){
   header.appendChild(el("div",{class:"updated"}, `Última atualização: <b>${dashboardData.updatedAt}</b>`));
   app.appendChild(header);
 
-  [renderBusinessSummary, renderGlobalDailyEvolution, renderProductGrowth, renderLoteEspecialProductTrend, renderSpendVsResult, renderCpmByCampaign, renderFunnelShareOverview, renderFunnels, renderGeneralDemands].forEach(fn=>{
+  [renderBusinessSummary, renderGlobalDailyEvolution, renderProductGrowth, renderSpendVsResult, renderFunnelShareOverview, renderFunnels, renderGeneralDemands].forEach(fn=>{
     try{ fn(app); }
     catch(err){
       console.error(fn.name, err);
