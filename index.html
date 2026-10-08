@@ -1054,6 +1054,87 @@ function renderSpendVsResult(container){
   sec.appendChild(card);
   container.appendChild(sec);
 }
+
+function renderCpmByCampaign(container){
+  const rows = [];
+  dashboardData.funnels.forEach(funnel=>{
+    funnel.campaigns.forEach(camp=>{
+      if(!camp.daily || !camp.daily.length) return;
+      if(!isNum(camp.impressions7d) || camp.impressions7d<=0) return;
+      rows.push({
+        funnel: funnel.name,
+        funnelColor: funnel.color,
+        campaign: camp.name,
+        status: camp.status,
+        spend7d: camp.spend7d,
+        impressions7d: camp.impressions7d,
+        cpm7d: camp.spend7d / camp.impressions7d * 1000
+      });
+    });
+  });
+  if(!rows.length) return;
+  rows.sort((a,b)=> b.cpm7d - a.cpm7d);
+
+  const sec = el("section");
+  sec.appendChild(el("div",{class:"section-title"},
+    `<h2>CPM por campanha</h2><span class="tag">Meta Ads · Últimos 7 dias (${fmtDateBR(dashboardData.funnelWindow.from)} a ${fmtDateBR(dashboardData.funnelWindow.to)})</span>`));
+  sec.appendChild(el("div",{class:"note"},
+    `CPM = custo por mil impressões (investimento ÷ impressões × 1.000) de cada campanha na janela de 7 dias. Quanto maior o CPM, mais caro o Meta está cobrando para entregar os anúncios dessa campanha — útil para comparar eficiência de entrega entre campanhas, independente de conversão.`));
+
+  const chartCard = el("div",{class:"card"});
+  chartCard.appendChild(el("h3",{},"CPM por campanha (R$)"));
+  const chartBoxWrap = el("div",{class:"chart-box tall"});
+  const canvas = el("canvas");
+  chartBoxWrap.appendChild(canvas);
+  chartCard.appendChild(chartBoxWrap);
+  sec.appendChild(chartCard);
+
+  const tableCard = el("div",{class:"card", style:"margin-top:16px;"});
+  const tableWrap = el("div",{class:"table-scroll"});
+  const table = el("table");
+  table.appendChild(el("thead",{},
+    `<tr><th>Campanha</th><th>Funil</th><th>Impressões (7d)</th><th>Investimento (7d)</th><th>CPM (7d)</th></tr>`));
+  const tbody = el("tbody");
+  rows.forEach(r=>{
+    const tr = el("tr");
+    if(r.status==="inactive") tr.className = "inactive-row";
+    tr.appendChild(el("td",{}, r.campaign));
+    tr.appendChild(el("td",{}, r.funnel));
+    tr.appendChild(el("td",{}, fmtNum(r.impressions7d)));
+    tr.appendChild(el("td",{}, fmtBRL(r.spend7d)));
+    tr.appendChild(el("td",{style:"font-weight:600;"}, fmtBRL(r.cpm7d)));
+    tbody.appendChild(tr);
+  });
+  table.appendChild(tbody);
+  tableWrap.appendChild(table);
+  tableCard.appendChild(tableWrap);
+  sec.appendChild(tableCard);
+
+  container.appendChild(sec);
+
+  if(!chartsAvailable()){
+    chartBoxWrap.replaceWith(el("div",{class:"empty-state"}, "Não foi possível carregar a biblioteca de gráficos."));
+    return;
+  }
+  new Chart(canvas.getContext("2d"), {
+    type:"bar",
+    data:{
+      labels: rows.map(r=>r.campaign),
+      datasets:[
+        { label:"CPM (R$)", data: rows.map(r=>r.cpm7d), backgroundColor: rows.map(r=>r.funnelColor+"99"), borderRadius:4 }
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      layout:{ padding:{top:16} },
+      plugins:{ legend:{display:false}, tooltip:{ callbacks:{ label: ctx => ` CPM: ${fmtBRL(ctx.parsed.y)}` } } },
+      scales:{
+        y:{ ticks:{ color:"#9aa7b8", callback:v=>fmtBRL(v) }, grid:{color:"#232a35"} },
+        x:{ ticks:{ color:"#e7ebf1", font:{size:9.5}, maxRotation:45, minRotation:45 }, grid:{display:false} }
+      }
+    }
+  });
+}
 </script>
 
 <script>
@@ -1619,7 +1700,7 @@ function render(){
   header.appendChild(el("div",{class:"updated"}, `Última atualização: <b>${dashboardData.updatedAt}</b>`));
   app.appendChild(header);
 
-  [renderBusinessSummary, renderGlobalDailyEvolution, renderProductGrowth, renderLoteEspecialProductTrend, renderSpendVsResult, renderFunnelShareOverview, renderFunnels, renderGeneralDemands].forEach(fn=>{
+  [renderBusinessSummary, renderGlobalDailyEvolution, renderProductGrowth, renderLoteEspecialProductTrend, renderSpendVsResult, renderCpmByCampaign, renderFunnelShareOverview, renderFunnels, renderGeneralDemands].forEach(fn=>{
     try{ fn(app); }
     catch(err){
       console.error(fn.name, err);
