@@ -194,6 +194,10 @@ const dashboardData = {
       // 08/10/2026
       metaSpend: 10468.22,
       googleSpend: 1231.08,
+      // Base de custo usada no ROAS real: só Meta, excluindo [BRA] [FHT]
+      // conversão-leads-lp e [BRA] [LUAN] tráfego-seguidores-instagram (não geram
+      // venda direta), e sem Google. 10468.22 - 139.27 (FHT) - 44.91 (seguidores).
+      roasSpend: 10284.04,
       hotmartRevenue: 41915.44,
       hotmartSales: 72,
       promoRevenue: 7156.80,
@@ -204,6 +208,8 @@ const dashboardData = {
       // 05/10/2026 a 08/10/2026 — 4 dias seguidos, sem gap
       metaSpend: 38091.69,
       googleSpend: 2222.32,
+      // Soma do roasSpend diário de 05 a 08/10 (ver dailyBusiness.roasSpend).
+      roasSpend: 36060.42,
       hotmartRevenue: 176196.42,
       hotmartSales: 298,
       promoRevenue: 31159.19,
@@ -219,23 +225,28 @@ const dashboardData = {
   // Receita = Hotmart líquida do dia; promoRevenue = BF/aniversário + qualquer produto
   // de recorrência (Assinatura mensal/anual, STLFLIX 4 ANOS) identificado no top-10 de
   // produtos daquele dia (retirados do ROAS real e de qualquer análise de crescimento,
-  // pois não são vendas novas geradas pela campanha do dia); custo = Meta + Google
-  // (Windsor.ai).
+  // pois não são vendas novas geradas pela campanha do dia); metaSpend/googleSpend =
+  // registro bruto (Windsor.ai), mantidos só para referência.
+  // roasSpend = base de custo usada no ROAS real: metaSpend (conta inteira) menos
+  // [BRA] [FHT] conversão-leads-lp e [BRA] [LUAN] tráfego-seguidores-instagram
+  // (campanhas de geração de lead/tráfego, não vendem direto) — e sem Google,
+  // a pedido do time de mídia.
   // Valores da Hotmart são revisados conforme reembolsos/chargebacks processam nos
   // dias seguintes — os números abaixo refletem a versão mais recente enviada.
   // metaSpend de 04 a 07/10 teve pequena revisão nesta atualização (janela de
   // atribuição do Meta ainda fechando) — diferença de poucos reais, não é erro.
   // Observação: como a tabela de produtos da Hotmart só mostra os 10 maiores, pode
   // haver receita de recorrência fora do top-10 que não entrou no corte.
-  // 02 a 07/10 revisados (metaSpend); 08/10 é dado novo.
+  // 02 a 07/10 revisados (metaSpend); 08/10 é dado novo. roasSpend é novo nesta
+  // atualização, calculado para os 7 dias da janela atual.
   dailyBusiness: [
-    { date:"2026-10-02", hotmartRevenue:41173.38, hotmartSales:73, promoRevenue:7651.89, metaSpend:8380.75, googleSpend:365.44 },
-    { date:"2026-10-03", hotmartRevenue:53323.08, hotmartSales:86, promoRevenue:10988.83, metaSpend:7995.29, googleSpend:7.06 },
-    { date:"2026-10-04", hotmartRevenue:37214.29, hotmartSales:69, promoRevenue:6618.15, metaSpend:8842.78, googleSpend:3.63 },
-    { date:"2026-10-05", hotmartRevenue:32576.55, hotmartSales:57, promoRevenue:5035.25, metaSpend:8498.19, googleSpend:6.70 },
-    { date:"2026-10-06", hotmartRevenue:52776.48, hotmartSales:85, promoRevenue:9149.47, metaSpend:9581.10, googleSpend:4.32 },
-    { date:"2026-10-07", hotmartRevenue:48927.95, hotmartSales:84, promoRevenue:9817.67, metaSpend:9544.18, googleSpend:980.22 },
-    { date:"2026-10-08", hotmartRevenue:41915.44, hotmartSales:72, promoRevenue:7156.80, metaSpend:10468.22, googleSpend:1231.08 }
+    { date:"2026-10-02", hotmartRevenue:41173.38, hotmartSales:73, promoRevenue:7651.89, metaSpend:8380.75, googleSpend:365.44, roasSpend:7777.48 },
+    { date:"2026-10-03", hotmartRevenue:53323.08, hotmartSales:86, promoRevenue:10988.83, metaSpend:7995.29, googleSpend:7.06, roasSpend:7430.79 },
+    { date:"2026-10-04", hotmartRevenue:37214.29, hotmartSales:69, promoRevenue:6618.15, metaSpend:8842.78, googleSpend:3.63, roasSpend:8167.28 },
+    { date:"2026-10-05", hotmartRevenue:32576.55, hotmartSales:57, promoRevenue:5035.25, metaSpend:8498.19, googleSpend:6.70, roasSpend:7866.50 },
+    { date:"2026-10-06", hotmartRevenue:52776.48, hotmartSales:85, promoRevenue:9149.47, metaSpend:9581.10, googleSpend:4.32, roasSpend:8992.52 },
+    { date:"2026-10-07", hotmartRevenue:48927.95, hotmartSales:84, promoRevenue:9817.67, metaSpend:9544.18, googleSpend:980.22, roasSpend:8917.36 },
+    { date:"2026-10-08", hotmartRevenue:41915.44, hotmartSales:72, promoRevenue:7156.80, metaSpend:10468.22, googleSpend:1231.08, roasSpend:10284.04 }
   ],
 
   // janela usada em "Performance por funil" e nos gráficos (dados do Meta, sem gap): 02/10 a 08/10/2026
@@ -851,7 +862,7 @@ function renderBlackFridayLeads(container){
 
 function renderBusinessSummary(container){
   const sec = el("section");
-  sec.appendChild(el("div", {class:"section-title"}, `<h2>Visão global do negócio</h2><span class="tag">Meta + Google + Hotmart</span>`));
+  sec.appendChild(el("div", {class:"section-title"}, `<h2>Visão global do negócio</h2><span class="tag">Meta (ROAS, exclui FHT/seguidores e Google) + Hotmart</span>`));
 
   const grid = el("div", {class:"grid grid-2"});
   grid.appendChild(periodCard("Ontem (08/10/2026)", dashboardData.businessSummary.yesterday, "yesterday"));
@@ -861,7 +872,8 @@ function renderBusinessSummary(container){
 }
 
 function periodCard(title, data, kind){
-  const total = (isNum(data.metaSpend) && isNum(data.googleSpend)) ? data.metaSpend + data.googleSpend : null;
+  // Base de custo do ROAS: Meta sem FHT/seguidores e sem Google (ver dailyBusiness.roasSpend).
+  const total = isNum(data.roasSpend) ? data.roasSpend : null;
   const roas = roasValue(data.hotmartRevenue, total);
   const hasPromo = isNum(data.promoRevenue) && data.promoRevenue>0;
   const revenueExPromo = hasPromo && isNum(data.hotmartRevenue) ? data.hotmartRevenue - data.promoRevenue : null;
@@ -875,7 +887,7 @@ function periodCard(title, data, kind){
 
   const stats = el("div",{class:"stat-tiles"});
   [
-    ["Investimento", fmtBRL(total)],
+    ["Investimento (ROAS)", fmtBRL(total)],
     ["Receita", fmtBRL(mainRevenue)],
     ["ROAS", isNum(mainRoas) ? mainRoas.toFixed(2).replace(".",",")+"x" : "Não informado"]
   ].forEach(([label,val])=>{
@@ -900,11 +912,13 @@ function renderGlobalDailyEvolution(container){
   const days = dashboardData.dailyBusiness || [];
   if(!days.length) return;
   const sec = el("section");
-  sec.appendChild(el("div",{class:"section-title"}, `<h2>Evolução diária do negócio</h2><span class="tag">Receita, custo e ROAS · Últimos 7 dias</span>`));
+  sec.appendChild(el("div",{class:"section-title"}, `<h2>Evolução diária do negócio</h2><span class="tag">Receita, custo (ROAS) e ROAS · Últimos 7 dias</span>`));
+  sec.appendChild(el("div",{class:"note"},
+    `Custo usado no ROAS = investimento Meta da conta, excluindo [BRA] [FHT] conversão-leads-lp e [BRA] [LUAN] tráfego-seguidores-instagram (geração de lead/tráfego, não vendem direto) — sem Google.`));
 
   const rows = days.map(d=>{
     const revenue = d.hotmartRevenue - (d.promoRevenue||0);
-    const cost = (d.metaSpend||0) + (d.googleSpend||0);
+    const cost = d.roasSpend||0;
     const roas = roasValue(revenue, cost);
     return {...d, revenue, cost, roas};
   });
