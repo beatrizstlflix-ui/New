@@ -205,10 +205,12 @@ const dashboardData = {
       metaSpend: 10882.05,
       googleSpend: 1544.37,
       // Base de custo usada no ROAS real: só Meta, excluindo [BRA] [FHT]
-      // conversão-leads-lp e [BRA] [LUAN] tráfego-seguidores-instagram (não geram
-      // venda direta), e sem Google. As duas campanhas ficaram sem investimento
-      // em 09-12/10 (pausadas), então roasSpend = metaSpend neste período.
-      roasSpend: 10882.05,
+      // conversão-leads-lp, [BRA] [LUAN] tráfego-seguidores-instagram e
+      // [BRA] [BLACK-FRIDAY]_conversão-leads (nenhuma gera venda direta —
+      // são campanhas de captação de lead/tráfego, não de conversão de venda),
+      // e sem Google. FHT/seguidores ficaram sem investimento em 09-12/10
+      // (pausadas); Black Friday (leads) seguiu rodando. 10882.05 - 548.42 (BF).
+      roasSpend: 10333.63,
       hotmartRevenue: 42053.10,
       hotmartSales: 85,
       promoRevenue: 11737.75,
@@ -220,7 +222,7 @@ const dashboardData = {
       metaSpend: 39788.10,
       googleSpend: 5765.77,
       // Soma do roasSpend diário de 09 a 12/10 (ver dailyBusiness.roasSpend).
-      roasSpend: 39788.10,
+      roasSpend: 36591.15,
       hotmartRevenue: 169089.27,
       hotmartSales: 358,
       promoRevenue: 39973.60,
@@ -236,23 +238,25 @@ const dashboardData = {
   // pois não são vendas novas geradas pela campanha do dia); metaSpend/googleSpend =
   // registro bruto (Windsor.ai), mantidos só para referência.
   // roasSpend = base de custo usada no ROAS real: metaSpend (conta inteira) menos
-  // [BRA] [FHT] conversão-leads-lp e [BRA] [LUAN] tráfego-seguidores-instagram
-  // (campanhas de geração de lead/tráfego, não vendem direto) — e sem Google.
-  // Ambas ficaram sem investimento em 09-12/10 (pausadas), então roasSpend = metaSpend
-  // nesses dias.
+  // [BRA] [FHT] conversão-leads-lp, [BRA] [LUAN] tráfego-seguidores-instagram e
+  // [BRA] [BLACK-FRIDAY]_conversão-leads (nenhuma gera venda direta — campanhas
+  // de captação de lead/tráfego, não de conversão de venda) — e sem Google.
+  // FHT/seguidores ficaram sem investimento em 09-12/10 (pausadas); Black Friday
+  // (leads) seguiu rodando o período todo, por isso continua sendo descontada.
   // Valores da Hotmart são revisados conforme reembolsos/chargebacks processam nos
   // dias seguintes — os números abaixo refletem a versão mais recente enviada.
   // Observação: como a tabela de produtos da Hotmart só mostra os 10 maiores, pode
   // haver receita de recorrência fora do top-10 que não entrou no corte.
-  // 06 a 08/10 mantidos; 09 a 12/10 são dados novos.
+  // 06 a 08/10 mantidos; 09 a 12/10 são dados novos. roasSpend revisado nesta
+  // atualização para também excluir o investimento da campanha de leads da Black Friday.
   dailyBusiness: [
-    { date:"2026-10-06", hotmartRevenue:52776.48, hotmartSales:85, promoRevenue:9149.47, metaSpend:9581.10, googleSpend:4.32, roasSpend:8992.52 },
-    { date:"2026-10-07", hotmartRevenue:48927.95, hotmartSales:84, promoRevenue:9817.67, metaSpend:9544.18, googleSpend:980.22, roasSpend:8917.36 },
-    { date:"2026-10-08", hotmartRevenue:41915.44, hotmartSales:72, promoRevenue:7156.80, metaSpend:10468.22, googleSpend:1231.08, roasSpend:10284.04 },
-    { date:"2026-10-09", hotmartRevenue:37782.40, hotmartSales:81, promoRevenue:10667.04, metaSpend:8865.59, googleSpend:1454.09, roasSpend:8865.59 },
-    { date:"2026-10-10", hotmartRevenue:41127.36, hotmartSales:87, promoRevenue:9482.48, metaSpend:9064.67, googleSpend:1428.63, roasSpend:9064.67 },
-    { date:"2026-10-11", hotmartRevenue:48126.41, hotmartSales:105, promoRevenue:8086.33, metaSpend:10975.79, googleSpend:1338.68, roasSpend:10975.79 },
-    { date:"2026-10-12", hotmartRevenue:42053.10, hotmartSales:85, promoRevenue:11737.75, metaSpend:10882.05, googleSpend:1544.37, roasSpend:10882.05 }
+    { date:"2026-10-06", hotmartRevenue:52776.48, hotmartSales:85, promoRevenue:9149.47, metaSpend:9581.10, googleSpend:4.32, roasSpend:8488.72 },
+    { date:"2026-10-07", hotmartRevenue:48927.95, hotmartSales:84, promoRevenue:9817.67, metaSpend:9544.18, googleSpend:980.22, roasSpend:8106.18 },
+    { date:"2026-10-08", hotmartRevenue:41915.44, hotmartSales:72, promoRevenue:7156.80, metaSpend:10468.22, googleSpend:1231.08, roasSpend:9752.37 },
+    { date:"2026-10-09", hotmartRevenue:37782.40, hotmartSales:81, promoRevenue:10667.04, metaSpend:8865.59, googleSpend:1454.09, roasSpend:8182.15 },
+    { date:"2026-10-10", hotmartRevenue:41127.36, hotmartSales:87, promoRevenue:9482.48, metaSpend:9064.67, googleSpend:1428.63, roasSpend:8283.90 },
+    { date:"2026-10-11", hotmartRevenue:48126.41, hotmartSales:105, promoRevenue:8086.33, metaSpend:10975.79, googleSpend:1338.68, roasSpend:9791.47 },
+    { date:"2026-10-12", hotmartRevenue:42053.10, hotmartSales:85, promoRevenue:11737.75, metaSpend:10882.05, googleSpend:1544.37, roasSpend:10333.63 }
   ],
 
   // janela usada em "Performance por funil" e nos gráficos (dados do Meta, sem gap): 06/10 a 12/10/2026
@@ -413,7 +417,8 @@ const dashboardData = {
       campaigns: [
         {
           name: "[BRA] [ASSINE] conversão-vendas-drops-automação",
-          status: "active",
+          status: "inactive",
+          noteTag: "pausada pelo time",
           spend7d: 2095.81,
           conversions7d: 5,
           impressions7d: 94919,
@@ -1003,7 +1008,7 @@ function renderLoteEspecialAdsets(container){
 
 function renderBusinessSummary(container){
   const sec = el("section");
-  sec.appendChild(el("div", {class:"section-title"}, `<h2>Visão global do negócio</h2><span class="tag">Meta (ROAS, exclui FHT/seguidores e Google) + Hotmart</span>`));
+  sec.appendChild(el("div", {class:"section-title"}, `<h2>Visão global do negócio</h2><span class="tag">Meta (ROAS, exclui FHT/seguidores/leads BF e Google) + Hotmart</span>`));
 
   const grid = el("div", {class:"grid grid-2"});
   grid.appendChild(periodCard("Ontem (12/10/2026)", dashboardData.businessSummary.yesterday, "yesterday"));
@@ -1055,7 +1060,7 @@ function renderGlobalDailyEvolution(container){
   const sec = el("section");
   sec.appendChild(el("div",{class:"section-title"}, `<h2>Evolução diária do negócio</h2><span class="tag">Receita, custo (ROAS) e ROAS · Últimos 7 dias</span>`));
   sec.appendChild(el("div",{class:"note"},
-    `Custo usado no ROAS = investimento Meta da conta, excluindo [BRA] [FHT] conversão-leads-lp e [BRA] [LUAN] tráfego-seguidores-instagram (geração de lead/tráfego, não vendem direto) — sem Google.`));
+    `Custo usado no ROAS = investimento Meta da conta, excluindo [BRA] [FHT] conversão-leads-lp, [BRA] [LUAN] tráfego-seguidores-instagram e [BRA] [BLACK-FRIDAY]_conversão-leads (geração de lead/tráfego, não vendem direto) — sem Google.`));
 
   const rows = days.map(d=>{
     const revenue = d.hotmartRevenue - (d.promoRevenue||0);
