@@ -213,9 +213,9 @@ const dashboardData = {
       roasSpend: 10333.63,
       hotmartRevenue: 42053.10,
       hotmartSales: 85,
-      promoRevenue: 11737.75,
-      promoSales: 49,
-      promoNote: "Assinaturas/planos recorrentes + [BF25] Lifetime (49 vendas, R$11.737,75) — recorrência/promoção — excluídas do ROAS real. Todos os 15 produtos do dia capturados — bate exato com o total (85 vendas, R$42.053,10)."
+      promoRevenue: 2582.34,
+      promoSales: 8,
+      promoNote: "Só [BF25] Lifetime + oferta de aniversário STLFLIX 4 ANOS (8 vendas, R$2.582,34) — ofertas pontuais de upgrade, não plano vendido — excluídas do ROAS real. Assinaturas (mensal/anual) e STL Seller Mensal contam como venda nova a partir desta atualização. Todos os 15 produtos do dia capturados — bate exato com o total (85 vendas, R$42.053,10)."
     },
     last4Days: {
       // 09/10/2026 a 12/10/2026 — 4 dias seguidos, sem gap
@@ -225,18 +225,20 @@ const dashboardData = {
       roasSpend: 36591.15,
       hotmartRevenue: 169089.27,
       hotmartSales: 358,
-      promoRevenue: 39973.60,
-      promoSales: 195,
-      promoNote: "4 dias seguidos (09 a 12/10). Inclui Assinaturas, STL Seller Mensal/Anual, STLFLIX 4 ANOS e [BF Lifetime/upgrade — recorrência/promoção — excluídos do ROAS real."
+      promoRevenue: 12585.85,
+      promoSales: 42,
+      promoNote: "4 dias seguidos (09 a 12/10). Só [BF25] Lifetime e oferta de aniversário STLFLIX 4 ANOS — ofertas pontuais de upgrade, excluídas do ROAS real. Assinaturas e STL Seller Mensal/Anual contam como venda nova (revisado nesta atualização)."
     }
   },
 
   // Receita/custo/ROAS diário do negócio (últimos 7 dias, 06/10 a 12/10/2026 — sem gap).
-  // Receita = Hotmart líquida do dia; promoRevenue = BF/aniversário + qualquer produto
-  // de recorrência (Assinatura mensal/anual, STLFLIX 4 ANOS) identificado no top-10 de
-  // produtos daquele dia (retirados do ROAS real e de qualquer análise de crescimento,
-  // pois não são vendas novas geradas pela campanha do dia); metaSpend/googleSpend =
-  // registro bruto (Windsor.ai), mantidos só para referência.
+  // Receita = Hotmart líquida do dia; promoRevenue = só ofertas pontuais de
+  // upgrade/lifetime (BF/Black Friday) e a oferta de aniversário (STLFLIX 4 ANOS)
+  // identificadas no top-10 de produtos daquele dia — ver isRecurringOrPromoProduct.
+  // Revisão nesta atualização: planos de Assinatura (mensal/anual) e STL Seller
+  // Mensal/Anual DEIXARAM de ser tratados como recorrência/fora do ROAS — são
+  // vendas novas reais (o time vende plano mensal como aquisição, não só renovação).
+  // metaSpend/googleSpend = registro bruto (Windsor.ai), mantidos só para referência.
   // roasSpend = base de custo usada no ROAS real: metaSpend (conta inteira) menos
   // [BRA] [FHT] conversão-leads-lp, [BRA] [LUAN] tráfego-seguidores-instagram e
   // [BRA] [BLACK-FRIDAY]_conversão-leads (nenhuma gera venda direta — campanhas
@@ -247,16 +249,18 @@ const dashboardData = {
   // dias seguintes — os números abaixo refletem a versão mais recente enviada.
   // Observação: como a tabela de produtos da Hotmart só mostra os 10 maiores, pode
   // haver receita de recorrência fora do top-10 que não entrou no corte.
-  // 06 a 08/10 mantidos; 09 a 12/10 são dados novos. roasSpend revisado nesta
-  // atualização para também excluir o investimento da campanha de leads da Black Friday.
+  // promoRevenue de 08 a 12/10 recalculado com o novo critério (detalhamento por
+  // produto disponível); 06 e 07/10 mantiveram o valor antigo (critério anterior)
+  // porque o detalhamento original desses 2 dias não foi preservado — não dá pra
+  // refazer a separação sem reconstituir o print original.
   dailyBusiness: [
     { date:"2026-10-06", hotmartRevenue:52776.48, hotmartSales:85, promoRevenue:9149.47, metaSpend:9581.10, googleSpend:4.32, roasSpend:8488.72 },
     { date:"2026-10-07", hotmartRevenue:48927.95, hotmartSales:84, promoRevenue:9817.67, metaSpend:9544.18, googleSpend:980.22, roasSpend:8106.18 },
-    { date:"2026-10-08", hotmartRevenue:41915.44, hotmartSales:72, promoRevenue:7156.80, metaSpend:10468.22, googleSpend:1231.08, roasSpend:9752.37 },
-    { date:"2026-10-09", hotmartRevenue:37782.40, hotmartSales:81, promoRevenue:10667.04, metaSpend:8865.59, googleSpend:1454.09, roasSpend:8182.15 },
-    { date:"2026-10-10", hotmartRevenue:41127.36, hotmartSales:87, promoRevenue:9482.48, metaSpend:9064.67, googleSpend:1428.63, roasSpend:8283.90 },
-    { date:"2026-10-11", hotmartRevenue:48126.41, hotmartSales:105, promoRevenue:8086.33, metaSpend:10975.79, googleSpend:1338.68, roasSpend:9791.47 },
-    { date:"2026-10-12", hotmartRevenue:42053.10, hotmartSales:85, promoRevenue:11737.75, metaSpend:10882.05, googleSpend:1544.37, roasSpend:10333.63 }
+    { date:"2026-10-08", hotmartRevenue:41915.44, hotmartSales:72, promoRevenue:806.76, metaSpend:10468.22, googleSpend:1231.08, roasSpend:9752.37 },
+    { date:"2026-10-09", hotmartRevenue:37782.40, hotmartSales:81, promoRevenue:6116.12, metaSpend:8865.59, googleSpend:1454.09, roasSpend:8182.15 },
+    { date:"2026-10-10", hotmartRevenue:41127.36, hotmartSales:87, promoRevenue:3074.69, metaSpend:9064.67, googleSpend:1428.63, roasSpend:8283.90 },
+    { date:"2026-10-11", hotmartRevenue:48126.41, hotmartSales:105, promoRevenue:812.70, metaSpend:10975.79, googleSpend:1338.68, roasSpend:9791.47 },
+    { date:"2026-10-12", hotmartRevenue:42053.10, hotmartSales:85, promoRevenue:2582.34, metaSpend:10882.05, googleSpend:1544.37, roasSpend:10333.63 }
   ],
 
   // janela usada em "Performance por funil" e nos gráficos (dados do Meta, sem gap): 06/10 a 12/10/2026
@@ -373,34 +377,66 @@ const dashboardData = {
     { date:"2026-10-08", products: [
       {name:"Lote Especial STLFLIX", sales:27, revenue:24192.83},
       {name:"Lote Especial STLFLIX + STLAI", sales:5, revenue:7969.10},
+      {name:"Assinatura STLFLIX - Comercial Anual", sales:4, revenue:3582.60},
+      {name:"Assinatura STLAI", sales:6, revenue:1432.54},
       {name:"Curso de Modelagem 3D", sales:4, revenue:1175.02},
-      {name:"Curso Ao vivo Modelagem 3D", sales:1, revenue:297.22},
+      {name:"Assinatura STLFLIX - Comercial Mensal", sales:11, revenue:919.10},
+      {name:"Assinatura STLAI - Comercial Mensal", sales:3, revenue:284.70},
       {name:"STLFLIX – 4 Years – Special Anniversary Offer", sales:1, revenue:312.53},
+      {name:"Curso Ao vivo Modelagem 3D", sales:1, revenue:297.22},
       {name:"Subscribe STLAI Commercial - Month Premium", sales:1, revenue:157.54},
-      {name:"Curso Vivendo de Impressão 3D", sales:1, revenue:56.64}
+      {name:"Assinatura STLAI - Pessoal Mensal", sales:2, revenue:93.80},
+      {name:"Curso Vivendo de Impressão 3D", sales:1, revenue:56.64},
+      {name:"Assinatura STLFLIX - Pessoal Mensal", sales:1, revenue:37.30}
     ]},
     { date:"2026-10-09", products: [
       {name:"Lote Especial STLFLIX", sales:25, revenue:21174.93},
       {name:"Lote Especial STLFLIX + STLAI", sales:2, revenue:2514.24},
+      {name:"Assinatura STLFLIX - Comercial Anual", sales:3, revenue:2617.82},
       {name:"Curso de Modelagem 3D", sales:5, revenue:1474.92},
-      {name:"STLFLIX", sales:2, revenue:417.23}
+      {name:"Assinatura STLFLIX - Comercial Mensal", sales:15, revenue:1231.50},
+      {name:"STLFLIX", sales:2, revenue:417.23},
+      {name:"Assinatura STLAI - Comercial Mensal", sales:5, revenue:474.50},
+      {name:"STL Seller Mensal", sales:1, revenue:94.90},
+      {name:"Assinatura STLAI", sales:1, revenue:94.90},
+      {name:"Assinatura STLFLIX - Pessoal Mensal", sales:1, revenue:37.30}
     ]},
     { date:"2026-10-10", products: [
       {name:"Lote Especial STLFLIX", sales:24, revenue:21875.55},
       {name:"Lote Especial STLFLIX + STLAI", sales:5, revenue:6464.74},
+      {name:"Assinatura STLFLIX - Comercial Anual", sales:5, revenue:3584.39},
+      {name:"Assinatura STLFLIX - Comercial Mensal", sales:24, revenue:1980.00},
       {name:"STLFLIX", sales:3, revenue:1336.50},
-      {name:"Curso de Modelagem 3D", sales:3, revenue:877.80}
+      {name:"Curso de Modelagem 3D", sales:3, revenue:877.80},
+      {name:"Assinatura STLAI - Comercial Mensal", sales:6, revenue:569.40},
+      {name:"STL Seller Mensal", sales:2, revenue:189.80},
+      {name:"Assinatura STLAI - Pessoal Mensal", sales:1, revenue:46.90},
+      {name:"Assinatura STLFLIX - Pessoal Mensal", sales:1, revenue:37.30}
     ]},
     { date:"2026-10-11", products: [
       {name:"Lote Especial STLFLIX", sales:39, revenue:31422.07},
+      {name:"Assinatura STLFLIX - Comercial Anual", sales:4, revenue:3513.47},
       {name:"Curso de Modelagem 3D", sales:9, revenue:2663.80},
+      {name:"Assinatura STLFLIX - Comercial Mensal", sales:28, revenue:2340.40},
+      {name:"Assinatura STLAI - Comercial Mensal", sales:5, revenue:474.50},
+      {name:"Assinatura STLFLIX - Pessoal Anual", sales:1, revenue:407.96},
+      {name:"Assinatura STLAI", sales:2, revenue:189.80},
+      {name:"Assinatura STLAI - Pessoal Mensal", sales:3, revenue:140.70},
+      {name:"Assinatura STLFLIX - Pessoal Mensal", sales:3, revenue:111.90},
       {name:"Curso Ao vivo Modelagem 3D", sales:1, revenue:297.22},
+      {name:"STL Seller Mensal", sales:1, revenue:94.90},
       {name:"STLFLIX", sales:1, revenue:27.70}
     ]},
     { date:"2026-10-12", products: [
       {name:"Lote Especial STLFLIX", sales:22, revenue:17598.77},
       {name:"Lote Especial STLFLIX + STLAI", sales:10, revenue:11527.70},
-      {name:"Curso de Modelagem 3D", sales:4, revenue:1188.88}
+      {name:"Assinatura STLFLIX - Comercial Anual", sales:10, revenue:6482.31},
+      {name:"Assinatura STLFLIX - Comercial Mensal", sales:22, revenue:1876.60},
+      {name:"Curso de Modelagem 3D", sales:4, revenue:1188.88},
+      {name:"Assinatura STLAI - Comercial Mensal", sales:3, revenue:284.70},
+      {name:"Assinatura STLAI", sales:3, revenue:284.70},
+      {name:"STL Seller Mensal", sales:2, revenue:189.80},
+      {name:"Assinatura STLFLIX - Pessoal Mensal", sales:1, revenue:37.30}
     ]}
   ],
 
@@ -594,17 +630,19 @@ const dashboardData = {
   // funnelWindow (06 a 12/10/2026). reach não soma para o total da campanha (pessoas
   // alcançadas por mais de um conjunto são contadas nos dois) — por isso não aparece
   // um "reach7d" agregado aqui, só por conjunto.
+  // status = situação atual no Meta Ads (consultado em 13/10/2026), não a janela de 7 dias —
+  // um conjunto pode ter tido investimento na janela e já estar pausado hoje.
   loteEspecialAdsets: {
     campaign: "[BRA] [LOTE ESPECIAL] conversão-vendas",
     adsets: [
-      { name:"Público_Advantage_Sinal-LAL-Compradores [Drops-Validados]", spend:3024.33, conversions:11, convValue:7709.70, impressions:305725, linkClicks:8508, reach:269208, landingPageViews:7124 },
-      { name:"30 - impressao-3d  - Halloween_Feed", spend:12392.86, conversions:22, convValue:13130.07, impressions:1419431, linkClicks:14249, reach:1077415, landingPageViews:9096 },
-      { name:"28-impressao-3d  -Símbolos_Cristãos_Plataforma", spend:3731.72, conversions:7, convValue:5797.22, impressions:152847, linkClicks:1111, reach:99136, landingPageViews:787 },
-      { name:"Público_Advantage_Sinal-LAL-Compradores [Oferta]", spend:2979.72, conversions:11, convValue:7125.34, impressions:72797, linkClicks:1105, reach:40108, landingPageViews:942 },
-      { name:"35 -  impressao-3d  - Porta - Fotos - 3d_Feed", spend:2163.65, conversions:8, convValue:5682.88, impressions:120691, linkClicks:878, reach:101636, landingPageViews:686 },
-      { name:"36 -  impressao-3d  - Base - Playstation_Feed", spend:1523.15, conversions:2, convValue:2389.74, impressions:89378, linkClicks:662, reach:76137, landingPageViews:488 },
-      { name:"34 -  impressao-3d  - Utilidades Escritório_Feed", spend:1459.51, conversions:2, convValue:1688.72, impressions:75507, linkClicks:546, reach:63509, landingPageViews:393 },
-      { name:"Público_Advantage_Sinal-LAL-Compradores [Drops-Teste]", spend:745.53, conversions:2, convValue:1037.81, impressions:63856, linkClicks:1045, reach:60576, landingPageViews:762 }
+      { name:"Público_Advantage_Sinal-LAL-Compradores [Drops-Validados]", status:"active", spend:3024.33, conversions:11, convValue:7709.70, impressions:305725, linkClicks:8508, reach:269208, landingPageViews:7124 },
+      { name:"30 - impressao-3d  - Halloween_Feed", status:"inactive", spend:12392.86, conversions:22, convValue:13130.07, impressions:1419431, linkClicks:14249, reach:1077415, landingPageViews:9096 },
+      { name:"28-impressao-3d  -Símbolos_Cristãos_Plataforma", status:"inactive", spend:3731.72, conversions:7, convValue:5797.22, impressions:152847, linkClicks:1111, reach:99136, landingPageViews:787 },
+      { name:"Público_Advantage_Sinal-LAL-Compradores [Oferta]", status:"active", spend:2979.72, conversions:11, convValue:7125.34, impressions:72797, linkClicks:1105, reach:40108, landingPageViews:942 },
+      { name:"35 -  impressao-3d  - Porta - Fotos - 3d_Feed", status:"inactive", spend:2163.65, conversions:8, convValue:5682.88, impressions:120691, linkClicks:878, reach:101636, landingPageViews:686 },
+      { name:"36 -  impressao-3d  - Base - Playstation_Feed", status:"inactive", spend:1523.15, conversions:2, convValue:2389.74, impressions:89378, linkClicks:662, reach:76137, landingPageViews:488 },
+      { name:"34 -  impressao-3d  - Utilidades Escritório_Feed", status:"inactive", spend:1459.51, conversions:2, convValue:1688.72, impressions:75507, linkClicks:546, reach:63509, landingPageViews:393 },
+      { name:"Público_Advantage_Sinal-LAL-Compradores [Drops-Teste]", status:"active", spend:745.53, conversions:2, convValue:1037.81, impressions:63856, linkClicks:1045, reach:60576, landingPageViews:762 }
     ]
   }
 };
@@ -960,19 +998,20 @@ function renderLoteEspecialAdsets(container){
 
   const totalSpend = rows.reduce((s,r)=>s+r.spend,0);
   const totalConv = rows.reduce((s,r)=>s+(r.conversions||0),0);
+  const activeCount = rows.filter(r=>r.status==="active").length;
 
   const sec = el("section");
   sec.appendChild(el("div",{class:"section-title"},
     `<h2>Conjuntos de anúncios — Lote Especial Vendas</h2><span class="tag">Meta Ads · ${data.campaign} · Últimos 7 dias (${fmtDateBR(dashboardData.funnelWindow.from)} a ${fmtDateBR(dashboardData.funnelWindow.to)})</span>`));
   sec.appendChild(el("div",{class:"note"},
-    `Campanha genérica (o time de mídia renomeou, sem referência a drop/funil específico no nome) — aqui aberta por conjunto de anúncios. Alcance (reach) não soma entre conjuntos, por isso não aparece um total agregado dessa coluna.`));
+    `Campanha genérica (o time de mídia renomeou, sem referência a drop/funil específico no nome) — aqui aberta por conjunto de anúncios. Status é a situação atual no Meta (hoje), não a janela de 7 dias — um conjunto pode ter investido na janela e já estar pausado. Alcance (reach) não soma entre conjuntos, por isso não aparece um total agregado dessa coluna.`));
 
   const card = el("div",{class:"card"});
   const stats = el("div",{class:"stat-tiles"});
   [
     ["Investimento 7d", fmtBRL(totalSpend)],
     ["Conversões 7d", fmtNum(totalConv)],
-    ["Conjuntos ativos", fmtNum(rows.length)]
+    ["Conjuntos ativos", `${fmtNum(activeCount)} de ${fmtNum(rows.length)}`]
   ].forEach(([label,val])=>{
     const tile = el("div",{class:"stat-tile"});
     tile.appendChild(el("div",{class:"stat-tile-label"}, label));
@@ -984,11 +1023,13 @@ function renderLoteEspecialAdsets(container){
   const tableWrap = el("div",{class:"table-scroll", style:"margin-top:16px;"});
   const table = el("table");
   table.appendChild(el("thead",{},
-    `<tr><th>Conjunto de anúncios</th><th>Investimento</th><th>CPM</th><th>Conversões</th><th>CTR</th><th>Connect rate</th><th>Custo/resultado</th><th>ROAS (Meta)</th><th>% invest.</th></tr>`));
+    `<tr><th>Conjunto de anúncios</th><th>Status</th><th>Investimento</th><th>CPM</th><th>Conversões</th><th>CTR</th><th>Connect rate</th><th>Custo/resultado</th><th>ROAS (Meta)</th><th>% invest.</th></tr>`));
   const tbody = el("tbody");
   rows.forEach(r=>{
     const tr = el("tr");
+    if(r.status!=="active") tr.classList.add("inactive-row");
     tr.appendChild(el("td",{}, r.name));
+    tr.appendChild(el("td",{}, `<span class="status-dot ${r.status}"></span>${STATUS_LABEL[r.status]||r.status}`));
     tr.appendChild(el("td",{}, fmtBRL(r.spend)));
     tr.appendChild(el("td",{}, isNum(r.cpm) ? fmtBRL(r.cpm) : "Não informado"));
     tr.appendChild(el("td",{}, fmtNum(r.conversions)));
@@ -1132,13 +1173,14 @@ function renderGlobalDailyEvolution(container){
   });
 }
 
-// produto "Assinatura..." ou "STLFLIX 4 ANOS..." = recorrência/renovação;
-// "STL Seller Mensal/Anual" = plano recorrente (mesma lógica, billing mensal/anual,
-// mesmo sem o prefixo "Assinatura"); "[BF..." = promoção — mesmo critério usado
-// para excluir do ROAS real, aplicado aqui para isolar receita nova.
+// Revisado: "Assinatura..." (planos mensais/anuais) e "STL Seller Mensal/Anual"
+// também são vendas novas de verdade (o time vende plano mensal como aquisição,
+// não só renovação de quem já assinava) — por isso não ficam mais de fora do
+// ROAS/crescimento. Só continuam de fora itens que não são plano vendido (ofertas
+// pontuais de upgrade/lifetime): "[BF..."/"[Black..." (Black Friday/lifetime) e
+// "STLFLIX 4 ANOS..." (oferta de aniversário).
 function isRecurringOrPromoProduct(name){
-  return name.startsWith("Assinatura") || name.startsWith("[BF") || name.startsWith("[Black") || name.startsWith("STLFLIX 4 ANOS")
-    || name === "STL Seller Mensal" || name === "STL Seller Anual";
+  return name.startsWith("[BF") || name.startsWith("[Black") || name.startsWith("STLFLIX 4 ANOS");
 }
 
 function renderProductGrowth(container){
