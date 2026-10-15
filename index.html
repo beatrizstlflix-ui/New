@@ -214,10 +214,10 @@ const dashboardData = {
       // conversão-leads-lp, [BRA] [LUAN] tráfego-seguidores-instagram e
       // [BRA] [BLACK-FRIDAY]_conversão-leads (nenhuma gera venda direta —
       // são campanhas de captação de lead/tráfego, não de conversão de venda),
-      // e sem Google. FHT/seguidores seguem sem investimento (pausadas);
-      // Black Friday (leads) seguiu rodando. 9528.85 - 3199.52 (BF, revisado —
-      // ver nota em blackFridayLeads.daily de 14/10).
-      roasSpend: 6329.33,
+      // e sem Google. FHT/seguidores seguem sem investimento (pausadas).
+      // 14/10 inclui investimento externo nas campanhas de venda (fora do que a
+      // API do Meta reporta) — valor informado pelo time de mídia: R$7.332,00.
+      roasSpend: 7332.00,
       hotmartRevenue: 37346.66,
       hotmartSales: 80,
       promoRevenue: 2110.29,
@@ -229,7 +229,7 @@ const dashboardData = {
       metaSpend: 40219.66,
       googleSpend: 7452.98,
       // Soma do roasSpend diário de 11 a 14/10 (ver dailyBusiness.roasSpend).
-      roasSpend: 33476.98,
+      roasSpend: 34479.65,
       hotmartRevenue: 159538.44,
       hotmartSales: 339,
       promoRevenue: 6267.31,
@@ -252,6 +252,9 @@ const dashboardData = {
   // de captação de lead/tráfego, não de conversão de venda) — e sem Google.
   // FHT/seguidores seguem sem investimento (pausadas); Black Friday (leads)
   // seguiu rodando o período todo, por isso continua sendo descontada.
+  // Exceção 14/10: roasSpend = R$7.332,00, informado pelo time de mídia —
+  // inclui investimento externo nas campanhas de venda que não aparece na
+  // API do Meta (por isso não bate com metaSpend - BF daquele dia).
   // Valores da Hotmart são revisados conforme reembolsos/chargebacks processam nos
   // dias seguintes — os números abaixo refletem a versão mais recente enviada.
   // Observação: como a tabela de produtos da Hotmart só mostra os 10 maiores, pode
@@ -265,7 +268,7 @@ const dashboardData = {
     { date:"2026-10-11", hotmartRevenue:48126.41, hotmartSales:105, promoRevenue:812.70, metaSpend:10975.79, googleSpend:1338.68, roasSpend:9791.47 },
     { date:"2026-10-12", hotmartRevenue:42053.10, hotmartSales:85, promoRevenue:2582.34, metaSpend:10882.05, googleSpend:1544.37, roasSpend:10333.23 },
     { date:"2026-10-13", hotmartRevenue:32012.27, hotmartSales:69, promoRevenue:761.98, metaSpend:8832.97, googleSpend:2456.15, roasSpend:7022.95 },
-    { date:"2026-10-14", hotmartRevenue:37346.66, hotmartSales:80, promoRevenue:2110.29, metaSpend:9528.85, googleSpend:2113.78, roasSpend:6329.33 }
+    { date:"2026-10-14", hotmartRevenue:37346.66, hotmartSales:80, promoRevenue:2110.29, metaSpend:9528.85, googleSpend:2113.78, roasSpend:7332.00 }
   ],
 
   // janela usada em "Performance por funil" e nos gráficos (dados do Meta, sem gap): 08/10 a 14/10/2026
