@@ -191,14 +191,17 @@ const dashboardData = {
       { date:"2026-10-09", spend:683.44, leads:132 },
       { date:"2026-10-10", spend:780.77, leads:174 },
       { date:"2026-10-11", spend:1184.33, leads:471 },
-      { date:"2026-10-12", spend:548.81, leads:293 },
-      { date:"2026-10-13", spend:1808.77, leads:513 },
-      { date:"2026-10-14", spend:361.34, leads:101 }
+      { date:"2026-10-12", spend:548.82, leads:293 },
+      { date:"2026-10-13", spend:1810.02, leads:513 },
+      // 14/10 revisado: puxado antes como dia parcial (101 leads) — reconferido
+      // direto na conta Meta Brasil após o dia fechar, o conjunto novo
+      // [Fiorino-Creality] decolou rápido (17 → 967 leads).
+      { date:"2026-10-14", spend:3199.52, leads:1171 }
     ],
     adsets: [
-      { name:"Público_Advantage_Sinal-Visitantes-Site-30d_[Fake-tela-Verde]", spend:4030.14, leads:845 },
-      { name:"Público_Advantage_Sinal-Visitantes-Site-30d_[2025]", spend:3132.54, leads:1133 },
-      { name:"Público_Advantage_Sinal-LAL1%-Compradores_[Fiorino-Creality]", spend:51.43, leads:17 }
+      { name:"Público_Advantage_Sinal-Visitantes-Site-30d_[Fake-tela-Verde]", spend:4111.73, leads:872 },
+      { name:"Público_Advantage_Sinal-Visitantes-Site-30d_[2025]", spend:3408.37, leads:1226 },
+      { name:"Público_Advantage_Sinal-LAL1%-Compradores_[Fiorino-Creality]", spend:2533.45, leads:967 }
     ]
   },
 
@@ -212,8 +215,9 @@ const dashboardData = {
       // [BRA] [BLACK-FRIDAY]_conversão-leads (nenhuma gera venda direta —
       // são campanhas de captação de lead/tráfego, não de conversão de venda),
       // e sem Google. FHT/seguidores seguem sem investimento (pausadas);
-      // Black Friday (leads) seguiu rodando. 9528.85 - 361.34 (BF).
-      roasSpend: 9167.51,
+      // Black Friday (leads) seguiu rodando. 9528.85 - 3199.52 (BF, revisado —
+      // ver nota em blackFridayLeads.daily de 14/10).
+      roasSpend: 6329.33,
       hotmartRevenue: 37346.66,
       hotmartSales: 80,
       promoRevenue: 2110.29,
@@ -225,7 +229,7 @@ const dashboardData = {
       metaSpend: 40219.66,
       googleSpend: 7452.98,
       // Soma do roasSpend diário de 11 a 14/10 (ver dailyBusiness.roasSpend).
-      roasSpend: 36316.81,
+      roasSpend: 33476.98,
       hotmartRevenue: 159538.44,
       hotmartSales: 339,
       promoRevenue: 6267.31,
@@ -259,9 +263,9 @@ const dashboardData = {
     { date:"2026-10-09", hotmartRevenue:37782.40, hotmartSales:81, promoRevenue:6116.12, metaSpend:8865.59, googleSpend:1454.09, roasSpend:8182.15 },
     { date:"2026-10-10", hotmartRevenue:41127.36, hotmartSales:87, promoRevenue:3074.69, metaSpend:9064.67, googleSpend:1428.63, roasSpend:8283.90 },
     { date:"2026-10-11", hotmartRevenue:48126.41, hotmartSales:105, promoRevenue:812.70, metaSpend:10975.79, googleSpend:1338.68, roasSpend:9791.47 },
-    { date:"2026-10-12", hotmartRevenue:42053.10, hotmartSales:85, promoRevenue:2582.34, metaSpend:10882.05, googleSpend:1544.37, roasSpend:10333.63 },
-    { date:"2026-10-13", hotmartRevenue:32012.27, hotmartSales:69, promoRevenue:761.98, metaSpend:8832.97, googleSpend:2456.15, roasSpend:7024.20 },
-    { date:"2026-10-14", hotmartRevenue:37346.66, hotmartSales:80, promoRevenue:2110.29, metaSpend:9528.85, googleSpend:2113.78, roasSpend:9167.51 }
+    { date:"2026-10-12", hotmartRevenue:42053.10, hotmartSales:85, promoRevenue:2582.34, metaSpend:10882.05, googleSpend:1544.37, roasSpend:10333.23 },
+    { date:"2026-10-13", hotmartRevenue:32012.27, hotmartSales:69, promoRevenue:761.98, metaSpend:8832.97, googleSpend:2456.15, roasSpend:7022.95 },
+    { date:"2026-10-14", hotmartRevenue:37346.66, hotmartSales:80, promoRevenue:2110.29, metaSpend:9528.85, googleSpend:2113.78, roasSpend:6329.33 }
   ],
 
   // janela usada em "Performance por funil" e nos gráficos (dados do Meta, sem gap): 08/10 a 14/10/2026
